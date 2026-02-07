@@ -1,0 +1,50 @@
+# Deploy path-pulse-web to GitHub Pages (HTTPS) so you can use the app from Tab 9 on mobile data or any WiFi.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Copy web app to deployment root
+        run: |
+          # Repo may have "Path Pulse file" at root or workspace may be inside it
+          if [ -d "Path Pulse file/path-pulse-web" ]; then
+            cp -r "Path Pulse file/path-pulse-web"/* .
+          elif [ -d "path-pulse-web" ]; then
+            cp -r path-pulse-web/* .
+          else
+            echo "path-pulse-web not found"
+            exit 1
+          fi
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        environment:
+          name: github-pages
+          url: ${{ steps.deployment.outputs.page_url }}

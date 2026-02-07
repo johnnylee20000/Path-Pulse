@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../engine.dart';
 import '../state/system_commander.dart';
+import 'ar_ghost_screen.dart';
 
 class MainCommandCenter extends StatelessWidget {
   const MainCommandCenter({super.key});
@@ -22,7 +23,6 @@ class MainCommandCenter extends StatelessWidget {
               _buildMissionControl(context),
               const SizedBox(height: 20),
               Expanded(child: _buildBioDiagnosticPanel(context)),
-              _buildBottomNav(context),
             ],
           ),
         ),
@@ -114,7 +114,14 @@ class MainCommandCenter extends StatelessWidget {
     return Consumer<SystemCommander>(
       builder: (context, cmd, _) {
         return InkWell(
-          onTap: () => cmd.toggleMission(),
+          onTap: () {
+            cmd.toggleMission();
+            if (cmd.isMissionActive) {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const ArGhostScreen()),
+              );
+            }
+          },
           child: Container(
             width: double.infinity,
             padding: const EdgeInsets.all(20),
@@ -186,22 +193,4 @@ class MainCommandCenter extends StatelessWidget {
     );
   }
 
-  Widget _buildBottomNav(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        IconButton(onPressed: () {}, icon: const Icon(Icons.map_outlined), color: Colors.grey),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.home_rounded),
-          color: const Color(0xFF00F5FF),
-        ),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.restaurant_menu_outlined),
-          color: Colors.grey,
-        ),
-      ],
-    );
-  }
 }

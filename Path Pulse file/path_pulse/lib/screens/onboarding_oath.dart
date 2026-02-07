@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../state/system_commander.dart';
+import '../prism_audio.dart';
 
 /// Explorer's Oath screen — first thing after identity sync.
 class OnboardingOathScreen extends StatefulWidget {
@@ -68,8 +69,9 @@ class _OnboardingOathScreenState extends State<OnboardingOathScreen> {
               ElevatedButton(
                 onPressed: () {
                   setState(() => _accepted = true);
+                  PrismAudio.playInitialization();
                   Future.delayed(const Duration(milliseconds: 400), () {
-                    context.read<SystemCommander>().acceptOath();
+                    if (mounted) context.read<SystemCommander>().acceptOath();
                   });
                 },
                 style: ElevatedButton.styleFrom(
