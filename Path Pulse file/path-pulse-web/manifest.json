@@ -1,0 +1,23 @@
+{
+  "name": "Path-Pulse — Tactical Bio-Lab",
+  "short_name": "Path-Pulse",
+  "description": "Bio-Explorer fitness: Oath, Map, expedition, Report, Profile",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0B0E11",
+  "theme_color": "#00F5FF",
+  "icons": [
+    {
+      "src": "icon-512.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

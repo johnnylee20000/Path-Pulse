@@ -12,6 +12,7 @@
     history: 'pathpulse_history',
     missionComplete: 'pathpulse_mission_week',
     calories: 'pathpulse_calories',
+    weightHistory: 'pathpulse_weight_history',
   };
 
   const EXPEDITION_MISSION_KM = 2; // "Walk 2 km this week"
@@ -22,7 +23,7 @@
     height: 1.8,
     age: 30,
     isMale: true,
-    dailySteps: 7540,
+    dailySteps: 0,
     xp: 0,
     isMissionActive: false,
     routePoints: [],
@@ -38,6 +39,9 @@
   let userMarker = null;
   let routeLine = null;
   let mapInited = false;
+  let lastRoutePoints = [];
+  let replayMarker = null;
+  let replayAnimationId = null;
 
   function bmi() {
     return state.weight / (state.height * state.height);
@@ -195,12 +199,51 @@
     } catch (e) {}
   }
 
+  function getWeightHistory() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEYS.weightHistory);
+      if (!raw) return [];
+      var arr = JSON.parse(raw);
+      return Array.isArray(arr) ? arr : [];
+    } catch (e) { return []; }
+  }
+
+  function saveWeightToHistory() {
+    try {
+      var arr = getWeightHistory();
+      var today = getTodayKey();
+      var found = arr.findIndex(function (e) { return e.date === today; });
+      var entry = { date: today, weight: state.weight };
+      if (found >= 0) arr[found] = entry;
+      else arr.push(entry);
+      arr.sort(function (a, b) { return b.date.localeCompare(a.date); });
+      arr = arr.slice(0, 30);
+      localStorage.setItem(STORAGE_KEYS.weightHistory, JSON.stringify(arr));
+    } catch (e) {}
+  }
+
+  function getLast7WeightEntries() {
+    var arr = getWeightHistory();
+    return arr.slice(0, 7);
+  }
+
+  function getWeightTrendText() {
+    var entries = getLast7WeightEntries();
+    if (entries.length < 2) return null;
+    var first = entries[entries.length - 1].weight;
+    var last = entries[0].weight;
+    var diff = last - first;
+    if (Math.abs(diff) < 0.1) return '— stable';
+    return (diff > 0 ? '+' : '') + diff.toFixed(1) + ' kg over ' + entries.length + ' entries';
+  }
+
   function saveProfile() {
     try {
       localStorage.setItem(STORAGE_KEYS.weight, String(state.weight));
       localStorage.setItem(STORAGE_KEYS.height, String(state.height));
       localStorage.setItem(STORAGE_KEYS.age, String(state.age));
       localStorage.setItem(STORAGE_KEYS.male, state.isMale ? '1' : '0');
+      saveWeightToHistory();
     } catch (e) {}
   }
 
@@ -231,7 +274,10 @@
       }
     }
     if (tabName === 'report' && typeof updateReportUI === 'function') updateReportUI();
-    if (tabName === 'map') updateMapDistanceUI();
+    if (tabName === 'map') {
+      updateMapDistanceUI();
+      updateReplayButton();
+    }
   }
 
   function updateMapFromState() {
@@ -303,20 +349,34 @@
   function updateMapDistanceUI() {
     var hud = document.getElementById('map-distance-hud');
     if (!hud) return;
+    hud.classList.remove('hidden');
     var labelEl = document.getElementById('map-distance-label');
     var kmEl = document.getElementById('map-distance-km');
+    var perimeterEl = document.getElementById('map-perimeter-km');
+    var milometerEl = document.getElementById('map-milometer-km');
+    var km = 0;
     if (state.isMissionActive) {
-      var km = routeDistanceKm();
-      hud.classList.remove('hidden');
+      km = routeDistanceKm();
       if (labelEl) labelEl.textContent = 'LIVE';
-      if (kmEl) kmEl.textContent = km.toFixed(2);
-    } else if (state.lastRouteKm > 0) {
-      hud.classList.remove('hidden');
+    } else if (lastRoutePoints && lastRoutePoints.length >= 2) {
+      km = routeDistanceFromPoints(lastRoutePoints);
       if (labelEl) labelEl.textContent = 'Last';
-      if (kmEl) kmEl.textContent = state.lastRouteKm.toFixed(2);
+    } else if (state.lastRouteKm > 0) {
+      km = state.lastRouteKm;
+      if (labelEl) labelEl.textContent = 'Last';
     } else {
-      hud.classList.add('hidden');
+      if (labelEl) labelEl.textContent = '—';
     }
+    if (kmEl) kmEl.textContent = (km || 0).toFixed(2);
+    if (perimeterEl) perimeterEl.textContent = (km || 0).toFixed(2);
+    if (milometerEl) milometerEl.textContent = (km || 0).toFixed(2);
+  }
+
+  function routeDistanceFromPoints(points) {
+    if (!points || points.length < 2) return 0;
+    var km = 0;
+    for (var i = 1; i < points.length; i++) km += haversineKm(points[i - 1], points[i]);
+    return Math.round(km * 100) / 100;
   }
 
   function updateReportUI() {
@@ -348,6 +408,23 @@
     document.getElementById('sex-female').classList.toggle('active', !state.isMale);
     document.getElementById('profile-bmi').textContent = bmi().toFixed(1);
     document.getElementById('profile-bmr').textContent = Math.round(bmr()) + ' kcal/day';
+    var entries = getLast7WeightEntries();
+    var listEl = document.getElementById('weight-trend-list');
+    var trendEl = document.getElementById('weight-trend-summary');
+    if (listEl) {
+      if (entries.length === 0) {
+        listEl.innerHTML = '<p class="trend-empty">Save baseline to start logging. Each save records today\'s weight.</p>';
+      } else {
+        listEl.innerHTML = entries.map(function (e) {
+          var bmiVal = (e.weight / (state.height * state.height)).toFixed(1);
+          return '<div class="trend-row"><span class="trend-date">' + e.date + '</span><span>' + e.weight + ' kg</span><span>BMI ' + bmiVal + '</span></div>';
+        }).join('');
+      }
+    }
+    if (trendEl) {
+      var trendText = getWeightTrendText();
+      trendEl.textContent = trendText != null ? trendText : '—';
+    }
   }
 
   function updateExpeditionButton() {
@@ -357,10 +434,12 @@
     document.getElementById('expedition-label').textContent = state.isMissionActive ? 'STOP EXPEDITION' : 'START EXPEDITION';
   }
 
+  var DEFAULT_CENTER = [10.65, -61.52];
+
   function initMap() {
     const center = state.currentPosition
       ? [state.currentPosition.lat, state.currentPosition.lng]
-      : [51.5, -0.09];
+      : DEFAULT_CENTER;
     map = L.map('map', { zoomControl: false }).setView(center, 15);
     L.control.zoom({ position: 'topright' }).addTo(map);
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
@@ -399,16 +478,82 @@
 
   function updateRouteLine() {
     if (!routeLine) return;
-    const pts = state.routePoints.map(function (p) { return [p.lat, p.lng]; });
+    var src = state.isMissionActive ? state.routePoints : lastRoutePoints;
+    var pts = src.map(function (p) { return [p.lat, p.lng]; });
     routeLine.setLatLngs(pts);
   }
 
+  function getRouteForReplay() {
+    return state.isMissionActive ? state.routePoints : lastRoutePoints;
+  }
+
+  function startRouteReplay() {
+    var points = getRouteForReplay();
+    if (!map || points.length < 2) return;
+    if (replayAnimationId) {
+      cancelAnimationFrame(replayAnimationId);
+      replayAnimationId = null;
+    }
+    if (replayMarker && map.hasLayer(replayMarker)) map.removeLayer(replayMarker);
+    replayMarker = L.marker([points[0].lat, points[0].lng], {
+      icon: L.divIcon({
+        className: 'pulse-marker',
+        html: '<span class="pulse-dot"></span>',
+        iconSize: [20, 20],
+        iconAnchor: [10, 10],
+      }),
+    }).addTo(map);
+    var duration = 5000;
+    var startTime = null;
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      var elapsed = timestamp - startTime;
+      var t = Math.min(1, elapsed / duration);
+      var eased = t * t * (3 - 2 * t);
+      var idx = eased * (points.length - 1);
+      var i0 = Math.floor(idx);
+      var i1 = Math.min(points.length - 1, i0 + 1);
+      var frac = idx - i0;
+      var p0 = points[i0];
+      var p1 = points[i1];
+      var lat = p0.lat + frac * (p1.lat - p0.lat);
+      var lng = p0.lng + frac * (p1.lng - p0.lng);
+      replayMarker.setLatLng([lat, lng]);
+      if (t < 1) replayAnimationId = requestAnimationFrame(step);
+      else {
+        replayAnimationId = null;
+        if (replayMarker && map.hasLayer(replayMarker)) map.removeLayer(replayMarker);
+        replayMarker = null;
+      }
+    }
+    replayAnimationId = requestAnimationFrame(step);
+  }
+
+  function updateReplayButton() {
+    var btn = document.getElementById('btn-replay-route');
+    if (!btn) return;
+    var points = getRouteForReplay();
+    btn.classList.toggle('hidden', points.length < 2);
+  }
+
+  var DESIRED_ACCURACY_M = 5;
+  var lastPositionTime = 0;
+  var accuracyFallbackMs = 15000;
+
   function startWatching() {
     if (state.watchId != null) return;
+    lastPositionTime = 0;
     state.watchId = navigator.geolocation.watchPosition(
       function (pos) {
-        const lat = pos.coords.latitude;
-        const lng = pos.coords.longitude;
+        var accuracy = pos.coords.accuracy;
+        var now = Date.now();
+        var usePosition = accuracy <= DESIRED_ACCURACY_M ||
+          lastPositionTime === 0 ||
+          (now - lastPositionTime >= accuracyFallbackMs);
+        if (!usePosition) return;
+        lastPositionTime = now;
+        var lat = pos.coords.latitude;
+        var lng = pos.coords.longitude;
         updateMapPosition(lat, lng);
         if (state.isMissionActive) {
           state.routePoints.push({ lat: lat, lng: lng });
@@ -419,7 +564,7 @@
         }
       },
       function () {},
-      { enableHighAccuracy: true, maximumAge: 5000 }
+      { enableHighAccuracy: true, maximumAge: 0, timeout: 10000 }
     );
   }
 
@@ -454,13 +599,16 @@
         } catch (e) {}
       }
       saveOath();
+      lastRoutePoints = state.routePoints.slice();
       state.routePoints = [];
       updateRouteLine();
       updateMapDistanceUI();
+      updateReplayButton();
       if (typeof updateReportUI === 'function') updateReportUI();
     }
     updateExpeditionButton();
     updateHomeUI();
+    updateReplayButton();
     if (typeof updateReportUI === 'function') updateReportUI();
   }
 
@@ -475,11 +623,14 @@
       setTab('home');
       navigator.geolocation.getCurrentPosition(
         function (pos) {
-          updateMapPosition(pos.coords.latitude, pos.coords.longitude);
+          var lat = pos.coords.latitude;
+          var lng = pos.coords.longitude;
+          updateMapPosition(lat, lng);
+          if (map) map.setView([lat, lng], 16);
           startWatching();
         },
         function () { startWatching(); },
-        { enableHighAccuracy: true }
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
       );
       updateHomeUI();
       updateProfileUI();
@@ -501,9 +652,23 @@
     document.getElementById('btn-expedition').addEventListener('click', toggleExpedition);
 
     document.getElementById('btn-location').addEventListener('click', function () {
-      if (!state.currentPosition || !map) return;
-      map.setView([state.currentPosition.lat, state.currentPosition.lng], 16);
+      if (!map) return;
+      navigator.geolocation.getCurrentPosition(
+        function (pos) {
+          var lat = pos.coords.latitude;
+          var lng = pos.coords.longitude;
+          updateMapPosition(lat, lng);
+          map.setView([lat, lng], 16);
+        },
+        function () {
+          if (state.currentPosition) map.setView([state.currentPosition.lat, state.currentPosition.lng], 16);
+        },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+      );
     });
+
+    var replayBtn = document.getElementById('btn-replay-route');
+    if (replayBtn) replayBtn.addEventListener('click', startRouteReplay);
 
     document.getElementById('save-profile').addEventListener('click', function () {
       const w = parseFloat(document.getElementById('input-weight').value);
@@ -515,7 +680,7 @@
       saveProfile();
       updateHomeUI();
       updateProfileUI();
-      alert('Baseline saved. Lab recalculated.');
+      alert('Baseline saved. Today\'s weight logged for trend.');
     });
 
     document.getElementById('sex-male').addEventListener('click', function () {
@@ -562,17 +727,44 @@
       });
     }
 
+    var shareReportImageBtn = document.getElementById('share-report-image');
+    if (shareReportImageBtn && typeof html2canvas === 'function') {
+      shareReportImageBtn.addEventListener('click', function () {
+        var el = document.getElementById('report-share-card');
+        if (!el) return;
+        shareReportImageBtn.textContent = 'GENERATING...';
+        html2canvas(el, {
+          scale: 2,
+          backgroundColor: '#0B0E11',
+          useCORS: true,
+        }).then(function (canvas) {
+          var link = document.createElement('a');
+          link.download = 'path-pulse-weekly-report.png';
+          link.href = canvas.toDataURL('image/png');
+          link.click();
+          shareReportImageBtn.textContent = 'DOWNLOADED!';
+          setTimeout(function () { shareReportImageBtn.textContent = 'DOWNLOAD AS IMAGE'; }, 1500);
+        }).catch(function () {
+          shareReportImageBtn.textContent = 'Failed';
+          setTimeout(function () { shareReportImageBtn.textContent = 'DOWNLOAD AS IMAGE'; }, 1500);
+        });
+      });
+    }
+
     if (state.oathAccepted) {
       document.getElementById('loader').classList.add('hidden');
       showScreen('main-shell');
       setTab('home');
       navigator.geolocation.getCurrentPosition(
         function (pos) {
-          updateMapPosition(pos.coords.latitude, pos.coords.longitude);
+          var lat = pos.coords.latitude;
+          var lng = pos.coords.longitude;
+          updateMapPosition(lat, lng);
+          if (map) map.setView([lat, lng], 16);
           startWatching();
         },
         function () { startWatching(); },
-        { enableHighAccuracy: true }
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
       );
       updateHomeUI();
       updateProfileUI();

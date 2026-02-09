@@ -4,7 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Path-Pulse — Tactical Bio-Lab</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="icon-512.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="icon-512.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="icon-512.png" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css?v=2">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
@@ -39,12 +43,14 @@
         <!-- Map tab -->
         <div id="tab-map" class="tab-pane">
           <div id="map"></div>
-          <div id="map-distance-hud" class="map-distance-hud hidden">
-            <span id="map-distance-label">LIVE</span>
-            <span id="map-distance-km">0.00</span> km
+          <div id="map-distance-hud" class="map-distance-hud">
+            <div class="hud-row"><span id="map-distance-label">—</span><span id="map-distance-km">0.00</span> km</div>
+            <div class="hud-row"><span>Perimeter</span><span id="map-perimeter-km">0.00</span> km</div>
+            <div class="hud-row"><span>Milometer</span><span id="map-milometer-km">0.00</span> km</div>
           </div>
           <div class="map-controls">
             <button id="btn-location" class="fab small" title="My location">⌖</button>
+            <button id="btn-replay-route" class="fab small hidden" title="Replay route">⟳</button>
             <button id="btn-expedition" class="fab extended">
               <span id="expedition-icon">▶</span>
               <span id="expedition-label">START EXPEDITION</span>
@@ -64,7 +70,7 @@
             <div class="ring-bg"></div>
             <div class="ring-fill" id="ring-fill"></div>
             <div class="ring-content">
-              <span id="steps">7540</span>
+              <span id="steps">0</span>
               <span class="label">KINETIC STEPS</span>
             </div>
           </div>
@@ -118,18 +124,28 @@
             <div class="diag-row"><span>BMI</span><span id="profile-bmi">26.2</span></div>
             <div class="diag-row"><span>BMR</span><span id="profile-bmr">1842 kcal/day</span></div>
           </div>
+          <div class="weight-trend">
+            <h3>WEIGHT / BMI TREND (7 days)</h3>
+            <p id="weight-trend-summary" class="trend-summary">—</p>
+            <div id="weight-trend-list" class="trend-list"></div>
+          </div>
         </div>
         <!-- Report tab -->
         <div id="tab-report" class="tab-pane">
-          <h2 class="report-heading">WEEKLY DIAGNOSTIC</h2>
-          <p class="report-sub">Declassified summary</p>
-          <div class="report-card">
-            <div class="report-row"><span>Distance this week</span><span id="report-distance">0 km</span></div>
-            <div class="report-row"><span>Today's steps</span><span id="report-steps">0</span></div>
-            <div class="report-row"><span>Verdict</span><span id="report-verdict" class="verdict">—</span></div>
+          <div id="report-share-card" class="report-share-card">
+            <h2 class="report-heading">WEEKLY DIAGNOSTIC</h2>
+            <p class="report-sub">Declassified summary</p>
+            <div class="report-card">
+              <div class="report-row"><span>Distance this week</span><span id="report-distance">0 km</span></div>
+              <div class="report-row"><span>Today's steps</span><span id="report-steps">0</span></div>
+              <div class="report-row"><span>Verdict</span><span id="report-verdict" class="verdict">—</span></div>
+            </div>
           </div>
           <p class="report-hint">Complete expeditions to fill your report. New week starts Monday.</p>
-          <button id="copy-report" class="btn-primary btn-copy">COPY REPORT</button>
+          <div class="report-actions">
+            <button id="copy-report" class="btn-primary btn-copy">COPY REPORT</button>
+            <button id="share-report-image" class="btn-secondary">DOWNLOAD AS IMAGE</button>
+          </div>
         </div>
       </main>
       <nav class="bottom-nav">
@@ -142,6 +158,7 @@
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="app.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="app.js?v=2"></script>
 </body>
 </html>
