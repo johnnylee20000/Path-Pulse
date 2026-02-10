@@ -735,24 +735,52 @@
       });
     }
 
+    function getReportShareText() {
+      var weekStats = getWeekStats();
+      var verdict = weekStats.totalKm >= EXPEDITION_MISSION_KM ? 'OPTIMAL EVOLUTION' :
+        weekStats.totalKm > 0 ? 'STABLE PROGRESS' : 'INITIATE EXPEDITION';
+      return 'Path-Pulse Weekly Diagnostic\n' +
+        'Distance this week: ' + weekStats.totalKm.toFixed(2) + ' km\n' +
+        "Today's steps: " + weekStats.todaySteps + '\n' +
+        'Verdict: ' + verdict + '\n' +
+        'Level ' + level() + ' · ' + rank();
+    }
+
+    var shareReportBtn = document.getElementById('share-report');
+    if (shareReportBtn) {
+      shareReportBtn.addEventListener('click', function () {
+        var text = getReportShareText();
+        var title = 'Path-Pulse Weekly Report';
+        if (typeof navigator.share === 'function') {
+          shareReportBtn.textContent = 'SHARING...';
+          navigator.share({ title: title, text: text }).then(function () {
+            shareReportBtn.textContent = 'SHARED!';
+            setTimeout(function () { shareReportBtn.textContent = 'SHARE REPORT'; }, 1500);
+          }).catch(function (err) {
+            if (err.name !== 'AbortError') copyReportToClipboard(shareReportBtn, text);
+            shareReportBtn.textContent = 'SHARE REPORT';
+          });
+        } else {
+          copyReportToClipboard(shareReportBtn, text, 'SHARE REPORT');
+        }
+      });
+    }
+
+    function copyReportToClipboard(btn, text, label) {
+      label = label || 'COPY TEXT';
+      navigator.clipboard.writeText(text).then(function () {
+        btn.textContent = 'COPIED!';
+        setTimeout(function () { btn.textContent = label; }, 1500);
+      }).catch(function () {
+        btn.textContent = 'Copy failed';
+        setTimeout(function () { btn.textContent = label; }, 1500);
+      });
+    }
+
     var copyReportBtn = document.getElementById('copy-report');
     if (copyReportBtn) {
       copyReportBtn.addEventListener('click', function () {
-        var weekStats = getWeekStats();
-        var verdict = weekStats.totalKm >= EXPEDITION_MISSION_KM ? 'OPTIMAL EVOLUTION' :
-          weekStats.totalKm > 0 ? 'STABLE PROGRESS' : 'INITIATE EXPEDITION';
-        var text = 'Path-Pulse Weekly Diagnostic\n' +
-          'Distance this week: ' + weekStats.totalKm.toFixed(2) + ' km\n' +
-          "Today's steps: " + weekStats.todaySteps + '\n' +
-          'Verdict: ' + verdict + '\n' +
-          'Level ' + level() + ' · ' + rank();
-        navigator.clipboard.writeText(text).then(function () {
-          copyReportBtn.textContent = 'COPIED!';
-          setTimeout(function () { copyReportBtn.textContent = 'COPY REPORT'; }, 1500);
-        }).catch(function () {
-          copyReportBtn.textContent = 'Copy failed';
-          setTimeout(function () { copyReportBtn.textContent = 'COPY REPORT'; }, 1500);
-        });
+        copyReportToClipboard(copyReportBtn, getReportShareText(), 'COPY TEXT');
       });
     }
 

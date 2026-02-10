@@ -8,6 +8,7 @@ Use this list when continuing work in the worktree. Pick one and say which you w
 
 - [x] **Single codebase** — **Done.** Develop only in **2026 project** → `Path Pulse file/path-pulse-web`. See **WHERE-TO-EDIT.md**.
 - [x] **Service worker in worktree** — **Done.** `sw.js` registered in `app.js` (init).
+- [x] **Share report** — **Done.** SHARE REPORT uses Web Share API when available (mobile/some desktop), else copies to clipboard. COPY TEXT and DOWNLOAD AS IMAGE unchanged.
 - [x] **Share report as image** — **Done.** Download as image hardened with allowTaint, error handling, and proper link click for all devices.
 - [x] **Time-lapse duration** — **Done.** Replay duration configurable (5s / 8s / 15s) and Loop option on map tab.
 - [x] **Offline map tiles** — **Done.** Leaflet/Carto tile requests cached in service worker (TILES_CACHE) for better offline map.
@@ -16,8 +17,9 @@ Use this list when continuing work in the worktree. Pick one and say which you w
 
 ## GPS & deployment
 
-- [ ] **GPS on tablet (HTTPS)** — Revisit when ready: use ngrok or deploy so GPS works on Tab 9. See **GPS-over-HTTPS.md** and **PINNED.md**.
-- [ ] **Push to Git** — Ensure changes are committed on `main` and pushed (post-commit hook may auto-push).
+- [ ] **Deploy to Vercel (HTTPS)** — One-time: import repo at vercel.com, set root to `Path Pulse file/path-pulse-web`, deploy. Then open the HTTPS URL on Tab 9 for GPS. See **DEPLOY-VERCEL.md**.
+- [ ] **GPS on tablet (HTTPS)** — After deploy: use your Vercel URL on the tablet; or use ngrok (see **GPS-over-HTTPS.md**).
+- [x] **Push to Git** — Done. main is pushed; use `git add` / `git commit` / `git push origin main` for future changes.
 
 ---
 
