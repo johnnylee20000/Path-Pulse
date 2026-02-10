@@ -4,7 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Path-Pulse — Tactical Bio-Lab</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="icon-512.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="icon-512.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="icon-512.png" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css?v=2">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
@@ -29,23 +33,32 @@
           <li><strong>GRID TRANSPARENCY:</strong> I may share Tactical Time-Lapses to inspire new Explorers.</li>
         </ul>
       </div>
-      <button id="accept-oath" class="btn-primary">ACCEPT OATH & INITIALIZE GRID</button>
-      <button id="abort-oath" class="btn-text">ABORT MISSION</button>
+      <button id="accept-oath" class="btn-primary" aria-label="Accept Explorer's Oath and start the app">ACCEPT OATH & INITIALIZE GRID</button>
+      <button id="abort-oath" class="btn-text" aria-label="Abort and close oath screen">ABORT MISSION</button>
     </div>
 
     <!-- Main shell: Map | Home | Profile -->
     <div id="main-shell" class="screen hidden">
-      <main id="tab-content">
+      <main id="tab-content" role="main">
         <!-- Map tab -->
         <div id="tab-map" class="tab-pane">
           <div id="map"></div>
-          <div id="map-distance-hud" class="map-distance-hud hidden">
-            <span id="map-distance-label">LIVE</span>
-            <span id="map-distance-km">0.00</span> km
+          <div id="map-distance-hud" class="map-distance-hud">
+            <div class="hud-row"><span id="map-distance-label">—</span><span id="map-distance-km">0.00</span> km</div>
+            <div class="hud-row"><span>Perimeter</span><span id="map-perimeter-km">0.00</span> km</div>
+            <div class="hud-row"><span>Milometer</span><span id="map-milometer-km">0.00</span> km</div>
           </div>
           <div class="map-controls">
-            <button id="btn-location" class="fab small" title="My location">⌖</button>
-            <button id="btn-expedition" class="fab extended">
+            <button id="btn-location" class="fab small" title="My location" aria-label="Center map on my location">⌖</button>
+            <div id="replay-controls" class="replay-controls hidden">
+              <span class="replay-label">Replay:</span>
+              <button type="button" class="replay-dur" data-duration="5" aria-label="5 second replay">5s</button>
+              <button type="button" class="replay-dur active" data-duration="8" aria-label="8 second replay">8s</button>
+              <button type="button" class="replay-dur" data-duration="15" aria-label="15 second replay">15s</button>
+              <label class="replay-loop"><input type="checkbox" id="replay-loop" aria-label="Loop replay"> Loop</label>
+            </div>
+            <button id="btn-replay-route" class="fab small hidden" title="Replay route" aria-label="Replay route time-lapse">⟳</button>
+            <button id="btn-expedition" class="fab extended" aria-label="Start or stop expedition">
               <span id="expedition-icon">▶</span>
               <span id="expedition-label">START EXPEDITION</span>
             </button>
@@ -64,7 +77,7 @@
             <div class="ring-bg"></div>
             <div class="ring-fill" id="ring-fill"></div>
             <div class="ring-content">
-              <span id="steps">7540</span>
+              <span id="steps">0</span>
               <span class="label">KINETIC STEPS</span>
             </div>
           </div>
@@ -112,36 +125,47 @@
             <button type="button" id="sex-male" class="sex-btn active">Male</button>
             <button type="button" id="sex-female" class="sex-btn">Female</button>
           </div>
-          <button id="save-profile" class="btn-primary">SAVE BASELINE</button>
+          <button id="save-profile" class="btn-primary" aria-label="Save profile and log today's weight">SAVE BASELINE</button>
           <div class="profile-output">
             <p class="label">CURRENT LAB OUTPUT</p>
             <div class="diag-row"><span>BMI</span><span id="profile-bmi">26.2</span></div>
             <div class="diag-row"><span>BMR</span><span id="profile-bmr">1842 kcal/day</span></div>
           </div>
+          <div class="weight-trend">
+            <h3>WEIGHT / BMI TREND (7 days)</h3>
+            <p id="weight-trend-summary" class="trend-summary">—</p>
+            <div id="weight-trend-list" class="trend-list"></div>
+          </div>
         </div>
         <!-- Report tab -->
         <div id="tab-report" class="tab-pane">
-          <h2 class="report-heading">WEEKLY DIAGNOSTIC</h2>
-          <p class="report-sub">Declassified summary</p>
-          <div class="report-card">
-            <div class="report-row"><span>Distance this week</span><span id="report-distance">0 km</span></div>
-            <div class="report-row"><span>Today's steps</span><span id="report-steps">0</span></div>
-            <div class="report-row"><span>Verdict</span><span id="report-verdict" class="verdict">—</span></div>
+          <div id="report-share-card" class="report-share-card">
+            <h2 class="report-heading">WEEKLY DIAGNOSTIC</h2>
+            <p class="report-sub">Declassified summary</p>
+            <div class="report-card">
+              <div class="report-row"><span>Distance this week</span><span id="report-distance">0 km</span></div>
+              <div class="report-row"><span>Today's steps</span><span id="report-steps">0</span></div>
+              <div class="report-row"><span>Verdict</span><span id="report-verdict" class="verdict">—</span></div>
+            </div>
           </div>
           <p class="report-hint">Complete expeditions to fill your report. New week starts Monday.</p>
-          <button id="copy-report" class="btn-primary btn-copy">COPY REPORT</button>
+          <div class="report-actions">
+            <button id="copy-report" class="btn-primary btn-copy" aria-label="Copy weekly report to clipboard">COPY REPORT</button>
+            <button id="share-report-image" class="btn-secondary" aria-label="Download weekly report as PNG image">DOWNLOAD AS IMAGE</button>
+          </div>
         </div>
       </main>
-      <nav class="bottom-nav">
-        <button data-tab="map" class="nav-btn"><span class="icon">🗺</span><span>Map</span></button>
-        <button data-tab="home" class="nav-btn active"><span class="icon">⌂</span><span>Home</span></button>
-        <button data-tab="report" class="nav-btn"><span class="icon">📋</span><span>Report</span></button>
-        <button data-tab="profile" class="nav-btn"><span class="icon">👤</span><span>Profile</span></button>
+      <nav class="bottom-nav" role="navigation" aria-label="Main sections">
+        <button data-tab="map" class="nav-btn" aria-label="Map tab" aria-current="false"><span class="icon" aria-hidden="true">🗺</span><span>Map</span></button>
+        <button data-tab="home" class="nav-btn active" aria-label="Home tab" aria-current="true"><span class="icon" aria-hidden="true">⌂</span><span>Home</span></button>
+        <button data-tab="report" class="nav-btn" aria-label="Report tab" aria-current="false"><span class="icon" aria-hidden="true">📋</span><span>Report</span></button>
+        <button data-tab="profile" class="nav-btn" aria-label="Profile tab" aria-current="false"><span class="icon" aria-hidden="true">👤</span><span>Profile</span></button>
       </nav>
     </div>
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="app.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="app.js?v=2"></script>
 </body>
 </html>

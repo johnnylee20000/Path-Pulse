@@ -1,0 +1,12 @@
+# IDE / editor (do not commit)
+Microsoft VS Code/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Flutter
+path_pulse/.dart_tool/
+path_pulse/.packages
+path_pulse/build/
+path_pulse/*.iml

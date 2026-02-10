@@ -1,0 +1,6 @@
+{
+  "version": 2,
+  "redirects": [
+    { "source": "/", "destination": "/Path%20Pulse%20file/path-pulse-web/", "permanent": false }
+  ]
+}
