@@ -103,7 +103,7 @@
           </div>
           <div class="diagnostics">
             <h3>BIO-DIAGNOSTICS</h3>
-            <div class="diag-row"><span>CURRENT BMI</span><span id="val-bmi">26.2</span></div>
+            <div class="diag-row"><span>CURRENT BMI</span><span id="val-bmi" class="val-bmi">26.2</span></div>
             <div class="diag-row"><span>BMR</span><span id="val-bmr">1842 kcal/day</span></div>
             <div class="diag-row"><span>METABOLIC BURN</span><span id="val-burn">362 KCAL</span></div>
             <div class="diag-row"><span>FUELING PROTOCOL</span><span id="val-protocol">Baseline Protein</span></div>
@@ -125,11 +125,20 @@
             <button type="button" id="sex-male" class="sex-btn active">Male</button>
             <button type="button" id="sex-female" class="sex-btn">Female</button>
           </div>
+          <label class="checkbox-label">
+            <input type="checkbox" id="use-asian-bmi" aria-label="Use WHO Asian BMI cut-offs">
+            Use WHO Asian BMI cut-offs (overweight ≥23, obese ≥27)
+          </label>
+          <p class="hint hint-small">All calculations follow WHO/ICD-10 and Mifflin-St Jeor (BMR). Units: kg, m, kcal.</p>
           <button id="save-profile" class="btn-primary" aria-label="Save profile and log today's weight">SAVE BASELINE</button>
           <div class="profile-output">
             <p class="label">CURRENT LAB OUTPUT</p>
-            <div class="diag-row"><span>BMI</span><span id="profile-bmi">26.2</span></div>
+            <div class="diag-row"><span>BMI</span><span id="profile-bmi" class="profile-bmi-val">26.2</span></div>
+            <div class="diag-row"><span>BMI category</span><span id="profile-bmi-cat" class="profile-bmi-cat">—</span></div>
+            <div class="diag-row"><span>Ideal weight range</span><span id="profile-ideal-range">—</span></div>
             <div class="diag-row"><span>BMR</span><span id="profile-bmr">1842 kcal/day</span></div>
+            <div class="diag-row"><span>BSA (body surface)</span><span id="profile-bsa">—</span></div>
+            <div class="diag-row sub"><span>New BMI (Trefethen)</span><span id="profile-new-bmi">—</span></div>
           </div>
           <div class="weight-trend">
             <h3>WEIGHT / BMI TREND (7 days)</h3>

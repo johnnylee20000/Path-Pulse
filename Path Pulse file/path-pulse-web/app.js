@@ -13,6 +13,7 @@
     missionComplete: 'pathpulse_mission_week',
     calories: 'pathpulse_calories',
     weightHistory: 'pathpulse_weight_history',
+    bmiAsian: 'pathpulse_bmi_asian',
   };
 
   const EXPEDITION_MISSION_KM = 2; // "Walk 2 km this week"
@@ -33,6 +34,7 @@
     weekDistanceKm: 0,
     missionCompletedThisWeek: false,
     calorieIntake: 0,
+    useAsianBmi: false,
   };
 
   let map = null;
@@ -45,11 +47,43 @@
   let replayDurationSec = 8;
   let replayLoop = false;
 
+  // WHO standard: BMI = weight (kg) / height (m)². Units SI (kg, m).
   function bmi() {
     return state.weight / (state.height * state.height);
   }
+  // WHO/ICD-10 adult BMI categories. Optional WHO Asian cut-offs (overweight ≥23, obese ≥27).
+  function bmiCategory(bmiVal) {
+    if (bmiVal == null) bmiVal = bmi();
+    var under = 18.5;
+    var normalMax = state.useAsianBmi ? 22.9 : 24.9;
+    var overMax = state.useAsianBmi ? 26.9 : 29.9;
+    var obese2Max = state.useAsianBmi ? 36.9 : 39.9;
+    if (bmiVal < under) return { label: 'Underweight', class: 'bmi-under' };
+    if (bmiVal <= normalMax) return { label: 'Normal', class: 'bmi-normal' };
+    if (bmiVal <= overMax) return { label: 'Overweight', class: 'bmi-over' };
+    if (bmiVal <= (state.useAsianBmi ? 31.9 : 34.9)) return { label: 'Obese I', class: 'bmi-obese' };
+    if (bmiVal <= obese2Max) return { label: 'Obese II', class: 'bmi-obese' };
+    return { label: 'Obese III', class: 'bmi-obese' };
+  }
+  // WHO healthy BMI range 18.5–24.9 kg/m² (global). Asian option: 18.5–22.9.
+  function idealWeightRange() {
+    var h = state.height;
+    var maxBmi = state.useAsianBmi ? 22.9 : 24.9;
+    return { min: 18.5 * h * h, max: maxBmi * h * h };
+  }
+  // Du Bois & Du Bois (1916) BSA, international standard: 0.007184 × W^0.425 × H^0.725 (kg, cm).
+  function bsa() {
+    return 0.007184 * Math.pow(state.weight, 0.425) * Math.pow(state.height * 100, 0.725);
+  }
+  // Trefethen (2013) alternative BMI; not WHO standard, shown for reference.
+  function newBmi() {
+    return 1.3 * state.weight / Math.pow(state.height, 2.5);
+  }
+  // Mifflin-St Jeor (1990) BMR, recommended by FAO/WHO/UNU for resting energy expenditure. Units: kcal/day.
   function bmr() {
-    const base = 10 * state.weight + 6.25 * (state.height * 100) - 5 * state.age;
+    var w = state.weight;
+    var hCm = state.height * 100;
+    var base = 10 * w + 6.25 * hCm - 5 * state.age;
     return state.isMale ? base + 5 : base - 161;
   }
   function level() {
@@ -178,6 +212,8 @@
           if (obj[today] != null) state.calorieIntake = parseInt(obj[today], 10) || 0;
         } catch (e) {}
       }
+      var asian = localStorage.getItem(STORAGE_KEYS.bmiAsian);
+      if (asian != null) state.useAsianBmi = asian === '1';
     } catch (e) {}
   }
 
@@ -300,7 +336,10 @@
     document.getElementById('explorer-id').textContent = explorerId();
     document.getElementById('level').textContent = level();
     document.getElementById('rank').textContent = rank();
-    document.getElementById('val-bmi').textContent = bmi().toFixed(1);
+    var bmiVal = bmi();
+    var bmiCat = bmiCategory(bmiVal);
+    var valBmiEl = document.getElementById('val-bmi');
+    if (valBmiEl) { valBmiEl.textContent = bmiVal.toFixed(1) + ' (' + bmiCat.label + ')'; valBmiEl.className = 'val-bmi ' + bmiCat.class; }
     document.getElementById('val-bmr').textContent = Math.round(bmr()) + ' kcal/day';
     document.getElementById('val-burn').textContent = burn() + ' KCAL';
     document.getElementById('val-protocol').textContent = protocol();
@@ -410,8 +449,22 @@
     document.getElementById('input-age').value = state.age;
     document.getElementById('sex-male').classList.toggle('active', state.isMale);
     document.getElementById('sex-female').classList.toggle('active', !state.isMale);
-    document.getElementById('profile-bmi').textContent = bmi().toFixed(1);
+    var asianCb = document.getElementById('use-asian-bmi');
+    if (asianCb) asianCb.checked = state.useAsianBmi;
+    var bmiVal = bmi();
+    var bmiCat = bmiCategory(bmiVal);
+    var ideal = idealWeightRange();
+    var profileBmiEl = document.getElementById('profile-bmi');
+    var profileBmiCatEl = document.getElementById('profile-bmi-cat');
+    if (profileBmiEl) { profileBmiEl.textContent = bmiVal.toFixed(1); profileBmiEl.className = 'profile-bmi-val ' + bmiCat.class; }
+    if (profileBmiCatEl) { profileBmiCatEl.textContent = bmiCat.label; profileBmiCatEl.className = 'profile-bmi-cat ' + bmiCat.class; }
+    var idealRangeEl = document.getElementById('profile-ideal-range');
+    if (idealRangeEl) idealRangeEl.textContent = ideal.min.toFixed(1) + ' – ' + ideal.max.toFixed(1) + ' kg';
     document.getElementById('profile-bmr').textContent = Math.round(bmr()) + ' kcal/day';
+    var bsaEl = document.getElementById('profile-bsa');
+    if (bsaEl) bsaEl.textContent = bsa().toFixed(2) + ' m²';
+    var newBmiEl = document.getElementById('profile-new-bmi');
+    if (newBmiEl) newBmiEl.textContent = newBmi().toFixed(1) + ' (alt formula)';
     var entries = getLast7WeightEntries();
     var listEl = document.getElementById('weight-trend-list');
     var trendEl = document.getElementById('weight-trend-summary');
@@ -724,6 +777,16 @@
       document.getElementById('sex-male').classList.remove('active');
       updateProfileUI();
     });
+
+    var asianBmiCb = document.getElementById('use-asian-bmi');
+    if (asianBmiCb) {
+      asianBmiCb.addEventListener('change', function () {
+        state.useAsianBmi = asianBmiCb.checked;
+        try { localStorage.setItem(STORAGE_KEYS.bmiAsian, state.useAsianBmi ? '1' : '0'); } catch (e) {}
+        updateProfileUI();
+        updateHomeUI();
+      });
+    }
 
     var calorieInput = document.getElementById('input-calories');
     if (calorieInput) {
