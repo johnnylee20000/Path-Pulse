@@ -14,6 +14,7 @@
     calories: 'pathpulse_calories',
     weightHistory: 'pathpulse_weight_history',
     bmiAsian: 'pathpulse_bmi_asian',
+    installDismissed: 'pathpulse_install_dismissed',
   };
 
   const EXPEDITION_MISSION_KM = 2; // "Walk 2 km this week"
@@ -85,6 +86,16 @@
     var hCm = state.height * 100;
     var base = 10 * w + 6.25 * hCm - 5 * state.age;
     return state.isMale ? base + 5 : base - 161;
+  }
+  // TDEE: BMR × PAL (WHO/FAO Physical Activity Level). PAL estimated from daily steps.
+  function palFromSteps(steps) {
+    if (steps < 5000) return 1.2;
+    if (steps < 7500) return 1.375;
+    if (steps < 12500) return 1.55;
+    return 1.725;
+  }
+  function tdee() {
+    return Math.round(bmr() * palFromSteps(state.dailySteps));
   }
   function level() {
     return Math.floor(0.1 * Math.sqrt(Math.max(0, state.xp)) + 1);
@@ -373,10 +384,12 @@
 
   function updateFuelUI() {
     var bmrEl = document.getElementById('fuel-bmr');
+    var tdeeEl = document.getElementById('fuel-tdee');
     var burnEl = document.getElementById('fuel-burn');
     var balanceEl = document.getElementById('fuel-balance');
     var inputEl = document.getElementById('input-calories');
     if (bmrEl) bmrEl.textContent = Math.round(bmr()) + ' kcal';
+    if (tdeeEl) tdeeEl.textContent = tdee() + ' kcal/day';
     if (burnEl) burnEl.textContent = burn() + ' kcal';
     if (inputEl) inputEl.value = state.calorieIntake || '';
     var totalBurn = Math.round(bmr()) + burn();
@@ -684,6 +697,20 @@
     navigator.serviceWorker.register('sw.js').then(function () {}).catch(function () {});
   }
 
+  function isStandalone() {
+    return window.matchMedia('(display-mode: standalone)').matches ||
+      window.navigator.standalone === true;
+  }
+
+  function showInstallBannerIfAppropriate() {
+    if (isStandalone()) return;
+    try {
+      if (localStorage.getItem(STORAGE_KEYS.installDismissed) === '1') return;
+    } catch (e) { return; }
+    var banner = document.getElementById('install-banner');
+    if (banner) banner.classList.remove('hidden');
+  }
+
   function init() {
     loadStorage();
     registerServiceWorker();
@@ -693,6 +720,7 @@
       state.xp = 0;
       saveOath();
       showScreen('main-shell');
+      showInstallBannerIfAppropriate();
       setTab('home');
       navigator.geolocation.getCurrentPosition(
         function (pos) {
@@ -880,9 +908,19 @@
       });
     }
 
+    var installDismiss = document.getElementById('install-banner-dismiss');
+    if (installDismiss) {
+      installDismiss.addEventListener('click', function () {
+        try { localStorage.setItem(STORAGE_KEYS.installDismissed, '1'); } catch (e) {}
+        var banner = document.getElementById('install-banner');
+        if (banner) banner.classList.add('hidden');
+      });
+    }
+
     if (state.oathAccepted) {
       document.getElementById('loader').classList.add('hidden');
       showScreen('main-shell');
+      showInstallBannerIfAppropriate();
       setTab('home');
       navigator.geolocation.getCurrentPosition(
         function (pos) {

@@ -12,6 +12,8 @@ Use this list when continuing work in the worktree. Pick one and say which you w
 - [x] **Share report as image** — **Done.** Download as image hardened with allowTaint, error handling, and proper link click for all devices.
 - [x] **Time-lapse duration** — **Done.** Replay duration configurable (5s / 8s / 15s) and Loop option on map tab.
 - [x] **Offline map tiles** — **Done.** Leaflet/Carto tile requests cached in service worker (TILES_CACHE) for better offline map.
+- [x] **TDEE (Fuel Gauge)** — **Done.** Est. daily need (TDEE) = BMR × PAL; PAL from steps (WHO/FAO style). Shown on Home.
+- [x] **Install prompt** — **Done.** Dismissible “Add to Home Screen” banner when not installed; once dismissed, not shown again.
 
 ---
 

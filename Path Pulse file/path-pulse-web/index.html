@@ -39,6 +39,10 @@
 
     <!-- Main shell: Map | Home | Profile -->
     <div id="main-shell" class="screen hidden">
+      <div id="install-banner" class="install-banner hidden" role="region" aria-label="Install app">
+        <span class="install-banner-text">Add Path-Pulse to Home Screen for quick access</span>
+        <button type="button" id="install-banner-dismiss" class="install-banner-dismiss" aria-label="Dismiss">×</button>
+      </div>
       <main id="tab-content" role="main">
         <!-- Map tab -->
         <div id="tab-map" class="tab-pane">
@@ -94,6 +98,7 @@
           <div class="fuel-section">
             <h3>FUEL GAUGE</h3>
             <div class="diag-row"><span>BMR (basal)</span><span id="fuel-bmr">—</span></div>
+            <div class="diag-row"><span>Est. daily need (TDEE)</span><span id="fuel-tdee">—</span></div>
             <div class="diag-row"><span>Active burn today</span><span id="fuel-burn">—</span></div>
             <div class="fuel-intake">
               <label>Calories in today</label>

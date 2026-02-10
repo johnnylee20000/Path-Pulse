@@ -23,6 +23,29 @@ body {
 
 .hidden { display: none !important; }
 
+.install-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(0,245,255,0.12);
+  border-bottom: 1px solid rgba(0,245,255,0.25);
+  font-size: 12px;
+  color: var(--white);
+}
+.install-banner.hidden { display: none !important; }
+.install-banner-text { flex: 1; }
+.install-banner-dismiss {
+  background: none;
+  border: none;
+  color: var(--gray);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0 0.25rem;
+  line-height: 1;
+}
+
 /* Loader */
 #loader {
   min-height: 100vh;
