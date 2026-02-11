@@ -21,11 +21,16 @@
     waist: 'pathpulse_waist',
     neck: 'pathpulse_neck',
     hip: 'pathpulse_hip',
+    showFuelWidget: 'pathpulse_show_fuel_widget',
+    showExpeditionWidget: 'pathpulse_show_expedition_widget',
+    stepsByDate: 'pathpulse_steps_by_date',
+    calorieGoal: 'pathpulse_calorie_goal',
   };
 
   var MAX_SAVED_ROUTE_POINTS = 5000;
   var KG_PER_LB = 0.453592;
   var M_PER_FT = 0.3048;
+  var KCAL_PER_KG_FAT = 7700; // ~7700 kcal deficit ≈ 1 kg fat loss
 
   const EXPEDITION_MISSION_KM = 2; // "Walk 2 km this week"
 
@@ -51,6 +56,11 @@
     waistCm: null,
     neckCm: null,
     hipCm: null,
+    showFuelWidget: true,
+    showExpeditionWidget: true,
+    lastTodayKey: '',
+    calorieGoal: 'maintain', // 'lose' | 'maintain' | 'gain'
+    todayMeals: { breakfast: { kcal: 0, ts: '' }, lunch: { kcal: 0, ts: '' }, dinner: { kcal: 0, ts: '' } },
   };
 
   function heightToM(val, unit) {
@@ -130,6 +140,19 @@
   }
   function tdee() {
     return Math.round(bmr() * palFromSteps(state.dailySteps));
+  }
+
+  function dailyTargetCalories() {
+    var t = tdee();
+    if (state.calorieGoal === 'lose') return Math.max(1200, t - 500);
+    if (state.calorieGoal === 'gain') return t + 300;
+    return t;
+  }
+
+  function calorieGoalLabel() {
+    if (state.calorieGoal === 'lose') return 'lose';
+    if (state.calorieGoal === 'gain') return 'gain';
+    return 'maintain';
   }
 
   // Body composition. Navy method when waist/neck (and hip for women) available; else Deurenberg.
@@ -234,6 +257,75 @@
     return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
   }
 
+  function getStepsByDate() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEYS.stepsByDate);
+      if (!raw) return {};
+      var obj = JSON.parse(raw);
+      return typeof obj === 'object' && obj !== null ? obj : {};
+    } catch (e) { return {}; }
+  }
+
+  function setStepsForDate(key, steps) {
+    try {
+      var obj = getStepsByDate();
+      obj[key] = steps;
+      localStorage.setItem(STORAGE_KEYS.stepsByDate, JSON.stringify(obj));
+    } catch (e) {}
+  }
+
+  function getCaloriesData() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEYS.calories);
+      if (!raw) return {};
+      var obj = JSON.parse(raw);
+      return typeof obj === 'object' && obj !== null ? obj : {};
+    } catch (e) { return {}; }
+  }
+
+  function getMealsForDate(key) {
+    var cal = getCaloriesData();
+    var day = cal[key];
+    if (day == null) return { breakfast: { kcal: 0, ts: '' }, lunch: { kcal: 0, ts: '' }, dinner: { kcal: 0, ts: '' } };
+    if (typeof day === 'number') return { breakfast: { kcal: 0, ts: '' }, lunch: { kcal: 0, ts: '' }, dinner: { kcal: 0, ts: '' } };
+    return {
+      breakfast: day.breakfast || day.b || { kcal: 0, ts: '' },
+      lunch: day.lunch || day.l || { kcal: 0, ts: '' },
+      dinner: day.dinner || day.d || { kcal: 0, ts: '' },
+    };
+  }
+
+  function saveMealsForDate(key, meals) {
+    try {
+      var cal = getCaloriesData();
+      var total = totalKcalFromMeals(meals);
+      cal[key] = { b: meals.breakfast, l: meals.lunch, d: meals.dinner, total: total };
+      localStorage.setItem(STORAGE_KEYS.calories, JSON.stringify(cal));
+    } catch (e) {}
+  }
+
+  function totalKcalFromMeals(meals) {
+    return (meals.breakfast && meals.breakfast.kcal ? meals.breakfast.kcal : 0) +
+      (meals.lunch && meals.lunch.kcal ? meals.lunch.kcal : 0) +
+      (meals.dinner && meals.dinner.kcal ? meals.dinner.kcal : 0);
+  }
+
+  function refreshTodayData() {
+    var today = getTodayKey();
+    if (state.lastTodayKey === today) return false;
+    state.lastTodayKey = today;
+    var stepsObj = getStepsByDate();
+    state.dailySteps = typeof stepsObj[today] === 'number' ? stepsObj[today] : 0;
+    state.todayMeals = getMealsForDate(today);
+    state.calorieIntake = totalKcalFromMeals(state.todayMeals);
+    return true;
+  }
+
+  function nowTimeString() {
+    var d = new Date();
+    return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+  }
+
   function getWeekStart() {
     const d = new Date();
     const day = d.getDay();
@@ -292,8 +384,18 @@
       if (m != null) state.isMale = m === '1';
       const x = localStorage.getItem(STORAGE_KEYS.xp);
       if (x != null) state.xp = parseInt(x, 10);
-      const steps = localStorage.getItem(STORAGE_KEYS.dailySteps);
-      if (steps != null) state.dailySteps = parseInt(steps, 10);
+      var today = getTodayKey();
+      state.lastTodayKey = today;
+      var stepsObj = getStepsByDate();
+      if (Object.keys(stepsObj).length > 0) {
+        state.dailySteps = typeof stepsObj[today] === 'number' ? stepsObj[today] : 0;
+      } else {
+        var legacySteps = localStorage.getItem(STORAGE_KEYS.dailySteps);
+        if (legacySteps != null) {
+          state.dailySteps = parseInt(legacySteps, 10);
+          setStepsForDate(today, state.dailySteps);
+        }
+      }
       const week = getWeekStart();
       state.missionCompletedThisWeek = localStorage.getItem(STORAGE_KEYS.missionComplete) === week;
       var weekStats = getWeekStats();
@@ -302,14 +404,18 @@
         state.missionCompletedThisWeek = true;
         try { localStorage.setItem(STORAGE_KEYS.missionComplete, week); } catch (e) {}
       }
-      var cal = localStorage.getItem(STORAGE_KEYS.calories);
-      if (cal) {
-        try {
-          var obj = JSON.parse(cal);
-          var today = getTodayKey();
-          if (obj[today] != null) state.calorieIntake = parseInt(obj[today], 10) || 0;
-        } catch (e) {}
+      var cal = getCaloriesData();
+      if (cal[today] != null) {
+        if (typeof cal[today] === 'number') {
+          state.calorieIntake = parseInt(cal[today], 10) || 0;
+          state.todayMeals = { breakfast: { kcal: 0, ts: '' }, lunch: { kcal: 0, ts: '' }, dinner: { kcal: 0, ts: '' } };
+        } else {
+          state.todayMeals = getMealsForDate(today);
+          state.calorieIntake = totalKcalFromMeals(state.todayMeals);
+        }
       }
+      var goal = localStorage.getItem(STORAGE_KEYS.calorieGoal);
+      if (goal === 'lose' || goal === 'maintain' || goal === 'gain') state.calorieGoal = goal;
       var asian = localStorage.getItem(STORAGE_KEYS.bmiAsian);
       if (asian != null) state.useAsianBmi = asian === '1';
       var hu = localStorage.getItem(STORAGE_KEYS.heightUnit);
@@ -322,26 +428,24 @@
       if (neckVal != null && neckVal !== '') { var v = parseFloat(neckVal); if (!isNaN(v) && v > 0) state.neckCm = v; }
       var hipVal = localStorage.getItem(STORAGE_KEYS.hip);
       if (hipVal != null && hipVal !== '') { var v = parseFloat(hipVal); if (!isNaN(v) && v > 0) state.hipCm = v; }
+      var showFuel = localStorage.getItem(STORAGE_KEYS.showFuelWidget);
+      if (showFuel === '0') state.showFuelWidget = false;
+      var showExp = localStorage.getItem(STORAGE_KEYS.showExpeditionWidget);
+      if (showExp === '0') state.showExpeditionWidget = false;
     } catch (e) {}
   }
 
-  function saveCalorieIntake() {
-    try {
-      var cal = {};
-      try {
-        var raw = localStorage.getItem(STORAGE_KEYS.calories);
-        if (raw) cal = JSON.parse(raw);
-      } catch (e) {}
-      cal[getTodayKey()] = state.calorieIntake;
-      localStorage.setItem(STORAGE_KEYS.calories, JSON.stringify(cal));
-    } catch (e) {}
+  function saveMeal(mealType, kcal, ts) {
+    state.todayMeals[mealType] = { kcal: kcal, ts: ts || nowTimeString() };
+    state.calorieIntake = totalKcalFromMeals(state.todayMeals);
+    saveMealsForDate(getTodayKey(), state.todayMeals);
   }
 
   function saveOath() {
     try {
       localStorage.setItem(STORAGE_KEYS.oath, state.oathAccepted ? '1' : '0');
       localStorage.setItem(STORAGE_KEYS.xp, String(state.xp));
-      localStorage.setItem(STORAGE_KEYS.dailySteps, String(state.dailySteps));
+      setStepsForDate(getTodayKey(), state.dailySteps);
     } catch (e) {}
   }
 
@@ -394,7 +498,17 @@
       if (state.waistCm != null) localStorage.setItem(STORAGE_KEYS.waist, String(state.waistCm)); else localStorage.removeItem(STORAGE_KEYS.waist);
       if (state.neckCm != null) localStorage.setItem(STORAGE_KEYS.neck, String(state.neckCm)); else localStorage.removeItem(STORAGE_KEYS.neck);
       if (state.hipCm != null) localStorage.setItem(STORAGE_KEYS.hip, String(state.hipCm)); else localStorage.removeItem(STORAGE_KEYS.hip);
+      localStorage.setItem(STORAGE_KEYS.showFuelWidget, state.showFuelWidget ? '1' : '0');
+      localStorage.setItem(STORAGE_KEYS.showExpeditionWidget, state.showExpeditionWidget ? '1' : '0');
+      localStorage.setItem(STORAGE_KEYS.calorieGoal, state.calorieGoal);
       saveWeightToHistory();
+    } catch (e) {}
+  }
+
+  function saveWidgetOptions() {
+    try {
+      localStorage.setItem(STORAGE_KEYS.showFuelWidget, state.showFuelWidget ? '1' : '0');
+      localStorage.setItem(STORAGE_KEYS.showExpeditionWidget, state.showExpeditionWidget ? '1' : '0');
     } catch (e) {}
   }
 
@@ -442,6 +556,11 @@
   }
 
   function updateHomeUI() {
+    var fuelWidget = document.getElementById('home-widget-fuel');
+    var expeditionWidget = document.getElementById('home-widget-expedition');
+    if (fuelWidget) fuelWidget.classList.toggle('hidden', !state.showFuelWidget);
+    if (expeditionWidget) expeditionWidget.classList.toggle('hidden', !state.showExpeditionWidget);
+
     const targetSteps = 10000;
     const progress = Math.min(1, state.dailySteps / targetSteps);
     document.getElementById('ring-fill').style.transform = 'rotate(-90deg) rotate(' + (progress * 360) + 'deg)';
@@ -491,11 +610,13 @@
     var tdeeEl = document.getElementById('fuel-tdee');
     var burnEl = document.getElementById('fuel-burn');
     var balanceEl = document.getElementById('fuel-balance');
-    var inputEl = document.getElementById('input-calories');
+    var targetEl = document.getElementById('fuel-target');
+    var weightEquivEl = document.getElementById('fuel-weight-equiv');
     if (bmrEl) bmrEl.textContent = Math.round(bmr()) + ' kcal';
     if (tdeeEl) tdeeEl.textContent = tdee() + ' kcal/day';
     if (burnEl) burnEl.textContent = burn() + ' kcal';
-    if (inputEl) inputEl.value = state.calorieIntake || '';
+    var targetKcal = dailyTargetCalories();
+    if (targetEl) targetEl.textContent = targetKcal + ' kcal (' + calorieGoalLabel() + ')';
     var totalBurn = Math.round(bmr()) + burn();
     var intake = state.calorieIntake || 0;
     var balance = totalBurn - intake;
@@ -504,9 +625,21 @@
       balanceEl.classList.toggle('surplus', balance < 0);
       balanceEl.classList.toggle('deficit', balance >= 0);
     }
+    var equivKg = balance / KCAL_PER_KG_FAT;
+    if (weightEquivEl) {
+      if (Math.abs(equivKg) < 0.005) weightEquivEl.textContent = '—';
+      else weightEquivEl.textContent = (equivKg > 0 ? '−' : '+') + Math.abs(equivKg).toFixed(2) + ' kg (est.)';
+    }
+    var burnToday = burn();
+    var walkEquivKg = burnToday / KCAL_PER_KG_FAT;
+    var walkEquivEl = document.getElementById('fuel-walk-equiv');
+    if (walkEquivEl) {
+      if (burnToday < 10) walkEquivEl.textContent = '—';
+      else walkEquivEl.textContent = '−' + walkEquivKg.toFixed(2) + ' kg (est. from steps)';
+    }
 
-    var tdeeVal = tdee();
-    var level = tdeeVal > 0 ? intake / tdeeVal : 0;
+    var targetVal = dailyTargetCalories();
+    var level = targetVal > 0 ? intake / targetVal : 0;
     var levelCapped = Math.min(level, 1.5);
     var needleDeg = -90 + levelCapped * 180;
     var needleEl = document.getElementById('fuel-gauge-needle');
@@ -515,6 +648,26 @@
     if (fillEl) fillEl.style.strokeDashoffset = String(FUEL_ARC_LENGTH * (1 - Math.min(level, 1)));
     var valueEl = document.getElementById('fuel-gauge-value');
     if (valueEl) valueEl.textContent = level >= 1 ? (level > 1.5 ? '150+' : Math.round(level * 100)) : Math.round(level * 100);
+
+    updateMealInputsAndTimestamps();
+  }
+
+  function updateMealInputsAndTimestamps() {
+    var b = state.todayMeals.breakfast;
+    var l = state.todayMeals.lunch;
+    var d = state.todayMeals.dinner;
+    var inB = document.getElementById('input-breakfast');
+    var inL = document.getElementById('input-lunch');
+    var inD = document.getElementById('input-dinner');
+    var tsB = document.getElementById('meal-ts-breakfast');
+    var tsL = document.getElementById('meal-ts-lunch');
+    var tsD = document.getElementById('meal-ts-dinner');
+    if (inB) inB.value = b && b.kcal ? b.kcal : '';
+    if (inL) inL.value = l && l.kcal ? l.kcal : '';
+    if (inD) inD.value = d && d.kcal ? d.kcal : '';
+    if (tsB) tsB.textContent = b && b.ts ? b.ts : '—';
+    if (tsL) tsL.textContent = l && l.ts ? l.ts : '—';
+    if (tsD) tsD.textContent = d && d.ts ? d.ts : '—';
   }
 
   function updateMapDistanceUI() {
@@ -592,6 +745,9 @@
     document.getElementById('input-age').value = state.age;
     document.getElementById('sex-male').classList.toggle('active', state.isMale);
     document.getElementById('sex-female').classList.toggle('active', !state.isMale);
+    document.getElementById('goal-lose').classList.toggle('active', state.calorieGoal === 'lose');
+    document.getElementById('goal-maintain').classList.toggle('active', state.calorieGoal === 'maintain');
+    document.getElementById('goal-gain').classList.toggle('active', state.calorieGoal === 'gain');
     var waistIn = document.getElementById('input-waist');
     var neckIn = document.getElementById('input-neck');
     var hipIn = document.getElementById('input-hip');
@@ -600,6 +756,10 @@
     if (hipIn) hipIn.value = state.hipCm != null ? state.hipCm : '';
     var asianCb = document.getElementById('use-asian-bmi');
     if (asianCb) asianCb.checked = state.useAsianBmi;
+    var showFuelCb = document.getElementById('show-fuel-widget');
+    var showExpCb = document.getElementById('show-expedition-widget');
+    if (showFuelCb) showFuelCb.checked = state.showFuelWidget;
+    if (showExpCb) showExpCb.checked = state.showExpeditionWidget;
     var bmiVal = bmi();
     var bmiCat = bmiCategory(bmiVal);
     var ideal = idealWeightRange();
@@ -797,6 +957,7 @@
           state.routePoints.push({ lat: lat, lng: lng });
           updateRouteLine();
           state.dailySteps += Math.round(Math.random() * 4 + 8);
+          setStepsForDate(getTodayKey(), state.dailySteps);
           updateHomeUI();
           updateMapDistanceUI();
           if (state.routePoints.length % 5 === 0) saveExpeditionState();
@@ -857,6 +1018,7 @@
       state.lastRouteKm = km;
       var addedSteps = stepsFromDistanceKm(km);
       state.dailySteps += addedSteps;
+      setStepsForDate(getTodayKey(), state.dailySteps);
       logToday(km);
       state.weekDistanceKm = getWeekStats().totalKm;
       if (!state.missionCompletedThisWeek && state.weekDistanceKm >= EXPEDITION_MISSION_KM) {
@@ -909,6 +1071,10 @@
       if (document.hidden) {
         saveExpeditionState();
       } else {
+        if (refreshTodayData()) {
+          updateHomeUI();
+          updateFuelUI();
+        }
         if (state.oathAccepted) {
           if (state.isMissionActive) {
             stopWatching();
@@ -921,6 +1087,12 @@
         }
       }
     });
+    setInterval(function () {
+      if (refreshTodayData()) {
+        updateHomeUI();
+        updateFuelUI();
+      }
+    }, 60000);
     window.addEventListener('pagehide', saveExpeditionState);
 
     document.getElementById('accept-oath').addEventListener('click', function () {
@@ -1036,20 +1208,50 @@
         updateHomeUI();
       });
     }
+    var showFuelCb = document.getElementById('show-fuel-widget');
+    if (showFuelCb) {
+      showFuelCb.addEventListener('change', function () {
+        state.showFuelWidget = showFuelCb.checked;
+        saveWidgetOptions();
+        updateHomeUI();
+      });
+    }
+    var showExpCb = document.getElementById('show-expedition-widget');
+    if (showExpCb) {
+      showExpCb.addEventListener('change', function () {
+        state.showExpeditionWidget = showExpCb.checked;
+        saveWidgetOptions();
+        updateHomeUI();
+      });
+    }
+    ['lose', 'maintain', 'gain'].forEach(function (g) {
+      var btn = document.getElementById('goal-' + g);
+      if (btn) {
+        btn.addEventListener('click', function () {
+          state.calorieGoal = g;
+          try { localStorage.setItem(STORAGE_KEYS.calorieGoal, g); } catch (e) {}
+          updateProfileUI();
+          updateHomeUI();
+          updateFuelUI();
+        });
+      }
+    });
     var weightUnitSel = document.getElementById('weight-unit');
     if (weightUnitSel) weightUnitSel.addEventListener('change', function () { state.weightUnit = weightUnitSel.value; updateProfileUI(); });
     var heightUnitSel = document.getElementById('height-unit');
     if (heightUnitSel) heightUnitSel.addEventListener('change', function () { state.heightUnit = heightUnitSel.value; updateProfileUI(); });
 
-    var calorieInput = document.getElementById('input-calories');
-    if (calorieInput) {
-      calorieInput.addEventListener('change', function () {
-        var v = parseInt(calorieInput.value, 10);
-        state.calorieIntake = isNaN(v) || v < 0 ? 0 : v;
-        saveCalorieIntake();
+    document.querySelectorAll('.btn-meal-save').forEach(function (btn) {
+      var meal = btn.getAttribute('data-meal');
+      if (!meal) return;
+      btn.addEventListener('click', function () {
+        var input = document.getElementById('input-' + meal);
+        var v = input ? parseInt(input.value, 10) : 0;
+        if (isNaN(v) || v < 0) v = 0;
+        saveMeal(meal, v, nowTimeString());
         updateFuelUI();
       });
-    }
+    });
 
     function getReportShareText() {
       var weekStats = getWeekStats();

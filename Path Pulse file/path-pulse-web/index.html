@@ -85,17 +85,19 @@
               <span class="label">KINETIC STEPS</span>
             </div>
           </div>
-          <button id="btn-mission-home" class="mission-btn">
-            <span id="mission-icon">▶</span>
-            <span id="mission-label">START EXPEDITION</span>
-          </button>
-          <div id="last-route" class="last-route hidden">Last route: <span id="last-route-km">0</span> km</div>
-          <div id="expedition-mission" class="expedition-mission">
-            <p class="mission-title">MISSION: Walk <span id="mission-target-km">2</span> km this week</p>
-            <div class="mission-progress-bg"><div class="mission-progress-fill" id="mission-progress-fill"></div></div>
-            <p id="mission-status" class="mission-status">0 / 2 km</p>
+          <div id="home-widget-expedition">
+            <button id="btn-mission-home" class="mission-btn">
+              <span id="mission-icon">▶</span>
+              <span id="mission-label">START EXPEDITION</span>
+            </button>
+            <div id="last-route" class="last-route hidden">Last route: <span id="last-route-km">0</span> km</div>
+            <div id="expedition-mission" class="expedition-mission">
+              <p class="mission-title">MISSION: Walk <span id="mission-target-km">2</span> km this week</p>
+              <div class="mission-progress-bg"><div class="mission-progress-fill" id="mission-progress-fill"></div></div>
+              <p id="mission-status" class="mission-status">0 / 2 km</p>
+            </div>
           </div>
-          <div class="fuel-section">
+          <div id="home-widget-fuel" class="fuel-section">
             <h3>FUEL GAUGE</h3>
             <div class="fuel-gauge-wrap">
               <div class="fuel-gauge-dial">
@@ -124,12 +126,37 @@
             </div>
             <div class="diag-row"><span>BMR (basal)</span><span id="fuel-bmr">—</span></div>
             <div class="diag-row"><span>Est. daily need (TDEE)</span><span id="fuel-tdee">—</span></div>
+            <div class="diag-row"><span>Target (goal)</span><span id="fuel-target">—</span></div>
             <div class="diag-row"><span>Active burn today</span><span id="fuel-burn">—</span></div>
-            <div class="fuel-intake">
-              <label>Calories in today</label>
-              <input type="number" id="input-calories" placeholder="e.g. 1800" min="0" step="50">
+            <div class="fuel-meals">
+              <div class="meal-row">
+                <label>Breakfast</label>
+                <div class="meal-input-row">
+                  <input type="number" id="input-breakfast" placeholder="kcal" min="0" step="50" aria-label="Breakfast calories">
+                  <span id="meal-ts-breakfast" class="meal-ts">—</span>
+                  <button type="button" class="btn-meal-save" data-meal="breakfast" aria-label="Save breakfast">Save</button>
+                </div>
+              </div>
+              <div class="meal-row">
+                <label>Lunch</label>
+                <div class="meal-input-row">
+                  <input type="number" id="input-lunch" placeholder="kcal" min="0" step="50" aria-label="Lunch calories">
+                  <span id="meal-ts-lunch" class="meal-ts">—</span>
+                  <button type="button" class="btn-meal-save" data-meal="lunch" aria-label="Save lunch">Save</button>
+                </div>
+              </div>
+              <div class="meal-row">
+                <label>Dinner</label>
+                <div class="meal-input-row">
+                  <input type="number" id="input-dinner" placeholder="kcal" min="0" step="50" aria-label="Dinner calories">
+                  <span id="meal-ts-dinner" class="meal-ts">—</span>
+                  <button type="button" class="btn-meal-save" data-meal="dinner" aria-label="Save dinner">Save</button>
+                </div>
+              </div>
             </div>
             <div class="diag-row"><span>Balance</span><span id="fuel-balance">—</span></div>
+            <div class="diag-row"><span>Balance → weight</span><span id="fuel-weight-equiv">—</span></div>
+            <div class="diag-row sub"><span>Walking today → weight</span><span id="fuel-walk-equiv">—</span></div>
           </div>
           <div class="diagnostics">
             <h3>BIO-DIAGNOSTICS</h3>
@@ -168,6 +195,12 @@
             <button type="button" id="sex-male" class="sex-btn active">Male</button>
             <button type="button" id="sex-female" class="sex-btn">Female</button>
           </div>
+          <label>Calorie goal (Fuel Gauge target)</label>
+          <div class="goal-toggle">
+            <button type="button" id="goal-lose" class="goal-btn" aria-label="Lose weight">Lose</button>
+            <button type="button" id="goal-maintain" class="goal-btn active" aria-label="Maintain weight">Maintain</button>
+            <button type="button" id="goal-gain" class="goal-btn" aria-label="Gain weight">Gain</button>
+          </div>
           <p class="hint hint-small label-section">Optional: circumferences (cm) improve body fat & visceral estimate (Navy method). Hip used for women.</p>
           <label>Waist (cm)</label>
           <input type="number" id="input-waist" value="" step="0.1" min="40" max="200" placeholder="e.g. 85">
@@ -178,6 +211,15 @@
           <label class="checkbox-label">
             <input type="checkbox" id="use-asian-bmi" aria-label="Use WHO Asian BMI cut-offs">
             Use WHO Asian BMI cut-offs (overweight ≥23, obese ≥27)
+          </label>
+          <p class="label label-section">HOME WIDGET OPTIONS</p>
+          <label class="checkbox-label">
+            <input type="checkbox" id="show-fuel-widget" aria-label="Show Fuel Gauge on Home">
+            Show Fuel Gauge on Home
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="show-expedition-widget" aria-label="Show Expedition / Mission on Home">
+            Show Expedition / Mission on Home
           </label>
           <p class="hint hint-small">BMR: Mifflin-St Jeor. Body composition: Deurenberg or Navy (when waist/neck/hip entered). Not a substitute for DEXA/BIA.</p>
           <button id="save-profile" class="btn-primary" aria-label="Save profile and log today's weight">SAVE BASELINE</button>
