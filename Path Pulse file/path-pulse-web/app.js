@@ -382,6 +382,8 @@
     updateFuelUI();
   }
 
+  var FUEL_ARC_LENGTH = Math.PI * 80;
+
   function updateFuelUI() {
     var bmrEl = document.getElementById('fuel-bmr');
     var tdeeEl = document.getElementById('fuel-tdee');
@@ -400,6 +402,17 @@
       balanceEl.classList.toggle('surplus', balance < 0);
       balanceEl.classList.toggle('deficit', balance >= 0);
     }
+
+    var tdeeVal = tdee();
+    var level = tdeeVal > 0 ? intake / tdeeVal : 0;
+    var levelCapped = Math.min(level, 1.5);
+    var needleDeg = -90 + levelCapped * 180;
+    var needleEl = document.getElementById('fuel-gauge-needle');
+    if (needleEl) needleEl.style.transform = 'rotate(' + needleDeg + 'deg)';
+    var fillEl = document.getElementById('fuel-gauge-fill');
+    if (fillEl) fillEl.style.strokeDashoffset = String(FUEL_ARC_LENGTH * (1 - Math.min(level, 1)));
+    var valueEl = document.getElementById('fuel-gauge-value');
+    if (valueEl) valueEl.textContent = level >= 1 ? (level > 1.5 ? '150+' : Math.round(level * 100)) : Math.round(level * 100);
   }
 
   function updateMapDistanceUI() {

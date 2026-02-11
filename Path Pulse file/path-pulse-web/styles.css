@@ -259,8 +259,84 @@ body {
   background: rgba(255,255,255,0.04);
   border: 1px solid var(--gray-dim);
   border-radius: 12px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
 }
 .fuel-section h3 { font-size: 11px; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+
+.fuel-gauge-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 220px;
+  margin: 0 auto 1rem;
+}
+.fuel-gauge-dial {
+  position: relative;
+  width: 100%;
+  padding-bottom: 55%;
+  background: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.1) 100%);
+  border-radius: 12px 12px 0 0;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3), inset 0 0 0 1px rgba(0,245,255,0.08);
+}
+.fuel-gauge-arc {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.fuel-gauge-track { opacity: 0.35; }
+.fuel-gauge-fill {
+  transition: stroke-dashoffset 0.4s ease-out;
+  filter: drop-shadow(0 0 6px rgba(0,245,255,0.4));
+}
+.fuel-gauge-needle {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  width: 4px;
+  height: 31%;
+  margin-left: -2px;
+  background: linear-gradient(180deg, var(--cyan) 0%, rgba(0,245,255,0.9) 100%);
+  border-radius: 2px;
+  transform-origin: 50% 100%;
+  transform: rotate(-90deg);
+  transition: transform 0.4s ease-out;
+  box-shadow: 0 0 8px rgba(0,245,255,0.5), 0 2px 4px rgba(0,0,0,0.4);
+}
+.fuel-gauge-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+}
+.fuel-gauge-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--cyan);
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 12px rgba(0,245,255,0.4);
+}
+.fuel-gauge-unit { font-size: 0.75rem; color: var(--gray); margin-left: 1px; }
+.fuel-gauge-labels {
+  position: absolute;
+  bottom: 8%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 12%;
+  font-size: 10px;
+  font-weight: bold;
+  color: var(--gray);
+  letter-spacing: 0.1em;
+}
+.fuel-gauge-e { opacity: 0.8; }
+.fuel-gauge-f { opacity: 0.8; }
+
 .fuel-intake { margin: 0.5rem 0; }
 .fuel-intake label { display: block; font-size: 11px; color: var(--gray); margin-bottom: 0.25rem; }
 .fuel-intake input {

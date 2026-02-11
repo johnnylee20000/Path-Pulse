@@ -97,6 +97,31 @@
           </div>
           <div class="fuel-section">
             <h3>FUEL GAUGE</h3>
+            <div class="fuel-gauge-wrap">
+              <div class="fuel-gauge-dial">
+                <svg class="fuel-gauge-arc" viewBox="0 0 200 120" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="fuel-arc-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#ef4444"/>
+                      <stop offset="35%" stop-color="#f59e0b"/>
+                      <stop offset="65%" stop-color="#22c55e"/>
+                      <stop offset="100%" stop-color="#eab308"/>
+                    </linearGradient>
+                  </defs>
+                  <path class="fuel-gauge-track" d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="url(#fuel-arc-gradient)" stroke-width="12" stroke-linecap="round"/>
+                  <path id="fuel-gauge-fill" class="fuel-gauge-fill" d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="rgba(0,245,255,0.5)" stroke-width="10" stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="251.2"/>
+                </svg>
+                <div id="fuel-gauge-needle" class="fuel-gauge-needle" role="img" aria-label="Fuel level"></div>
+                <div class="fuel-gauge-center">
+                  <span id="fuel-gauge-value" class="fuel-gauge-value">0</span>
+                  <span class="fuel-gauge-unit">%</span>
+                </div>
+              </div>
+              <div class="fuel-gauge-labels">
+                <span class="fuel-gauge-e">E</span>
+                <span class="fuel-gauge-f">F</span>
+              </div>
+            </div>
             <div class="diag-row"><span>BMR (basal)</span><span id="fuel-bmr">—</span></div>
             <div class="diag-row"><span>Est. daily need (TDEE)</span><span id="fuel-tdee">—</span></div>
             <div class="diag-row"><span>Active burn today</span><span id="fuel-burn">—</span></div>
