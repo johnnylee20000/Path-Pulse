@@ -143,11 +143,24 @@
         <!-- Profile tab -->
         <div id="tab-profile" class="tab-pane">
           <h2>PHYSICAL SPECS</h2>
-          <p class="hint">Lab uses these for BMI and BMR.</p>
-          <label>Weight (kg)</label>
-          <input type="number" id="input-weight" value="85" step="0.1" min="20" max="300">
-          <label>Height (m)</label>
-          <input type="number" id="input-height" value="1.80" step="0.01" min="1" max="2.5">
+          <p class="hint">Lab uses these for BMI, BMR, and body composition estimates.</p>
+          <label>Weight</label>
+          <div class="input-with-unit">
+            <input type="number" id="input-weight" value="85" step="0.1" min="20" max="700" placeholder="85">
+            <select id="weight-unit" aria-label="Weight unit">
+              <option value="kg">kg</option>
+              <option value="lbs">lbs</option>
+            </select>
+          </div>
+          <label>Height</label>
+          <div class="input-with-unit">
+            <input type="number" id="input-height" value="1.80" step="0.01" min="0.5" max="3" placeholder="1.80">
+            <select id="height-unit" aria-label="Height unit">
+              <option value="m">m</option>
+              <option value="cm">cm</option>
+              <option value="ft">ft</option>
+            </select>
+          </div>
           <label>Age</label>
           <input type="number" id="input-age" value="30" min="10" max="120">
           <label>Sex</label>
@@ -155,11 +168,18 @@
             <button type="button" id="sex-male" class="sex-btn active">Male</button>
             <button type="button" id="sex-female" class="sex-btn">Female</button>
           </div>
+          <p class="hint hint-small label-section">Optional: circumferences (cm) improve body fat & visceral estimate (Navy method). Hip used for women.</p>
+          <label>Waist (cm)</label>
+          <input type="number" id="input-waist" value="" step="0.1" min="40" max="200" placeholder="e.g. 85">
+          <label>Neck (cm)</label>
+          <input type="number" id="input-neck" value="" step="0.1" min="20" max="60" placeholder="e.g. 38">
+          <label>Hip (cm) <span class="hint-inline">women</span></label>
+          <input type="number" id="input-hip" value="" step="0.1" min="50" max="200" placeholder="e.g. 98">
           <label class="checkbox-label">
             <input type="checkbox" id="use-asian-bmi" aria-label="Use WHO Asian BMI cut-offs">
             Use WHO Asian BMI cut-offs (overweight ≥23, obese ≥27)
           </label>
-          <p class="hint hint-small">All calculations follow WHO/ICD-10 and Mifflin-St Jeor (BMR). Units: kg, m, kcal.</p>
+          <p class="hint hint-small">BMR: Mifflin-St Jeor. Body composition: Deurenberg or Navy (when waist/neck/hip entered). Not a substitute for DEXA/BIA.</p>
           <button id="save-profile" class="btn-primary" aria-label="Save profile and log today's weight">SAVE BASELINE</button>
           <div class="profile-output">
             <p class="label">CURRENT LAB OUTPUT</p>
@@ -168,6 +188,12 @@
             <div class="diag-row"><span>Ideal weight range</span><span id="profile-ideal-range">—</span></div>
             <div class="diag-row"><span>BMR</span><span id="profile-bmr">1842 kcal/day</span></div>
             <div class="diag-row"><span>BSA (body surface)</span><span id="profile-bsa">—</span></div>
+            <p class="label label-section">BODY COMPOSITION (estimated)</p>
+            <div class="diag-row"><span>Body fat</span><span id="profile-bodyfat">—</span></div>
+            <div class="diag-row"><span>Body water</span><span id="profile-bodywater">—</span></div>
+            <div class="diag-row"><span>Visceral fat level</span><span id="profile-visceral">—</span></div>
+            <div class="diag-row"><span>Skeletal muscle</span><span id="profile-muscle">—</span></div>
+            <div class="diag-row"><span>Bone mass</span><span id="profile-bone">—</span></div>
             <div class="diag-row sub"><span>New BMI (Trefethen)</span><span id="profile-new-bmi">—</span></div>
           </div>
           <div class="weight-trend">

@@ -445,9 +445,22 @@ body {
 .diag-row.success span:last-child { color: var(--lime); }
 .diag-row.sub { font-size: 0.9em; }
 .diag-row.sub span:last-child { color: var(--gray); }
+.input-with-unit { display: flex; gap: 0.5rem; align-items: center; }
+.input-with-unit input { flex: 1; }
+.input-with-unit select {
+  padding: 0.5rem 0.4rem;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  color: var(--white);
+  font-size: 0.9rem;
+  min-width: 4rem;
+}
+.label-section { margin-top: 0.75rem; margin-bottom: 0.25rem; }
 .checkbox-label { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; margin: 0.75rem 0 0; font-size: 0.9rem; }
 .checkbox-label input { accent-color: var(--cyan); }
 .hint-small { font-size: 10px; color: var(--gray); margin-top: 0.35rem; }
+.hint-inline { font-size: 11px; color: var(--gray); font-weight: normal; }
 .val-bmi.bmi-under, .profile-bmi-val.bmi-under, .profile-bmi-cat.bmi-under { color: #93c5fd; }
 .val-bmi.bmi-normal, .profile-bmi-val.bmi-normal, .profile-bmi-cat.bmi-normal { color: var(--lime); }
 .val-bmi.bmi-over, .profile-bmi-val.bmi-over, .profile-bmi-cat.bmi-over { color: #fbbf24; }

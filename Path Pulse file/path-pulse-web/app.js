@@ -15,7 +15,17 @@
     weightHistory: 'pathpulse_weight_history',
     bmiAsian: 'pathpulse_bmi_asian',
     installDismissed: 'pathpulse_install_dismissed',
+    expedition: 'pathpulse_expedition',
+    heightUnit: 'pathpulse_height_unit',
+    weightUnit: 'pathpulse_weight_unit',
+    waist: 'pathpulse_waist',
+    neck: 'pathpulse_neck',
+    hip: 'pathpulse_hip',
   };
+
+  var MAX_SAVED_ROUTE_POINTS = 5000;
+  var KG_PER_LB = 0.453592;
+  var M_PER_FT = 0.3048;
 
   const EXPEDITION_MISSION_KM = 2; // "Walk 2 km this week"
 
@@ -36,7 +46,31 @@
     missionCompletedThisWeek: false,
     calorieIntake: 0,
     useAsianBmi: false,
+    heightUnit: 'm',
+    weightUnit: 'kg',
+    waistCm: null,
+    neckCm: null,
+    hipCm: null,
   };
+
+  function heightToM(val, unit) {
+    if (unit === 'cm') return val / 100;
+    if (unit === 'ft') return val * M_PER_FT;
+    return val;
+  }
+  function heightFromM(m, unit) {
+    if (unit === 'cm') return m * 100;
+    if (unit === 'ft') return m / M_PER_FT;
+    return m;
+  }
+  function weightToKg(val, unit) {
+    if (unit === 'lbs') return val * KG_PER_LB;
+    return val;
+  }
+  function weightFromKg(kg, unit) {
+    if (unit === 'lbs') return kg / KG_PER_LB;
+    return kg;
+  }
 
   let map = null;
   let userMarker = null;
@@ -97,6 +131,59 @@
   function tdee() {
     return Math.round(bmr() * palFromSteps(state.dailySteps));
   }
+
+  // Body composition. Navy method when waist/neck (and hip for women) available; else Deurenberg.
+  function bodyFatPct() {
+    var hCm = state.height * 100;
+    var w = state.waistCm;
+    var n = state.neckCm;
+    var hi = state.hipCm;
+    if (state.isMale && w != null && n != null && w > n && hCm > 0) {
+      var log10 = Math.log10;
+      var bf = 495 / (1.0324 - 0.19077 * log10(w - n) + 0.15456 * log10(hCm)) - 450;
+      return Math.max(3, Math.min(50, bf));
+    }
+    if (!state.isMale && w != null && n != null && hi != null && (w + hi - n) > 0 && hCm > 0) {
+      var bf = 495 / (1.29579 - 0.35004 * Math.log10(w + hi - n) + 0.22100 * Math.log10(hCm)) - 450;
+      return Math.max(3, Math.min(50, bf));
+    }
+    var bmiVal = bmi();
+    var sex = state.isMale ? 1 : 0;
+    var bf = (1.20 * bmiVal) + (0.23 * state.age) - (10.8 * sex) - 5.4;
+    return Math.max(3, Math.min(50, bf));
+  }
+  function bodyFatSource() {
+    if (state.isMale && state.waistCm != null && state.neckCm != null) return 'Navy';
+    if (!state.isMale && state.waistCm != null && state.neckCm != null && state.hipCm != null) return 'Navy';
+    return 'Deurenberg';
+  }
+  function fatMassKg() { return state.weight * (bodyFatPct() / 100); }
+  function leanMassKg() { return state.weight - fatMassKg(); }
+  function bodyWaterPct() {
+    var h = state.height * 100;
+    var w = state.weight;
+    var tbw = state.isMale
+      ? 2.447 - (0.09156 * state.age) + (0.1074 * h) + (0.3362 * w)
+      : -2.097 + (0.1069 * h) + (0.2466 * w);
+    return Math.max(40, Math.min(65, (tbw / w) * 100));
+  }
+  function skeletalMuscleKg() {
+    var ffm = leanMassKg();
+    return state.isMale ? ffm * 0.45 : ffm * 0.35;
+  }
+  function boneMassKg() {
+    return Math.max(1.5, Math.min(8, leanMassKg() * 0.15));
+  }
+  function visceralFatLevel() {
+    var w = state.waistCm;
+    if (w != null) {
+      var v = state.isMale ? 10 + (w - 80) * 0.4 + state.age * 0.05 : 10 + (w - 70) * 0.4 + state.age * 0.05;
+      return Math.max(1, Math.min(59, Math.round(v)));
+    }
+    var v = 10 + (bmi() - 22) * 1.5 + state.age * 0.08;
+    return Math.max(1, Math.min(59, Math.round(v)));
+  }
+  function visceralSource() { return state.waistCm != null ? 'waist' : 'BMI/age'; }
   function level() {
     return Math.floor(0.1 * Math.sqrt(Math.max(0, state.xp)) + 1);
   }
@@ -225,6 +312,16 @@
       }
       var asian = localStorage.getItem(STORAGE_KEYS.bmiAsian);
       if (asian != null) state.useAsianBmi = asian === '1';
+      var hu = localStorage.getItem(STORAGE_KEYS.heightUnit);
+      if (hu === 'cm' || hu === 'ft') state.heightUnit = hu;
+      var wu = localStorage.getItem(STORAGE_KEYS.weightUnit);
+      if (wu === 'lbs') state.weightUnit = wu;
+      var waistVal = localStorage.getItem(STORAGE_KEYS.waist);
+      if (waistVal != null && waistVal !== '') { var v = parseFloat(waistVal); if (!isNaN(v) && v > 0) state.waistCm = v; }
+      var neckVal = localStorage.getItem(STORAGE_KEYS.neck);
+      if (neckVal != null && neckVal !== '') { var v = parseFloat(neckVal); if (!isNaN(v) && v > 0) state.neckCm = v; }
+      var hipVal = localStorage.getItem(STORAGE_KEYS.hip);
+      if (hipVal != null && hipVal !== '') { var v = parseFloat(hipVal); if (!isNaN(v) && v > 0) state.hipCm = v; }
     } catch (e) {}
   }
 
@@ -292,6 +389,11 @@
       localStorage.setItem(STORAGE_KEYS.height, String(state.height));
       localStorage.setItem(STORAGE_KEYS.age, String(state.age));
       localStorage.setItem(STORAGE_KEYS.male, state.isMale ? '1' : '0');
+      localStorage.setItem(STORAGE_KEYS.heightUnit, state.heightUnit);
+      localStorage.setItem(STORAGE_KEYS.weightUnit, state.weightUnit);
+      if (state.waistCm != null) localStorage.setItem(STORAGE_KEYS.waist, String(state.waistCm)); else localStorage.removeItem(STORAGE_KEYS.waist);
+      if (state.neckCm != null) localStorage.setItem(STORAGE_KEYS.neck, String(state.neckCm)); else localStorage.removeItem(STORAGE_KEYS.neck);
+      if (state.hipCm != null) localStorage.setItem(STORAGE_KEYS.hip, String(state.hipCm)); else localStorage.removeItem(STORAGE_KEYS.hip);
       saveWeightToHistory();
     } catch (e) {}
   }
@@ -470,11 +572,32 @@
   }
 
   function updateProfileUI() {
-    document.getElementById('input-weight').value = state.weight;
-    document.getElementById('input-height').value = state.height;
+    var weightInput = document.getElementById('input-weight');
+    var heightInput = document.getElementById('input-height');
+    var weightUnitSel = document.getElementById('weight-unit');
+    var heightUnitSel = document.getElementById('height-unit');
+    if (weightInput) weightInput.value = Math.round(weightFromKg(state.weight, state.weightUnit) * 10) / 10;
+    if (heightInput) heightInput.value = Math.round(heightFromM(state.height, state.heightUnit) * 100) / 100;
+    if (weightUnitSel) weightUnitSel.value = state.weightUnit;
+    if (heightUnitSel) heightUnitSel.value = state.heightUnit;
+    if (heightInput) {
+      heightInput.min = state.heightUnit === 'ft' ? '4' : (state.heightUnit === 'cm' ? '100' : '0.5');
+      heightInput.max = state.heightUnit === 'ft' ? '8' : (state.heightUnit === 'cm' ? '250' : '2.5');
+      heightInput.step = state.heightUnit === 'cm' ? '1' : '0.01';
+    }
+    if (weightInput) {
+      weightInput.min = state.weightUnit === 'lbs' ? '44' : '20';
+      weightInput.max = state.weightUnit === 'lbs' ? '660' : '300';
+    }
     document.getElementById('input-age').value = state.age;
     document.getElementById('sex-male').classList.toggle('active', state.isMale);
     document.getElementById('sex-female').classList.toggle('active', !state.isMale);
+    var waistIn = document.getElementById('input-waist');
+    var neckIn = document.getElementById('input-neck');
+    var hipIn = document.getElementById('input-hip');
+    if (waistIn) waistIn.value = state.waistCm != null ? state.waistCm : '';
+    if (neckIn) neckIn.value = state.neckCm != null ? state.neckCm : '';
+    if (hipIn) hipIn.value = state.hipCm != null ? state.hipCm : '';
     var asianCb = document.getElementById('use-asian-bmi');
     if (asianCb) asianCb.checked = state.useAsianBmi;
     var bmiVal = bmi();
@@ -485,10 +608,31 @@
     if (profileBmiEl) { profileBmiEl.textContent = bmiVal.toFixed(1); profileBmiEl.className = 'profile-bmi-val ' + bmiCat.class; }
     if (profileBmiCatEl) { profileBmiCatEl.textContent = bmiCat.label; profileBmiCatEl.className = 'profile-bmi-cat ' + bmiCat.class; }
     var idealRangeEl = document.getElementById('profile-ideal-range');
-    if (idealRangeEl) idealRangeEl.textContent = ideal.min.toFixed(1) + ' – ' + ideal.max.toFixed(1) + ' kg';
+    if (idealRangeEl) {
+      var u = state.weightUnit === 'lbs' ? ' lbs' : ' kg';
+      var minD = state.weightUnit === 'lbs' ? weightFromKg(ideal.min, 'lbs') : ideal.min;
+      var maxD = state.weightUnit === 'lbs' ? weightFromKg(ideal.max, 'lbs') : ideal.max;
+      idealRangeEl.textContent = minD.toFixed(1) + ' – ' + maxD.toFixed(1) + u;
+    }
     document.getElementById('profile-bmr').textContent = Math.round(bmr()) + ' kcal/day';
     var bsaEl = document.getElementById('profile-bsa');
     if (bsaEl) bsaEl.textContent = bsa().toFixed(2) + ' m²';
+    var bfEl = document.getElementById('profile-bodyfat');
+    if (bfEl) bfEl.textContent = bodyFatPct().toFixed(1) + ' % (' + bodyFatSource() + ')';
+    var bwEl = document.getElementById('profile-bodywater');
+    if (bwEl) bwEl.textContent = bodyWaterPct().toFixed(1) + ' %';
+    var viscEl = document.getElementById('profile-visceral');
+    if (viscEl) viscEl.textContent = visceralFatLevel() + ' (1–59, ' + visceralSource() + ')';
+    var muscleEl = document.getElementById('profile-muscle');
+    if (muscleEl) {
+      var sm = skeletalMuscleKg();
+      muscleEl.textContent = (state.weightUnit === 'lbs' ? weightFromKg(sm, 'lbs').toFixed(1) + ' lbs' : sm.toFixed(1) + ' kg');
+    }
+    var boneEl = document.getElementById('profile-bone');
+    if (boneEl) {
+      var bm = boneMassKg();
+      boneEl.textContent = (state.weightUnit === 'lbs' ? weightFromKg(bm, 'lbs').toFixed(1) + ' lbs' : bm.toFixed(1) + ' kg');
+    }
     var newBmiEl = document.getElementById('profile-new-bmi');
     if (newBmiEl) newBmiEl.textContent = newBmi().toFixed(1) + ' (alt formula)';
     var entries = getLast7WeightEntries();
@@ -500,7 +644,8 @@
       } else {
         listEl.innerHTML = entries.map(function (e) {
           var bmiVal = (e.weight / (state.height * state.height)).toFixed(1);
-          return '<div class="trend-row"><span class="trend-date">' + e.date + '</span><span>' + e.weight + ' kg</span><span>BMI ' + bmiVal + '</span></div>';
+          var wDisplay = state.weightUnit === 'lbs' ? weightFromKg(e.weight, 'lbs').toFixed(1) + ' lbs' : e.weight + ' kg';
+          return '<div class="trend-row"><span class="trend-date">' + e.date + '</span><span>' + wDisplay + '</span><span>BMI ' + bmiVal + '</span></div>';
         }).join('');
       }
     }
@@ -654,6 +799,7 @@
           state.dailySteps += Math.round(Math.random() * 4 + 8);
           updateHomeUI();
           updateMapDistanceUI();
+          if (state.routePoints.length % 5 === 0) saveExpeditionState();
         }
       },
       function () {},
@@ -668,6 +814,34 @@
     }
   }
 
+  function saveExpeditionState() {
+    if (!state.isMissionActive) {
+      try { localStorage.removeItem(STORAGE_KEYS.expedition); } catch (e) {}
+      return;
+    }
+    try {
+      var points = state.routePoints.length > MAX_SAVED_ROUTE_POINTS
+        ? state.routePoints.slice(-MAX_SAVED_ROUTE_POINTS)
+        : state.routePoints.slice();
+      localStorage.setItem(STORAGE_KEYS.expedition, JSON.stringify({
+        active: true,
+        routePoints: points,
+        savedAt: Date.now(),
+      }));
+    } catch (e) {}
+  }
+
+  function loadExpeditionState() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEYS.expedition);
+      if (!raw) return;
+      var data = JSON.parse(raw);
+      if (!data || !data.active || !Array.isArray(data.routePoints)) return;
+      state.isMissionActive = true;
+      state.routePoints = data.routePoints;
+    } catch (e) {}
+  }
+
   function toggleExpedition() {
     state.isMissionActive = !state.isMissionActive;
     if (state.isMissionActive) {
@@ -677,6 +851,7 @@
       updateRouteLine();
       state.xp += 10;
       saveOath();
+      saveExpeditionState();
     } else {
       var km = routeDistanceKm();
       state.lastRouteKm = km;
@@ -694,6 +869,7 @@
       saveOath();
       lastRoutePoints = state.routePoints.slice();
       state.routePoints = [];
+      saveExpeditionState();
       updateRouteLine();
       updateMapDistanceUI();
       updateReplayButton();
@@ -726,7 +902,26 @@
 
   function init() {
     loadStorage();
+    loadExpeditionState();
     registerServiceWorker();
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        saveExpeditionState();
+      } else {
+        if (state.oathAccepted) {
+          if (state.isMissionActive) {
+            stopWatching();
+            startWatching();
+          }
+          updateHomeUI();
+          updateMapDistanceUI();
+          updateExpeditionButton();
+          updateRouteLine();
+        }
+      }
+    });
+    window.addEventListener('pagehide', saveExpeditionState);
 
     document.getElementById('accept-oath').addEventListener('click', function () {
       state.oathAccepted = true;
@@ -794,12 +989,25 @@
     if (loopCheck) loopCheck.addEventListener('change', function () { replayLoop = loopCheck.checked; });
 
     document.getElementById('save-profile').addEventListener('click', function () {
-      const w = parseFloat(document.getElementById('input-weight').value);
-      const h = parseFloat(document.getElementById('input-height').value);
-      const a = parseInt(document.getElementById('input-age').value, 10);
-      if (!isNaN(w) && w > 0) state.weight = w;
-      if (!isNaN(h) && h > 0) state.height = h;
+      var wRaw = parseFloat(document.getElementById('input-weight').value);
+      var hRaw = parseFloat(document.getElementById('input-height').value);
+      var a = parseInt(document.getElementById('input-age').value, 10);
+      var wu = document.getElementById('weight-unit').value;
+      var hu = document.getElementById('height-unit').value;
+      state.weightUnit = wu;
+      state.heightUnit = hu;
+      if (!isNaN(wRaw) && wRaw > 0) state.weight = weightToKg(wRaw, wu);
+      if (!isNaN(hRaw) && hRaw > 0) state.height = heightToM(hRaw, hu);
       if (!isNaN(a) && a > 0) state.age = a;
+      var waistRaw = document.getElementById('input-waist').value.trim();
+      var neckRaw = document.getElementById('input-neck').value.trim();
+      var hipRaw = document.getElementById('input-hip').value.trim();
+      var wCm = waistRaw === '' ? null : parseFloat(waistRaw);
+      var nCm = neckRaw === '' ? null : parseFloat(neckRaw);
+      var hCm = hipRaw === '' ? null : parseFloat(hipRaw);
+      state.waistCm = (wCm != null && !isNaN(wCm) && wCm > 0) ? wCm : null;
+      state.neckCm = (nCm != null && !isNaN(nCm) && nCm > 0) ? nCm : null;
+      state.hipCm = (hCm != null && !isNaN(hCm) && hCm > 0) ? hCm : null;
       saveProfile();
       updateHomeUI();
       updateProfileUI();
@@ -828,6 +1036,10 @@
         updateHomeUI();
       });
     }
+    var weightUnitSel = document.getElementById('weight-unit');
+    if (weightUnitSel) weightUnitSel.addEventListener('change', function () { state.weightUnit = weightUnitSel.value; updateProfileUI(); });
+    var heightUnitSel = document.getElementById('height-unit');
+    if (heightUnitSel) heightUnitSel.addEventListener('change', function () { state.heightUnit = heightUnitSel.value; updateProfileUI(); });
 
     var calorieInput = document.getElementById('input-calories');
     if (calorieInput) {
