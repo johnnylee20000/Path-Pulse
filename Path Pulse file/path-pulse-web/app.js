@@ -1959,11 +1959,7 @@
   }
 
   function init() {
-    loadStorage();
-    loadExpeditionState();
     registerServiceWorker();
-    updateReminderUI();
-    if (state.reminderEnabled) startReminderLoop();
 
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) {
@@ -2504,6 +2500,9 @@
 
     function finishInit() {
       loadStorage();
+      loadExpeditionState();
+      updateReminderUI();
+      if (state.reminderEnabled) startReminderLoop();
       document.getElementById('loader').classList.add('hidden');
       if (state.oathAccepted) {
         var prismSeen = localStorage.getItem(STORAGE_KEYS.prismSeen) === '1';
