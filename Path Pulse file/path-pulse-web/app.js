@@ -754,6 +754,8 @@
     var expeditionWidget = document.getElementById('home-widget-expedition');
     if (fuelWidget) fuelWidget.classList.toggle('hidden', !state.showFuelWidget);
     if (expeditionWidget) expeditionWidget.classList.toggle('hidden', !state.showExpeditionWidget);
+    var ghostHomeBtn = document.getElementById('btn-ghost-path-home');
+    if (ghostHomeBtn) ghostHomeBtn.classList.toggle('hidden', !(lastRoutePoints && lastRoutePoints.length >= 2));
 
     const targetSteps = 10000;
     const progress = Math.min(1, state.dailySteps / targetSteps);
@@ -1164,6 +1166,8 @@
     if (controls) controls.classList.toggle('hidden', !show);
     if (ghostBtn) ghostBtn.classList.toggle('hidden', !(lastRoutePoints && lastRoutePoints.length >= 2));
     if (ghostBtn) ghostBtn.classList.toggle('active', showGhostPath);
+    var ghostHomeBtn = document.getElementById('btn-ghost-path-home');
+    if (ghostHomeBtn) ghostHomeBtn.classList.toggle('hidden', !(lastRoutePoints && lastRoutePoints.length >= 2));
   }
 
   var DESIRED_ACCURACY_M = 5;
@@ -1369,6 +1373,15 @@
 
     document.getElementById('btn-mission-home').addEventListener('click', toggleExpedition);
     document.getElementById('btn-expedition').addEventListener('click', toggleExpedition);
+    var ghostPathHomeBtn = document.getElementById('btn-ghost-path-home');
+    if (ghostPathHomeBtn) ghostPathHomeBtn.addEventListener('click', function () {
+      setTab('map');
+      showGhostPath = true;
+      setTimeout(function () {
+        updateGhostLine();
+        updateReplayButton();
+      }, 150);
+    });
 
     document.getElementById('btn-location').addEventListener('click', function () {
       if (!map) return;

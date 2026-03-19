@@ -580,6 +580,34 @@ body {
   border-color: var(--cyan);
 }
 .mission-btn .icon { font-size: 1.25rem; }
+
+.btn-ghost-path-home {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: rgba(0,245,255,0.08);
+  border: 1px solid rgba(0,245,255,0.35);
+  border-radius: 10px;
+  color: var(--cyan);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.12s ease, box-shadow 0.2s ease;
+}
+.btn-ghost-path-home:hover {
+  background: rgba(0,245,255,0.15);
+  border-color: var(--cyan);
+  box-shadow: 0 0 16px rgba(0,245,255,0.2);
+}
+.btn-ghost-path-home:active { transform: scale(0.98); }
+.btn-ghost-path-home .btn-ghost-icon { font-size: 1.1rem; }
+.btn-ghost-path-home.hidden { display: none !important; }
+
 .diagnostics h3 {
   font-size: 11px;
   letter-spacing: 0.05em;
