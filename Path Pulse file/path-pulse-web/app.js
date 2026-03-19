@@ -25,6 +25,8 @@
     showExpeditionWidget: 'pathpulse_show_expedition_widget',
     stepsByDate: 'pathpulse_steps_by_date',
     calorieGoal: 'pathpulse_calorie_goal',
+    prismSeen: 'pathpulse_prism_seen',
+    lastRoute: 'pathpulse_last_route',
   };
 
   var MAX_SAVED_ROUTE_POINTS = 5000;
@@ -91,6 +93,10 @@
   let replayAnimationId = null;
   let replayDurationSec = 8;
   let replayLoop = false;
+  let ghostRouteLine = null;
+  let showGhostPath = false;
+  var calendarYear = new Date().getFullYear();
+  var calendarMonth = new Date().getMonth();
 
   // WHO standard: BMI = weight (kg) / height (m)². Units SI (kg, m).
   function bmi() {
@@ -224,6 +230,14 @@
   function burn() {
     const base = state.dailySteps * 0.04 * 1.2;
     return Math.round(base);
+  }
+  // Burn so far today: BMR prorated by time of day + active burn (steps/workout). Used for energy gauge.
+  function burnSoFarToday() {
+    var now = new Date();
+    var midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var hoursElapsed = (now - midnight) / (1000 * 60 * 60);
+    var bmrPerHour = bmr() / 24;
+    return Math.round(bmrPerHour * hoursElapsed + burn());
   }
   function protocol() {
     return state.dailySteps > 10000 ? 'High-Carb Recovery' : 'Baseline Protein';
@@ -369,6 +383,143 @@
       if (e.date >= weekStart) totalKm += e.distanceKm || 0;
     });
     return { totalKm: totalKm, todaySteps: state.dailySteps };
+  }
+
+  function getDayData(dateKey) {
+    var stepsObj = getStepsByDate();
+    var cal = getCaloriesData();
+    var hist = loadHistory();
+    var weightHist = getWeightHistory();
+    var steps = typeof stepsObj[dateKey] === 'number' ? stepsObj[dateKey] : 0;
+    var dayCal = cal[dateKey];
+    var calories = 0;
+    if (dayCal != null) {
+      if (typeof dayCal.total === 'number') calories = dayCal.total;
+      else if (typeof dayCal === 'number') calories = dayCal;
+      else calories = totalKcalFromMeals(getMealsForDate(dateKey));
+    }
+    var entry = hist.find(function (e) { return e.date === dateKey; });
+    var distanceKm = entry && entry.distanceKm != null ? entry.distanceKm : 0;
+    var weightEntry = weightHist.find(function (e) { return e.date === dateKey; });
+    var weight = weightEntry ? weightEntry.weight : null;
+    return { steps: steps, calories: calories, distanceKm: distanceKm, weight: weight };
+  }
+
+  var ACTIVITY_STEPS_REF = 10000;
+  var ACTIVITY_KM_STEPS = 1200;
+
+  function physicalActivityPercent(data) {
+    var km = data.distanceKm || 0;
+    var equiv = data.steps + km * ACTIVITY_KM_STEPS;
+    return Math.min(100, Math.round((equiv / ACTIVITY_STEPS_REF) * 100));
+  }
+
+  function isActiveMovementDay(data) {
+    return data.steps >= 5000 || (data.distanceKm || 0) >= 0.5;
+  }
+
+  function escapeAttr(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+  }
+
+  function renderProgressCalendar() {
+    var labelEl = document.getElementById('calendar-month-label');
+    var gridEl = document.getElementById('calendar-grid');
+    var barsEl = document.getElementById('calendar-activity-bars');
+    var summaryEl = document.getElementById('activity-chart-summary');
+    var weekdaysEl = document.getElementById('calendar-weekdays');
+    if (!labelEl || !gridEl) return;
+    var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    labelEl.textContent = monthNames[calendarMonth] + ' ' + calendarYear;
+    if (weekdaysEl) {
+      weekdaysEl.innerHTML = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(function (d) {
+        return '<span class="calendar-wd">' + d + '</span>';
+      }).join('');
+    }
+    var first = new Date(calendarYear, calendarMonth, 1);
+    var last = new Date(calendarYear, calendarMonth + 1, 0);
+    var startDay = first.getDay();
+    var daysInMonth = last.getDate();
+    var now = new Date();
+    var isCurrentMonth = calendarYear === now.getFullYear() && calendarMonth === now.getMonth();
+    var isFutureMonth = calendarYear > now.getFullYear() || (calendarYear === now.getFullYear() && calendarMonth > now.getMonth());
+    var lastEvalDay = isFutureMonth ? 0 : (isCurrentMonth ? now.getDate() : daysInMonth);
+    var cells = [];
+    var barCells = [];
+    var activeCount = 0;
+    var evalDays = 0;
+    var dayActiveFlags = [];
+    var i;
+    for (i = 0; i < startDay; i++) {
+      cells.push('<div class="calendar-cell calendar-cell-empty"></div>');
+      barCells.push('<div class="activity-bar-cell activity-bar-empty" aria-hidden="true"></div>');
+    }
+    for (i = 1; i <= daysInMonth; i++) {
+      var d = new Date(calendarYear, calendarMonth, i);
+      var key = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+      var data = getDayData(key);
+      if (key === getTodayKey() && typeof state.dailySteps === 'number' && state.dailySteps > (data.steps || 0)) {
+        data = { steps: state.dailySteps, calories: data.calories, distanceKm: data.distanceKm, weight: data.weight };
+      }
+      var parts = [];
+      if (data.steps > 0) parts.push((data.steps >= 1000 ? (data.steps / 1000).toFixed(1) + 'k' : data.steps) + ' st');
+      if (data.distanceKm > 0) parts.push(data.distanceKm.toFixed(1) + ' km');
+      if (data.calories > 0) parts.push(data.calories + ' kcal');
+      if (data.weight != null) parts.push((state.weightUnit === 'lbs' ? weightFromKg(data.weight, 'lbs').toFixed(1) : data.weight.toFixed(1)) + (state.weightUnit === 'lbs' ? ' lb' : ' kg'));
+      var summary = parts.length ? parts.join(' · ') : '—';
+      var isToday = key === getTodayKey();
+      cells.push(
+        '<div class="calendar-cell' + (isToday ? ' calendar-cell-today' : '') + '" role="gridcell" data-date="' + key + '" title="' + escapeAttr(key + ': ' + summary) + '">' +
+          '<span class="calendar-day-num">' + i + '</span>' +
+          '<span class="calendar-day-data">' + (parts.length ? summary : '—') + '</span>' +
+        '</div>'
+      );
+
+      var pct = physicalActivityPercent(data);
+      var isFutureDay = isCurrentMonth && i > now.getDate();
+      var active = isActiveMovementDay(data);
+      if (i <= lastEvalDay && lastEvalDay > 0) {
+        evalDays++;
+        dayActiveFlags.push(active);
+        if (active) activeCount++;
+      }
+      var tier = '';
+      if (data.steps > 0 || data.distanceKm > 0) {
+        if (pct >= 60 || active) tier = 'is-active';
+        else if (pct >= 25) tier = 'is-moderate';
+        else tier = 'is-low';
+      }
+      var barTitle = key + ': ' + data.steps + ' steps' + (data.distanceKm > 0 ? ', ' + data.distanceKm.toFixed(2) + ' km' : '') + (isFutureDay ? '' : ' (~' + pct + '% vs ref)');
+      var barClass = 'activity-bar-cell' + (isToday ? ' is-today' : '') + (isFutureDay ? ' activity-bar-future' : '');
+      if (tier) barClass += ' ' + tier;
+      var barH = isFutureDay ? 0 : (data.steps > 0 || data.distanceKm > 0 ? Math.max(pct, 6) : 4);
+      barCells.push(
+        '<div class="' + barClass + '" title="' + escapeAttr(barTitle) + '">' +
+          '<div class="activity-bar-fill-wrap"><div class="activity-bar-fill" style="height:' + barH + '%"></div></div>' +
+          '<span class="activity-bar-day">' + i + '</span></div>'
+      );
+    }
+    gridEl.innerHTML = cells.join('');
+    if (barsEl) barsEl.innerHTML = barCells.join('');
+
+    if (summaryEl && lastEvalDay > 0) {
+      var consistency = evalDays ? Math.round((activeCount / evalDays) * 100) : 0;
+      var streak = 0;
+      var j;
+      for (j = dayActiveFlags.length - 1; j >= 0; j--) {
+        if (dayActiveFlags[j]) streak++;
+        else break;
+      }
+      var best = 0;
+      var run = 0;
+      for (j = 0; j < dayActiveFlags.length; j++) {
+        if (dayActiveFlags[j]) { run++; best = Math.max(best, run); } else run = 0;
+      }
+      summaryEl.innerHTML =
+        '<span class="stat-highlight">' + activeCount + '</span> / ' + evalDays + ' days active · Consistency <span class="stat-highlight">' + consistency + '%</span> · Current streak <span class="stat-highlight">' + streak + '</span> · Best streak <span class="stat-highlight">' + best + '</span>';
+    } else if (summaryEl) {
+      summaryEl.textContent = isFutureMonth ? 'No data for future months.' : 'Log steps and walks to see your consistency.';
+    }
   }
 
   function loadStorage() {
@@ -520,6 +671,47 @@
     if (el) el.classList.remove('hidden');
   }
 
+  function setPrismExplorerId() {
+    var el = document.getElementById('prism-explorer-id');
+    if (el) el.textContent = explorerId();
+  }
+
+  function playPrismSpeech() {
+    if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(
+      'Initialization successful. Welcome, Explorer. You have been assigned ID: ' + explorerId() + '. ' +
+      'I am PRISM, your onboard mission assistant. Your biometric baseline is synchronized. ' +
+      'Your Ghost-Path is ready. Set the pace. Do not just move. Evolve. ' +
+      'Operation First Pulse is active. Step outside. The grid is watching.'
+    );
+    u.rate = 0.9;
+    u.pitch = 1;
+    window.speechSynthesis.speak(u);
+  }
+
+  function showMainShellAndInit() {
+    showScreen('main-shell');
+    showInstallBannerIfAppropriate();
+    setTab('home');
+    navigator.geolocation.getCurrentPosition(
+      function (pos) {
+        var lat = pos.coords.latitude;
+        var lng = pos.coords.longitude;
+        updateMapPosition(lat, lng);
+        if (map) map.setView([lat, lng], 16);
+        startWatching();
+      },
+      function () { startWatching(); },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+    );
+    updateHomeUI();
+    updateProfileUI();
+    updateReportUI();
+    updateExpeditionButton();
+    updateMapDistanceUI();
+  }
+
   function setTab(tabName) {
     document.querySelectorAll('.tab-pane').forEach(function (p) {
       p.classList.remove('active');
@@ -541,9 +733,11 @@
       }
     }
     if (tabName === 'report' && typeof updateReportUI === 'function') updateReportUI();
+    if (tabName === 'profile' && typeof updateProfileUI === 'function') updateProfileUI();
     if (tabName === 'map') {
       updateMapDistanceUI();
       updateReplayButton();
+      updateGhostLine();
     }
   }
 
@@ -609,12 +803,15 @@
     var bmrEl = document.getElementById('fuel-bmr');
     var tdeeEl = document.getElementById('fuel-tdee');
     var burnEl = document.getElementById('fuel-burn');
+    var burnSoFarEl = document.getElementById('fuel-burn-so-far');
     var balanceEl = document.getElementById('fuel-balance');
     var targetEl = document.getElementById('fuel-target');
     var weightEquivEl = document.getElementById('fuel-weight-equiv');
     if (bmrEl) bmrEl.textContent = Math.round(bmr()) + ' kcal';
     if (tdeeEl) tdeeEl.textContent = tdee() + ' kcal/day';
     if (burnEl) burnEl.textContent = burn() + ' kcal';
+    var burnSoFar = burnSoFarToday();
+    if (burnSoFarEl) burnSoFarEl.textContent = burnSoFar + ' kcal';
     var targetKcal = dailyTargetCalories();
     if (targetEl) targetEl.textContent = targetKcal + ' kcal (' + calorieGoalLabel() + ')';
     var totalBurn = Math.round(bmr()) + burn();
@@ -638,8 +835,9 @@
       else walkEquivEl.textContent = '−' + walkEquivKg.toFixed(2) + ' kg (est. from steps)';
     }
 
-    var targetVal = dailyTargetCalories();
-    var level = targetVal > 0 ? intake / targetVal : 0;
+    // Energy gauge: intake vs burn so far today (BMR prorated + activity). Based on your BMI/profile.
+    var burnSoFarVal = burnSoFarToday();
+    var level = burnSoFarVal > 0 ? intake / burnSoFarVal : (intake > 0 ? 1.5 : 0);
     var levelCapped = Math.min(level, 1.5);
     var needleDeg = -90 + levelCapped * 180;
     var needleEl = document.getElementById('fuel-gauge-needle');
@@ -647,7 +845,15 @@
     var fillEl = document.getElementById('fuel-gauge-fill');
     if (fillEl) fillEl.style.strokeDashoffset = String(FUEL_ARC_LENGTH * (1 - Math.min(level, 1)));
     var valueEl = document.getElementById('fuel-gauge-value');
-    if (valueEl) valueEl.textContent = level >= 1 ? (level > 1.5 ? '150+' : Math.round(level * 100)) : Math.round(level * 100);
+    var valueSubEl = document.getElementById('fuel-gauge-value-sub');
+    if (valueEl) {
+      if (level >= 0.95 && level <= 1.05) valueEl.textContent = 'OPTIMAL';
+      else if (level > 1.5) valueEl.textContent = '150+';
+      else valueEl.textContent = Math.round(level * 100);
+    }
+    if (valueSubEl) valueSubEl.textContent = level >= 0.95 && level <= 1.05 ? '' : ' intake vs burn';
+    var unitEl = document.getElementById('fuel-gauge-unit');
+    if (unitEl) unitEl.textContent = (level >= 0.95 && level <= 1.05) ? '' : '%';
 
     updateMealInputsAndTimestamps();
   }
@@ -813,6 +1019,7 @@
       var trendText = getWeightTrendText();
       trendEl.textContent = trendText != null ? trendText : '—';
     }
+    renderProgressCalendar();
   }
 
   function updateExpeditionButton() {
@@ -846,6 +1053,13 @@
     }
 
     routeLine = L.polyline([], { color: '#00F5FF', weight: 5 }).addTo(map);
+    ghostRouteLine = L.polyline([], {
+      color: '#00F5FF',
+      weight: 4,
+      opacity: 0.6,
+      dashArray: '10, 10',
+    }).addTo(map);
+    updateGhostLine();
   }
 
   function updateMapPosition(lat, lng) {
@@ -869,6 +1083,21 @@
     var src = state.isMissionActive ? state.routePoints : lastRoutePoints;
     var pts = src.map(function (p) { return [p.lat, p.lng]; });
     routeLine.setLatLngs(pts);
+    updateGhostLine();
+  }
+
+  function updateGhostLine() {
+    if (!ghostRouteLine) return;
+    if (!showGhostPath || !lastRoutePoints || lastRoutePoints.length < 2) {
+      ghostRouteLine.setLatLngs([]);
+      return;
+    }
+    if (!state.isMissionActive) {
+      ghostRouteLine.setLatLngs([]);
+      return;
+    }
+    var pts = lastRoutePoints.map(function (p) { return [p.lat, p.lng]; });
+    ghostRouteLine.setLatLngs(pts);
   }
 
   function getRouteForReplay() {
@@ -927,11 +1156,14 @@
   function updateReplayButton() {
     var btn = document.getElementById('btn-replay-route');
     var controls = document.getElementById('replay-controls');
+    var ghostBtn = document.getElementById('btn-ghost-path');
     if (!btn) return;
     var points = getRouteForReplay();
     var show = points.length >= 2;
     btn.classList.toggle('hidden', !show);
     if (controls) controls.classList.toggle('hidden', !show);
+    if (ghostBtn) ghostBtn.classList.toggle('hidden', !(lastRoutePoints && lastRoutePoints.length >= 2));
+    if (ghostBtn) ghostBtn.classList.toggle('active', showGhostPath);
   }
 
   var DESIRED_ACCURACY_M = 5;
@@ -995,11 +1227,25 @@
   function loadExpeditionState() {
     try {
       var raw = localStorage.getItem(STORAGE_KEYS.expedition);
-      if (!raw) return;
-      var data = JSON.parse(raw);
-      if (!data || !data.active || !Array.isArray(data.routePoints)) return;
-      state.isMissionActive = true;
-      state.routePoints = data.routePoints;
+      if (raw) {
+        var data = JSON.parse(raw);
+        if (data && data.active && Array.isArray(data.routePoints)) {
+          state.isMissionActive = true;
+          state.routePoints = data.routePoints;
+        }
+      }
+      var lastRaw = localStorage.getItem(STORAGE_KEYS.lastRoute);
+      if (lastRaw) {
+        var pts = JSON.parse(lastRaw);
+        if (Array.isArray(pts) && pts.length >= 2) lastRoutePoints = pts;
+      }
+    } catch (e) {}
+  }
+
+  function saveLastRoute() {
+    try {
+      if (!lastRoutePoints || lastRoutePoints.length < 2) return;
+      localStorage.setItem(STORAGE_KEYS.lastRoute, JSON.stringify(lastRoutePoints));
     } catch (e) {}
   }
 
@@ -1031,6 +1277,7 @@
       saveOath();
       lastRoutePoints = state.routePoints.slice();
       state.routePoints = [];
+      saveLastRoute();
       saveExpeditionState();
       updateRouteLine();
       updateMapDistanceUI();
@@ -1099,25 +1346,16 @@
       state.oathAccepted = true;
       state.xp = 0;
       saveOath();
-      showScreen('main-shell');
-      showInstallBannerIfAppropriate();
-      setTab('home');
-      navigator.geolocation.getCurrentPosition(
-        function (pos) {
-          var lat = pos.coords.latitude;
-          var lng = pos.coords.longitude;
-          updateMapPosition(lat, lng);
-          if (map) map.setView([lat, lng], 16);
-          startWatching();
-        },
-        function () { startWatching(); },
-        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
-      );
-      updateHomeUI();
-      updateProfileUI();
-      updateReportUI();
-      updateMapDistanceUI();
+      showScreen('prism-screen');
+      setPrismExplorerId();
+      try { if (navigator.vibrate) navigator.vibrate([100, 50, 100]); } catch (e) {}
     });
+    document.getElementById('prism-continue').addEventListener('click', function () {
+      try { localStorage.setItem(STORAGE_KEYS.prismSeen, '1'); } catch (e) {}
+      showMainShellAndInit();
+    });
+    var prismPlayBtn = document.getElementById('prism-play');
+    if (prismPlayBtn) prismPlayBtn.addEventListener('click', playPrismSpeech);
 
     document.getElementById('abort-oath').addEventListener('click', function () {
       document.getElementById('oath-screen').classList.add('hidden');
@@ -1150,6 +1388,12 @@
 
     var replayBtn = document.getElementById('btn-replay-route');
     if (replayBtn) replayBtn.addEventListener('click', startRouteReplay);
+    var ghostPathBtn = document.getElementById('btn-ghost-path');
+    if (ghostPathBtn) ghostPathBtn.addEventListener('click', function () {
+      showGhostPath = !showGhostPath;
+      updateGhostLine();
+      updateReplayButton();
+    });
     document.querySelectorAll('.replay-dur').forEach(function (b) {
       b.addEventListener('click', function () {
         document.querySelectorAll('.replay-dur').forEach(function (x) { x.classList.remove('active'); });
@@ -1224,6 +1468,18 @@
         updateHomeUI();
       });
     }
+    var calPrev = document.getElementById('calendar-prev');
+    var calNext = document.getElementById('calendar-next');
+    if (calPrev) calPrev.addEventListener('click', function () {
+      calendarMonth--;
+      if (calendarMonth < 0) { calendarMonth = 11; calendarYear--; }
+      renderProgressCalendar();
+    });
+    if (calNext) calNext.addEventListener('click', function () {
+      calendarMonth++;
+      if (calendarMonth > 11) { calendarMonth = 0; calendarYear++; }
+      renderProgressCalendar();
+    });
     ['lose', 'maintain', 'gain'].forEach(function (g) {
       var btn = document.getElementById('goal-' + g);
       if (btn) {
@@ -1257,9 +1513,16 @@
       var weekStats = getWeekStats();
       var verdict = weekStats.totalKm >= EXPEDITION_MISSION_KM ? 'OPTIMAL EVOLUTION' :
         weekStats.totalKm > 0 ? 'STABLE PROGRESS' : 'INITIATE EXPEDITION';
+      var weekCal = getWeeklyCalories();
+      var calLine = weekCal.daysWithData > 0
+        ? 'Calories this week: ' + weekCal.total + ' kcal (' + weekCal.daysWithData + ' days)\n'
+        : '';
+      var goalLine = 'Target: ' + calorieGoalLabel() + ' (' + dailyTargetCalories() + ' kcal)\n';
       return 'Path-Pulse Weekly Diagnostic\n' +
         'Distance this week: ' + weekStats.totalKm.toFixed(2) + ' km\n' +
         "Today's steps: " + weekStats.todaySteps + '\n' +
+        (calLine || '') +
+        goalLine +
         'Verdict: ' + verdict + '\n' +
         'Level ' + level() + ' · ' + rank();
     }
@@ -1346,25 +1609,13 @@
 
     if (state.oathAccepted) {
       document.getElementById('loader').classList.add('hidden');
-      showScreen('main-shell');
-      showInstallBannerIfAppropriate();
-      setTab('home');
-      navigator.geolocation.getCurrentPosition(
-        function (pos) {
-          var lat = pos.coords.latitude;
-          var lng = pos.coords.longitude;
-          updateMapPosition(lat, lng);
-          if (map) map.setView([lat, lng], 16);
-          startWatching();
-        },
-        function () { startWatching(); },
-        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
-      );
-      updateHomeUI();
-      updateProfileUI();
-      updateReportUI();
-      updateExpeditionButton();
-      updateMapDistanceUI();
+      var prismSeen = localStorage.getItem(STORAGE_KEYS.prismSeen) === '1';
+      if (!prismSeen) {
+        showScreen('prism-screen');
+        setPrismExplorerId();
+      } else {
+        showMainShellAndInit();
+      }
     } else {
       document.getElementById('loader').classList.add('hidden');
       showScreen('oath-screen');

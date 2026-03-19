@@ -37,6 +37,24 @@
       <button id="abort-oath" class="btn-text" aria-label="Abort and close oath screen">ABORT MISSION</button>
     </div>
 
+    <!-- PRISM welcome (after first oath accept) -->
+    <div id="prism-screen" class="screen hidden" role="dialog" aria-label="PRISM welcome">
+      <div class="prism-silhouette" aria-hidden="true"></div>
+      <div class="prism-content">
+        <h2 class="prism-title">PRISM</h2>
+        <p class="prism-subtitle">Onboard mission assistant</p>
+        <div class="prism-text">
+          <p>Initialization successful. Welcome, Explorer. You have been assigned ID: <strong id="prism-explorer-id">PATHFINDER_01</strong>.</p>
+          <p>I am PRISM. Your biometric baseline is synchronized. Your Ghost-Path is ready—set the pace. Do not just move. Evolve.</p>
+          <p>Operation: First Pulse is active. Step outside. The grid is watching.</p>
+        </div>
+        <div class="prism-actions">
+          <button type="button" id="prism-play" class="btn-secondary" aria-label="Play PRISM voice">PLAY PRISM</button>
+          <button type="button" id="prism-continue" class="btn-primary" aria-label="Continue to Lab">CONTINUE</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Main shell: Map | Home | Profile -->
     <div id="main-shell" class="screen hidden">
       <div id="install-banner" class="install-banner hidden" role="region" aria-label="Install app">
@@ -62,6 +80,7 @@
               <label class="replay-loop"><input type="checkbox" id="replay-loop" aria-label="Loop replay"> Loop</label>
             </div>
             <button id="btn-replay-route" class="fab small hidden" title="Replay route" aria-label="Replay route time-lapse">⟳</button>
+            <button id="btn-ghost-path" class="fab small hidden" title="Show Ghost-Path (race your last route)" aria-label="Toggle Ghost-Path">👻</button>
             <button id="btn-expedition" class="fab extended" aria-label="Start or stop expedition">
               <span id="expedition-icon">▶</span>
               <span id="expedition-label">START EXPEDITION</span>
@@ -97,8 +116,9 @@
               <p id="mission-status" class="mission-status">0 / 2 km</p>
             </div>
           </div>
-          <div id="home-widget-fuel" class="fuel-section">
-            <h3>FUEL GAUGE</h3>
+          <div id="home-widget-fuel" class="fuel-section fuel-section-modern">
+            <h3>ENERGY GAUGE</h3>
+            <p class="fuel-gauge-desc">Calories in vs burn (BMR + activity). Based on your profile.</p>
             <div class="fuel-gauge-wrap">
               <div class="fuel-gauge-dial">
                 <svg class="fuel-gauge-arc" viewBox="0 0 200 120" aria-hidden="true">
@@ -113,21 +133,23 @@
                   <path class="fuel-gauge-track" d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="url(#fuel-arc-gradient)" stroke-width="12" stroke-linecap="round"/>
                   <path id="fuel-gauge-fill" class="fuel-gauge-fill" d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="rgba(0,245,255,0.5)" stroke-width="10" stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="251.2"/>
                 </svg>
-                <div id="fuel-gauge-needle" class="fuel-gauge-needle" role="img" aria-label="Fuel level"></div>
+                <div id="fuel-gauge-needle" class="fuel-gauge-needle" role="img" aria-label="Energy level"></div>
                 <div class="fuel-gauge-center">
                   <span id="fuel-gauge-value" class="fuel-gauge-value">0</span>
-                  <span class="fuel-gauge-unit">%</span>
+                  <span id="fuel-gauge-unit" class="fuel-gauge-unit">%</span>
+                  <span id="fuel-gauge-value-sub" class="fuel-gauge-value-sub"></span>
                 </div>
               </div>
               <div class="fuel-gauge-labels">
-                <span class="fuel-gauge-e">E</span>
-                <span class="fuel-gauge-f">F</span>
+                <span class="fuel-gauge-e">LOW</span>
+                <span class="fuel-gauge-f">FULL</span>
               </div>
             </div>
-            <div class="diag-row"><span>BMR (basal)</span><span id="fuel-bmr">—</span></div>
+            <div class="diag-row"><span>BMR (at rest)</span><span id="fuel-bmr">—</span></div>
+            <div class="diag-row"><span>Active burn today</span><span id="fuel-burn">—</span></div>
+            <div class="diag-row highlight"><span>Burn so far today</span><span id="fuel-burn-so-far">—</span></div>
             <div class="diag-row"><span>Est. daily need (TDEE)</span><span id="fuel-tdee">—</span></div>
             <div class="diag-row"><span>Target (goal)</span><span id="fuel-target">—</span></div>
-            <div class="diag-row"><span>Active burn today</span><span id="fuel-burn">—</span></div>
             <div class="fuel-meals">
               <div class="meal-row">
                 <label>Breakfast</label>
@@ -243,6 +265,24 @@
             <p id="weight-trend-summary" class="trend-summary">—</p>
             <div id="weight-trend-list" class="trend-list"></div>
           </div>
+          <div class="progress-calendar">
+            <h3>PROGRESS CALENDAR</h3>
+            <div class="calendar-nav">
+              <button type="button" id="calendar-prev" class="btn-calendar-nav" aria-label="Previous month">‹</button>
+              <span id="calendar-month-label" class="calendar-month-label">—</span>
+              <button type="button" id="calendar-next" class="btn-calendar-nav" aria-label="Next month">›</button>
+            </div>
+            <div id="calendar-weekdays" class="calendar-weekdays"></div>
+            <div id="calendar-grid" class="calendar-grid" role="grid" aria-label="Progress by day"></div>
+            <div class="activity-chart-section">
+              <h3>PHYSICALITY & CONSISTENCY</h3>
+              <p id="activity-chart-summary" class="activity-chart-summary" aria-live="polite">—</p>
+              <div id="calendar-activity-bars" class="calendar-activity-bars" role="img" aria-label="Daily activity by calendar day"></div>
+              <p class="activity-chart-legend">Bars align with calendar above. Height = movement vs ~10k steps + distance. <strong>Active</strong> = ≥5k steps or ≥0.5 km walked.</p>
+            </div>
+          </div>
+          <p class="label label-section">DATA</p>
+          <button type="button" id="export-data" class="btn-secondary" aria-label="Export my data as JSON">EXPORT MY DATA</button>
         </div>
         <!-- Report tab -->
         <div id="tab-report" class="tab-pane">
@@ -254,8 +294,14 @@
               <div class="report-row"><span>Today's steps</span><span id="report-steps">0</span></div>
               <div class="report-row"><span>Verdict</span><span id="report-verdict" class="verdict">—</span></div>
             </div>
+            <div class="report-card">
+              <p class="label">THIS WEEK: CALORIES</p>
+              <div class="report-row"><span>Total intake</span><span id="report-cal-total">—</span></div>
+              <div class="report-row"><span>Days logged</span><span id="report-cal-days">—</span></div>
+              <div class="report-row"><span>Daily average</span><span id="report-cal-avg">—</span></div>
+            </div>
           </div>
-          <p class="report-hint">Complete expeditions to fill your report. New week starts Monday.</p>
+          <p class="report-hint">Complete expeditions to fill your report. Log meals on Home for weekly calories. New week starts Monday.</p>
           <div class="report-actions">
             <button id="share-report" class="btn-primary" aria-label="Share weekly report (native share or copy)">SHARE REPORT</button>
             <button id="copy-report" class="btn-secondary btn-copy" aria-label="Copy weekly report to clipboard">COPY TEXT</button>
