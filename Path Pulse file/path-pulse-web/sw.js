@@ -85,3 +85,16 @@ self.addEventListener('fetch', function (event) {
     })
   );
 });
+
+// When the user taps a notification, focus the app.
+self.addEventListener('notificationclick', function (event) {
+  try { event.notification.close(); } catch (e) {}
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then(function (clientList) {
+      if (!clientList || clientList.length === 0) return;
+      // Focus the first matching client; the app will keep its current tab state.
+      var client = clientList[0];
+      if (client && client.focus) return client.focus();
+    })
+  );
+});

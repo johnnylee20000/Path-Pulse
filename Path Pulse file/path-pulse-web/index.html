@@ -98,6 +98,16 @@
         </div>
         <!-- Home tab -->
         <div id="tab-home" class="tab-pane">
+          <div id="onboarding-checklist" class="onboarding-checklist hidden" role="region" aria-label="Get started">
+            <h3>GET STARTED</h3>
+            <ul class="onboarding-steps">
+              <li id="onb-1">Set your weight in Profile</li>
+              <li id="onb-2">Start an expedition on the Map</li>
+              <li id="onb-3">Check your Report</li>
+            </ul>
+            <button type="button" id="onboarding-dismiss" class="btn-small">Got it</button>
+          </div>
+          <div id="home-nudge" class="home-nudge hidden" role="status"></div>
           <div class="top-bar">
             <div>
               <p class="id">EXPLORER ID: <span id="explorer-id">PATHFINDER_01</span></p>
@@ -111,6 +121,13 @@
             <div class="ring-content">
               <span id="steps">0</span>
               <span class="label">KINETIC STEPS</span>
+            </div>
+          </div>
+          <div class="sync-steps-row">
+            <label for="input-sync-steps" class="sync-steps-label">Sync steps from device</label>
+            <div class="input-row">
+              <input type="number" id="input-sync-steps" placeholder="e.g. 5000" min="0" aria-label="Today's steps from phone or watch">
+              <button type="button" id="sync-steps-btn" class="btn-small">Set today</button>
             </div>
           </div>
           <div id="home-widget-expedition">
@@ -316,6 +333,39 @@
               <div class="report-row"><span>Daily average</span><span id="report-cal-avg">—</span></div>
             </div>
           </div>
+          <div id="report-weekly-summary" class="report-weekly-summary report-card">
+            <h3>WEEKLY SUMMARY</h3>
+            <p id="report-summary-text" class="report-summary-text">—</p>
+            <p id="report-summary-insight" class="report-summary-insight"></p>
+            <button type="button" id="share-weekly-summary" class="btn-small">Share summary</button>
+          </div>
+          <div class="report-goals-section">
+            <h3>GOALS</h3>
+            <div class="report-card">
+              <div class="report-row"><span>Daily steps</span><span id="report-goal-steps">—</span></div>
+              <div class="report-row"><span>Daily water</span><span id="report-goal-water">—</span></div>
+              <div class="report-row"><span>Weekly exercise</span><span id="report-goal-exercise">—</span></div>
+              <div class="input-row">
+                <input type="number" id="input-goal-steps" placeholder="steps" min="1000" step="500">
+                <input type="number" id="input-goal-water" placeholder="ml" min="500" step="250">
+                <input type="number" id="input-goal-exercise" placeholder="min/week" min="30" step="30">
+                <button type="button" id="save-goals" class="btn-small">Save goals</button>
+              </div>
+            </div>
+          </div>
+          <div class="report-reminders-section">
+            <h3>REMINDERS</h3>
+            <div class="report-card">
+              <div class="report-row"><span>Status</span><span id="reminder-status">—</span></div>
+              <div class="input-row">
+                <button type="button" id="btn-request-reminders" class="btn-small">Enable notifications</button>
+                <input type="time" id="reminder-time-input" step="300" aria-label="Reminder time" value="18:00">
+                <button type="button" id="btn-save-reminders" class="btn-small">Save</button>
+                <button type="button" id="btn-disable-reminders" class="btn-small">Disable</button>
+              </div>
+              <p class="hint hint-small">Local notification reminders while the app is open (no server required).</p>
+            </div>
+          </div>
           <div class="report-stats-grid">
             <h3>STEPS</h3>
             <div class="report-card">
@@ -387,6 +437,21 @@
               </div>
               <div id="exercise-log-list" class="report-log-list"></div>
             </div>
+            <h3>SLEEP LOG</h3>
+            <div class="report-card">
+              <p class="label">Last night</p>
+              <div class="input-row">
+                <input type="number" id="input-sleep-hours" placeholder="hours" min="0" max="24" step="0.5" aria-label="Sleep hours">
+                <select id="input-sleep-quality" aria-label="Sleep quality">
+                  <option value="Poor">Poor</option>
+                  <option value="Fair">Fair</option>
+                  <option value="Good">Good</option>
+                  <option value="Great">Great</option>
+                </select>
+                <button type="button" id="log-sleep" class="btn-small">Log</button>
+              </div>
+              <div id="sleep-log-list" class="report-log-list"></div>
+            </div>
           </div>
           <div class="progress-calendar progress-calendar-report">
             <h3>PROGRESS CALENDAR</h3>
@@ -423,6 +488,8 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <!-- Optional: set your backend URL to enable sync and push reminders (e.g. http://localhost:3030) -->
+  <!-- <script>window.PATH_PULSE_API = 'http://localhost:3030';</script> -->
   <script src="app.js?v=2"></script>
 </body>
 </html>

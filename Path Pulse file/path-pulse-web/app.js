@@ -32,6 +32,14 @@
     exerciseTimeLog: 'pathpulse_exercise_time_log',
     targetWeight: 'pathpulse_target_weight',
     waterLog: 'pathpulse_water_log',
+    goals: 'pathpulse_goals',
+    sleepLog: 'pathpulse_sleep_log',
+    onboardingDismissed: 'pathpulse_onboarding_dismissed',
+    expeditionStartTime: 'pathpulse_expedition_start_time',
+    reminderEnabled: 'pathpulse_reminder_enabled',
+    reminderTime: 'pathpulse_reminder_time',
+    reminderLastSent: 'pathpulse_reminder_last_sent',
+    deviceId: 'pathpulse_device_id',
   };
 
   var MAX_SAVED_ROUTE_POINTS = 5000;
@@ -69,6 +77,9 @@
     calorieGoal: 'maintain', // 'lose' | 'maintain' | 'gain'
     todayMeals: { breakfast: { kcal: 0, ts: '' }, lunch: { kcal: 0, ts: '' }, dinner: { kcal: 0, ts: '' } },
     targetWeightKg: null,
+    expeditionStartTime: null,
+    reminderEnabled: false,
+    reminderTime: '18:00',
   };
 
   function heightToM(val, unit) {
@@ -292,6 +303,7 @@
       obj[key] = steps;
       localStorage.setItem(STORAGE_KEYS.stepsByDate, JSON.stringify(obj));
     } catch (e) {}
+    scheduleSync();
   }
 
   function getCaloriesData() {
@@ -422,6 +434,113 @@
   }
   function setJsonStorage(key, obj) {
     try { localStorage.setItem(key, JSON.stringify(obj)); } catch (e) {}
+    scheduleSync();
+  }
+
+  function getApiBase() {
+    try { return (window.PATH_PULSE_API || '').replace(/\/$/, ''); } catch (e) { return ''; }
+  }
+  function getDeviceId() {
+    try {
+      var id = localStorage.getItem(STORAGE_KEYS.deviceId);
+      if (id) return id;
+      id = 'pp-' + Math.random().toString(36).slice(2) + '-' + Date.now().toString(36);
+      localStorage.setItem(STORAGE_KEYS.deviceId, id);
+      return id;
+    } catch (e) { return 'pp-unknown'; }
+  }
+  function exportPathpulseStorage() {
+    var out = {};
+    try {
+      for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i);
+        if (k && k.indexOf('pathpulse_') === 0 && k !== STORAGE_KEYS.deviceId)
+          out[k] = localStorage.getItem(k);
+      }
+    } catch (e) {}
+    return out;
+  }
+  function applyPathpulseStorage(obj) {
+    if (!obj || typeof obj !== 'object') return;
+    try {
+      Object.keys(obj).forEach(function (k) {
+        if (k && k.indexOf('pathpulse_') === 0)
+          localStorage.setItem(k, String(obj[k]));
+      });
+    } catch (e) {}
+  }
+  var syncTimeoutId = null;
+  function scheduleSync() {
+    var api = getApiBase();
+    if (!api) return;
+    if (syncTimeoutId) clearTimeout(syncTimeoutId);
+    syncTimeoutId = setTimeout(function () {
+      syncTimeoutId = null;
+      syncToServer();
+    }, 2000);
+  }
+  function syncToServer() {
+    var api = getApiBase();
+    if (!api) return;
+    var deviceId = getDeviceId();
+    var payload = exportPathpulseStorage();
+    fetch(api + '/api/sync', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ deviceId: deviceId, data: payload }),
+    }).catch(function () {});
+  }
+  function syncFromServer(cb) {
+    var api = getApiBase();
+    if (!api) { if (cb) cb(); return; }
+    var deviceId = getDeviceId();
+    fetch(api + '/api/sync?deviceId=' + encodeURIComponent(deviceId))
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        applyPathpulseStorage(data);
+        if (cb) cb();
+      })
+      .catch(function () { if (cb) cb(); });
+  }
+  function registerPushWithBackend(subscription, reminderTime) {
+    var api = getApiBase();
+    if (!api) return;
+    fetch(api + '/api/push-subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        deviceId: getDeviceId(),
+        subscription: { endpoint: subscription.endpoint, keys: subscription.keys, expirationTime: subscription.expirationTime },
+        reminderTime: reminderTime || state.reminderTime || '09:00',
+      }),
+    }).catch(function () {});
+  }
+  function subscribePushAndRegister() {
+    var api = getApiBase();
+    if (!api || !('PushManager' in window) || !('serviceWorker' in navigator)) return;
+    fetch(api + '/api/vapid-public')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var key = data && data.publicKey;
+        if (!key) return;
+        function base64UrlToUint8Array(base64) {
+          var padding = '='.repeat((4 - base64.length % 4) % 4);
+          var b64 = (base64 + padding).replace(/-/g, '+').replace(/_/g, '/');
+          var raw = atob(b64);
+          var arr = new Uint8Array(raw.length);
+          for (var i = 0; i < raw.length; i++) arr[i] = raw.charCodeAt(i);
+          return arr;
+        }
+        return navigator.serviceWorker.ready.then(function (reg) {
+          return reg.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: base64UrlToUint8Array(key),
+          });
+        }).then(function (sub) {
+          registerPushWithBackend(sub, state.reminderTime);
+        });
+      })
+      .catch(function () {});
   }
 
   function getHeartRateLog() {
@@ -476,6 +595,175 @@
       if (kg != null) localStorage.setItem(STORAGE_KEYS.targetWeight, String(kg));
       else localStorage.removeItem(STORAGE_KEYS.targetWeight);
     } catch (e) {}
+  }
+
+  var DEFAULT_GOALS = { steps: 10000, waterMl: 2000, exerciseWeeklyMins: 150 };
+  function getGoals() {
+    var o = getJsonStorage(STORAGE_KEYS.goals, DEFAULT_GOALS);
+    return {
+      steps: typeof o.steps === 'number' ? o.steps : DEFAULT_GOALS.steps,
+      waterMl: typeof o.waterMl === 'number' ? o.waterMl : DEFAULT_GOALS.waterMl,
+      exerciseWeeklyMins: typeof o.exerciseWeeklyMins === 'number' ? o.exerciseWeeklyMins : DEFAULT_GOALS.exerciseWeeklyMins,
+    };
+  }
+  function setGoals(goals) {
+    setJsonStorage(STORAGE_KEYS.goals, goals);
+  }
+
+  function getSleepLog() {
+    return getJsonStorage(STORAGE_KEYS.sleepLog, {});
+  }
+  function getYesterdayKey() {
+    var d = new Date();
+    d.setDate(d.getDate() - 1);
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+  function addSleepEntry(dateKey, hours, quality) {
+    var log = getSleepLog();
+    log[dateKey] = { hours: hours, quality: quality || 'Fair' };
+    setJsonStorage(STORAGE_KEYS.sleepLog, log);
+  }
+  function getSleepForDate(dateKey) {
+    var log = getSleepLog();
+    return log[dateKey] || null;
+  }
+
+  function getWeeklySummary() {
+    var rWeek = getDateRangeForPeriod('week');
+    var steps = sumStepsInRange(rWeek.start, rWeek.end);
+    var burn = sumBurnInRange(rWeek.start, rWeek.end);
+    var dist = sumDistanceInRange(rWeek.start, rWeek.end);
+    var ex = sumExerciseInRange(rWeek.start, rWeek.end);
+    var lastWeekStart = (function () {
+      var d = new Date(rWeek.start);
+      d.setDate(d.getDate() - 7);
+      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    })();
+    var lastWeekEnd = (function () {
+      var d = new Date(rWeek.end);
+      d.setDate(d.getDate() - 7);
+      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    })();
+    var lastSteps = sumStepsInRange(lastWeekStart, lastWeekEnd);
+    var lastDist = sumDistanceInRange(lastWeekStart, lastWeekEnd);
+    var insight = '';
+    if (steps > lastSteps && lastSteps > 0) insight = 'Steps up from last week — keep it up.';
+    else if (dist > lastDist && lastDist > 0) insight = 'You walked more this week than last.';
+    else if (steps >= getGoals().steps * 5) insight = 'Strong step count this week.';
+    else if (dist >= EXPEDITION_MISSION_KM) insight = 'Mission distance achieved this week.';
+    else insight = 'Log expeditions and steps to see insights.';
+    return { steps, burn, dist, ex, insight };
+  }
+
+  function getNudgeMessage() {
+    var today = getTodayKey();
+    var meals = state.todayMeals;
+    var intake = state.calorieIntake || 0;
+    var water = (getWaterLog()[today] || 0);
+    var goals = getGoals();
+    if (intake === 0 && (!meals.breakfast || !meals.breakfast.kcal) && (!meals.lunch || !meals.lunch.kcal) && (!meals.dinner || !meals.dinner.kcal)) return 'Log your meals on Home to track energy.';
+    if (water < goals.waterMl * 0.5 && water > 0) return 'Halfway to your water goal — add more in Report.';
+    if (water === 0) return 'Track your water intake in Report.';
+    if (state.dailySteps < goals.steps * 0.3 && state.dailySteps > 0) return 'Time for a walk? Start an expedition on the Map.';
+    if (state.dailySteps === 0) return 'Start an expedition to log distance and steps.';
+    return null;
+  }
+
+  // Local (client-side) reminder notifications.
+  // Note: Without a backend + Web Push, notifications only fire while the app is open.
+  var reminderIntervalId = null;
+
+  function parseReminderTimeParts(t) {
+    if (!t) return null;
+    var parts = String(t).split(':');
+    if (parts.length !== 2) return null;
+    var h = parseInt(parts[0], 10);
+    var m = parseInt(parts[1], 10);
+    if (isNaN(h) || isNaN(m)) return null;
+    return { h: h, m: m };
+  }
+
+  function getReminderSentKey() {
+    try { return getTodayKey() + '|' + String(state.reminderTime || ''); } catch (e) { return ''; }
+  }
+
+  function getReminderStatusText() {
+    if (!('Notification' in window)) return 'Not supported';
+    if (Notification.permission === 'denied') return 'Blocked';
+    if (Notification.permission === 'granted') return state.reminderEnabled ? 'Enabled' : 'Ready';
+    return state.reminderEnabled ? 'Permission needed' : 'Off';
+  }
+
+  function updateReminderUI() {
+    var statusEl = document.getElementById('reminder-status');
+    if (statusEl) statusEl.textContent = getReminderStatusText();
+    var timeEl = document.getElementById('reminder-time-input');
+    if (timeEl) timeEl.value = state.reminderTime || '18:00';
+  }
+
+  function showReminderNotification(body) {
+    var title = 'Path Pulse Reminder';
+    var msg = body || 'Open Path Pulse and check your Report.';
+    var icon = 'icon-512.png';
+    var tag = 'pathpulse-reminder';
+    try {
+      if ('serviceWorker' in navigator && navigator.serviceWorker) {
+        navigator.serviceWorker.ready.then(function (reg) {
+          if (reg && typeof reg.showNotification === 'function') {
+            reg.showNotification(title, { body: msg, icon: icon, tag: tag });
+          } else {
+            new Notification(title, { body: msg, icon: icon, tag: tag });
+          }
+        }).catch(function () {
+          new Notification(title, { body: msg, icon: icon, tag: tag });
+        });
+      } else {
+        new Notification(title, { body: msg, icon: icon, tag: tag });
+      }
+    } catch (e) {}
+  }
+
+  function maybeSendReminder() {
+    if (!state.reminderEnabled) return;
+    if (!('Notification' in window)) return;
+    if (Notification.permission !== 'granted') return;
+    var parts = parseReminderTimeParts(state.reminderTime);
+    if (!parts) return;
+
+    var now = new Date();
+    var target = new Date();
+    target.setHours(parts.h, parts.m, 0, 0);
+    if (now < target) return;
+
+    var sentKey = getReminderSentKey();
+    if (!sentKey) return;
+
+    var lastSent = '';
+    try { lastSent = localStorage.getItem(STORAGE_KEYS.reminderLastSent) || ''; } catch (e) {}
+    if (lastSent === sentKey) return;
+
+    var body = getNudgeMessage() || 'Keep moving. Log steps, water, and meals in Path Pulse.';
+    showReminderNotification(body);
+    try { localStorage.setItem(STORAGE_KEYS.reminderLastSent, sentKey); } catch (e) {}
+    updateReminderUI();
+  }
+
+  function startReminderLoop() {
+    if (reminderIntervalId) clearInterval(reminderIntervalId);
+    reminderIntervalId = setInterval(function () { maybeSendReminder(); }, 60000);
+    maybeSendReminder();
+  }
+
+  function stopReminderLoop() {
+    if (reminderIntervalId) clearInterval(reminderIntervalId);
+    reminderIntervalId = null;
+  }
+
+  function isOnboardingDismissed() {
+    try { return localStorage.getItem(STORAGE_KEYS.onboardingDismissed) === '1'; } catch (e) { return false; }
+  }
+  function setOnboardingDismissed() {
+    try { localStorage.setItem(STORAGE_KEYS.onboardingDismissed, '1'); } catch (e) {}
   }
 
   function getDateRangeForPeriod(period) {
@@ -742,6 +1030,10 @@
       if (showFuel === '0') state.showFuelWidget = false;
       var showExp = localStorage.getItem(STORAGE_KEYS.showExpeditionWidget);
       if (showExp === '0') state.showExpeditionWidget = false;
+      var re = localStorage.getItem(STORAGE_KEYS.reminderEnabled);
+      if (re === '1') state.reminderEnabled = true;
+      var rt = localStorage.getItem(STORAGE_KEYS.reminderTime);
+      if (rt) state.reminderTime = rt;
     } catch (e) {}
   }
 
@@ -909,6 +1201,14 @@
   }
 
   function updateHomeUI() {
+    var onb = document.getElementById('onboarding-checklist');
+    if (onb) onb.classList.toggle('hidden', isOnboardingDismissed());
+    var nudgeEl = document.getElementById('home-nudge');
+    if (nudgeEl) {
+      var nudge = getNudgeMessage();
+      nudgeEl.textContent = nudge || '';
+      nudgeEl.classList.toggle('hidden', !nudge);
+    }
     var fuelWidget = document.getElementById('home-widget-fuel');
     var expeditionWidget = document.getElementById('home-widget-expedition');
     if (fuelWidget) fuelWidget.classList.toggle('hidden', !state.showFuelWidget);
@@ -922,8 +1222,8 @@
     var ghostHint = document.getElementById('btn-ghost-path-hint');
     if (ghostHint) ghostHint.textContent = hasRoute ? '' : 'Complete an expedition to race your ghost';
 
-    const targetSteps = 10000;
-    const progress = Math.min(1, state.dailySteps / targetSteps);
+    var targetSteps = getGoals().steps;
+    const progress = Math.min(1, targetSteps > 0 ? state.dailySteps / targetSteps : 0);
     document.getElementById('ring-fill').style.transform = 'rotate(-90deg) rotate(' + (progress * 360) + 'deg)';
     document.getElementById('steps').textContent = state.dailySteps;
     document.getElementById('explorer-id').textContent = explorerId();
@@ -1140,6 +1440,32 @@
     var exEntries = Object.keys(exLog).sort().reverse().slice(0, 12).map(function (k) { return { d: k, m: exLog[k] }; });
     var exList = document.getElementById('exercise-log-list');
     if (exList) exList.innerHTML = exEntries.length ? exEntries.map(function (e) { return '<div class="report-log-row">' + e.d + ' — ' + e.m + ' min</div>'; }).join('') : '<span class="report-log-empty">No entries</span>';
+    var sum = getWeeklySummary();
+    var sumText = document.getElementById('report-summary-text');
+    var sumInsight = document.getElementById('report-summary-insight');
+    if (sumText) sumText.textContent = 'This week: ' + sum.steps + ' steps, ' + sum.dist.toFixed(1) + ' km, ~' + sum.burn + ' kcal burned, ' + sum.ex + ' min exercise.';
+    if (sumInsight) { sumInsight.textContent = sum.insight; sumInsight.className = 'report-summary-insight'; }
+    var g = getGoals();
+    setElText('report-goal-steps', g.steps + ' steps');
+    setElText('report-goal-water', g.waterMl + ' ml');
+    setElText('report-goal-exercise', g.exerciseWeeklyMins + ' min/week');
+    var goalStepsInp = document.getElementById('input-goal-steps');
+    var goalWaterInp = document.getElementById('input-goal-water');
+    var goalExInp = document.getElementById('input-goal-exercise');
+    if (goalStepsInp) goalStepsInp.value = g.steps;
+    if (goalWaterInp) goalWaterInp.value = g.waterMl;
+    if (goalExInp) goalExInp.value = g.exerciseWeeklyMins;
+    var sleepLog = getSleepLog();
+    var sleepEntries = [];
+    for (var s = 0; s < 7; s++) {
+      var dd = new Date();
+      dd.setDate(dd.getDate() - s);
+      var sk = dd.getFullYear() + '-' + String(dd.getMonth() + 1).padStart(2, '0') + '-' + String(dd.getDate()).padStart(2, '0');
+      var se = sleepLog[sk];
+      if (se) sleepEntries.push(sk + ' — ' + se.hours + ' h (' + se.quality + ')');
+    }
+    var sleepListEl = document.getElementById('sleep-log-list');
+    if (sleepListEl) sleepListEl.innerHTML = sleepEntries.length ? sleepEntries.map(function (e) { return '<div class="report-log-row">' + e + '</div>'; }).join('') : '<span class="report-log-empty">Log last night to start</span>';
     renderProgressCalendar();
   }
 
@@ -1541,6 +1867,8 @@
         if (data && data.active && Array.isArray(data.routePoints)) {
           state.isMissionActive = true;
           state.routePoints = data.routePoints;
+          var startRaw = localStorage.getItem(STORAGE_KEYS.expeditionStartTime);
+          if (startRaw) state.expeditionStartTime = parseInt(startRaw, 10);
         }
       }
       var lastRaw = localStorage.getItem(STORAGE_KEYS.lastRoute);
@@ -1564,6 +1892,8 @@
       state.routePoints = state.currentPosition
         ? [{ lat: state.currentPosition.lat, lng: state.currentPosition.lng }]
         : [];
+      state.expeditionStartTime = Date.now();
+      try { localStorage.setItem(STORAGE_KEYS.expeditionStartTime, String(state.expeditionStartTime)); } catch (e) {}
       updateRouteLine();
       state.xp += 10;
       saveOath();
@@ -1575,6 +1905,16 @@
       state.dailySteps += addedSteps;
       setStepsForDate(getTodayKey(), state.dailySteps);
       logToday(km);
+      var startRaw = state.expeditionStartTime || localStorage.getItem(STORAGE_KEYS.expeditionStartTime);
+      if (startRaw) {
+        var startMs = parseInt(startRaw, 10);
+        if (!isNaN(startMs)) {
+          var durationMins = Math.round((Date.now() - startMs) / 60000);
+          if (durationMins >= 1) addExerciseEntry(durationMins);
+        }
+        state.expeditionStartTime = null;
+        try { localStorage.removeItem(STORAGE_KEYS.expeditionStartTime); } catch (e) {}
+      }
       state.weekDistanceKm = getWeekStats().totalKm;
       if (!state.missionCompletedThisWeek && state.weekDistanceKm >= EXPEDITION_MISSION_KM) {
         state.missionCompletedThisWeek = true;
@@ -1622,6 +1962,8 @@
     loadStorage();
     loadExpeditionState();
     registerServiceWorker();
+    updateReminderUI();
+    if (state.reminderEnabled) startReminderLoop();
 
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) {
@@ -2013,6 +2355,143 @@
         updateReportUI();
       });
     }
+    var saveGoalsBtn = document.getElementById('save-goals');
+    if (saveGoalsBtn) {
+      saveGoalsBtn.addEventListener('click', function () {
+        var cur = getGoals();
+        var sInp = document.getElementById('input-goal-steps');
+        var wInp = document.getElementById('input-goal-water');
+        var eInp = document.getElementById('input-goal-exercise');
+        var s = sInp ? parseInt(sInp.value, 10) : NaN;
+        var w = wInp ? parseInt(wInp.value, 10) : NaN;
+        var e = eInp ? parseInt(eInp.value, 10) : NaN;
+        setGoals({
+          steps: !isNaN(s) && s >= 1000 ? s : cur.steps,
+          waterMl: !isNaN(w) && w >= 500 ? w : cur.waterMl,
+          exerciseWeeklyMins: !isNaN(e) && e >= 30 ? e : cur.exerciseWeeklyMins,
+        });
+        updateReportUI();
+        updateHomeUI();
+      });
+    }
+    var logSleepBtn = document.getElementById('log-sleep');
+    if (logSleepBtn) {
+      logSleepBtn.addEventListener('click', function () {
+        var hoursInp = document.getElementById('input-sleep-hours');
+        var qualitySel = document.getElementById('input-sleep-quality');
+        if (!hoursInp) return;
+        var hours = parseFloat(hoursInp.value);
+        if (isNaN(hours) || hours < 0 || hours > 24) return;
+        addSleepEntry(getYesterdayKey(), hours, qualitySel ? qualitySel.value : 'Fair');
+        hoursInp.value = '';
+        updateReportUI();
+      });
+    }
+    var shareWeeklySummaryBtn = document.getElementById('share-weekly-summary');
+    if (shareWeeklySummaryBtn) {
+      shareWeeklySummaryBtn.addEventListener('click', function () {
+        var sum = getWeeklySummary();
+        var text = 'Path-Pulse weekly summary: ' + sum.steps + ' steps, ' + sum.dist.toFixed(1) + ' km, ~' + sum.burn + ' kcal burned, ' + sum.ex + ' min exercise. ' + sum.insight;
+        if (typeof navigator.share === 'function') {
+          navigator.share({ title: 'Path-Pulse Summary', text: text }).catch(function () {
+            navigator.clipboard.writeText(text).then(function () { shareWeeklySummaryBtn.textContent = 'Copied!'; setTimeout(function () { shareWeeklySummaryBtn.textContent = 'Share summary'; }, 1500); });
+          });
+        } else {
+          navigator.clipboard.writeText(text).then(function () {
+            shareWeeklySummaryBtn.textContent = 'Copied!';
+            setTimeout(function () { shareWeeklySummaryBtn.textContent = 'Share summary'; }, 1500);
+          });
+        }
+      });
+    }
+
+    var syncStepsBtn = document.getElementById('sync-steps-btn');
+    if (syncStepsBtn) {
+      syncStepsBtn.addEventListener('click', function () {
+        var inp = document.getElementById('input-sync-steps');
+        if (!inp) return;
+        var steps = parseInt(inp.value, 10);
+        if (isNaN(steps) || steps < 0) return;
+        state.dailySteps = steps;
+        setStepsForDate(getTodayKey(), steps);
+        inp.value = '';
+        updateHomeUI();
+        if (typeof updateReportUI === 'function') updateReportUI();
+      });
+    }
+    var onboardingDismissBtn = document.getElementById('onboarding-dismiss');
+    if (onboardingDismissBtn) {
+      onboardingDismissBtn.addEventListener('click', function () {
+        setOnboardingDismissed();
+        updateHomeUI();
+      });
+    }
+
+    var requestRemindersBtn = document.getElementById('btn-request-reminders');
+    if (requestRemindersBtn) {
+      requestRemindersBtn.addEventListener('click', function () {
+        if (!('Notification' in window)) return;
+        var tEl = document.getElementById('reminder-time-input');
+        if (tEl && tEl.value) state.reminderTime = tEl.value;
+
+        var perm = Notification.permission;
+        var afterPerm = function () {
+          try { localStorage.setItem(STORAGE_KEYS.reminderTime, state.reminderTime || '18:00'); } catch (e) {}
+          state.reminderEnabled = true;
+          try { localStorage.setItem(STORAGE_KEYS.reminderEnabled, '1'); } catch (e) {}
+          updateReminderUI();
+          startReminderLoop();
+          subscribePushAndRegister();
+        };
+
+        if (perm === 'granted') {
+          afterPerm();
+          return;
+        }
+
+        Notification.requestPermission().then(function (p) {
+          if (p === 'granted') afterPerm();
+          else {
+            state.reminderEnabled = false;
+            try { localStorage.setItem(STORAGE_KEYS.reminderEnabled, '0'); } catch (e) {}
+            stopReminderLoop();
+            updateReminderUI();
+          }
+        }).catch(function () {
+          state.reminderEnabled = false;
+          try { localStorage.setItem(STORAGE_KEYS.reminderEnabled, '0'); } catch (e) {}
+          stopReminderLoop();
+          updateReminderUI();
+        });
+      });
+    }
+
+    var saveRemindersBtn = document.getElementById('btn-save-reminders');
+    if (saveRemindersBtn) {
+      saveRemindersBtn.addEventListener('click', function () {
+        var tEl = document.getElementById('reminder-time-input');
+        if (tEl && tEl.value) state.reminderTime = tEl.value;
+        try { localStorage.setItem(STORAGE_KEYS.reminderTime, state.reminderTime || '18:00'); } catch (e) {}
+        updateReminderUI();
+        if (state.reminderEnabled) {
+          startReminderLoop();
+          subscribePushAndRegister();
+        }
+      });
+    }
+
+    var disableRemindersBtn = document.getElementById('btn-disable-reminders');
+    if (disableRemindersBtn) {
+      disableRemindersBtn.addEventListener('click', function () {
+        state.reminderEnabled = false;
+        try {
+          localStorage.setItem(STORAGE_KEYS.reminderEnabled, '0');
+          localStorage.removeItem(STORAGE_KEYS.reminderLastSent);
+        } catch (e) {}
+        stopReminderLoop();
+        updateReminderUI();
+      });
+    }
 
     var installDismiss = document.getElementById('install-banner-dismiss');
     if (installDismiss) {
@@ -2023,18 +2502,25 @@
       });
     }
 
-    if (state.oathAccepted) {
+    function finishInit() {
+      loadStorage();
       document.getElementById('loader').classList.add('hidden');
-      var prismSeen = localStorage.getItem(STORAGE_KEYS.prismSeen) === '1';
-      if (!prismSeen) {
-        showScreen('prism-screen');
-        setPrismExplorerId();
+      if (state.oathAccepted) {
+        var prismSeen = localStorage.getItem(STORAGE_KEYS.prismSeen) === '1';
+        if (!prismSeen) {
+          showScreen('prism-screen');
+          setPrismExplorerId();
+        } else {
+          showMainShellAndInit();
+        }
       } else {
-        showMainShellAndInit();
+        showScreen('oath-screen');
       }
+    }
+    if (getApiBase()) {
+      syncFromServer(finishInit);
     } else {
-      document.getElementById('loader').classList.add('hidden');
-      showScreen('oath-screen');
+      finishInit();
     }
   }
 

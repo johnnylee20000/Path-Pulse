@@ -1,0 +1,17 @@
+{
+  "name": "path-pulse-api",
+  "version": "1.0.0",
+  "description": "Path Pulse sync and push-reminder API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "generate-vapid": "node -e \"const webpush=require('web-push'); const v=webpush.generateVAPIDKeys(); console.log('VAPID_PUBLIC='+v.publicKey); console.log('VAPID_PRIVATE='+v.privateKey);\""
+  },
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "node-cron": "^3.0.3",
+    "web-push": "^3.6.7"
+  }
+}
