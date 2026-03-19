@@ -27,6 +27,11 @@
     calorieGoal: 'pathpulse_calorie_goal',
     prismSeen: 'pathpulse_prism_seen',
     lastRoute: 'pathpulse_last_route',
+    heartRateLog: 'pathpulse_heart_rate_log',
+    bloodPressureLog: 'pathpulse_blood_pressure_log',
+    exerciseTimeLog: 'pathpulse_exercise_time_log',
+    targetWeight: 'pathpulse_target_weight',
+    waterLog: 'pathpulse_water_log',
   };
 
   var MAX_SAVED_ROUTE_POINTS = 5000;
@@ -63,6 +68,7 @@
     lastTodayKey: '',
     calorieGoal: 'maintain', // 'lose' | 'maintain' | 'gain'
     todayMeals: { breakfast: { kcal: 0, ts: '' }, lunch: { kcal: 0, ts: '' }, dinner: { kcal: 0, ts: '' } },
+    targetWeightKg: null,
   };
 
   function heightToM(val, unit) {
@@ -349,6 +355,29 @@
     return mon.getFullYear() + '-' + String(mon.getMonth() + 1).padStart(2, '0') + '-' + String(mon.getDate()).padStart(2, '0');
   }
 
+  function getWeeklyCalories() {
+    var weekStart = getWeekStart();
+    var today = getTodayKey();
+    var cal = getCaloriesData();
+    var total = 0;
+    var daysWithData = 0;
+    var d = new Date(weekStart);
+    var end = new Date(today);
+    while (d <= end) {
+      var key = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+      var dayCal = cal[key];
+      var kcal = 0;
+      if (dayCal != null) {
+        if (typeof dayCal.total === 'number') kcal = dayCal.total;
+        else if (typeof dayCal === 'number') kcal = dayCal;
+        else kcal = totalKcalFromMeals(getMealsForDate(key));
+      }
+      if (kcal > 0) { total += kcal; daysWithData++; }
+      d.setDate(d.getDate() + 1);
+    }
+    return { total: total, daysWithData: daysWithData };
+  }
+
   function loadHistory() {
     try {
       const raw = localStorage.getItem(STORAGE_KEYS.history);
@@ -383,6 +412,135 @@
       if (e.date >= weekStart) totalKm += e.distanceKm || 0;
     });
     return { totalKm: totalKm, todaySteps: state.dailySteps };
+  }
+
+  function getJsonStorage(key, defaultValue) {
+    try {
+      var raw = localStorage.getItem(key);
+      return raw ? JSON.parse(raw) : (defaultValue != null ? defaultValue : {});
+    } catch (e) { return defaultValue != null ? defaultValue : {}; }
+  }
+  function setJsonStorage(key, obj) {
+    try { localStorage.setItem(key, JSON.stringify(obj)); } catch (e) {}
+  }
+
+  function getHeartRateLog() {
+    var o = getJsonStorage(STORAGE_KEYS.heartRateLog, []);
+    return Array.isArray(o) ? o : [];
+  }
+  function addHeartRateEntry(bpm) {
+    var log = getHeartRateLog();
+    log.push({ dateKey: getTodayKey(), bpm: bpm, ts: nowTimeString() });
+    if (log.length > 100) log = log.slice(-100);
+    setJsonStorage(STORAGE_KEYS.heartRateLog, log);
+  }
+  function getBloodPressureLog() {
+    var o = getJsonStorage(STORAGE_KEYS.bloodPressureLog, []);
+    return Array.isArray(o) ? o : [];
+  }
+  function addBloodPressureEntry(systolic, diastolic) {
+    var log = getBloodPressureLog();
+    log.push({ dateKey: getTodayKey(), sys: systolic, dia: diastolic, ts: nowTimeString() });
+    if (log.length > 100) log = log.slice(-100);
+    setJsonStorage(STORAGE_KEYS.bloodPressureLog, log);
+  }
+  function getExerciseTimeLog() {
+    return getJsonStorage(STORAGE_KEYS.exerciseTimeLog, {});
+  }
+  function addExerciseEntry(minutes) {
+    var key = getTodayKey();
+    var log = getExerciseTimeLog();
+    log[key] = (log[key] || 0) + minutes;
+    setJsonStorage(STORAGE_KEYS.exerciseTimeLog, log);
+  }
+  function getWaterLog() {
+    return getJsonStorage(STORAGE_KEYS.waterLog, {});
+  }
+  function addWaterToday(ml) {
+    var key = getTodayKey();
+    var log = getWaterLog();
+    log[key] = (log[key] || 0) + ml;
+    setJsonStorage(STORAGE_KEYS.waterLog, log);
+  }
+  function getTargetWeightKg() {
+    if (state.targetWeightKg != null) return state.targetWeightKg;
+    try {
+      var v = localStorage.getItem(STORAGE_KEYS.targetWeight);
+      if (v != null) { var n = parseFloat(v); state.targetWeightKg = n; return n; }
+    } catch (e) {}
+    return null;
+  }
+  function setTargetWeightKg(kg) {
+    state.targetWeightKg = kg;
+    try {
+      if (kg != null) localStorage.setItem(STORAGE_KEYS.targetWeight, String(kg));
+      else localStorage.removeItem(STORAGE_KEYS.targetWeight);
+    } catch (e) {}
+  }
+
+  function getDateRangeForPeriod(period) {
+    var now = new Date();
+    var year = now.getFullYear();
+    var month = now.getMonth();
+    var weekStart = getWeekStart();
+    if (period === 'week') return { start: weekStart, end: getTodayKey() };
+    if (period === 'month') {
+      var mStart = year + '-' + String(month + 1).padStart(2, '0') + '-01';
+      var lastDay = new Date(year, month + 1, 0).getDate();
+      var mEnd = year + '-' + String(month + 1).padStart(2, '0') + '-' + String(lastDay).padStart(2, '0');
+      return { start: mStart, end: mEnd };
+    }
+    if (period === 'year') {
+      return { start: year + '-01-01', end: year + '-12-31' };
+    }
+    return { start: getTodayKey(), end: getTodayKey() };
+  }
+  function sumStepsInRange(startKey, endKey) {
+    var stepsObj = getStepsByDate();
+    var total = 0;
+    var d = new Date(startKey);
+    var end = new Date(endKey);
+    while (d <= end) {
+      var k = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+      if (k === getTodayKey()) total += state.dailySteps;
+      else total += typeof stepsObj[k] === 'number' ? stepsObj[k] : 0;
+      d.setDate(d.getDate() + 1);
+    }
+    return total;
+  }
+  function sumDistanceInRange(startKey, endKey) {
+    var hist = loadHistory();
+    var total = 0;
+    hist.forEach(function (e) {
+      if (e.date >= startKey && e.date <= endKey) total += e.distanceKm || 0;
+    });
+    return total;
+  }
+  function sumExerciseInRange(startKey, endKey) {
+    var log = getExerciseTimeLog();
+    var total = 0;
+    Object.keys(log).forEach(function (k) {
+      if (k >= startKey && k <= endKey) total += log[k] || 0;
+    });
+    return total;
+  }
+  function estimatedBurnForDay(dateKey) {
+    var data = getDayData(dateKey);
+    var steps = dateKey === getTodayKey() ? state.dailySteps : (data.steps || 0);
+    var bmrVal = bmr();
+    var activeBurn = Math.round(steps * 0.04 * 1.2);
+    return Math.round(bmrVal + activeBurn);
+  }
+  function sumBurnInRange(startKey, endKey) {
+    var total = 0;
+    var d = new Date(startKey);
+    var end = new Date(endKey);
+    while (d <= end) {
+      var k = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+      total += estimatedBurnForDay(k);
+      d.setDate(d.getDate() + 1);
+    }
+    return total;
   }
 
   function getDayData(dateKey) {
@@ -573,6 +731,7 @@
       if (hu === 'cm' || hu === 'ft') state.heightUnit = hu;
       var wu = localStorage.getItem(STORAGE_KEYS.weightUnit);
       if (wu === 'lbs') state.weightUnit = wu;
+      getTargetWeightKg();
       var waistVal = localStorage.getItem(STORAGE_KEYS.waist);
       if (waistVal != null && waistVal !== '') { var v = parseFloat(waistVal); if (!isNaN(v) && v > 0) state.waistCm = v; }
       var neckVal = localStorage.getItem(STORAGE_KEYS.neck);
@@ -755,7 +914,13 @@
     if (fuelWidget) fuelWidget.classList.toggle('hidden', !state.showFuelWidget);
     if (expeditionWidget) expeditionWidget.classList.toggle('hidden', !state.showExpeditionWidget);
     var ghostHomeBtn = document.getElementById('btn-ghost-path-home');
-    if (ghostHomeBtn) ghostHomeBtn.classList.toggle('hidden', !(lastRoutePoints && lastRoutePoints.length >= 2));
+    var hasRoute = lastRoutePoints && lastRoutePoints.length >= 2;
+    if (ghostHomeBtn) {
+      ghostHomeBtn.classList.toggle('no-route', !hasRoute);
+      ghostHomeBtn.disabled = false;
+    }
+    var ghostHint = document.getElementById('btn-ghost-path-hint');
+    if (ghostHint) ghostHint.textContent = hasRoute ? '' : 'Complete an expedition to race your ghost';
 
     const targetSteps = 10000;
     const progress = Math.min(1, state.dailySteps / targetSteps);
@@ -930,6 +1095,52 @@
         verdictEl.className = 'verdict';
       }
     }
+    var weekCal = getWeeklyCalories();
+    setElText('report-cal-total', weekCal.daysWithData > 0 ? weekCal.total + ' kcal' : '—');
+    setElText('report-cal-days', weekCal.daysWithData > 0 ? weekCal.daysWithData + ' days' : '—');
+    setElText('report-cal-avg', weekCal.daysWithData > 0 ? Math.round(weekCal.total / 7) + ' kcal/day' : '—');
+    function setElText(id, text) { var el = document.getElementById(id); if (el) el.textContent = text; }
+    var todayKey = getTodayKey();
+    var rWeek = getDateRangeForPeriod('week');
+    var rMonth = getDateRangeForPeriod('month');
+    var rYear = getDateRangeForPeriod('year');
+    setElText('report-steps-day', state.dailySteps);
+    setElText('report-steps-week', sumStepsInRange(rWeek.start, rWeek.end));
+    setElText('report-steps-month', sumStepsInRange(rMonth.start, rMonth.end));
+    setElText('report-steps-year', sumStepsInRange(rYear.start, rYear.end));
+    setElText('report-burn-day', estimatedBurnForDay(getTodayKey()) + ' kcal');
+    setElText('report-burn-week', sumBurnInRange(rWeek.start, rWeek.end) + ' kcal');
+    setElText('report-burn-month', sumBurnInRange(rMonth.start, rMonth.end) + ' kcal');
+    setElText('report-dist-week', sumDistanceInRange(rWeek.start, rWeek.end).toFixed(2) + ' km');
+    setElText('report-dist-month', sumDistanceInRange(rMonth.start, rMonth.end).toFixed(2) + ' km');
+    setElText('report-dist-year', sumDistanceInRange(rYear.start, rYear.end).toFixed(2) + ' km');
+    var exWeek = sumExerciseInRange(rWeek.start, rWeek.end);
+    var exMonth = sumExerciseInRange(rMonth.start, rMonth.end);
+    var exYear = sumExerciseInRange(rYear.start, rYear.end);
+    setElText('report-exercise-week', exWeek ? exWeek + ' min' : '—');
+    setElText('report-exercise-month', exMonth ? exMonth + ' min' : '—');
+    setElText('report-exercise-year', exYear ? exYear + ' min' : '—');
+    var tw = getTargetWeightKg();
+    if (tw != null) {
+      setElText('report-target-weight', state.weightUnit === 'lbs' ? weightFromKg(tw, 'lbs').toFixed(1) + ' lbs' : tw.toFixed(1) + ' kg');
+      var twInp = document.getElementById('input-target-weight');
+      var twUnit = document.getElementById('target-weight-unit');
+      if (twInp) twInp.value = state.weightUnit === 'lbs' ? weightFromKg(tw, 'lbs').toFixed(1) : tw.toFixed(1);
+      if (twUnit) twUnit.value = state.weightUnit;
+    } else setElText('report-target-weight', '—');
+    var waterToday = getWaterLog()[getTodayKey()] || 0;
+    setElText('report-water-today', waterToday ? waterToday + ' ml' : '—');
+    var hrLog = getHeartRateLog();
+    var hrList = document.getElementById('heart-rate-log-list');
+    if (hrList) hrList.innerHTML = hrLog.slice(-12).reverse().map(function (e) { return '<div class="report-log-row">' + e.dateKey + ' ' + e.ts + ' — ' + e.bpm + ' bpm</div>'; }).join('') || '<span class="report-log-empty">No entries</span>';
+    var bpLog = getBloodPressureLog();
+    var bpList = document.getElementById('blood-pressure-log-list');
+    if (bpList) bpList.innerHTML = bpLog.slice(-12).reverse().map(function (e) { return '<div class="report-log-row">' + e.dateKey + ' ' + e.ts + ' — ' + e.sys + '/' + e.dia + '</div>'; }).join('') || '<span class="report-log-empty">No entries</span>';
+    var exLog = getExerciseTimeLog();
+    var exEntries = Object.keys(exLog).sort().reverse().slice(0, 12).map(function (k) { return { d: k, m: exLog[k] }; });
+    var exList = document.getElementById('exercise-log-list');
+    if (exList) exList.innerHTML = exEntries.length ? exEntries.map(function (e) { return '<div class="report-log-row">' + e.d + ' — ' + e.m + ' min</div>'; }).join('') : '<span class="report-log-empty">No entries</span>';
+    renderProgressCalendar();
   }
 
   function updateProfileUI() {
@@ -1021,7 +1232,6 @@
       var trendText = getWeightTrendText();
       trendEl.textContent = trendText != null ? trendText : '—';
     }
-    renderProgressCalendar();
   }
 
   function updateExpeditionButton() {
@@ -1032,6 +1242,101 @@
   }
 
   var DEFAULT_CENTER = [10.65, -61.52];
+
+  // Demo routes: offsets in degrees from center (≈111m per 0.001 deg lat). Center = user location or DEFAULT_CENTER.
+  var DEMO_ROUTES = {
+    park: {
+      name: 'Park loop',
+      desc: '~1.5 km loop',
+      points: (function () {
+        var r = 0.0022;
+        var out = [];
+        for (var i = 0; i <= 24; i++) {
+          var t = (i / 24) * 2 * Math.PI;
+          out.push({ dlat: r * Math.cos(t), dlng: r * 0.85 * Math.sin(t) });
+        }
+        return out;
+      })(),
+    },
+    savannah: {
+      name: 'Savannah trail',
+      desc: '~2 km meandering',
+      points: [
+        { dlat: 0, dlng: 0 },
+        { dlat: 0.0012, dlng: 0.0004 },
+        { dlat: 0.0022, dlng: -0.0002 },
+        { dlat: 0.003, dlng: 0.0006 },
+        { dlat: 0.004, dlng: 0.0002 },
+        { dlat: 0.0048, dlng: -0.0005 },
+        { dlat: 0.0055, dlng: 0.0003 },
+        { dlat: 0.0062, dlng: -0.0004 },
+        { dlat: 0.0068, dlng: 0.0002 },
+        { dlat: 0.0072, dlng: 0.0008 },
+        { dlat: 0.0068, dlng: 0.0014 },
+        { dlat: 0.006, dlng: 0.0016 },
+        { dlat: 0.005, dlng: 0.0012 },
+        { dlat: 0.0042, dlng: 0.0016 },
+        { dlat: 0.0032, dlng: 0.001 },
+        { dlat: 0.0024, dlng: 0.0014 },
+        { dlat: 0.0014, dlng: 0.0008 },
+        { dlat: 0.0006, dlng: 0.0012 },
+        { dlat: 0, dlng: 0 },
+      ],
+    },
+    steepHill: {
+      name: 'Steep hill',
+      desc: '~0.9 km switchback',
+      points: [
+        { dlat: 0, dlng: 0 },
+        { dlat: 0.0012, dlng: 0 },
+        { dlat: 0.0012, dlng: 0.0006 },
+        { dlat: 0.0024, dlng: 0.0006 },
+        { dlat: 0.0024, dlng: 0.0012 },
+        { dlat: 0.0036, dlng: 0.0012 },
+        { dlat: 0.0036, dlng: 0.0006 },
+        { dlat: 0.0048, dlng: 0.0006 },
+        { dlat: 0.0048, dlng: 0 },
+        { dlat: 0.006, dlng: 0 },
+        { dlat: 0.006, dlng: -0.0006 },
+        { dlat: 0.0048, dlng: -0.0006 },
+        { dlat: 0.0048, dlng: -0.0012 },
+        { dlat: 0.0036, dlng: -0.0012 },
+        { dlat: 0.0036, dlng: -0.0006 },
+        { dlat: 0.0024, dlng: -0.0006 },
+        { dlat: 0.0024, dlng: 0 },
+        { dlat: 0.0012, dlng: 0 },
+        { dlat: 0, dlng: 0 },
+      ],
+    },
+  };
+
+  function getDemoRoutePoints(demoKey, centerLat, centerLng) {
+    var demo = DEMO_ROUTES[demoKey];
+    if (!demo || !demo.points || !demo.points.length) return [];
+    var lat = centerLat != null ? centerLat : DEFAULT_CENTER[0];
+    var lng = centerLng != null ? centerLng : DEFAULT_CENTER[1];
+    return demo.points.map(function (p) {
+      return { lat: lat + p.dlat, lng: lng + p.dlng };
+    });
+  }
+
+  function loadDemoRoute(demoKey) {
+    var center = state.currentPosition || { lat: DEFAULT_CENTER[0], lng: DEFAULT_CENTER[1] };
+    var pts = getDemoRoutePoints(demoKey, center.lat, center.lng);
+    if (pts.length < 2) return;
+    lastRoutePoints = pts;
+    state.lastRouteKm = routeDistanceFromPoints(lastRoutePoints);
+    saveLastRoute();
+    updateRouteLine();
+    updateGhostLine();
+    updateReplayButton();
+    updateHomeUI();
+    updateMapDistanceUI();
+    if (map) {
+      var bounds = L.latLngBounds(pts.map(function (p) { return [p.lat, p.lng]; }));
+      map.fitBounds(bounds, { padding: [40, 40], maxZoom: 16 });
+    }
+  }
 
   function initMap() {
     const center = state.currentPosition
@@ -1167,7 +1472,7 @@
     if (ghostBtn) ghostBtn.classList.toggle('hidden', !(lastRoutePoints && lastRoutePoints.length >= 2));
     if (ghostBtn) ghostBtn.classList.toggle('active', showGhostPath);
     var ghostHomeBtn = document.getElementById('btn-ghost-path-home');
-    if (ghostHomeBtn) ghostHomeBtn.classList.toggle('hidden', !(lastRoutePoints && lastRoutePoints.length >= 2));
+    if (ghostHomeBtn) ghostHomeBtn.classList.toggle('no-route', !(lastRoutePoints && lastRoutePoints.length >= 2));
   }
 
   var DESIRED_ACCURACY_M = 5;
@@ -1381,6 +1686,37 @@
         updateGhostLine();
         updateReplayButton();
       }, 150);
+    });
+
+    var showcaseBtn = document.getElementById('btn-showcase-demo');
+    if (showcaseBtn) showcaseBtn.addEventListener('click', function () {
+      loadDemoRoute('park');
+      setTab('map');
+      showGhostPath = true;
+      setTimeout(function () {
+        updateGhostLine();
+        updateReplayButton();
+      }, 200);
+    });
+
+    document.querySelectorAll('.btn-demo-test').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var demoKey = btn.getAttribute('data-demo');
+        if (!demoKey) return;
+        loadDemoRoute(demoKey);
+        setTab('map');
+        showGhostPath = true;
+        setTimeout(function () {
+          updateGhostLine();
+          updateReplayButton();
+        }, 200);
+      });
+    });
+
+    var demoSelect = document.getElementById('demo-route-select');
+    if (demoSelect) demoSelect.addEventListener('change', function () {
+      var v = demoSelect.value;
+      if (v) { loadDemoRoute(v); demoSelect.value = ''; }
     });
 
     document.getElementById('btn-location').addEventListener('click', function () {
@@ -1608,6 +1944,73 @@
           shareReportImageBtn.disabled = false;
           setTimeout(function () { shareReportImageBtn.textContent = 'DOWNLOAD AS IMAGE'; }, 2000);
         });
+      });
+    }
+
+    var saveTargetBtn = document.getElementById('save-target-weight');
+    if (saveTargetBtn) {
+      saveTargetBtn.addEventListener('click', function () {
+        var inp = document.getElementById('input-target-weight');
+        var unitSel = document.getElementById('target-weight-unit');
+        if (!inp || !unitSel) return;
+        var val = parseFloat(inp.value);
+        if (isNaN(val) || val < 20 || val > 300) return;
+        var kg = unitSel.value === 'lbs' ? weightToKg(val, 'lbs') : val;
+        setTargetWeightKg(kg);
+        updateReportUI();
+      });
+    }
+    var targetWeightUnitEl = document.getElementById('target-weight-unit');
+    if (targetWeightUnitEl) targetWeightUnitEl.value = state.weightUnit;
+
+    var addWaterBtn = document.getElementById('add-water');
+    if (addWaterBtn) {
+      addWaterBtn.addEventListener('click', function () {
+        var inp = document.getElementById('input-water-ml');
+        if (!inp) return;
+        var ml = parseInt(inp.value, 10) || 0;
+        if (ml <= 0) return;
+        addWaterToday(ml);
+        inp.value = '';
+        updateReportUI();
+      });
+    }
+    var logHrBtn = document.getElementById('log-heart-rate');
+    if (logHrBtn) {
+      logHrBtn.addEventListener('click', function () {
+        var inp = document.getElementById('input-heart-rate');
+        if (!inp) return;
+        var bpm = parseInt(inp.value, 10);
+        if (isNaN(bpm) || bpm < 30 || bpm > 250) return;
+        addHeartRateEntry(bpm);
+        inp.value = '';
+        updateReportUI();
+      });
+    }
+    var logBpBtn = document.getElementById('log-blood-pressure');
+    if (logBpBtn) {
+      logBpBtn.addEventListener('click', function () {
+        var sysInp = document.getElementById('input-bp-sys');
+        var diaInp = document.getElementById('input-bp-dia');
+        if (!sysInp || !diaInp) return;
+        var sys = parseInt(sysInp.value, 10);
+        var dia = parseInt(diaInp.value, 10);
+        if (isNaN(sys) || isNaN(dia) || sys < 70 || sys > 250 || dia < 40 || dia > 150) return;
+        addBloodPressureEntry(sys, dia);
+        sysInp.value = ''; diaInp.value = '';
+        updateReportUI();
+      });
+    }
+    var logExBtn = document.getElementById('log-exercise');
+    if (logExBtn) {
+      logExBtn.addEventListener('click', function () {
+        var inp = document.getElementById('input-exercise-mins');
+        if (!inp) return;
+        var mins = parseInt(inp.value, 10);
+        if (isNaN(mins) || mins < 1 || mins > 300) return;
+        addExerciseEntry(mins);
+        inp.value = '';
+        updateReportUI();
       });
     }
 

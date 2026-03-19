@@ -70,6 +70,15 @@
             <div class="hud-row"><span>Perimeter</span><span id="map-perimeter-km">0.00</span> km</div>
             <div class="hud-row"><span>Milometer</span><span id="map-milometer-km">0.00</span> km</div>
           </div>
+          <div class="demo-routes-wrap">
+            <label for="demo-route-select" class="demo-routes-label">Showcase demo route</label>
+            <select id="demo-route-select" class="demo-route-select" aria-label="Load a demo route for showcase">
+              <option value="">—</option>
+              <option value="park">Showcase: Park loop (~1.5 km)</option>
+              <option value="savannah">Savannah trail (~2 km)</option>
+              <option value="steepHill">Steep hill (~0.9 km)</option>
+            </select>
+          </div>
           <div class="map-controls">
             <button id="btn-location" class="fab small" title="My location" aria-label="Center map on my location">⌖</button>
             <div id="replay-controls" class="replay-controls hidden">
@@ -110,14 +119,32 @@
               <span id="mission-label">START EXPEDITION</span>
             </button>
             <div id="last-route" class="last-route hidden">Last route: <span id="last-route-km">0</span> km</div>
-            <button type="button" id="btn-ghost-path-home" class="btn-ghost-path-home hidden" aria-label="Open Map and show AR Ghost Path (race your last route)">
-              <span class="btn-ghost-icon" aria-hidden="true">👻</span>
-              <span class="btn-ghost-label">AR GHOST PATH</span>
-            </button>
             <div id="expedition-mission" class="expedition-mission">
               <p class="mission-title">MISSION: Walk <span id="mission-target-km">2</span> km this week</p>
               <div class="mission-progress-bg"><div class="mission-progress-fill" id="mission-progress-fill"></div></div>
               <p id="mission-status" class="mission-status">0 / 2 km</p>
+            </div>
+            </div>
+          <div id="home-ghost-wrap" class="home-ghost-wrap">
+            <button type="button" id="btn-ghost-path-home" class="btn-ghost-path-home" aria-label="Open Map and show AR Ghost Path (race your last route)">
+              <span class="btn-ghost-icon" aria-hidden="true">👻</span>
+              <span class="btn-ghost-label">AR GHOST PATH</span>
+              <span id="btn-ghost-path-hint" class="btn-ghost-path-hint" aria-hidden="true"></span>
+            </button>
+            <div class="demo-test-section">
+              <p class="demo-test-label">Showcase demo (for presentations)</p>
+              <button type="button" id="btn-showcase-demo" class="btn-showcase-demo" aria-label="Load showcase demo route and open Map">
+                Load showcase route
+              </button>
+              <p class="demo-test-hint">Opens Map with a demo route. Tap <strong>Start Expedition</strong> to display the ghost path.</p>
+              <details class="demo-more-options">
+                <summary>Other demo routes</summary>
+                <div class="demo-test-buttons">
+                  <button type="button" class="btn-demo-test" data-demo="park" aria-label="Load Park loop demo">Park loop</button>
+                  <button type="button" class="btn-demo-test" data-demo="savannah" aria-label="Load Savannah trail demo">Savannah trail</button>
+                  <button type="button" class="btn-demo-test" data-demo="steepHill" aria-label="Load Steep hill demo">Steep hill</button>
+                </div>
+              </details>
             </div>
           </div>
           <div id="home-widget-fuel" class="fuel-section fuel-section-modern">
@@ -269,22 +296,6 @@
             <p id="weight-trend-summary" class="trend-summary">—</p>
             <div id="weight-trend-list" class="trend-list"></div>
           </div>
-          <div class="progress-calendar">
-            <h3>PROGRESS CALENDAR</h3>
-            <div class="calendar-nav">
-              <button type="button" id="calendar-prev" class="btn-calendar-nav" aria-label="Previous month">‹</button>
-              <span id="calendar-month-label" class="calendar-month-label">—</span>
-              <button type="button" id="calendar-next" class="btn-calendar-nav" aria-label="Next month">›</button>
-            </div>
-            <div id="calendar-weekdays" class="calendar-weekdays"></div>
-            <div id="calendar-grid" class="calendar-grid" role="grid" aria-label="Progress by day"></div>
-            <div class="activity-chart-section">
-              <h3>PHYSICALITY & CONSISTENCY</h3>
-              <p id="activity-chart-summary" class="activity-chart-summary" aria-live="polite">—</p>
-              <div id="calendar-activity-bars" class="calendar-activity-bars" role="img" aria-label="Daily activity by calendar day"></div>
-              <p class="activity-chart-legend">Bars align with calendar above. Height = movement vs ~10k steps + distance. <strong>Active</strong> = ≥5k steps or ≥0.5 km walked.</p>
-            </div>
-          </div>
           <p class="label label-section">DATA</p>
           <button type="button" id="export-data" class="btn-secondary" aria-label="Export my data as JSON">EXPORT MY DATA</button>
         </div>
@@ -303,6 +314,94 @@
               <div class="report-row"><span>Total intake</span><span id="report-cal-total">—</span></div>
               <div class="report-row"><span>Days logged</span><span id="report-cal-days">—</span></div>
               <div class="report-row"><span>Daily average</span><span id="report-cal-avg">—</span></div>
+            </div>
+          </div>
+          <div class="report-stats-grid">
+            <h3>STEPS</h3>
+            <div class="report-card">
+              <div class="report-row"><span>Today</span><span id="report-steps-day">—</span></div>
+              <div class="report-row"><span>This week</span><span id="report-steps-week">—</span></div>
+              <div class="report-row"><span>This month</span><span id="report-steps-month">—</span></div>
+              <div class="report-row"><span>This year</span><span id="report-steps-year">—</span></div>
+            </div>
+            <h3>CALORIES BURNED (est.)</h3>
+            <div class="report-card">
+              <div class="report-row"><span>Today</span><span id="report-burn-day">—</span></div>
+              <div class="report-row"><span>This week</span><span id="report-burn-week">—</span></div>
+              <div class="report-row"><span>This month</span><span id="report-burn-month">—</span></div>
+            </div>
+            <h3>DISTANCE</h3>
+            <div class="report-card">
+              <div class="report-row"><span>This week</span><span id="report-dist-week">—</span></div>
+              <div class="report-row"><span>This month</span><span id="report-dist-month">—</span></div>
+              <div class="report-row"><span>This year</span><span id="report-dist-year">—</span></div>
+            </div>
+            <h3>EXERCISE TIME</h3>
+            <div class="report-card">
+              <div class="report-row"><span>This week</span><span id="report-exercise-week">—</span></div>
+              <div class="report-row"><span>This month</span><span id="report-exercise-month">—</span></div>
+              <div class="report-row"><span>This year</span><span id="report-exercise-year">—</span></div>
+            </div>
+          </div>
+          <div class="report-tracking-section">
+            <h3>TARGET WEIGHT</h3>
+            <div class="report-card report-target-weight">
+              <div class="report-row"><span>Target</span><span id="report-target-weight">—</span></div>
+              <div class="input-row">
+                <input type="number" id="input-target-weight" placeholder="kg" min="20" max="300" step="0.1" aria-label="Target weight">
+                <select id="target-weight-unit" aria-label="Unit"><option value="kg">kg</option><option value="lbs">lbs</option></select>
+                <button type="button" id="save-target-weight" class="btn-small">Set</button>
+              </div>
+            </div>
+            <h3>WATER TRACKER</h3>
+            <div class="report-card">
+              <div class="report-row"><span>Today</span><span id="report-water-today">—</span></div>
+              <div class="input-row">
+                <input type="number" id="input-water-ml" placeholder="ml" min="0" step="100" aria-label="Water intake ml">
+                <button type="button" id="add-water" class="btn-small">Add</button>
+              </div>
+            </div>
+            <h3>HEART RATE LOG</h3>
+            <div class="report-card">
+              <div class="input-row">
+                <input type="number" id="input-heart-rate" placeholder="bpm" min="30" max="250" aria-label="Heart rate bpm">
+                <button type="button" id="log-heart-rate" class="btn-small">Log</button>
+              </div>
+              <div id="heart-rate-log-list" class="report-log-list"></div>
+            </div>
+            <h3>BLOOD PRESSURE</h3>
+            <div class="report-card">
+              <div class="input-row">
+                <input type="number" id="input-bp-sys" placeholder="Systolic" min="70" max="250" aria-label="Systolic">
+                <span class="bp-sep">/</span>
+                <input type="number" id="input-bp-dia" placeholder="Diastolic" min="40" max="150" aria-label="Diastolic">
+                <button type="button" id="log-blood-pressure" class="btn-small">Log</button>
+              </div>
+              <div id="blood-pressure-log-list" class="report-log-list"></div>
+            </div>
+            <h3>EXERCISE TIME (log session)</h3>
+            <div class="report-card">
+              <div class="input-row">
+                <input type="number" id="input-exercise-mins" placeholder="minutes" min="1" max="300" aria-label="Exercise minutes">
+                <button type="button" id="log-exercise" class="btn-small">Log</button>
+              </div>
+              <div id="exercise-log-list" class="report-log-list"></div>
+            </div>
+          </div>
+          <div class="progress-calendar progress-calendar-report">
+            <h3>PROGRESS CALENDAR</h3>
+            <div class="calendar-nav">
+              <button type="button" id="calendar-prev" class="btn-calendar-nav" aria-label="Previous month">‹</button>
+              <span id="calendar-month-label" class="calendar-month-label">—</span>
+              <button type="button" id="calendar-next" class="btn-calendar-nav" aria-label="Next month">›</button>
+            </div>
+            <div id="calendar-weekdays" class="calendar-weekdays"></div>
+            <div id="calendar-grid" class="calendar-grid" role="grid" aria-label="Progress by day"></div>
+            <div class="activity-chart-section">
+              <h3>PHYSICALITY & CONSISTENCY</h3>
+              <p id="activity-chart-summary" class="activity-chart-summary" aria-live="polite">—</p>
+              <div id="calendar-activity-bars" class="calendar-activity-bars" role="img" aria-label="Daily activity by calendar day"></div>
+              <p class="activity-chart-legend">Bars align with calendar above. Height = movement vs ~10k steps + distance. <strong>Active</strong> = ≥5k steps or ≥0.5 km walked.</p>
             </div>
           </div>
           <p class="report-hint">Complete expeditions to fill your report. Log meals on Home for weekly calories. New week starts Monday.</p>
