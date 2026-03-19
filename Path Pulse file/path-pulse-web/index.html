@@ -455,6 +455,20 @@
           </div>
           <div class="progress-calendar progress-calendar-report">
             <h3>PROGRESS CALENDAR</h3>
+            <div class="report-graph-range-toggle" role="group" aria-label="Progress graph range">
+              <button type="button" id="report-range-day" class="btn-small report-graph-range-btn">DAY</button>
+              <button type="button" id="report-range-week" class="btn-small report-graph-range-btn active">WEEK</button>
+              <button type="button" id="report-range-month" class="btn-small report-graph-range-btn">MONTH</button>
+              <button type="button" id="report-range-year" class="btn-small report-graph-range-btn">YEAR</button>
+            </div>
+            <div class="report-card report-graph-card">
+              <p id="report-graph-subtitle" class="report-sub" aria-live="polite">—</p>
+              <div class="report-graph-svg-wrap">
+                <svg id="report-progress-graph" viewBox="0 0 320 160" preserveAspectRatio="none" role="img" aria-label="Progress graph"></svg>
+              </div>
+              <div id="report-progress-details" class="report-progress-details" aria-live="polite">Tap a bar to inspect a day.</div>
+            </div>
+            <div id="report-calendar-month-wrap" class="hidden">
             <div class="calendar-nav">
               <button type="button" id="calendar-prev" class="btn-calendar-nav" aria-label="Previous month">‹</button>
               <span id="calendar-month-label" class="calendar-month-label">—</span>
@@ -467,6 +481,7 @@
               <p id="activity-chart-summary" class="activity-chart-summary" aria-live="polite">—</p>
               <div id="calendar-activity-bars" class="calendar-activity-bars" role="img" aria-label="Daily activity by calendar day"></div>
               <p class="activity-chart-legend">Bars align with calendar above. Height = movement vs ~10k steps + distance. <strong>Active</strong> = ≥5k steps or ≥0.5 km walked.</p>
+            </div>
             </div>
           </div>
           <p class="report-hint">Complete expeditions to fill your report. Log meals on Home for weekly calories. New week starts Monday.</p>

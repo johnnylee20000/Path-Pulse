@@ -114,6 +114,8 @@
   let showGhostPath = false;
   var calendarYear = new Date().getFullYear();
   var calendarMonth = new Date().getMonth();
+  var reportGraphPeriod = 'week'; // day | week | month | year
+  var reportGraphSelectedKey = null; // dateKey for day/week/month; interval startKey for year
 
   // WHO standard: BMI = weight (kg) / height (m)². Units SI (kg, m).
   function bmi() {
@@ -868,6 +870,304 @@
     return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
   }
 
+  function dateToKey(d) {
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+
+  function getSundayWeekStartKey(baseDate) {
+    var d = baseDate ? new Date(baseDate) : new Date();
+    var diff = d.getDate() - d.getDay(); // Sunday = 0
+    d.setDate(diff);
+    d.setHours(0, 0, 0, 0);
+    return dateToKey(d);
+  }
+
+  function sumWaterInRange(startKey, endKey) {
+    var water = getWaterLog();
+    var total = 0;
+    var d = new Date(startKey);
+    var end = new Date(endKey);
+    while (d <= end) {
+      var k = dateToKey(d);
+      total += typeof water[k] === 'number' ? water[k] : 0;
+      d.setDate(d.getDate() + 1);
+    }
+    return total;
+  }
+
+  function getHeartRateAvgForDay(dateKey) {
+    var log = getHeartRateLog();
+    var sum = 0;
+    var count = 0;
+    for (var i = 0; i < log.length; i++) {
+      if (log[i].dateKey !== dateKey) continue;
+      sum += log[i].bpm || 0;
+      count++;
+    }
+    if (count === 0) return null;
+    return Math.round(sum / count);
+  }
+
+  function getLastBloodPressureForDay(dateKey) {
+    var log = getBloodPressureLog();
+    for (var i = log.length - 1; i >= 0; i--) {
+      if (log[i].dateKey !== dateKey) continue;
+      return log[i];
+    }
+    return null;
+  }
+
+  function getSleepForDay(dateKey) {
+    return getSleepForDate(dateKey);
+  }
+
+  function getDayWaterMl(dateKey) {
+    var water = getWaterLog();
+    var v = water[dateKey];
+    return typeof v === 'number' ? v : 0;
+  }
+
+  function getDayExerciseMinutes(dateKey) {
+    var log = getExerciseTimeLog();
+    var v = log[dateKey];
+    return typeof v === 'number' ? v : 0;
+  }
+
+  function buildReportGraphPoints(period) {
+    var now = new Date();
+    var goals = getGoals();
+    var goalSteps = typeof goals.steps === 'number' ? goals.steps : 10000;
+
+    var points = [];
+    var subtitle = '';
+    var maxSteps = 0;
+
+    var todayKey = getTodayKey();
+    var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var monthShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var dayShort = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+    function stepsForKey(key) {
+      var stepsObj = getStepsByDate();
+      var base = typeof stepsObj[key] === 'number' ? stepsObj[key] : 0;
+      if (key === todayKey && typeof state.dailySteps === 'number') return state.dailySteps;
+      return base;
+    }
+
+    if (period === 'day') {
+      var k = todayKey;
+      var steps = stepsForKey(k);
+      points.push({ label: 'Today', fromKey: k, toKey: k, steps: steps });
+      subtitle = 'DAY · ' + k;
+      maxSteps = steps;
+    } else if (period === 'week') {
+      var startKey = getSundayWeekStartKey(now);
+      var startDate = new Date(startKey);
+      subtitle = 'WEEK · Sun–Sat (' + startKey + ')';
+      for (var i = 0; i < 7; i++) {
+        var d = new Date(startDate);
+        d.setDate(d.getDate() + i);
+        var key = dateToKey(d);
+        var steps = stepsForKey(key);
+        points.push({ label: dayShort[i], fromKey: key, toKey: key, steps: steps });
+        if (steps > maxSteps) maxSteps = steps;
+      }
+    } else if (period === 'month') {
+      var y = now.getFullYear();
+      var m = now.getMonth();
+      var last = new Date(y, m + 1, 0).getDate();
+      subtitle = 'MONTH · ' + monthNames[m] + ' ' + y;
+      for (var day = 1; day <= last; day++) {
+        var d2 = new Date(y, m, day);
+        var key2 = dateToKey(d2);
+        var steps2 = stepsForKey(key2);
+        points.push({ label: String(day), fromKey: key2, toKey: key2, steps: steps2 });
+        if (steps2 > maxSteps) maxSteps = steps2;
+      }
+    } else if (period === 'year') {
+      var year = now.getFullYear();
+      subtitle = 'YEAR · ' + year;
+      for (var mi = 0; mi < 12; mi++) {
+        var sDate = new Date(year, mi, 1);
+        var eDate = new Date(year, mi + 1, 0);
+        var sKey = dateToKey(sDate);
+        var eKey = dateToKey(eDate);
+        var stepsTotal = sumStepsInRange(sKey, eKey);
+        points.push({ label: monthShort[mi], fromKey: sKey, toKey: eKey, steps: stepsTotal });
+        if (stepsTotal > maxSteps) maxSteps = stepsTotal;
+      }
+    }
+
+    // Keep a stable scale using goalSteps when reasonable.
+    var yMax = Math.max(maxSteps, goalSteps);
+    return { points: points, subtitle: subtitle, yMax: yMax };
+  }
+
+  function renderReportProgressDetailsForPoint(point) {
+    var detailsEl = document.getElementById('report-progress-details');
+    if (!detailsEl || !point) return;
+
+    var isSingleDay = point.fromKey === point.toKey;
+    var goals = getGoals();
+    var goalSteps = typeof goals.steps === 'number' ? goals.steps : 10000;
+
+    function fmtInt(n) { return typeof n === 'number' ? n : 0; }
+    function fmtKm(n) { return typeof n === 'number' ? n.toFixed(2) : '0.00'; }
+
+    if (isSingleDay) {
+      var k = point.fromKey;
+      var d = getDayData(k);
+      var waterMl = getDayWaterMl(k);
+      var exMin = getDayExerciseMinutes(k);
+      var burnKcal = estimatedBurnForDay(k);
+      var hrAvg = getHeartRateAvgForDay(k);
+      var bp = getLastBloodPressureForDay(k);
+      var sleep = getSleepForDay(k);
+
+      var achieved = point.steps >= goalSteps;
+      var title = k + (achieved ? ' · GOAL HIT' : '');
+
+      detailsEl.innerHTML =
+        '<div class="report-progress-details-title">' + title + '</div>' +
+        '<div class="rp-row"><span class="rp-label">Steps</span><span class="rp-val steps">' + fmtInt(point.steps) + '</span></div>' +
+        '<div class="rp-row"><span class="rp-label">Distance</span><span class="rp-val">' + fmtKm(d.distanceKm || 0) + ' km</span></div>' +
+        '<div class="rp-row"><span class="rp-label">Water</span><span class="rp-val water">' + fmtInt(waterMl) + ' ml</span></div>' +
+        '<div class="rp-row"><span class="rp-label">Exercise</span><span class="rp-val exercise">' + fmtInt(exMin) + ' min</span></div>' +
+        '<div class="rp-row"><span class="rp-label">Burn (est.)</span><span class="rp-val">' + fmtInt(burnKcal) + ' kcal</span></div>' +
+        (hrAvg != null ? '<div class="rp-row"><span class="rp-label">Heart rate avg</span><span class="rp-val">' + hrAvg + ' bpm</span></div>' : '') +
+        (bp ? '<div class="rp-row"><span class="rp-label">Blood pressure</span><span class="rp-val">' + (bp.sys || '—') + '/' + (bp.dia || '—') + '</span></div>' : '') +
+        (sleep ? '<div class="rp-row"><span class="rp-label">Sleep</span><span class="rp-val">' + sleep.hours + ' h (' + sleep.quality + ')</span></div>' : '');
+    } else {
+      var sKey = point.fromKey;
+      var eKey = point.toKey;
+      var stepsTotal = sumStepsInRange(sKey, eKey);
+      var distTotal = sumDistanceInRange(sKey, eKey);
+      var burnTotal = sumBurnInRange(sKey, eKey);
+      var waterTotal = sumWaterInRange(sKey, eKey);
+      var exTotal = sumExerciseInRange(sKey, eKey);
+      var title = point.label + ' · ' + sKey + ' — ' + eKey;
+
+      detailsEl.innerHTML =
+        '<div class="report-progress-details-title">' + title + '</div>' +
+        '<div class="rp-row"><span class="rp-label">Steps</span><span class="rp-val steps">' + fmtInt(stepsTotal) + '</span></div>' +
+        '<div class="rp-row"><span class="rp-label">Distance</span><span class="rp-val">' + fmtKm(distTotal || 0) + ' km</span></div>' +
+        '<div class="rp-row"><span class="rp-label">Water</span><span class="rp-val water">' + fmtInt(waterTotal) + ' ml</span></div>' +
+        '<div class="rp-row"><span class="rp-label">Exercise</span><span class="rp-val exercise">' + fmtInt(exTotal) + ' min</span></div>' +
+        '<div class="rp-row"><span class="rp-label">Burn (est.)</span><span class="rp-val">' + fmtInt(burnTotal) + ' kcal</span></div>';
+    }
+  }
+
+  function renderReportProgressGraph(period) {
+    var svg = document.getElementById('report-progress-graph');
+    if (!svg) return;
+
+    var graph = buildReportGraphPoints(period);
+    var points = graph.points;
+
+    // Pick selection.
+    var selectedKey = reportGraphSelectedKey;
+    var selectedIdx = -1;
+    for (var i = 0; i < points.length; i++) {
+      if (points[i].fromKey === selectedKey) { selectedIdx = i; break; }
+      if (points[i].toKey === selectedKey) { selectedIdx = i; break; }
+    }
+    if (selectedIdx < 0) {
+      // Prefer today when present.
+      var todayKey = getTodayKey();
+      for (var j = 0; j < points.length; j++) {
+        if (points[j].toKey === todayKey) { selectedIdx = j; break; }
+      }
+      if (selectedIdx < 0) selectedIdx = 0;
+    }
+
+    var w = 320;
+    var h = 160;
+    var pad = 18;
+    var chartW = w - pad * 2;
+    var chartH = h - pad * 2;
+    var n = points.length || 1;
+    var xStep = chartW / n;
+    var barW = Math.max(2, xStep * 0.68);
+    var yMax = graph.yMax || 1;
+
+    var goals = getGoals();
+    var goalSteps = typeof goals.steps === 'number' ? goals.steps : 10000;
+
+    // Build bars/line.
+    var bars = [];
+    var linePts = [];
+    for (var k = 0; k < points.length; k++) {
+      var p = points[k];
+      var cx = pad + k * xStep + xStep / 2;
+      var y = pad + chartH - (Math.max(0, p.steps) / yMax) * chartH;
+      var barHeight = Math.max(2, (Math.max(0, p.steps) / yMax) * chartH);
+      var yBar = pad + chartH - barHeight;
+
+      var isGoal = p.steps >= goalSteps;
+      var fill = isGoal ? 'rgba(57,255,20,0.32)' : 'rgba(0,245,255,0.20)';
+      var stroke = isGoal ? 'rgba(57,255,20,0.65)' : 'rgba(0,245,255,0.55)';
+
+      bars.push(
+        '<rect x="' + (cx - barW / 2) + '" y="' + yBar + '" width="' + barW + '" height="' + barHeight + '" rx="3" ' +
+        'fill="' + fill + '" stroke="' + stroke + '" stroke-width="1" data-idx="' + k + '" />'
+      );
+      linePts.push({ x: cx, y: y });
+    }
+
+    var pathD = '';
+    for (var m = 0; m < linePts.length; m++) {
+      pathD += (m === 0 ? 'M' : 'L') + linePts[m].x + ' ' + linePts[m].y + ' ';
+    }
+
+    var grid = [];
+    for (var g = 0; g <= 4; g++) {
+      var pct = g / 4;
+      var yGrid = pad + chartH - pct * chartH;
+      grid.push('<line x1="' + pad + '" y1="' + yGrid + '" x2="' + (pad + chartW) + '" y2="' + yGrid + '" stroke="rgba(255,255,255,0.05)" stroke-dasharray="3 3" />');
+    }
+
+    // Highlight selected point with stronger stroke.
+    var dots = [];
+    for (var dIdx = 0; dIdx < points.length; dIdx++) {
+      var p2 = points[dIdx];
+      var cx2 = pad + dIdx * xStep + xStep / 2;
+      var y2 = pad + chartH - (Math.max(0, p2.steps) / yMax) * chartH;
+      var isGoal2 = p2.steps >= goalSteps;
+      var fill2 = isGoal2 ? 'rgba(57,255,20,0.95)' : 'rgba(0,245,255,0.95)';
+      var r = dIdx === selectedIdx ? 4 : 3;
+      var stroke2 = dIdx === selectedIdx ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0)';
+
+      dots.push('<circle cx="' + cx2 + '" cy="' + y2 + '" r="' + r + '" fill="' + fill2 + '" stroke="' + stroke2 + '" stroke-width="' + (dIdx === selectedIdx ? 2 : 0) + '" data-idx="' + dIdx + '" />');
+    }
+
+    var subtitleEl = document.getElementById('report-graph-subtitle');
+    if (subtitleEl) subtitleEl.textContent = graph.subtitle;
+
+    svg.innerHTML =
+      '<rect x="0" y="0" width="' + w + '" height="' + h + '" fill="transparent" />' +
+      grid.join('') +
+      '<line x1="' + pad + '" y1="' + (pad + chartH) + '" x2="' + (pad + chartW) + '" y2="' + (pad + chartH) + '" stroke="rgba(255,255,255,0.10)" />' +
+      bars.join('') +
+      '<path d="' + pathD + '" fill="none" stroke="rgba(0,245,255,0.95)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />' +
+      dots.join('');
+
+    // Bind click handlers.
+    var nodes = svg.querySelectorAll('[data-idx]');
+    nodes.forEach(function (node) {
+      node.style.cursor = 'pointer';
+      node.addEventListener('click', function (ev) {
+        var idx = parseInt(node.getAttribute('data-idx'), 10);
+        if (isNaN(idx) || !points[idx]) return;
+        var p3 = points[idx];
+        reportGraphSelectedKey = p3.fromKey;
+        renderReportProgressDetailsForPoint(p3);
+      });
+    });
+
+    renderReportProgressDetailsForPoint(points[selectedIdx]);
+  }
+
+
   function renderProgressCalendar() {
     var labelEl = document.getElementById('calendar-month-label');
     var gridEl = document.getElementById('calendar-grid');
@@ -1466,7 +1766,9 @@
     }
     var sleepListEl = document.getElementById('sleep-log-list');
     if (sleepListEl) sleepListEl.innerHTML = sleepEntries.length ? sleepEntries.map(function (e) { return '<div class="report-log-row">' + e + '</div>'; }).join('') : '<span class="report-log-empty">Log last night to start</span>';
-    renderProgressCalendar();
+    var calWrap = document.getElementById('report-calendar-month-wrap');
+    if (calWrap) calWrap.classList.add('hidden');
+    renderReportProgressGraph(reportGraphPeriod);
   }
 
   function updateProfileUI() {
@@ -2167,6 +2469,26 @@
       if (calendarMonth > 11) { calendarMonth = 0; calendarYear++; }
       renderProgressCalendar();
     });
+    function setReportGraphPeriod(period) {
+      reportGraphPeriod = period;
+      ['day', 'week', 'month', 'year'].forEach(function (p) {
+        var btn = document.getElementById('report-range-' + p);
+        if (!btn) return;
+        btn.classList.toggle('active', p === period);
+      });
+      var calWrap = document.getElementById('report-calendar-month-wrap');
+      if (calWrap) calWrap.classList.add('hidden');
+      renderReportProgressGraph(reportGraphPeriod);
+    }
+
+    var rDay = document.getElementById('report-range-day');
+    if (rDay) rDay.addEventListener('click', function () { setReportGraphPeriod('day'); });
+    var rWeek = document.getElementById('report-range-week');
+    if (rWeek) rWeek.addEventListener('click', function () { setReportGraphPeriod('week'); });
+    var rMonth = document.getElementById('report-range-month');
+    if (rMonth) rMonth.addEventListener('click', function () { setReportGraphPeriod('month'); });
+    var rYear = document.getElementById('report-range-year');
+    if (rYear) rYear.addEventListener('click', function () { setReportGraphPeriod('year'); });
     ['lose', 'maintain', 'gain'].forEach(function (g) {
       var btn = document.getElementById('goal-' + g);
       if (btn) {

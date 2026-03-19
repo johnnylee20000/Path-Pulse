@@ -905,6 +905,62 @@ body {
 .report-log-empty { font-style: italic; }
 .progress-calendar-report { margin-top: 1.5rem; }
 
+/* Report progress graph (Day/Week/Month/Year) */
+.report-graph-range-toggle {
+  display: flex;
+  gap: 0.35rem;
+  margin-bottom: 0.65rem;
+}
+.report-graph-range-btn {
+  flex: 1;
+  padding: 0.3rem 0.25rem;
+}
+.report-graph-range-btn.active {
+  background: rgba(0,245,255,0.15);
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+.report-graph-card {
+  padding: 0.85rem;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+  margin-bottom: 0.75rem;
+}
+.report-graph-svg-wrap {
+  height: 160px;
+}
+#report-progress-graph {
+  width: 100%;
+  height: 160px;
+  display: block;
+}
+.report-progress-details {
+  margin-top: 0.65rem;
+  font-size: 12px;
+  color: var(--gray);
+}
+.report-progress-details .report-progress-details-title {
+  color: var(--white);
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.35rem;
+}
+.report-progress-details .rp-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.report-progress-details .rp-row:last-child { border-bottom: none; }
+.report-progress-details .rp-val { color: var(--white); font-weight: 700; }
+.report-progress-details .rp-val.steps { color: var(--cyan); }
+.report-progress-details .rp-val.water { color: var(--lime); }
+.report-progress-details .rp-val.exercise { color: var(--cyan); }
+
 .onboarding-checklist {
   padding: 0.6rem 0.85rem;
   margin-bottom: 0.75rem;
@@ -1186,6 +1242,7 @@ button, input, select, textarea { font-family: inherit; }
 
 ::selection { background: rgba(0,245,255,0.25); color: var(--white); }
 
+::selection { background: rgba(0,245,255,0.25); color: var(--white); }
 *::-webkit-scrollbar { width: 10px; height: 10px; }
 *::-webkit-scrollbar-thumb {
   background: rgba(0,245,255,0.18);
