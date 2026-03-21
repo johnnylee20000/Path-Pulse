@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Path Pulse — 90s promo (no tools needed)</title>
+  <style>
+    :root {
+      --obsidian: #0b0e11;
+      --cyan: #00f5ff;
+      --lime: #39ff14;
+      --gray: #9ca3af;
+      --white: #fff;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: radial-gradient(900px circle at 15% -10%, rgba(0,245,255,0.12) 0%, transparent 55%),
+        radial-gradient(700px circle at 90% 0%, rgba(57,255,20,0.08) 0%, transparent 50%),
+        var(--obsidian);
+      color: var(--white);
+      overflow: hidden;
+    }
+    #stage {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .hud {
+      border: 1px solid rgba(0,245,255,0.25);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      max-width: 520px;
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.04);
+      animation: pulseGlow 4s ease-in-out infinite;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 12px 40px rgba(0,0,0,0.45), 0 0 0 1px rgba(0,245,255,0.08); }
+      50% { box-shadow: 0 12px 48px rgba(0,0,0,0.5), 0 0 24px rgba(0,245,255,0.12); }
+    }
+    .label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--gray);
+      margin-bottom: 0.5rem;
+    }
+    .title {
+      font-size: clamp(1.4rem, 5vw, 2rem);
+      font-weight: 800;
+      color: var(--cyan);
+      letter-spacing: 0.08em;
+      margin: 0 0 0.75rem;
+      min-height: 2.6em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sub {
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.88);
+      min-height: 4.5em;
+    }
+    .bar {
+      margin-top: 1.25rem;
+      height: 4px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .bar > i {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--cyan), var(--lime));
+      border-radius: inherit;
+      transition: width 0.3s linear;
+    }
+    .time {
+      margin-top: 0.75rem;
+      font-size: 11px;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+    }
+    .controls {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+    button {
+      font: inherit;
+      cursor: pointer;
+      border-radius: 10px;
+      padding: 0.65rem 1rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      border: 1px solid rgba(0,245,255,0.35);
+      background: rgba(0,245,255,0.15);
+      color: var(--cyan);
+    }
+    button.secondary {
+      background: rgba(255,255,255,0.06);
+      color: var(--white);
+      border-color: rgba(255,255,255,0.2);
+    }
+    button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+    .hint {
+      margin-top: 1.25rem;
+      max-width: 480px;
+      font-size: 11px;
+      color: var(--gray);
+      line-height: 1.45;
+    }
+    .hint strong { color: var(--lime); }
+  </style>
+</head>
+<body>
+  <div id="stage">
+    <div class="hud">
+      <div class="label" id="scene-label">PATH PULSE · PROMO</div>
+      <h1 class="title" id="scene-title">Ready</h1>
+      <p class="sub" id="scene-sub">Press Start. Turn on sound. Optional: use Windows screen recorder (Win+G) to capture this tab.</p>
+      <div class="bar"><i id="progress-bar"></i></div>
+      <div class="time" id="time-left">1:30</div>
+      <div class="controls">
+        <button type="button" id="btn-start">Start 90s promo + voice</button>
+        <button type="button" class="secondary" id="btn-mute">Voice: on</button>
+      </div>
+    </div>
+    <p class="hint">
+      <strong>No video software?</strong> This page animates text and uses your browser’s built-in speech.
+      To save a video: open this file in <strong>Microsoft Edge</strong>, click <strong>Start</strong>, then press <strong>Win + G</strong> → Capture → record this window for ~90 seconds.
+    </p>
+  </div>
+  <script>
+(function () {
+  'use strict';
+
+  var TOTAL_MS = 90 * 1000;
+  var voiceOn = true;
+  var running = false;
+  var startTime = 0;
+  var rafId = 0;
+  var utterance = null;
+
+  // Script: ~90s at this pacing (adjust line durations if VO feels fast/slow)
+  var scenes = [
+    { t: 0, dur: 12000, title: 'PATH PULSE', sub: 'Your body isn’t background noise—it’s the mission. A tactical bio-lab on your phone: move, measure, evolve.', say: 'Path Pulse. Your body is not background noise—it is the mission. A tactical bio-lab on your phone: move, measure, evolve.' },
+    { t: 12000, dur: 16000, title: 'MAP · EXPEDITION', sub: 'GPS tracks your route and distance. Replay your path—turn every walk into trusted data.', say: 'Open the map. Start an expedition. G P S tracks your route and distance. Replay your path—turn every walk into trusted data.' },
+    { t: 28000, dur: 17000, title: 'HOME · COMMAND DECK', sub: 'Steps, energy, fuel, and goals—plus fast logs for water, vitals, exercise, and sleep.', say: 'Home is your command deck: steps, energy, fuel, and goals—plus fast logs for water, heart rate, blood pressure, exercise, and sleep.' },
+    { t: 45000, dur: 18000, title: 'REPORT · GRAPHS', sub: 'Day, week, month, or year—steps as bars and a trend line. Tap a point for full detail.', say: 'Report turns noise into signal. Switch day, week, month, or year—see steps as bars and a line. Tap any point for the full breakdown.' },
+    { t: 63000, dur: 17000, title: 'SYNC · REMINDERS', sub: 'Optional backup keeps your data in sync. Reminders help you stay consistent—install and take the oath.', say: 'Optional cloud backup keeps your path in sync. Reminders help you stay consistent. Install Path Pulse, take the oath, and make every step part of the grid.' },
+    { t: 80000, dur: 10000, title: 'PATH PULSE', sub: 'Tactical bio-lab. Obsidian interface. Cyan signal. Lime progress.', say: 'Path Pulse. Tactical bio-lab. Obsidian interface. Cyan signal. Lime progress.' }
+  ];
+
+  var labelEl = document.getElementById('scene-label');
+  var titleEl = document.getElementById('scene-title');
+  var subEl = document.getElementById('scene-sub');
+  var barEl = document.getElementById('progress-bar');
+  var timeEl = document.getElementById('time-left');
+  var btnStart = document.getElementById('btn-start');
+  var btnMute = document.getElementById('btn-mute');
+
+  var lastSceneStart = -1;
+
+  function fmtTime(ms) {
+    var s = Math.max(0, Math.ceil((TOTAL_MS - ms) / 1000));
+    var m = Math.floor(s / 60);
+    var r = s % 60;
+    return m + ':' + (r < 10 ? '0' : '') + r;
+  }
+
+  function currentScene(elapsed) {
+    for (var i = scenes.length - 1; i >= 0; i--) {
+      if (elapsed >= scenes[i].t) return scenes[i];
+    }
+    return scenes[0];
+  }
+
+  function speak(text) {
+    if (!voiceOn || !('speechSynthesis' in window)) return;
+    try { window.speechSynthesis.cancel(); } catch (e) {}
+    utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 0.95;
+    utterance.pitch = 1;
+    utterance.volume = 1;
+    var voices = window.speechSynthesis.getVoices();
+    var en = voices.find(function (v) { return v.lang && v.lang.indexOf('en') === 0; });
+    if (en) utterance.voice = en;
+    window.speechSynthesis.speak(utterance);
+  }
+
+  function applyScene(sc) {
+    labelEl.textContent = 'SCENE · ' + Math.floor(sc.t / 1000) + 's';
+    titleEl.textContent = sc.title;
+    subEl.textContent = sc.sub;
+    speak(sc.say);
+  }
+
+  function tick() {
+    var now = performance.now();
+    var elapsed = now - startTime;
+    if (elapsed >= TOTAL_MS) {
+      cancelAnimationFrame(rafId);
+      finish();
+      return;
+    }
+    barEl.style.width = (elapsed / TOTAL_MS * 100) + '%';
+    timeEl.textContent = fmtTime(elapsed);
+    var sc = currentScene(elapsed);
+    if (sc.t !== lastSceneStart) {
+      lastSceneStart = sc.t;
+      applyScene(sc);
+    }
+    rafId = requestAnimationFrame(tick);
+  }
+
+  function finish() {
+    running = false;
+    btnStart.disabled = false;
+    btnStart.textContent = 'Play again';
+    barEl.style.width = '100%';
+    timeEl.textContent = '0:00';
+    labelEl.textContent = 'END';
+    titleEl.textContent = 'PATH PULSE';
+    subEl.textContent = 'Thanks for watching. Record this with Win+G next time to save your promo video.';
+    try { window.speechSynthesis.cancel(); } catch (e) {}
+  }
+
+  function start() {
+    if (running) return;
+    running = true;
+    lastSceneStart = -1;
+    btnStart.disabled = true;
+    btnStart.textContent = 'Playing…';
+    startTime = performance.now();
+    barEl.style.width = '0%';
+    rafId = requestAnimationFrame(tick);
+  }
+
+  btnStart.addEventListener('click', function () {
+    start();
+  });
+
+  btnMute.addEventListener('click', function () {
+    voiceOn = !voiceOn;
+    btnMute.textContent = voiceOn ? 'Voice: on' : 'Voice: off';
+    if (!voiceOn) try { window.speechSynthesis.cancel(); } catch (e) {}
+  });
+
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.onvoiceschanged = function () {};
+  }
+})();
+  </script>
+</body>
+</html>
