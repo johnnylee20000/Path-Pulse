@@ -74,10 +74,12 @@
             <label for="demo-route-select" class="demo-routes-label">Showcase demo route</label>
             <select id="demo-route-select" class="demo-route-select" aria-label="Load a demo route for showcase">
               <option value="">—</option>
-              <option value="park">Showcase: Park loop (~1.5 km)</option>
-              <option value="savannah">Savannah trail (~2 km)</option>
-              <option value="steepHill">Steep hill (~0.9 km)</option>
+              <option value="nearbyStreets">Nearby streets (live · area-based)</option>
+              <option value="park">Offline: Park loop</option>
+              <option value="savannah">Offline: Savannah trail</option>
+              <option value="steepHill">Offline: Steep hill</option>
             </select>
+            <p id="demo-route-status-map" class="demo-route-status" role="status"></p>
           </div>
           <div class="map-controls">
             <button id="btn-location" class="fab small" title="My location" aria-label="Center map on my location">⌖</button>
@@ -115,16 +117,20 @@
             </div>
             <div class="avatar">👤</div>
           </div>
-          <div class="kinetic-ring">
+          <div class="pulse-ring" id="pulse-step-ring" title="Daily stride count (steps)">
             <div class="ring-bg"></div>
             <div class="ring-fill" id="ring-fill"></div>
             <div class="ring-content">
               <span id="steps">0</span>
-              <span class="label">KINETIC STEPS</span>
+              <span class="label">STRIDE</span>
             </div>
           </div>
+          <div class="auto-steps-row">
+            <button type="button" id="btn-auto-steps" class="btn-auto-steps" aria-pressed="false">Auto track: off</button>
+            <p id="auto-steps-status" class="auto-steps-hint" role="status"></p>
+          </div>
           <div class="sync-steps-row">
-            <label for="input-sync-steps" class="sync-steps-label">Sync steps from device</label>
+            <label for="input-sync-steps" class="sync-steps-label">Sync total from watch / phone</label>
             <div class="input-row">
               <input type="number" id="input-sync-steps" placeholder="e.g. 5000" min="0" aria-label="Today's steps from phone or watch">
               <button type="button" id="sync-steps-btn" class="btn-small">Set today</button>
@@ -150,12 +156,13 @@
             </button>
             <div class="demo-test-section">
               <p class="demo-test-label">Showcase demo (for presentations)</p>
-              <button type="button" id="btn-showcase-demo" class="btn-showcase-demo" aria-label="Load showcase demo route and open Map">
-                Load showcase route
+              <button type="button" id="btn-showcase-demo" class="btn-showcase-demo" aria-label="Generate a walking route on nearby streets and open Map" data-label="Generate street route (nearby)">
+                Generate street route (nearby)
               </button>
-              <p class="demo-test-hint">Opens Map with a demo route. Tap <strong>Start Expedition</strong> to display the ghost path.</p>
+              <p class="demo-test-hint">Uses your location and <strong>OpenStreetMap</strong> walking paths (length varies by block layout). Tap <strong>Start Expedition</strong> to race the ghost.</p>
+              <p id="demo-route-status" class="demo-route-status" role="status"></p>
               <details class="demo-more-options">
-                <summary>Other demo routes</summary>
+                <summary>Offline demo shapes (no network routing)</summary>
                 <div class="demo-test-buttons">
                   <button type="button" class="btn-demo-test" data-demo="park" aria-label="Load Park loop demo">Park loop</button>
                   <button type="button" class="btn-demo-test" data-demo="savannah" aria-label="Load Savannah trail demo">Savannah trail</button>
@@ -339,6 +346,54 @@
             <p id="report-summary-insight" class="report-summary-insight"></p>
             <button type="button" id="share-weekly-summary" class="btn-small">Share summary</button>
           </div>
+          <div class="report-visuals-section">
+            <h3 class="report-visuals-heading">WEEKLY CHARTS (Mon–Sun)</h3>
+            <p class="report-visuals-sub">This calendar week. Future days show 0 until they arrive.</p>
+            <div class="report-visuals-grid">
+              <div class="report-chart-card">
+                <h4 class="report-chart-title">Weekly summary</h4>
+                <p class="report-chart-desc">Lines: steps · distance (km) · burn (kcal, est.) — scaled to each max</p>
+                <div class="report-chart-svg-wrap">
+                  <svg id="report-chart-summary-lines" viewBox="0 0 320 130" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Weekly summary line chart"></svg>
+                </div>
+                <div id="report-legend-summary" class="report-chart-legend" aria-hidden="true"></div>
+              </div>
+              <div class="report-chart-card">
+                <h4 class="report-chart-title">Steps</h4>
+                <div class="report-chart-svg-wrap">
+                  <svg id="report-chart-steps-bars" viewBox="0 0 320 160" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Weekly steps bar chart"></svg>
+                </div>
+              </div>
+              <div class="report-chart-card">
+                <h4 class="report-chart-title">Calories burned (daily share)</h4>
+                <p class="report-chart-desc">Each slice = that day’s share of total weekly burn (est.)</p>
+                <div class="report-chart-svg-wrap report-chart-svg-wrap-pie">
+                  <svg id="report-chart-burn-pie" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Weekly burn pie chart"></svg>
+                </div>
+                <div id="report-burn-pie-legend" class="report-pie-legend"></div>
+              </div>
+              <div class="report-chart-card">
+                <h4 class="report-chart-title">Distance</h4>
+                <div class="report-chart-svg-wrap">
+                  <svg id="report-chart-distance-line" viewBox="0 0 320 130" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Weekly distance line chart"></svg>
+                </div>
+              </div>
+              <div class="report-chart-card">
+                <h4 class="report-chart-title">Distance &amp; exercise time</h4>
+                <p class="report-chart-desc">Bars: km (cyan) · minutes (lime)</p>
+                <div class="report-chart-svg-wrap">
+                  <svg id="report-chart-dist-ex-bars" viewBox="0 0 320 160" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Distance and exercise grouped bars"></svg>
+                </div>
+              </div>
+              <div class="report-chart-card">
+                <h4 class="report-chart-title">Sleep</h4>
+                <p class="report-chart-desc">Hours logged per night (last 7 nights)</p>
+                <div class="report-chart-svg-wrap">
+                  <svg id="report-chart-sleep" viewBox="0 0 320 160" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Sleep hours chart"></svg>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="report-goals-section">
             <h3>GOALS</h3>
             <div class="report-card">
@@ -505,6 +560,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <!-- Optional: set your backend URL to enable sync and push reminders (e.g. http://localhost:3030) -->
   <!-- <script>window.PATH_PULSE_API = 'http://localhost:3030';</script> -->
-  <script src="app.js?v=2"></script>
+  <script src="app.js?v=3"></script>
 </body>
 </html>

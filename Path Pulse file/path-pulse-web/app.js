@@ -35,6 +35,7 @@
     goals: 'pathpulse_goals',
     sleepLog: 'pathpulse_sleep_log',
     onboardingDismissed: 'pathpulse_onboarding_dismissed',
+    motionAuto: 'pathpulse_motion_auto',
     expeditionStartTime: 'pathpulse_expedition_start_time',
     reminderEnabled: 'pathpulse_reminder_enabled',
     reminderTime: 'pathpulse_reminder_time',
@@ -283,6 +284,235 @@
 
   function stepsFromDistanceKm(km) {
     return Math.round(km * 1300);
+  }
+
+  /** Phone motion → step pulses (browser accelerometer; not as accurate as Apple Health / Google Fit). */
+  var motion = {
+    enabled: false,
+    sensor: null,
+    iosListener: null,
+    prevVal: 0,
+    lastPeakMs: 0,
+    minIntervalMs: 320,
+    lastError: '',
+    mode: '',
+    stepsSincePersist: 0,
+    persistTimer: null,
+  };
+
+  function saveMotionPreference() {
+    try {
+      localStorage.setItem(STORAGE_KEYS.motionAuto, motion.enabled ? '1' : '0');
+    } catch (e) {}
+  }
+
+  function loadMotionPreference() {
+    try {
+      motion.enabled = localStorage.getItem(STORAGE_KEYS.motionAuto) === '1';
+    } catch (e) {
+      motion.enabled = false;
+    }
+  }
+
+  function flushMotionSteps() {
+    if (motion.persistTimer) {
+      clearTimeout(motion.persistTimer);
+      motion.persistTimer = null;
+    }
+    motion.stepsSincePersist = 0;
+    setStepsForDate(getTodayKey(), state.dailySteps);
+  }
+
+  function addMotionStep() {
+    state.dailySteps += 1;
+    motion.stepsSincePersist += 1;
+    if (motion.stepsSincePersist >= 12) {
+      motion.stepsSincePersist = 0;
+      setStepsForDate(getTodayKey(), state.dailySteps);
+    } else {
+      clearTimeout(motion.persistTimer);
+      motion.persistTimer = setTimeout(function () {
+        setStepsForDate(getTodayKey(), state.dailySteps);
+        motion.persistTimer = null;
+      }, 2500);
+    }
+    updateHomeUI();
+    if (typeof updateReportUI === 'function') updateReportUI();
+  }
+
+  function processThresholdCrossing(val, th) {
+    var now = performance.now();
+    if (val > th && motion.prevVal <= th && (now - motion.lastPeakMs) > motion.minIntervalMs) {
+      motion.lastPeakMs = now;
+      addMotionStep();
+    }
+    motion.prevVal = val;
+  }
+
+  function processLinearSample(x, y, z) {
+    var mag = Math.sqrt(x * x + y * y + z * z);
+    processThresholdCrossing(mag, 1.55);
+  }
+
+  function processGravityDeviationSample(mag) {
+    var d = Math.abs(mag - 9.81);
+    processThresholdCrossing(d, 1.45);
+  }
+
+  function stopMotionTracking() {
+    flushMotionSteps();
+    motion.mode = '';
+    motion.prevVal = 0;
+    if (motion.sensor) {
+      try {
+        motion.sensor.stop();
+      } catch (e) {}
+      motion.sensor = null;
+    }
+    if (motion.iosListener) {
+      window.removeEventListener('devicemotion', motion.iosListener, true);
+      motion.iosListener = null;
+    }
+    var ring = document.getElementById('pulse-step-ring');
+    if (ring) ring.classList.remove('pulse-live');
+  }
+
+  function startIOSDeviceMotionListener() {
+    if (motion.iosListener) return;
+    motion.prevVal = 0;
+    motion.lastPeakMs = 0;
+    motion.iosListener = function (e) {
+      var a = e.acceleration;
+      if (!a) return;
+      if (a.x === null && a.y === null && a.z === null) return;
+      var x = a.x || 0;
+      var y = a.y || 0;
+      var z = a.z || 0;
+      processLinearSample(x, y, z);
+    };
+    window.addEventListener('devicemotion', motion.iosListener, true);
+    motion.mode = 'ios';
+    var ring = document.getElementById('pulse-step-ring');
+    if (ring) ring.classList.add('pulse-live');
+  }
+
+  function startMotionTracking() {
+    stopMotionTracking();
+    if (!motion.enabled) return;
+
+    if (typeof LinearAccelerationSensor !== 'undefined') {
+      try {
+        var s = new LinearAccelerationSensor({ frequency: 50 });
+        s.addEventListener('reading', function () {
+          processLinearSample(s.x, s.y, s.z);
+        });
+        s.addEventListener('error', function () {
+          stopMotionTracking();
+          motion.lastError = 'Sensor unavailable';
+          motion.enabled = false;
+          saveMotionPreference();
+          updateMotionUI();
+        });
+        s.start();
+        motion.sensor = s;
+        motion.mode = 'linear';
+        var ring = document.getElementById('pulse-step-ring');
+        if (ring) ring.classList.add('pulse-live');
+        updateMotionUI();
+        return;
+      } catch (err) {
+        motion.lastError = err.message || 'linear';
+      }
+    }
+
+    if (typeof Accelerometer !== 'undefined') {
+      try {
+        motion.lastError = '';
+        var ac = new Accelerometer({ frequency: 50 });
+        ac.addEventListener('reading', function () {
+          var mag = Math.sqrt(ac.x * ac.x + ac.y * ac.y + ac.z * ac.z);
+          processGravityDeviationSample(mag);
+        });
+        ac.addEventListener('error', function () {
+          stopMotionTracking();
+          motion.lastError = 'Accelerometer unavailable';
+          motion.enabled = false;
+          saveMotionPreference();
+          updateMotionUI();
+        });
+        ac.start();
+        motion.sensor = ac;
+        motion.mode = 'accel';
+        var ring2 = document.getElementById('pulse-step-ring');
+        if (ring2) ring2.classList.add('pulse-live');
+        updateMotionUI();
+        return;
+      } catch (err2) {
+        motion.lastError = err2.message || 'accel';
+      }
+    }
+
+    if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission !== 'function') {
+      startIOSDeviceMotionListener();
+      updateMotionUI();
+      return;
+    }
+
+    motion.lastError = 'No motion sensors (use HTTPS on phone, or sync steps below)';
+    motion.enabled = false;
+    saveMotionPreference();
+    updateMotionUI();
+  }
+
+  function tryStartMotionTracking() {
+    motion.lastError = '';
+    if (!motion.enabled) return;
+
+    if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
+      DeviceMotionEvent.requestPermission()
+        .then(function (status) {
+          if (status === 'granted') {
+            startIOSDeviceMotionListener();
+            updateMotionUI();
+          } else {
+            motion.lastError = 'Motion access denied';
+            motion.enabled = false;
+            saveMotionPreference();
+            updateMotionUI();
+          }
+        })
+        .catch(function () {
+          motion.lastError = 'Motion permission failed';
+          motion.enabled = false;
+          saveMotionPreference();
+          updateMotionUI();
+        });
+      return;
+    }
+
+    startMotionTracking();
+  }
+
+  function updateMotionUI() {
+    var btn = document.getElementById('btn-auto-steps');
+    var hint = document.getElementById('auto-steps-status');
+    if (btn) {
+      btn.textContent = motion.enabled ? 'Auto track: on' : 'Auto track: off';
+      btn.setAttribute('aria-pressed', motion.enabled ? 'true' : 'false');
+    }
+    if (!hint) return;
+    if (!motion.enabled) {
+      hint.textContent = 'Counts steps from device motion when on. Add your watch/phone total below if you prefer.';
+      return;
+    }
+    if (motion.lastError) {
+      hint.textContent = motion.lastError;
+      return;
+    }
+    if (motion.mode === 'linear') hint.textContent = 'Live · linear accel (pocket / walk)';
+    else if (motion.mode === 'accel') hint.textContent = 'Live · accelerometer (estimate)';
+    else if (motion.mode === 'ios') hint.textContent = 'Live · motion (iPhone)';
+    else hint.textContent = 'Starting…';
   }
 
   function getTodayKey() {
@@ -1167,6 +1397,436 @@
     renderReportProgressDetailsForPoint(points[selectedIdx]);
   }
 
+  function getMondayWeekDayKeys() {
+    var ws = getWeekStart();
+    var d = new Date(ws + 'T12:00:00');
+    var keys = [];
+    var labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    for (var i = 0; i < 7; i++) {
+      keys.push(dateToKey(d));
+      d.setDate(d.getDate() + 1);
+    }
+    return { keys: keys, labels: labels };
+  }
+
+  function reportStepsForKey(key) {
+    var stepsObj = getStepsByDate();
+    var base = typeof stepsObj[key] === 'number' ? stepsObj[key] : 0;
+    if (key === getTodayKey() && typeof state.dailySteps === 'number') return state.dailySteps;
+    return base;
+  }
+
+  function buildWeekSeries() {
+    var w = getMondayWeekDayKeys();
+    var steps = [];
+    var dist = [];
+    var burn = [];
+    var ex = [];
+    var sleepH = [];
+    for (var i = 0; i < 7; i++) {
+      var k = w.keys[i];
+      steps.push(reportStepsForKey(k));
+      var dd = getDayData(k);
+      if (k === getTodayKey() && typeof state.dailySteps === 'number') {
+        dd = { steps: state.dailySteps, calories: dd.calories, distanceKm: dd.distanceKm, weight: dd.weight };
+      }
+      dist.push(dd.distanceKm || 0);
+      burn.push(estimatedBurnForDay(k));
+      ex.push(getDayExerciseMinutes(k));
+      var sl = getSleepForDay(k);
+      sleepH.push(sl && typeof sl.hours === 'number' ? sl.hours : 0);
+    }
+    return { labels: w.labels, keys: w.keys, steps: steps, dist: dist, burn: burn, ex: ex, sleepH: sleepH };
+  }
+
+  function chartGridLines(pad, chartW, chartH, divisions) {
+    var lines = [];
+    for (var g = 0; g <= divisions; g++) {
+      var pct = g / divisions;
+      var y = pad + chartH - pct * chartH;
+      lines.push(
+        '<line x1="' +
+          pad +
+          '" y1="' +
+          y +
+          '" x2="' +
+          (pad + chartW) +
+          '" y2="' +
+          y +
+          '" stroke="rgba(255,255,255,0.05)" stroke-dasharray="3 3" />'
+      );
+    }
+    return lines.join('');
+  }
+
+  function piePath(cx, cy, r, a0, a1) {
+    var x0 = cx + r * Math.cos(a0);
+    var y0 = cy + r * Math.sin(a0);
+    var x1 = cx + r * Math.cos(a1);
+    var y1 = cy + r * Math.sin(a1);
+    var large = a1 - a0 > Math.PI ? 1 : 0;
+    return 'M ' + cx + ' ' + cy + ' L ' + x0 + ' ' + y0 + ' A ' + r + ' ' + r + ' 0 ' + large + ' 1 ' + x1 + ' ' + y1 + ' Z';
+  }
+
+  var REPORT_PIE_COLORS = [
+    'rgba(0,245,255,0.85)',
+    'rgba(57,255,20,0.75)',
+    'rgba(251,191,36,0.85)',
+    'rgba(239,68,68,0.75)',
+    'rgba(168,85,247,0.8)',
+    'rgba(236,72,153,0.75)',
+    'rgba(34,211,238,0.65)',
+  ];
+
+  function renderReportCharts() {
+    var s = buildWeekSeries();
+    var labels = s.labels;
+    var n = 7;
+    var pad = 22;
+    var w = 320;
+    var h = 130;
+    var chartW = w - pad * 2;
+    var chartH = h - pad * 2 - 14;
+    var xStep = chartW / n;
+
+    function yNorm(val, max) {
+      if (max <= 0) return pad + chartH;
+      return pad + chartH - (Math.max(0, val) / max) * chartH;
+    }
+
+    var maxS = Math.max.apply(null, s.steps.concat([1]));
+    var maxD = Math.max.apply(null, s.dist.concat([0.1]));
+    var maxB = Math.max.apply(null, s.burn.concat([1]));
+
+    var svgSum = document.getElementById('report-chart-summary-lines');
+    if (svgSum) {
+      var pathSteps = '';
+      var pathDist = '';
+      var pathBurn = '';
+      var i;
+      for (var i = 0; i < n; i++) {
+        var cx = pad + i * xStep + xStep / 2;
+        pathSteps += (i === 0 ? 'M' : 'L') + cx + ' ' + yNorm(s.steps[i], maxS) + ' ';
+        pathDist += (i === 0 ? 'M' : 'L') + cx + ' ' + yNorm(s.dist[i], maxD) + ' ';
+        pathBurn += (i === 0 ? 'M' : 'L') + cx + ' ' + yNorm(s.burn[i], maxB) + ' ';
+      }
+      svgSum.innerHTML =
+        '<rect width="' + w + '" height="' + h + '" fill="transparent"/>' +
+        chartGridLines(pad, chartW, chartH, 4) +
+        '<line x1="' +
+        pad +
+        '" y1="' +
+        (pad + chartH) +
+        '" x2="' +
+        (pad + chartW) +
+        '" y2="' +
+        (pad + chartH) +
+        '" stroke="rgba(255,255,255,0.10)" />' +
+        '<path d="' +
+        pathSteps.trim() +
+        '" fill="none" stroke="rgba(0,245,255,0.95)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />' +
+        '<path d="' +
+        pathDist.trim() +
+        '" fill="none" stroke="rgba(57,255,20,0.9)" stroke-width="2" stroke-linecap="round" stroke-dasharray="6 4" />' +
+        '<path d="' +
+        pathBurn.trim() +
+        '" fill="none" stroke="rgba(251,191,36,0.95)" stroke-width="2" stroke-linecap="round" />' +
+        labels
+          .map(function (lb, li) {
+            return (
+              '<text x="' +
+              (pad + li * xStep + xStep / 2) +
+              '" y="' +
+              (h - 4) +
+              '" text-anchor="middle" fill="rgba(156,163,175,0.9)" font-size="9">' +
+              lb +
+              '</text>'
+            );
+          })
+          .join('');
+      var leg = document.getElementById('report-legend-summary');
+      if (leg) {
+        leg.innerHTML =
+          '<span><i style="background:rgba(0,245,255,0.9)"></i> Steps</span>' +
+          '<span><i style="background:rgba(57,255,20,0.9)"></i> km</span>' +
+          '<span><i style="background:rgba(251,191,36,0.9)"></i> kcal burn</span>';
+      }
+    }
+
+    var goals = getGoals();
+    var goalSteps = typeof goals.steps === 'number' ? goals.steps : 10000;
+    var h2 = 160;
+    var chartH2 = h2 - pad * 2 - 14;
+    var barWSteps = Math.max(4, xStep * 0.55);
+    var svgSteps = document.getElementById('report-chart-steps-bars');
+    if (svgSteps) {
+      var maxSteps = Math.max.apply(null, s.steps.concat([goalSteps]));
+      if (maxSteps < 1) maxSteps = 1;
+      var rects = [];
+      for (var j = 0; j < n; j++) {
+        var cx2 = pad + j * xStep + xStep / 2;
+        var bh = (Math.max(0, s.steps[j]) / maxSteps) * chartH2;
+        var yb = pad + chartH2 - bh;
+        var hit = s.steps[j] >= goalSteps;
+        rects.push(
+          '<rect x="' +
+            (cx2 - barWSteps / 2) +
+            '" y="' +
+            yb +
+            '" width="' +
+            barWSteps +
+            '" height="' +
+            Math.max(2, bh) +
+            '" rx="3" fill="' +
+            (hit ? 'rgba(57,255,20,0.35)' : 'rgba(0,245,255,0.22)') +
+            '" stroke="' +
+            (hit ? 'rgba(57,255,20,0.65)' : 'rgba(0,245,255,0.5)') +
+            '" stroke-width="1"/>'
+        );
+      }
+      svgSteps.innerHTML =
+        '<rect width="' + w + '" height="' + h2 + '" fill="transparent"/>' +
+        chartGridLines(pad, chartW, chartH2, 4) +
+        '<line x1="' +
+        pad +
+        '" y1="' +
+        (pad + chartH2) +
+        '" x2="' +
+        (pad + chartW) +
+        '" y2="' +
+        (pad + chartH2) +
+        '" stroke="rgba(255,255,255,0.10)" />' +
+        rects.join('') +
+        labels
+          .map(function (lb, ji) {
+            return (
+              '<text x="' +
+              (pad + ji * xStep + xStep / 2) +
+              '" y="' +
+              (h2 - 4) +
+              '" text-anchor="middle" fill="rgba(156,163,175,0.9)" font-size="9">' +
+              lb +
+              '</text>'
+            );
+          })
+          .join('');
+    }
+
+    var svgPie = document.getElementById('report-chart-burn-pie');
+    var pieLeg = document.getElementById('report-burn-pie-legend');
+    var totalBurn = 0;
+    for (var p = 0; p < 7; p++) totalBurn += s.burn[p];
+    if (svgPie) {
+      if (totalBurn <= 0) {
+        svgPie.innerHTML =
+          '<text x="100" y="105" text-anchor="middle" fill="rgba(156,163,175,0.9)" font-size="11">No data</text>';
+        if (pieLeg) pieLeg.innerHTML = '';
+      } else {
+        var cxp = 100;
+        var cyp = 100;
+        var rp = 88;
+        var ang = -Math.PI / 2;
+        var paths = [];
+        for (var q = 0; q < 7; q++) {
+          var frac = s.burn[q] / totalBurn;
+          var ang2 = ang + frac * 2 * Math.PI;
+          if (frac > 0.0001) {
+            paths.push(
+              '<path d="' +
+                piePath(cxp, cyp, rp, ang, ang2) +
+                '" fill="' +
+                REPORT_PIE_COLORS[q] +
+                '" stroke="rgba(11,14,17,0.9)" stroke-width="1"/>'
+            );
+          }
+          ang = ang2;
+        }
+        svgPie.innerHTML = '<rect width="200" height="200" fill="transparent"/>' + paths.join('');
+        if (pieLeg) {
+          pieLeg.innerHTML = labels
+            .map(function (lb, qi) {
+              var pct = ((s.burn[qi] / totalBurn) * 100).toFixed(0);
+              return (
+                '<span><span class="report-pie-swatch" style="background:' +
+                REPORT_PIE_COLORS[qi] +
+                '"></span>' +
+                lb +
+                ' ' +
+                pct +
+                '%</span>'
+              );
+            })
+            .join('');
+        }
+      }
+    }
+
+    var maxKm = Math.max.apply(null, s.dist.concat([0.01]));
+    var svgDist = document.getElementById('report-chart-distance-line');
+    if (svgDist) {
+      var pathKm = '';
+      for (var ii = 0; ii < n; ii++) {
+        var cxx = pad + ii * xStep + xStep / 2;
+        pathKm += (ii === 0 ? 'M' : 'L') + cxx + ' ' + yNorm(s.dist[ii], maxKm) + ' ';
+      }
+      svgDist.innerHTML =
+        '<rect width="' + w + '" height="' + h + '" fill="transparent"/>' +
+        chartGridLines(pad, chartW, chartH, 4) +
+        '<line x1="' +
+        pad +
+        '" y1="' +
+        (pad + chartH) +
+        '" x2="' +
+        (pad + chartW) +
+        '" y2="' +
+        (pad + chartH) +
+        '" stroke="rgba(255,255,255,0.10)" />' +
+        '<path d="' +
+        pathKm.trim() +
+        '" fill="none" stroke="rgba(57,255,20,0.95)" stroke-width="2.5" stroke-linecap="round" />' +
+        labels
+          .map(function (lb, i3) {
+            return (
+              '<text x="' +
+              (pad + i3 * xStep + xStep / 2) +
+              '" y="' +
+              (h - 4) +
+              '" text-anchor="middle" fill="rgba(156,163,175,0.9)" font-size="9">' +
+              lb +
+              '</text>'
+            );
+          })
+          .join('');
+    }
+
+    var svgDE = document.getElementById('report-chart-dist-ex-bars');
+    if (svgDE) {
+      var maxKm2 = Math.max.apply(null, s.dist.concat([0.1]));
+      var maxEx = Math.max.apply(null, s.ex.concat([1]));
+      var h3 = 160;
+      var ch3 = h3 - pad * 2 - 14;
+      var bw = Math.max(3, xStep * 0.22);
+      var grp = [];
+      for (var u = 0; u < n; u++) {
+        var cxb = pad + u * xStep + xStep / 2;
+        var hk = (s.dist[u] / maxKm2) * ch3;
+        var he = (s.ex[u] / maxEx) * ch3;
+        var yk = pad + ch3 - hk;
+        var ye = pad + ch3 - he;
+        grp.push(
+          '<rect x="' +
+            (cxb - bw - 0.5) +
+            '" y="' +
+            yk +
+            '" width="' +
+            bw +
+            '" height="' +
+            Math.max(1, hk) +
+            '" rx="2" fill="rgba(0,245,255,0.35)" stroke="rgba(0,245,255,0.55)" stroke-width="1"/>'
+        );
+        grp.push(
+          '<rect x="' +
+            (cxb + 0.5) +
+            '" y="' +
+            ye +
+            '" width="' +
+            bw +
+            '" height="' +
+            Math.max(1, he) +
+            '" rx="2" fill="rgba(57,255,20,0.35)" stroke="rgba(57,255,20,0.55)" stroke-width="1"/>'
+        );
+      }
+      svgDE.innerHTML =
+        '<rect width="' + w + '" height="' + h3 + '" fill="transparent"/>' +
+        chartGridLines(pad, chartW, ch3, 4) +
+        '<line x1="' +
+        pad +
+        '" y1="' +
+        (pad + ch3) +
+        '" x2="' +
+        (pad + chartW) +
+        '" y2="' +
+        (pad + ch3) +
+        '" stroke="rgba(255,255,255,0.10)" />' +
+        grp.join('') +
+        labels
+          .map(function (lb, i4) {
+            return (
+              '<text x="' +
+              (pad + i4 * xStep + xStep / 2) +
+              '" y="' +
+              (h3 - 4) +
+              '" text-anchor="middle" fill="rgba(156,163,175,0.9)" font-size="9">' +
+              lb +
+              '</text>'
+            );
+          })
+          .join('');
+    }
+
+    var svgSleep = document.getElementById('report-chart-sleep');
+    if (svgSleep) {
+      var maxSleep = Math.max.apply(null, s.sleepH.concat([8]));
+      if (maxSleep < 1) maxSleep = 8;
+      var h4 = 160;
+      var ch4 = h4 - pad * 2 - 14;
+      var barSleep = Math.max(4, xStep * 0.5);
+      var rectsS = [];
+      for (var z = 0; z < n; z++) {
+        var cxs = pad + z * xStep + xStep / 2;
+        var hs = (s.sleepH[z] / maxSleep) * ch4;
+        var ysl = pad + ch4 - hs;
+        rectsS.push(
+          '<rect x="' +
+            (cxs - barSleep / 2) +
+            '" y="' +
+            ysl +
+            '" width="' +
+            barSleep +
+            '" height="' +
+            Math.max(2, hs) +
+            '" rx="3" fill="rgba(168,85,247,0.35)" stroke="rgba(168,85,247,0.65)" stroke-width="1"/>'
+        );
+        if (s.sleepH[z] > 0) {
+          rectsS.push(
+            '<text x="' +
+              cxs +
+              '" y="' +
+              (ysl - 3) +
+              '" text-anchor="middle" fill="rgba(196,181,253,0.95)" font-size="9">' +
+              s.sleepH[z].toFixed(1) +
+              'h</text>'
+          );
+        }
+      }
+      svgSleep.innerHTML =
+        '<rect width="' + w + '" height="' + h4 + '" fill="transparent"/>' +
+        chartGridLines(pad, chartW, ch4, 4) +
+        '<line x1="' +
+        pad +
+        '" y1="' +
+        (pad + ch4) +
+        '" x2="' +
+        (pad + chartW) +
+        '" y2="' +
+        (pad + ch4) +
+        '" stroke="rgba(255,255,255,0.10)" />' +
+        rectsS.join('') +
+        labels
+          .map(function (lb, i5) {
+            return (
+              '<text x="' +
+              (pad + i5 * xStep + xStep / 2) +
+              '" y="' +
+              (h4 - 4) +
+              '" text-anchor="middle" fill="rgba(156,163,175,0.9)" font-size="9">' +
+              lb +
+              '</text>'
+            );
+          })
+          .join('');
+    }
+  }
 
   function renderProgressCalendar() {
     var labelEl = document.getElementById('calendar-month-label');
@@ -1334,6 +1994,7 @@
       if (re === '1') state.reminderEnabled = true;
       var rt = localStorage.getItem(STORAGE_KEYS.reminderTime);
       if (rt) state.reminderTime = rt;
+      loadMotionPreference();
     } catch (e) {}
   }
 
@@ -1457,6 +2118,8 @@
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
     updateHomeUI();
+    updateMotionUI();
+    if (motion.enabled) tryStartMotionTracking();
     updateProfileUI();
     updateReportUI();
     updateExpeditionButton();
@@ -1676,6 +2339,159 @@
     return Math.round(km * 100) / 100;
   }
 
+  /** Public OSRM demo — walking routes snapped to OpenStreetMap streets (area-based, not fixed distance). */
+  var OSRM_WALK_BASE = 'https://router.project-osrm.org';
+
+  function snapWalkToRoad(lat, lng) {
+    return fetch(OSRM_WALK_BASE + '/nearest/v1/walking/' + lng + ',' + lat)
+      .then(function (r) {
+        return r.json();
+      })
+      .then(function (j) {
+        if (!j.waypoints || !j.waypoints[0] || !j.waypoints[0].location) throw new Error('nearest');
+        var loc = j.waypoints[0].location;
+        return { lat: loc[1], lng: loc[0] };
+      });
+  }
+
+  function randomLoopSeedPoints(lat, lng, n, metersBase) {
+    var pts = [];
+    var phase = Math.random() * Math.PI * 2;
+    for (var i = 0; i < n; i++) {
+      var angle = phase + (2 * Math.PI * i) / n + (Math.random() - 0.5) * 0.3;
+      var scale = 0.72 + Math.random() * 0.48;
+      var mNorth = metersBase * scale * Math.cos(angle);
+      var mEast = metersBase * scale * Math.sin(angle);
+      var dlat = mNorth / 111320;
+      var dlng = mEast / (111320 * Math.cos(lat * Math.PI / 180));
+      pts.push({ lat: lat + dlat, lng: lng + dlng });
+    }
+    return pts;
+  }
+
+  function osrmWalkingRoute(points) {
+    var coordStr = points
+      .map(function (p) {
+        return p.lng + ',' + p.lat;
+      })
+      .join(';');
+    var url = OSRM_WALK_BASE + '/route/v1/walking/' + coordStr + '?overview=full&geometries=geojson&steps=false';
+    return fetch(url)
+      .then(function (r) {
+        return r.json();
+      })
+      .then(function (j) {
+        if (j.code !== 'Ok' || !j.routes || !j.routes[0] || !j.routes[0].geometry) {
+          throw new Error(j.message || j.code || 'route');
+        }
+        var coords = j.routes[0].geometry.coordinates;
+        return coords.map(function (c) {
+          return { lat: c[1], lng: c[0] };
+        });
+      });
+  }
+
+  function decimateRoutePoints(points, maxPts) {
+    if (!points || points.length <= maxPts) return points;
+    var step = Math.ceil(points.length / maxPts);
+    var out = [];
+    var i;
+    for (i = 0; i < points.length - 1; i += step) out.push(points[i]);
+    out.push(points[points.length - 1]);
+    return out;
+  }
+
+  function tryStreetRoute(lat, lng, attempt) {
+    if (attempt > 4) return Promise.reject(new Error('No walking route'));
+    var n = attempt === 0 ? 5 : attempt === 1 ? 4 : 3;
+    var metersBase =
+      attempt === 0
+        ? 260 + Math.random() * 420
+        : attempt === 1
+          ? 200 + Math.random() * 280
+          : attempt === 2
+            ? 140 + Math.random() * 180
+            : 100 + Math.random() * 120;
+    var seeds = randomLoopSeedPoints(lat, lng, n, metersBase);
+    var toSnap = [{ lat: lat, lng: lng }].concat(seeds);
+    return Promise.all(
+      toSnap.map(function (s) {
+        return snapWalkToRoad(s.lat, s.lng);
+      })
+    )
+      .then(function (snapped) {
+        var loop = snapped.concat([snapped[0]]);
+        return osrmWalkingRoute(loop);
+      })
+      .then(function (pts) {
+        return decimateRoutePoints(pts, 900);
+      })
+      .catch(function () {
+        return tryStreetRoute(lat, lng, attempt + 1);
+      });
+  }
+
+  function setDemoRouteLoading(on) {
+    var btn = document.getElementById('btn-showcase-demo');
+    var sel = document.getElementById('demo-route-select');
+    if (btn) {
+      btn.disabled = !!on;
+      if (!btn.dataset.label) {
+        btn.dataset.label = btn.getAttribute('data-label') || btn.textContent.trim();
+      }
+      btn.textContent = on ? 'Generating…' : btn.dataset.label || 'Generate street route';
+    }
+    if (sel) sel.disabled = !!on;
+  }
+
+  function setDemoRouteStatus(msg) {
+    var el = document.getElementById('demo-route-status');
+    if (el) el.textContent = msg || '';
+    var elMap = document.getElementById('demo-route-status-map');
+    if (elMap) elMap.textContent = msg || '';
+  }
+
+  function loadStreetDemoRoute(onDone) {
+    function run(lat, lng) {
+      setDemoRouteLoading(true);
+      setDemoRouteStatus('');
+      tryStreetRoute(lat, lng, 0)
+        .then(function (pts) {
+          setDemoRouteLoading(false);
+          applyDemoRoutePoints(pts);
+          var km = routeDistanceFromPoints(pts);
+          setDemoRouteStatus('Street loop ~' + km.toFixed(2) + ' km (OpenStreetMap walking)');
+          if (onDone) onDone();
+        })
+        .catch(function (err) {
+          setDemoRouteLoading(false);
+          loadDemoRoute('park');
+          setDemoRouteStatus(
+            'Could not build a nearby street loop — loaded local demo. ' + (err && err.message ? '(' + err.message + ')' : '')
+          );
+          if (onDone) onDone();
+        });
+    }
+    if (state.currentPosition) {
+      run(state.currentPosition.lat, state.currentPosition.lng);
+      return;
+    }
+    if (!navigator.geolocation) {
+      run(DEFAULT_CENTER[0], DEFAULT_CENTER[1]);
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      function (pos) {
+        updateMapPosition(pos.coords.latitude, pos.coords.longitude);
+        run(pos.coords.latitude, pos.coords.longitude);
+      },
+      function () {
+        run(DEFAULT_CENTER[0], DEFAULT_CENTER[1]);
+      },
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 60000 }
+    );
+  }
+
   function updateReportUI() {
     var weekStats = getWeekStats();
     var distEl = document.getElementById('report-distance');
@@ -1769,6 +2585,7 @@
     var calWrap = document.getElementById('report-calendar-month-wrap');
     if (calWrap) calWrap.classList.add('hidden');
     renderReportProgressGraph(reportGraphPeriod);
+    renderReportCharts();
   }
 
   function updateProfileUI() {
@@ -1948,10 +2765,8 @@
     });
   }
 
-  function loadDemoRoute(demoKey) {
-    var center = state.currentPosition || { lat: DEFAULT_CENTER[0], lng: DEFAULT_CENTER[1] };
-    var pts = getDemoRoutePoints(demoKey, center.lat, center.lng);
-    if (pts.length < 2) return;
+  function applyDemoRoutePoints(pts) {
+    if (!pts || pts.length < 2) return;
     lastRoutePoints = pts;
     state.lastRouteKm = routeDistanceFromPoints(lastRoutePoints);
     saveLastRoute();
@@ -1964,6 +2779,13 @@
       var bounds = L.latLngBounds(pts.map(function (p) { return [p.lat, p.lng]; }));
       map.fitBounds(bounds, { padding: [40, 40], maxZoom: 16 });
     }
+  }
+
+  function loadDemoRoute(demoKey) {
+    setDemoRouteStatus('');
+    var center = state.currentPosition || { lat: DEFAULT_CENTER[0], lng: DEFAULT_CENTER[1] };
+    var pts = getDemoRoutePoints(demoKey, center.lat, center.lng);
+    applyDemoRoutePoints(pts);
   }
 
   function initMap() {
@@ -2125,9 +2947,7 @@
         if (state.isMissionActive) {
           state.routePoints.push({ lat: lat, lng: lng });
           updateRouteLine();
-          state.dailySteps += Math.round(Math.random() * 4 + 8);
-          setStepsForDate(getTodayKey(), state.dailySteps);
-          updateHomeUI();
+          /* Steps from expedition are added when you end the mission (distance → steps). */
           updateMapDistanceUI();
           if (state.routePoints.length % 5 === 0) saveExpeditionState();
         }
@@ -2266,6 +3086,7 @@
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) {
         saveExpeditionState();
+        if (motion.enabled) stopMotionTracking();
       } else {
         if (refreshTodayData()) {
           updateHomeUI();
@@ -2281,6 +3102,7 @@
           updateExpeditionButton();
           updateRouteLine();
         }
+        if (motion.enabled) tryStartMotionTracking();
       }
     });
     setInterval(function () {
@@ -2289,7 +3111,10 @@
         updateFuelUI();
       }
     }, 60000);
-    window.addEventListener('pagehide', saveExpeditionState);
+    window.addEventListener('pagehide', function () {
+      saveExpeditionState();
+      if (motion.enabled) flushMotionSteps();
+    });
 
     document.getElementById('accept-oath').addEventListener('click', function () {
       state.oathAccepted = true;
@@ -2330,13 +3155,14 @@
 
     var showcaseBtn = document.getElementById('btn-showcase-demo');
     if (showcaseBtn) showcaseBtn.addEventListener('click', function () {
-      loadDemoRoute('park');
       setTab('map');
       showGhostPath = true;
-      setTimeout(function () {
-        updateGhostLine();
-        updateReplayButton();
-      }, 200);
+      loadStreetDemoRoute(function () {
+        setTimeout(function () {
+          updateGhostLine();
+          updateReplayButton();
+        }, 200);
+      });
     });
 
     document.querySelectorAll('.btn-demo-test').forEach(function (btn) {
@@ -2354,10 +3180,31 @@
     });
 
     var demoSelect = document.getElementById('demo-route-select');
-    if (demoSelect) demoSelect.addEventListener('change', function () {
-      var v = demoSelect.value;
-      if (v) { loadDemoRoute(v); demoSelect.value = ''; }
-    });
+    if (demoSelect) {
+      demoSelect.addEventListener('change', function () {
+        var v = demoSelect.value;
+        if (!v) return;
+        if (v === 'nearbyStreets') {
+          setTab('map');
+          showGhostPath = true;
+          loadStreetDemoRoute(function () {
+            setTimeout(function () {
+              updateGhostLine();
+              updateReplayButton();
+            }, 200);
+          });
+        } else {
+          loadDemoRoute(v);
+          setTab('map');
+          showGhostPath = true;
+          setTimeout(function () {
+            updateGhostLine();
+            updateReplayButton();
+          }, 200);
+        }
+        demoSelect.value = '';
+      });
+    }
 
     document.getElementById('btn-location').addEventListener('click', function () {
       if (!map) return;
@@ -2735,6 +3582,21 @@
         inp.value = '';
         updateHomeUI();
         if (typeof updateReportUI === 'function') updateReportUI();
+      });
+    }
+
+    var autoStepsBtn = document.getElementById('btn-auto-steps');
+    if (autoStepsBtn) {
+      autoStepsBtn.addEventListener('click', function () {
+        motion.enabled = !motion.enabled;
+        saveMotionPreference();
+        if (motion.enabled) {
+          updateMotionUI();
+          tryStartMotionTracking();
+        } else {
+          stopMotionTracking();
+          updateMotionUI();
+        }
       });
     }
     var onboardingDismissBtn = document.getElementById('onboarding-dismiss');
