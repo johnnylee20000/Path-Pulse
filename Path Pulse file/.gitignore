@@ -5,6 +5,9 @@ Microsoft VS Code/
 .DS_Store
 Thumbs.db
 
+# Microsoft Office lock files (opened document temp)
+~$*
+
 # Flutter
 path_pulse/.dart_tool/
 path_pulse/.packages

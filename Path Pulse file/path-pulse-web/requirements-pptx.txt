@@ -1,2 +1,3 @@
 # Optional: generate Path-Pulse-Marketing-Deck.pptx for Microsoft PowerPoint
 python-pptx>=0.6.21
+Pillow>=10.0.0

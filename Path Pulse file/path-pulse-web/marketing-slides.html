@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Path-Pulse — Feature Deck</title>
+  <meta name="description" content="Marketing slides for Path-Pulse Tactical Bio-Lab fitness web app." />
+  <style>
+    :root {
+      --obsidian: #0b0e11;
+      --cyan: #00f5ff;
+      --lime: #39ff14;
+      --white: #ffffff;
+      --gray: #9ca3af;
+      --surface: rgba(255, 255, 255, 0.06);
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background:
+        radial-gradient(900px circle at 15% -10%, rgba(0, 245, 255, 0.12) 0%, transparent 55%),
+        radial-gradient(700px circle at 90% 0%, rgba(57, 255, 20, 0.08) 0%, transparent 50%),
+        var(--obsidian);
+      color: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+    .deck {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: clamp(1rem, 4vw, 2.5rem);
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .slide {
+      display: none;
+      flex: 1;
+      flex-direction: column;
+      justify-content: center;
+      animation: fadeIn 0.45s ease;
+    }
+    .slide.active { display: flex; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 0.75rem;
+    }
+    h1 {
+      font-size: clamp(1.75rem, 5vw, 2.75rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin: 0 0 0.75rem;
+      text-shadow: 0 0 40px rgba(0, 245, 255, 0.25);
+    }
+    h2 {
+      font-size: clamp(1.35rem, 4vw, 2rem);
+      font-weight: 700;
+      margin: 0 0 1rem;
+      color: var(--white);
+    }
+    .lead {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--gray);
+      line-height: 1.55;
+      max-width: 38rem;
+      margin: 0 0 1.25rem;
+    }
+    ul.features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.65rem;
+    }
+    ul.features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      padding: 0.65rem 0.85rem;
+      background: var(--surface);
+      border: 1px solid rgba(0, 245, 255, 0.18);
+      border-radius: 12px;
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+    ul.features li::before {
+      content: '◆';
+      color: var(--lime);
+      font-size: 0.75rem;
+      margin-top: 0.2rem;
+      flex-shrink: 0;
+    }
+    .accent { color: var(--cyan); font-weight: 700; }
+    .footer-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: auto;
+      padding-top: 1.5rem;
+    }
+    .dots {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+    .dots button {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      padding: 0;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .dots button[aria-current="true"] {
+      background: var(--cyan);
+      transform: scale(1.15);
+      box-shadow: 0 0 12px rgba(0, 245, 255, 0.5);
+    }
+    .nav-btns {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .nav-btns button {
+      font: inherit;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.65rem 1.1rem;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 245, 255, 0.45);
+      background: rgba(0, 245, 255, 0.1);
+      color: var(--white);
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .nav-btns button:hover {
+      background: rgba(0, 245, 255, 0.2);
+      border-color: var(--cyan);
+    }
+    .nav-btns button:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+    .counter {
+      font-size: 0.75rem;
+      color: var(--gray);
+      letter-spacing: 0.12em;
+    }
+    .auto-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    .auto-wrap input { accent-color: var(--cyan); }
+    .logo-line {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(0, 245, 255, 0.7);
+      margin-bottom: 0.5rem;
+    }
+    a.cta {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.25rem;
+      background: linear-gradient(135deg, rgba(0, 245, 255, 0.25), rgba(57, 255, 20, 0.12));
+      border: 1px solid rgba(0, 245, 255, 0.5);
+      border-radius: 12px;
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+    a.cta:hover { filter: brightness(1.08); }
+    @media (prefers-reduced-motion: reduce) {
+      .slide { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck" id="deck">
+    <!-- Slide 1 -->
+    <section class="slide active" data-index="0" aria-label="Slide 1 of 10">
+      <p class="logo-line">Tactical Bio-Lab</p>
+      <h1>Path-Pulse</h1>
+      <p class="lead">Your body is the hardware. Movement is the mission. A browser-based fitness lab for steps, routes, and progress—no app store required.</p>
+      <ul class="features">
+        <li><span><span class="accent">Explorer-first</span> onboarding with the Oath and PRISM welcome—then straight into the grid.</span></li>
+        <li><span>Dark <span class="accent">Obsidian</span> UI with cyan &amp; lime accents—built for focus, day or night.</span></li>
+      </ul>
+    </section>
+
+    <!-- Slide 2 -->
+    <section class="slide" data-index="1" aria-hidden="true">
+      <p class="badge">Access</p>
+      <h2>Runs in the browser · PWA-ready</h2>
+      <p class="lead">Open <span class="accent">index.html</span> via a local server for GPS, or install to your home screen for a standalone feel.</p>
+      <ul class="features">
+        <li><span><span class="accent">localStorage</span> keeps your data on-device by default—private and offline-friendly for core use.</span></li>
+        <li><span>Optional <span class="accent">Node backend</span> for sync and Web Push when you set <code style="color:var(--lime)">PATH_PULSE_API</code>.</span></li>
+      </ul>
+    </section>
+
+    <!-- Slide 3 -->
+    <section class="slide" data-index="2" aria-hidden="true">
+      <p class="badge">Home</p>
+      <h2>Daily pulse &amp; goals</h2>
+      <p class="lead">A kinetic step ring tracks progress toward your goal. See explorer ID, level, rank, BMI, BMR, burn, and protocol at a glance.</p>
+      <ul class="features">
+        <li><span><span class="accent">Manual step entry</span> so you can align with your watch or phone totals.</span></li>
+        <li><span><span class="accent">Quick actions</span>—jump to Map, Report, Expedition, or scroll to Energy from the home strip.</span></li>
+      </ul>
+    </section>
+
+    <!-- Slide 4 -->
+    <section class="slide" data-index="3" aria-hidden="true">
+      <p class="badge">Motion</p>
+      <h2>Auto steps from the device</h2>
+      <p class="lead">Turn on motion to estimate steps from accelerometer / device motion—useful when you keep the app open while you move.</p>
+      <ul class="features">
+        <li><span>Smart messaging: expedition GPS distance doesn’t double-count against motion when both could apply.</span></li>
+        <li><span>Tab visibility handling keeps step accounting consistent when you switch apps.</span></li>
+      </ul>
+    </section>
+
+    <!-- Slide 5 -->
+    <section class="slide" data-index="4" aria-hidden="true">
+      <p class="badge">Map</p>
+      <h2>Expeditions on a live map</h2>
+      <p class="lead">Leaflet map, geolocation, and <span class="accent">Start / Stop Expedition</span> to record your route in cyan. Distance HUD shows session track, odometer, and expedition step estimates.</p>
+      <ul class="features">
+        <li><span><span class="accent">Route replay</span> with duration presets—turn your path into a time-lapse-style playback.</span></li>
+        <li><span><span class="accent">Ghost-Path</span>—race your previous route on the map.</span></li>
+        <li><span>Demo routes for showcases when you’re testing without live GPS.</span></li>
+      </ul>
+    </section>
+
+    <!-- Slide 6 -->
+    <section class="slide" data-index="5" aria-hidden="true">
+      <p class="badge">Mission</p>
+      <h2>Weekly mission &amp; fuel</h2>
+      <p class="lead">Walk a set distance each week (e.g. mission km), track completion, and monitor your <span class="accent">energy / fuel</span> widget alongside the rest of your stats.</p>
+      <ul class="features">
+        <li><span>Mission progress and status on Home—clear, gamified, and tied to your expedition distance.</span></li>
+      </ul>
+    </section>
+
+    <!-- Slide 7 -->
+    <section class="slide" data-index="6" aria-hidden="true">
+      <p class="badge">Report</p>
+      <h2>Diagnostics that respect your calendar</h2>
+      <p class="lead">Day, week, month, and year views with charts and rollups—steps, distance, burn, water, exercise, and more.</p>
+      <ul class="features">
+        <li><span>Date keys use <span class="accent">local calendar days</span> so week and month boundaries match where you live—not UTC drift.</span></li>
+        <li><span>Tap points for richer detail: meals, sleep, heart rate, blood pressure when logged.</span></li>
+      </ul>
+    </section>
+
+    <!-- Slide 8 -->
+    <section class="slide" data-index="7" aria-hidden="true">
+      <p class="badge">Profile</p>
+      <h2>Baseline &amp; reminders</h2>
+      <p class="lead">Weight, height, age, sex, units, body metrics, goals, and optional daily reminders—your lab profile drives BMR, BMI, and burn estimates.</p>
+      <ul class="features">
+        <li><span>Configurable calorie goal and predictive fueling mindset aligned with the app’s protocol language.</span></li>
+      </ul>
+    </section>
+
+    <!-- Slide 9 -->
+    <section class="slide" data-index="8" aria-hidden="true">
+      <p class="badge">Share &amp; sync</p>
+      <h2>Capture &amp; optional cloud</h2>
+      <p class="lead">html2canvas support for sharing visuals. Connect the optional API for <span class="accent">device sync</span> and <span class="accent">Web Push</span> nudges when the backend is configured.</p>
+      <ul class="features">
+        <li><span>See <span class="accent">backend/README.md</span> for VAPID keys and deployment notes.</span></li>
+      </ul>
+    </section>
+
+    <!-- Slide 10 -->
+    <section class="slide" data-index="9" aria-hidden="true">
+      <p class="badge">Start</p>
+      <h2>Initialize the grid</h2>
+      <p class="lead">Path-Pulse is your tactical bio-lab for movement data: oath, map, report, profile—one tab, full mission.</p>
+      <a class="cta" href="index.html">Open Path-Pulse</a>
+      <p class="lead" style="margin-top:1.5rem;font-size:0.9rem;">Tip: serve over <span class="accent">localhost</span> or HTTPS for best geolocation results.</p>
+    </section>
+
+    <div class="footer-bar">
+      <span class="counter" id="counter" aria-live="polite">01 / 10</span>
+      <div class="dots" id="dots" role="tablist" aria-label="Slides"></div>
+      <label class="auto-wrap">
+        <input type="checkbox" id="autoplay" />
+        Auto-advance (8s)
+      </label>
+      <div class="nav-btns">
+        <button type="button" id="prev" aria-label="Previous slide">← Prev</button>
+        <button type="button" id="next" aria-label="Next slide">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+(function () {
+  'use strict';
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var total = slides.length;
+  var idx = 0;
+  var dotsEl = document.getElementById('dots');
+  var counterEl = document.getElementById('counter');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var autoplayCb = document.getElementById('autoplay');
+  var timer = null;
+
+  function pad(n) { return n < 10 ? '0' + n : String(n); }
+
+  function renderDots() {
+    dotsEl.innerHTML = '';
+    for (var i = 0; i < total; i++) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+      b.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+      if (i === idx) b.setAttribute('aria-current', 'true');
+      b.addEventListener('click', function (j) {
+        return function () { go(j); };
+      }(i));
+      dotsEl.appendChild(b);
+    }
+  }
+
+  function go(n) {
+    idx = (n + total) % total;
+    slides.forEach(function (el, i) {
+      var on = i === idx;
+      el.classList.toggle('active', on);
+      el.setAttribute('aria-hidden', on ? 'false' : 'true');
+    });
+    counterEl.textContent = pad(idx + 1) + ' / ' + pad(total);
+    renderDots();
+    resetAutoplay();
+  }
+
+  function next() { go(idx + 1); }
+
+  function prev() { go(idx - 1); }
+
+  function resetAutoplay() {
+    if (timer) clearInterval(timer);
+    timer = null;
+    if (autoplayCb.checked) {
+      timer = setInterval(next, 8000);
+    }
+  }
+
+  prevBtn.addEventListener('click', prev);
+  nextBtn.addEventListener('click', next);
+  autoplayCb.addEventListener('change', resetAutoplay);
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+    if (e.key === 'Home') { e.preventDefault(); go(0); }
+    if (e.key === 'End') { e.preventDefault(); go(total - 1); }
+  });
+
+  var sx = 0;
+  document.addEventListener('touchstart', function (e) {
+    if (e.changedTouches.length) sx = e.changedTouches[0].clientX;
+  }, { passive: true });
+  document.addEventListener('touchend', function (e) {
+    if (!e.changedTouches.length) return;
+    var dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 50) {
+      if (dx < 0) next();
+      else prev();
+    }
+  }, { passive: true });
+
+  go(0);
+})();
+  </script>
+</body>
+</html>

@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Path-Pulse — Introduction</title>
+  <meta name="description" content="Path-Pulse Tactical Bio-Lab — introduction deck with logo, summary, and features." />
+  <style>
+    :root {
+      --obsidian: #0b0e11;
+      --cyan: #00f5ff;
+      --lime: #39ff14;
+      --white: #ffffff;
+      --gray: #9ca3af;
+      --surface: rgba(255, 255, 255, 0.06);
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--obsidian);
+      color: var(--white);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Digital animated background */
+    .bg-digital {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        linear-gradient(180deg, transparent 0%, rgba(0, 245, 255, 0.03) 50%, transparent 100%),
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 47px,
+          rgba(0, 245, 255, 0.06) 47px,
+          rgba(0, 245, 255, 0.06) 48px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 47px,
+          rgba(0, 245, 255, 0.04) 47px,
+          rgba(0, 245, 255, 0.04) 48px
+        ),
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 245, 255, 0.15) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 40% at 100% 100%, rgba(57, 255, 20, 0.08) 0%, transparent 50%),
+        var(--obsidian);
+      animation: grid-drift 24s linear infinite;
+    }
+    @keyframes grid-drift {
+      0% { background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0; }
+      100% { background-position: 0 0, 48px 48px, -48px 48px, 0 0, 0 0, 0 0; }
+    }
+    .scanline {
+      position: fixed;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.12), transparent);
+      animation: scan 6s ease-in-out infinite;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+    @keyframes scan {
+      0%, 100% { top: 0; opacity: 0; }
+      10% { opacity: 0.6; }
+      50% { top: 100%; opacity: 0.4; }
+      90% { opacity: 0.6; }
+      100% { top: 0; opacity: 0; }
+    }
+
+    .download-bar {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem 1.25rem;
+      padding: 0.65rem 1rem;
+      margin-bottom: 0.5rem;
+      background: rgba(11, 14, 17, 0.92);
+      border: 1px solid rgba(0, 245, 255, 0.25);
+      border-radius: 12px;
+      max-width: 1120px;
+      width: 100%;
+    }
+    .download-bar span {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray);
+      width: 100%;
+      text-align: center;
+    }
+    .download-bar .download-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      color: var(--white);
+      background: rgba(0, 245, 255, 0.12);
+      border: 1px solid rgba(0, 245, 255, 0.45);
+      border-radius: 10px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .download-bar .download-link:hover {
+      background: rgba(0, 245, 255, 0.22);
+      transform: translateY(-1px);
+    }
+
+    .deck-wrap {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(1rem, 3vw, 2rem);
+    }
+
+    /* 16:9 symmetrical slide frame */
+    .slide-frame {
+      width: min(100%, 1120px);
+      aspect-ratio: 16 / 9;
+      max-height: min(85vh, 630px);
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(1.25rem, 4vw, 2.5rem) clamp(1.5rem, 5vw, 3rem);
+      background: rgba(11, 14, 17, 0.85);
+      border: 1px solid rgba(0, 245, 255, 0.22);
+      border-radius: 16px;
+      box-shadow:
+        0 0 0 1px rgba(0, 245, 255, 0.08) inset,
+        0 24px 80px rgba(0, 0, 0, 0.5),
+        0 0 60px rgba(0, 245, 255, 0.06);
+    }
+    .slide-frame.active { display: flex; animation: slide-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1); }
+    @keyframes slide-enter {
+      from { opacity: 0; transform: scale(0.98) translateY(12px); filter: blur(4px); }
+      to { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+    }
+
+    /* Title slide — symmetrical center */
+    .title-slide {
+      text-align: center;
+      align-items: center;
+    }
+    .logo-wrap {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1.25rem;
+      animation: logo-float 4s ease-in-out infinite;
+    }
+    @keyframes logo-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    .logo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 24px;
+      background: conic-gradient(from 180deg, transparent, rgba(0, 245, 255, 0.35), transparent, rgba(57, 255, 20, 0.2), transparent);
+      animation: ring-spin 8s linear infinite;
+      opacity: 0.6;
+    }
+    @keyframes ring-spin {
+      to { transform: rotate(360deg); }
+    }
+    .logo-wrap img {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      border-radius: 20px;
+      object-fit: cover;
+      box-shadow: 0 0 40px rgba(0, 245, 255, 0.35);
+      z-index: 1;
+    }
+    .kicker {
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(0, 245, 255, 0.85);
+      margin-bottom: 0.5rem;
+    }
+    .title-slide h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      margin: 0 0 0.5rem;
+      letter-spacing: 0.08em;
+      text-shadow: 0 0 50px rgba(0, 245, 255, 0.35);
+    }
+    .subtitle {
+      font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+      color: var(--gray);
+      max-width: 36rem;
+      margin: 0 auto;
+      line-height: 1.55;
+    }
+
+    /* Two-column summary — symmetrical */
+    .split-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(1rem, 3vw, 2rem);
+      align-items: start;
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    @media (max-width: 700px) {
+      .split-2 { grid-template-columns: 1fr; }
+    }
+    .panel {
+      padding: 1.25rem 1.35rem;
+      background: var(--surface);
+      border: 1px solid rgba(0, 245, 255, 0.2);
+      border-radius: 12px;
+      text-align: center;
+      animation: panel-pop 0.6s ease backwards;
+    }
+    .panel:nth-child(1) { animation-delay: 0.1s; }
+    .panel:nth-child(2) { animation-delay: 0.25s; }
+    @keyframes panel-pop {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .panel h3 {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin: 0 0 0.75rem;
+    }
+    .panel p {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    /* Feature grid — 2x2 symmetrical */
+    .slide-head {
+      text-align: center;
+      margin-bottom: 1.25rem;
+    }
+    .slide-head .badge {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      color: var(--cyan);
+      margin-bottom: 0.35rem;
+    }
+    .slide-head h2 {
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      margin: 0;
+      font-weight: 700;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 0.75rem;
+      width: 100%;
+      max-width: 880px;
+      margin: 0 auto;
+      flex: 1;
+    }
+    @media (max-width: 600px) {
+      .grid-4 { grid-template-columns: 1fr; grid-template-rows: auto; }
+    }
+    .feature-card {
+      padding: 0.85rem 1rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(0, 245, 255, 0.15);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      animation: card-in 0.5s ease backwards;
+    }
+    .feature-card:nth-child(1) { animation-delay: 0.05s; }
+    .feature-card:nth-child(2) { animation-delay: 0.12s; }
+    .feature-card:nth-child(3) { animation-delay: 0.19s; }
+    .feature-card:nth-child(4) { animation-delay: 0.26s; }
+    @keyframes card-in {
+      from { opacity: 0; transform: translateY(12px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .feature-card .icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.35rem;
+      filter: drop-shadow(0 0 8px rgba(0, 245, 255, 0.4));
+    }
+    .feature-card h4 {
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin: 0 0 0.35rem;
+    }
+    .feature-card p {
+      margin: 0;
+      font-size: 0.78rem;
+      line-height: 1.45;
+      color: var(--gray);
+    }
+
+    .cta-slide { text-align: center; justify-content: center; }
+    .cta-slide .pulse-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    .cta-slide .pulse-dots span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--cyan);
+      animation: dot-pulse 1.4s ease-in-out infinite;
+    }
+    .cta-slide .pulse-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .cta-slide .pulse-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes dot-pulse {
+      0%, 100% { transform: scale(1); opacity: 0.4; }
+      50% { transform: scale(1.4); opacity: 1; box-shadow: 0 0 12px var(--cyan); }
+    }
+    .cta-slide a {
+      display: inline-block;
+      margin-top: 0.75rem;
+      padding: 0.75rem 1.5rem;
+      background: linear-gradient(135deg, rgba(0, 245, 255, 0.2), rgba(57, 255, 20, 0.1));
+      border: 1px solid rgba(0, 245, 255, 0.5);
+      border-radius: 12px;
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta-slide a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0, 245, 255, 0.25);
+    }
+
+    .footer-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+      max-width: 1120px;
+      width: 100%;
+    }
+    .footer-nav .counter {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--gray);
+    }
+    .dots {
+      display: flex;
+      gap: 0.4rem;
+    }
+    .dots button {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .dots button[aria-current="true"] {
+      background: var(--cyan);
+      transform: scale(1.2);
+      box-shadow: 0 0 12px rgba(0, 245, 255, 0.6);
+    }
+    .nav-btns { display: flex; gap: 0.5rem; }
+    .nav-btns button {
+      font: inherit;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.55rem 1rem;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 245, 255, 0.45);
+      background: rgba(0, 245, 255, 0.12);
+      color: var(--white);
+      cursor: pointer;
+    }
+    .nav-btns button:hover { background: rgba(0, 245, 255, 0.22); }
+    .nav-btns button:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .bg-digital, .scanline, .logo-wrap, .logo-wrap::before, .slide-frame,
+      .panel, .feature-card, .cta-slide .pulse-dots span { animation: none !important; }
+      .slide-frame.active { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-digital" aria-hidden="true"></div>
+  <div class="scanline" aria-hidden="true"></div>
+
+  <div class="deck-wrap">
+    <div class="download-bar" role="region" aria-label="Download presentation files">
+      <span>Download</span>
+      <a class="download-link" href="Path-Pulse-Intro-Deck.pptx" download="Path-Pulse-Intro-Deck.pptx">⬇ PowerPoint (.pptx)</a>
+      <a class="download-link" href="path-pulse-intro-deck.html" download="path-pulse-intro-deck.html">⬇ This HTML deck</a>
+    </div>
+    <!-- Slide 1: Logo + title -->
+    <section class="slide-frame title-slide active" data-index="0" role="group" aria-label="Slide 1 of 5">
+      <div class="logo-wrap">
+        <img src="icon-512.png" alt="Path-Pulse logo" width="120" height="120" />
+      </div>
+      <p class="kicker">Tactical Bio-Lab</p>
+      <h1>PATH-PULSE</h1>
+      <p class="subtitle">Turn every walk into a mission. GPS routes, metabolic diagnostics, fuel tracking, and Ghost-Path racing—in your browser, Obsidian Lab aesthetic.</p>
+    </section>
+
+    <!-- Slide 2: Summary — symmetrical two columns -->
+    <section class="slide-frame" data-index="1" aria-hidden="true">
+      <div class="slide-head">
+        <p class="badge">SUMMARY</p>
+        <h2>What is Path-Pulse?</h2>
+      </div>
+      <div class="split-2">
+        <div class="panel">
+          <h3>The product</h3>
+          <p>A progressive web app that treats movement like tactical data: map expeditions, log fuel &amp; steps, track BMI and weekly missions—without an app store install.</p>
+        </div>
+        <div class="panel">
+          <h3>The experience</h3>
+          <p>Explorer’s Oath → PRISM welcome → Home, Map, Report, Profile. Neon cyan &amp; lime on obsidian—built for clarity and shareable “lab” vibes.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 3: Features grid 1 -->
+    <section class="slide-frame" data-index="2" aria-hidden="true">
+      <div class="slide-head">
+        <p class="badge">FEATURES · 1 / 2</p>
+        <h2>Core capabilities</h2>
+      </div>
+      <div class="grid-4">
+        <div class="feature-card">
+          <span class="icon" aria-hidden="true">🗺</span>
+          <h4>Map &amp; expedition</h4>
+          <p>Live GPS route on a dark map, distance HUD, route replay &amp; Ghost-Path to race your last run.</p>
+        </div>
+        <div class="feature-card">
+          <span class="icon" aria-hidden="true">⌂</span>
+          <h4>Home &amp; missions</h4>
+          <p>Kinetic step ring, weekly distance mission, explorer level &amp; rank, optional fuel widgets.</p>
+        </div>
+        <div class="feature-card">
+          <span class="icon" aria-hidden="true">🔊</span>
+          <h4>PRISM</h4>
+          <p>Onboard assistant welcome after the Oath; optional voice (TTS) and haptic feedback.</p>
+        </div>
+        <div class="feature-card">
+          <span class="icon" aria-hidden="true">📋</span>
+          <h4>Report &amp; share</h4>
+          <p>Weekly diagnostic, calories roll-up, share text or download report image.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 4: Features grid 2 -->
+    <section class="slide-frame" data-index="3" aria-hidden="true">
+      <div class="slide-head">
+        <p class="badge">FEATURES · 2 / 2</p>
+        <h2>Health &amp; data</h2>
+      </div>
+      <div class="grid-4">
+        <div class="feature-card">
+          <span class="icon" aria-hidden="true">👤</span>
+          <h4>Profile &amp; lab</h4>
+          <p>BMI, BMR, TDEE, body composition (Navy optional), calorie goal, progress calendar.</p>
+        </div>
+        <div class="feature-card">
+          <span class="icon" aria-hidden="true">🍽</span>
+          <h4>Fuel gauge</h4>
+          <p>Breakfast / lunch / dinner with timestamps, balance vs target, calorie→weight estimate.</p>
+        </div>
+        <div class="feature-card">
+          <span class="icon" aria-hidden="true">💾</span>
+          <h4>Your data</h4>
+          <p>On-device storage, export JSON backup, PWA &amp; offline-friendly map tiles.</p>
+        </div>
+        <div class="feature-card">
+          <span class="icon" aria-hidden="true">✓</span>
+          <h4>Accessibility</h4>
+          <p>ARIA labels, keyboard-friendly nav, reduced-motion respect for animations.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 5: CTA -->
+    <section class="slide-frame cta-slide" data-index="4" aria-hidden="true">
+      <div class="logo-wrap" style="width:88px;height:88px;margin-bottom:1rem;">
+        <img src="icon-512.png" alt="" width="88" height="88" style="width:88px;height:88px;" />
+      </div>
+      <p class="kicker">Initialize the grid</p>
+      <h2 style="margin:0 0 0.5rem;font-size:clamp(1.5rem,4vw,2rem);">Thank you</h2>
+      <p class="subtitle" style="max-width:28rem;">Open Path-Pulse in the browser, accept the Oath, and start your first expedition.</p>
+      <div class="pulse-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+      <a href="index.html">Launch Path-Pulse</a>
+      <p class="subtitle" style="margin-top:1rem;font-size:0.8rem;">Serve over HTTPS or localhost for GPS · Add to Home Screen for PWA</p>
+    </section>
+
+    <div class="footer-nav">
+      <span class="counter" id="counter" aria-live="polite">01 / 05</span>
+      <div class="dots" id="dots" role="tablist" aria-label="Slides"></div>
+      <div class="nav-btns">
+        <button type="button" id="prev" aria-label="Previous slide">← Prev</button>
+        <button type="button" id="next" aria-label="Next slide">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var slides = document.querySelectorAll('.slide-frame');
+      var total = slides.length;
+      var idx = 0;
+      var dots = document.getElementById('dots');
+      var counter = document.getElementById('counter');
+      var prevBtn = document.getElementById('prev');
+      var nextBtn = document.getElementById('next');
+
+      for (var i = 0; i < total; i++) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('role', 'tab');
+        b.setAttribute('aria-label', 'Slide ' + (i + 1));
+        b.dataset.index = String(i);
+        if (i === 0) b.setAttribute('aria-current', 'true');
+        b.addEventListener('click', function () { go(parseInt(this.dataset.index, 10)); });
+        dots.appendChild(b);
+      }
+
+      function go(n) {
+        if (n < 0 || n >= total) return;
+        idx = n;
+        slides.forEach(function (s, i) {
+          var on = i === idx;
+          s.classList.toggle('active', on);
+          s.setAttribute('aria-hidden', on ? 'false' : 'true');
+        });
+        dots.querySelectorAll('button').forEach(function (b, i) {
+          b.setAttribute('aria-current', i === idx ? 'true' : 'false');
+        });
+        counter.textContent = String(idx + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+        prevBtn.disabled = idx === 0;
+        nextBtn.disabled = idx === total - 1;
+      }
+
+      prevBtn.addEventListener('click', function () { go(idx - 1); });
+      nextBtn.addEventListener('click', function () { go(idx + 1); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(idx + 1); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); go(idx - 1); }
+        if (e.key === 'Home') go(0);
+        if (e.key === 'End') go(total - 1);
+      });
+      go(0);
+    })();
+  </script>
+</body>
+</html>
