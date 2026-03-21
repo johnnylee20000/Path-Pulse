@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" href="icon-512.png" sizes="192x192" />
   <link rel="apple-touch-icon" href="icon-512.png" />
   <link rel="manifest" href="manifest.json" />
-  <link rel="stylesheet" href="styles.css?v=2">
+  <link rel="stylesheet" href="styles.css?v=3">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
@@ -66,9 +66,12 @@
         <div id="tab-map" class="tab-pane">
           <div id="map"></div>
           <div id="map-distance-hud" class="map-distance-hud">
-            <div class="hud-row"><span id="map-distance-label">—</span><span id="map-distance-km">0.00</span> km</div>
-            <div class="hud-row"><span>Perimeter</span><span id="map-perimeter-km">0.00</span> km</div>
-            <div class="hud-row"><span>Milometer</span><span id="map-milometer-km">0.00</span> km</div>
+            <div class="hud-row hud-primary"><span id="map-distance-label">—</span><span><span id="map-distance-km">0.00</span> km</span></div>
+            <div id="map-expedition-extra-row" class="hud-row hud-expedition hidden" role="status">
+              <span>This expedition · steps (est.)</span><span id="map-expedition-steps">—</span>
+            </div>
+            <div class="hud-row"><span>Session track</span><span id="map-perimeter-km">0.00</span> km</div>
+            <div class="hud-row"><span>Odometer</span><span id="map-milometer-km">0.00</span> km</div>
           </div>
           <div class="demo-routes-wrap">
             <label for="demo-route-select" class="demo-routes-label">Showcase demo route</label>
@@ -117,12 +120,30 @@
             </div>
             <div class="avatar">👤</div>
           </div>
-          <div class="pulse-ring" id="pulse-step-ring" title="Daily stride count (steps)">
+          <nav class="home-feature-strip" aria-label="Top features">
+            <button type="button" class="home-feature-btn" data-feature-tab="map" aria-label="Open Map">
+              <span class="home-feature-icon" aria-hidden="true">🗺</span>
+              <span class="home-feature-text">Map</span>
+            </button>
+            <button type="button" class="home-feature-btn" data-feature-tab="report" aria-label="Open Report">
+              <span class="home-feature-icon" aria-hidden="true">📋</span>
+              <span class="home-feature-text">Report</span>
+            </button>
+            <button type="button" class="home-feature-btn" data-feature-tab="map" data-feature-focus="expedition" aria-label="Open Map for Expedition">
+              <span class="home-feature-icon" aria-hidden="true">🧭</span>
+              <span class="home-feature-text">Expedition</span>
+            </button>
+            <button type="button" class="home-feature-btn" data-scroll-to="home-widget-fuel" aria-label="Scroll to Energy gauge">
+              <span class="home-feature-icon" aria-hidden="true">⚡</span>
+              <span class="home-feature-text">Energy</span>
+            </button>
+          </nav>
+          <div class="pulse-ring" id="pulse-step-ring" title="Today's steps (all-day total)">
             <div class="ring-bg"></div>
             <div class="ring-fill" id="ring-fill"></div>
             <div class="ring-content">
               <span id="steps">0</span>
-              <span class="label">STRIDE</span>
+              <span class="label">STEPS</span>
             </div>
           </div>
           <div class="auto-steps-row">
@@ -130,10 +151,10 @@
             <p id="auto-steps-status" class="auto-steps-hint" role="status"></p>
           </div>
           <div class="sync-steps-row">
-            <label for="input-sync-steps" class="sync-steps-label">Sync total from watch / phone</label>
+            <label for="input-sync-steps" class="sync-steps-label">Set today's steps manually</label>
             <div class="input-row">
-              <input type="number" id="input-sync-steps" placeholder="e.g. 5000" min="0" aria-label="Today's steps from phone or watch">
-              <button type="button" id="sync-steps-btn" class="btn-small">Set today</button>
+              <input type="number" id="input-sync-steps" placeholder="e.g. 5000" min="0" aria-label="Today's step total">
+              <button type="button" id="sync-steps-btn" class="btn-small">Apply</button>
             </div>
           </div>
           <div id="home-widget-expedition">
@@ -560,6 +581,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <!-- Optional: set your backend URL to enable sync and push reminders (e.g. http://localhost:3030) -->
   <!-- <script>window.PATH_PULSE_API = 'http://localhost:3030';</script> -->
-  <script src="app.js?v=3"></script>
+  <script src="app.js?v=6"></script>
 </body>
 </html>

@@ -39,6 +39,11 @@ Run Path-Pulse in your **browser** — no Flutter or mobile SDK required.
 
 Data is stored in your browser (localStorage). No server or install needed.
 
+## Marketing slides (browser or PowerPoint)
+
+- **`marketing-slides.html`** — In-browser deck (arrow keys, full screen with F11).
+- **Microsoft PowerPoint:** see **`POWERPOINT.md`**. Run `python generate-marketing-pptx.py` (after `pip install -r requirements-pptx.txt`) to create **`Path-Pulse-Marketing-Deck.pptx`**, then open it in PowerPoint and press **F5** to present.
+
 ## Folder
 
 ```
@@ -46,5 +51,8 @@ path-pulse-web/
   index.html   — structure and tabs
   styles.css   — Obsidian theme and layout
   app.js       — state, map, geolocation, route, persistence
+  marketing-slides.html — feature deck in the browser
+  generate-marketing-pptx.py — builds Path-Pulse-Marketing-Deck.pptx
+  POWERPOINT.md — how to present in PowerPoint
   README.md    — this file
 ```

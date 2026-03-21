@@ -502,22 +502,35 @@
     }
     if (!hint) return;
     if (!motion.enabled) {
-      hint.textContent = 'Counts steps from device motion when on. Add your watch/phone total below if you prefer.';
+      hint.textContent =
+        'Turn on to estimate steps from movement. Expedition distance adds to your total only when auto track is off (avoids double count).';
       return;
     }
     if (motion.lastError) {
       hint.textContent = motion.lastError;
       return;
     }
-    if (motion.mode === 'linear') hint.textContent = 'Live · linear accel (pocket / walk)';
-    else if (motion.mode === 'accel') hint.textContent = 'Live · accelerometer (estimate)';
-    else if (motion.mode === 'ios') hint.textContent = 'Live · motion (iPhone)';
+    if (motion.mode === 'linear')
+      hint.textContent = 'Live · counts in background while the app stays open (some devices pause sensors if you switch apps).';
+    else if (motion.mode === 'accel') hint.textContent = 'Live · accelerometer (estimate). Keeps running when you change tabs.';
+    else if (motion.mode === 'ios') hint.textContent = 'Live · motion (iPhone). Expedition steps use the map HUD; daily ring is your full total.';
     else hint.textContent = 'Starting…';
   }
 
   function getTodayKey() {
     const d = new Date();
     return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+
+  /** Parse YYYY-MM-DD as a local calendar day. `new Date('YYYY-MM-DD')` is UTC midnight and shifts the local date in many timezones. */
+  function dateKeyToLocalDate(dateKey) {
+    if (dateKey == null || typeof dateKey !== 'string') return new Date(NaN);
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateKey.trim());
+    if (!m) return new Date(NaN);
+    var y = parseInt(m[1], 10);
+    var mo = parseInt(m[2], 10) - 1;
+    var da = parseInt(m[3], 10);
+    return new Date(y, mo, da);
   }
 
   function getStepsByDate() {
@@ -605,8 +618,8 @@
     var cal = getCaloriesData();
     var total = 0;
     var daysWithData = 0;
-    var d = new Date(weekStart);
-    var end = new Date(today);
+    var d = dateKeyToLocalDate(weekStart);
+    var end = dateKeyToLocalDate(today);
     while (d <= end) {
       var key = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
       var dayCal = cal[key];
@@ -867,14 +880,14 @@
     var dist = sumDistanceInRange(rWeek.start, rWeek.end);
     var ex = sumExerciseInRange(rWeek.start, rWeek.end);
     var lastWeekStart = (function () {
-      var d = new Date(rWeek.start);
+      var d = dateKeyToLocalDate(rWeek.start);
       d.setDate(d.getDate() - 7);
-      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+      return dateToKey(d);
     })();
     var lastWeekEnd = (function () {
-      var d = new Date(rWeek.end);
+      var d = dateKeyToLocalDate(rWeek.end);
       d.setDate(d.getDate() - 7);
-      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+      return dateToKey(d);
     })();
     var lastSteps = sumStepsInRange(lastWeekStart, lastWeekEnd);
     var lastDist = sumDistanceInRange(lastWeekStart, lastWeekEnd);
@@ -1018,8 +1031,8 @@
   function sumStepsInRange(startKey, endKey) {
     var stepsObj = getStepsByDate();
     var total = 0;
-    var d = new Date(startKey);
-    var end = new Date(endKey);
+    var d = dateKeyToLocalDate(startKey);
+    var end = dateKeyToLocalDate(endKey);
     while (d <= end) {
       var k = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
       if (k === getTodayKey()) total += state.dailySteps;
@@ -1053,8 +1066,8 @@
   }
   function sumBurnInRange(startKey, endKey) {
     var total = 0;
-    var d = new Date(startKey);
-    var end = new Date(endKey);
+    var d = dateKeyToLocalDate(startKey);
+    var end = dateKeyToLocalDate(endKey);
     while (d <= end) {
       var k = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
       total += estimatedBurnForDay(k);
@@ -1105,7 +1118,10 @@
   }
 
   function getSundayWeekStartKey(baseDate) {
-    var d = baseDate ? new Date(baseDate) : new Date();
+    var d;
+    if (!baseDate) d = new Date();
+    else if (typeof baseDate === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(baseDate.trim())) d = dateKeyToLocalDate(baseDate);
+    else d = new Date(baseDate);
     var diff = d.getDate() - d.getDay(); // Sunday = 0
     d.setDate(diff);
     d.setHours(0, 0, 0, 0);
@@ -1115,8 +1131,8 @@
   function sumWaterInRange(startKey, endKey) {
     var water = getWaterLog();
     var total = 0;
-    var d = new Date(startKey);
-    var end = new Date(endKey);
+    var d = dateKeyToLocalDate(startKey);
+    var end = dateKeyToLocalDate(endKey);
     while (d <= end) {
       var k = dateToKey(d);
       total += typeof water[k] === 'number' ? water[k] : 0;
@@ -1192,7 +1208,7 @@
       maxSteps = steps;
     } else if (period === 'week') {
       var startKey = getSundayWeekStartKey(now);
-      var startDate = new Date(startKey);
+      var startDate = dateKeyToLocalDate(startKey);
       subtitle = 'WEEK · Sun–Sat (' + startKey + ')';
       for (var i = 0; i < 7; i++) {
         var d = new Date(startDate);
@@ -2187,24 +2203,34 @@
 
     var targetSteps = getGoals().steps;
     const progress = Math.min(1, targetSteps > 0 ? state.dailySteps / targetSteps : 0);
-    document.getElementById('ring-fill').style.transform = 'rotate(-90deg) rotate(' + (progress * 360) + 'deg)';
-    document.getElementById('steps').textContent = state.dailySteps;
-    document.getElementById('explorer-id').textContent = explorerId();
-    document.getElementById('level').textContent = level();
-    document.getElementById('rank').textContent = rank();
+    var ringFill = document.getElementById('ring-fill');
+    if (ringFill) ringFill.style.transform = 'rotate(-90deg) rotate(' + (progress * 360) + 'deg)';
+    var stepsCountEl = document.getElementById('steps');
+    if (stepsCountEl) stepsCountEl.textContent = state.dailySteps;
+    var explorerEl = document.getElementById('explorer-id');
+    if (explorerEl) explorerEl.textContent = explorerId();
+    var levelEl = document.getElementById('level');
+    if (levelEl) levelEl.textContent = level();
+    var rankEl = document.getElementById('rank');
+    if (rankEl) rankEl.textContent = rank();
     var bmiVal = bmi();
     var bmiCat = bmiCategory(bmiVal);
     var valBmiEl = document.getElementById('val-bmi');
     if (valBmiEl) { valBmiEl.textContent = bmiVal.toFixed(1) + ' (' + bmiCat.label + ')'; valBmiEl.className = 'val-bmi ' + bmiCat.class; }
-    document.getElementById('val-bmr').textContent = Math.round(bmr()) + ' kcal/day';
-    document.getElementById('val-burn').textContent = burn() + ' KCAL';
-    document.getElementById('val-protocol').textContent = protocol();
+    var valBmrEl = document.getElementById('val-bmr');
+    if (valBmrEl) valBmrEl.textContent = Math.round(bmr()) + ' kcal/day';
+    var valBurnEl = document.getElementById('val-burn');
+    if (valBurnEl) valBurnEl.textContent = burn() + ' KCAL';
+    var valProtEl = document.getElementById('val-protocol');
+    if (valProtEl) valProtEl.textContent = protocol();
 
     const missionBtn = document.getElementById('btn-mission-home');
     if (missionBtn) {
       missionBtn.classList.toggle('active', state.isMissionActive);
-      document.getElementById('mission-icon').textContent = state.isMissionActive ? '◉' : '▶';
-      document.getElementById('mission-label').textContent = state.isMissionActive ? 'MISSION ACTIVE' : 'START EXPEDITION';
+      var missionIconEl = document.getElementById('mission-icon');
+      var missionLabelEl = document.getElementById('mission-label');
+      if (missionIconEl) missionIconEl.textContent = state.isMissionActive ? '◉' : '▶';
+      if (missionLabelEl) missionLabelEl.textContent = state.isMissionActive ? 'MISSION ACTIVE' : 'START EXPEDITION';
     }
     var lastRouteEl = document.getElementById('last-route');
     if (lastRouteEl) {
@@ -2221,8 +2247,11 @@
       missionFill.style.width = (pct * 100) + '%';
     }
     if (missionStatus) {
-      missionStatus.textContent = state.weekDistanceKm.toFixed(1) + ' / ' + EXPEDITION_MISSION_KM + ' km';
-      if (state.missionCompletedThisWeek) missionStatus.innerHTML += ' <span class="mission-done">✓</span>';
+      var missionLine =
+        state.weekDistanceKm.toFixed(1) + ' / ' + EXPEDITION_MISSION_KM + ' km';
+      missionStatus.innerHTML = state.missionCompletedThisWeek
+        ? missionLine + ' <span class="mission-done">✓</span>'
+        : missionLine;
     }
     updateFuelUI();
   }
@@ -2314,18 +2343,25 @@
     var kmEl = document.getElementById('map-distance-km');
     var perimeterEl = document.getElementById('map-perimeter-km');
     var milometerEl = document.getElementById('map-milometer-km');
+    var extraRow = document.getElementById('map-expedition-extra-row');
+    var expStepsEl = document.getElementById('map-expedition-steps');
     var km = 0;
     if (state.isMissionActive) {
       km = routeDistanceKm();
-      if (labelEl) labelEl.textContent = 'LIVE';
-    } else if (lastRoutePoints && lastRoutePoints.length >= 2) {
-      km = routeDistanceFromPoints(lastRoutePoints);
-      if (labelEl) labelEl.textContent = 'Last';
-    } else if (state.lastRouteKm > 0) {
-      km = state.lastRouteKm;
-      if (labelEl) labelEl.textContent = 'Last';
+      if (labelEl) labelEl.textContent = 'EXPEDITION';
+      if (extraRow) extraRow.classList.remove('hidden');
+      if (expStepsEl) expStepsEl.textContent = String(stepsFromDistanceKm(km));
     } else {
-      if (labelEl) labelEl.textContent = '—';
+      if (extraRow) extraRow.classList.add('hidden');
+      if (lastRoutePoints && lastRoutePoints.length >= 2) {
+        km = routeDistanceFromPoints(lastRoutePoints);
+        if (labelEl) labelEl.textContent = 'Last';
+      } else if (state.lastRouteKm > 0) {
+        km = state.lastRouteKm;
+        if (labelEl) labelEl.textContent = 'Last';
+      } else {
+        if (labelEl) labelEl.textContent = '—';
+      }
     }
     if (kmEl) kmEl.textContent = (km || 0).toFixed(2);
     if (perimeterEl) perimeterEl.textContent = (km || 0).toFixed(2);
@@ -2680,10 +2716,13 @@
   }
 
   function updateExpeditionButton() {
-    const btn = document.getElementById('btn-expedition');
+    var btn = document.getElementById('btn-expedition');
+    if (!btn) return;
     btn.classList.toggle('expedition-active', state.isMissionActive);
-    document.getElementById('expedition-icon').textContent = state.isMissionActive ? '■' : '▶';
-    document.getElementById('expedition-label').textContent = state.isMissionActive ? 'STOP EXPEDITION' : 'START EXPEDITION';
+    var expIcon = document.getElementById('expedition-icon');
+    var expLabel = document.getElementById('expedition-label');
+    if (expIcon) expIcon.textContent = state.isMissionActive ? '■' : '▶';
+    if (expLabel) expLabel.textContent = state.isMissionActive ? 'STOP EXPEDITION' : 'START EXPEDITION';
   }
 
   var DEFAULT_CENTER = [10.65, -61.52];
@@ -3024,7 +3063,10 @@
       var km = routeDistanceKm();
       state.lastRouteKm = km;
       var addedSteps = stepsFromDistanceKm(km);
-      state.dailySteps += addedSteps;
+      /* Weekly mission uses GPS distance only (logToday). Avoid double-counting steps when auto-track is on — motion already counted your walk. */
+      if (!motion.enabled) {
+        state.dailySteps += addedSteps;
+      }
       setStepsForDate(getTodayKey(), state.dailySteps);
       logToday(km);
       var startRaw = state.expeditionStartTime || localStorage.getItem(STORAGE_KEYS.expeditionStartTime);
@@ -3086,7 +3128,7 @@
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) {
         saveExpeditionState();
-        if (motion.enabled) stopMotionTracking();
+        if (motion.enabled) flushMotionSteps();
       } else {
         if (refreshTodayData()) {
           updateHomeUI();
@@ -3138,6 +3180,34 @@
     document.querySelectorAll('.nav-btn').forEach(function (btn) {
       btn.addEventListener('click', function () {
         setTab(btn.dataset.tab);
+      });
+    });
+
+    document.querySelectorAll('.home-feature-btn').forEach(function (fbtn) {
+      fbtn.addEventListener('click', function () {
+        var scrollTo = fbtn.getAttribute('data-scroll-to');
+        if (scrollTo) {
+          setTab('home');
+          setTimeout(function () {
+            var el = document.getElementById(scrollTo);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 100);
+          return;
+        }
+        var ftab = fbtn.getAttribute('data-feature-tab');
+        var focus = fbtn.getAttribute('data-feature-focus');
+        if (ftab) setTab(ftab);
+        if (focus === 'expedition' && ftab === 'map') {
+          setTimeout(function () {
+            var expBtn = document.getElementById('btn-expedition');
+            if (expBtn) {
+              expBtn.classList.add('home-feature-pulse');
+              setTimeout(function () {
+                expBtn.classList.remove('home-feature-pulse');
+              }, 2200);
+            }
+          }, 250);
+        }
       });
     });
 
