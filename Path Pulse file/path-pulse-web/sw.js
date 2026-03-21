@@ -1,5 +1,6 @@
 /* Path-Pulse — minimal service worker for offline + map tiles */
-const CACHE_NAME = 'path-pulse-v2';
+/* Bump CACHE_NAME when you ship breaking cache changes (deployments pick up new SW). */
+const CACHE_NAME = 'path-pulse-v3';
 const TILES_CACHE = 'path-pulse-tiles-v1';
 
 const APP_ASSETS = [
@@ -70,10 +71,11 @@ self.addEventListener('fetch', function (event) {
   var urlObj = new URL(url);
   if (urlObj.origin !== self.location.origin) return;
 
+  // Network-first for same-origin assets so deploys (e.g. Vercel) always deliver fresh
+  // app.js / styles.css / index.html after an update — cache-first was locking users on old bundles.
   event.respondWith(
-    caches.match(event.request).then(function (cached) {
-      if (cached) return cached;
-      return fetch(event.request).then(function (res) {
+    fetch(event.request)
+      .then(function (res) {
         var clone = res.clone();
         if (res.status === 200 && res.type === 'basic') {
           caches.open(CACHE_NAME).then(function (cache) {
@@ -81,8 +83,10 @@ self.addEventListener('fetch', function (event) {
           });
         }
         return res;
-      });
-    })
+      })
+      .catch(function () {
+        return caches.match(event.request);
+      })
   );
 });
 

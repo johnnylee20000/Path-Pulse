@@ -56,3 +56,15 @@ A **root vercel.json** redirect was added so **/** sends you to the app. Push an
 If your repo has a different layout (e.g. `path-pulse-web` at the top level), set Root Directory to **`path-pulse-web`** instead.
 
 Then open **https://your-project.vercel.app/** or **https://your-project.vercel.app/index.html**.
+
+---
+
+## Not seeing the latest UI (charts, styles, etc.)?
+
+1. **Push & redeploy** — Confirm your newest `app.js` / `index.html` / `styles.css` are **committed and pushed** to GitHub, then in Vercel → **Deployments** → **Redeploy** the latest (or push a new commit).
+
+2. **Service worker** — The app uses `sw.js`. Old versions cached `app.js` first; **current `sw.js` uses network-first** so updates show after deploy. If you still see an old build:
+   - **Chrome (phone):** ⋮ → **Settings** → **Site settings** → your site → **Clear & reset**, or open in a **private tab** once.
+   - **Desktop:** DevTools → **Application** → **Service Workers** → **Unregister**, then hard refresh (**Ctrl+Shift+R**).
+
+3. **Root directory** — Vercel must use **`Path Pulse file/path-pulse-web`** (see above) so it deploys the folder that contains your charts, not an older copy of the repo.

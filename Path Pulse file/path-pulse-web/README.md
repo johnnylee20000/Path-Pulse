@@ -9,6 +9,11 @@ Run Path-Pulse in your **browser** — no Flutter or mobile SDK required.
 
 **Tip:** For **location** (map and expedition) to work, use **HTTPS** or **localhost**. Opening `file:///...` may block geolocation. Easiest: use the **Live Server** extension in Cursor/VS Code so the app runs at `http://127.0.0.1:5500` (or similar).
 
+## Access on your phone (link)
+
+- **Same Wi‑Fi as your PC:** run **`Start-Path-Pulse-Phone.ps1`** — it prints and copies a link like `http://192.168.x.x:8080/index.html`. See **`ACCESS-ON-PHONE.md`**.
+- **Anywhere (HTTPS):** deploy with Vercel — see **`DEPLOY-VERCEL.md`**.
+
 ## Test on another device (phone, tablet, other PC)
 
 1. **Start the server** from the `path-pulse-web` folder:
