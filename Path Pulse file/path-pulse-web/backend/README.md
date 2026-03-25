@@ -10,6 +10,30 @@ Small Node.js backend for **Path Pulse** web app: data sync and optional Web Pus
 | POST | `/api/sync` | Body: `{ deviceId, data }` — merge and save |
 | POST | `/api/push-subscribe` | Body: `{ deviceId, subscription, reminderTime }` — store push subscription |
 | GET | `/api/health` | Health check |
+| POST | `/api/routes/energy` | Terrain-aware expedition kcal (same math as `terrain-energy-core.js`) |
+
+### `POST /api/routes/energy`
+
+Body (JSON):
+
+```json
+{
+  "weightKg": 78.5,
+  "surfaceKey": "trail_grass",
+  "defaultSpeedKmh": 5,
+  "points": [
+    { "lat": 51.5, "lng": -0.12, "t": 1710000000000, "alt": 45.2 },
+    { "lat": 51.501, "lng": -0.119, "t": 1710000060000, "alt": 46.1 }
+  ]
+}
+```
+
+- `surfaceKey`: `pavement` | `trail_grass` | `sand` | `snow` | `gravel`
+- `alt` optional per point; without altitude the model uses flat walking MET × distance × surface.
+
+Response: `{ totalKcal, elevGainM, avgAbsGradePct, segmentCount, hasAltitudeData, usedFlatFallback }`
+
+Logic lives in `terrain-energy.js` — keep in sync with `../terrain-energy-core.js` when tuning constants.
 
 Data is stored under `./data/` as JSON (one file per device for sync, one file for push subscriptions).
 

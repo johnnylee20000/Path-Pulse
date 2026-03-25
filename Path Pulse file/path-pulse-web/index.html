@@ -70,6 +70,19 @@
             <div id="map-expedition-extra-row" class="hud-row hud-expedition hidden" role="status">
               <span>This expedition · steps (est.)</span><span id="map-expedition-steps">—</span>
             </div>
+            <div id="map-terrain-surface-row" class="hud-row hud-expedition hud-terrain hidden" role="group" aria-label="Terrain model for this expedition">
+              <span class="hud-terrain-label">Surface</span>
+              <select id="select-expedition-surface" class="map-surface-select" aria-label="Surface type for calorie model">
+                <option value="pavement">Pavement</option>
+                <option value="trail_grass">Trail / grass</option>
+                <option value="sand">Sand</option>
+                <option value="snow">Snow</option>
+                <option value="gravel">Gravel</option>
+              </select>
+            </div>
+            <div id="map-terrain-kcal-row" class="hud-row hud-expedition hidden" role="status">
+              <span>Active burn (terrain est.)</span><span id="map-terrain-kcal">—</span>
+            </div>
             <div class="hud-row"><span>Session track</span><span id="map-perimeter-km">0.00</span> km</div>
             <div class="hud-row"><span>Odometer</span><span id="map-milometer-km">0.00</span> km</div>
           </div>
@@ -149,6 +162,20 @@
           <div class="auto-steps-row">
             <button type="button" id="btn-auto-steps" class="btn-auto-steps" aria-pressed="false">Auto track: off</button>
             <p id="auto-steps-status" class="auto-steps-hint" role="status"></p>
+          </div>
+          <div class="step-sensitivity-row">
+            <label for="select-step-sensitivity" class="step-sensitivity-label">Auto step sensitivity</label>
+            <select id="select-step-sensitivity" class="step-sensitivity-select" aria-label="How strict motion must be to count a step">
+              <option value="1">1 — Strict (fewer false steps)</option>
+              <option value="2">2 — Firm</option>
+              <option value="3" selected>3 — Balanced (default)</option>
+              <option value="4">4 — Light</option>
+              <option value="5">5 — Sensitive</option>
+            </select>
+            <p class="step-sensitivity-hint">Higher number = counts smaller movements. If the counter runs high while still, try <strong>1</strong> or <strong>2</strong>.</p>
+            <p class="home-steps-platform-hint">
+              <strong>How it works:</strong> Auto steps run while Path-Pulse is <em>open</em> (or in the background only if your browser keeps the tab alive). Fully closing the browser pauses motion counting — that’s a web limitation, not Path-Pulse. Stopping an <strong>expedition</strong> always adds GPS-based steps to today’s total (mission distance is unchanged). The same walk may add both motion and expedition estimates; use sensitivity or manual total if you need one exact number.
+            </p>
           </div>
           <div class="sync-steps-row">
             <label for="input-sync-steps" class="sync-steps-label">Set today's steps manually</label>
@@ -341,6 +368,24 @@
             <p id="weight-trend-summary" class="trend-summary">—</p>
             <div id="weight-trend-list" class="trend-list"></div>
           </div>
+          <div class="progression-card">
+            <h3>PROGRESSION &amp; EPICS</h3>
+            <p class="hint hint-small">Momentum scales XP (about 85–100%). Miss days and it decays. After 3+ days away you gain <strong>rested XP</strong>; while the boost window is active, part of each gain draws +25% from the bank.</p>
+            <div class="progression-momentum-head">
+              <span>Signal (momentum)</span>
+              <span id="progression-momentum-val" class="progression-momentum-val">100</span>
+            </div>
+            <div class="progression-momentum-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div id="progression-momentum-fill" class="progression-momentum-fill"></div></div>
+            <div class="diag-row"><span>XP efficiency</span><span id="progression-mult">100%</span></div>
+            <div class="diag-row"><span>Rested XP bank</span><span id="progression-rested">0</span></div>
+            <div class="diag-row"><span>Rested boost</span><span id="progression-boost">—</span></div>
+            <p class="label label-section">Milestone badges</p>
+            <div id="milestone-badge-strip" class="milestone-badge-strip" aria-label="Level milestone unlocks"></div>
+            <label for="select-ui-skin">UI skin</label>
+            <select id="select-ui-skin" aria-label="Interface theme"></select>
+            <h4 class="epic-heading">Epic expeditions</h4>
+            <div id="epic-expedition-list" class="epic-expedition-list"></div>
+          </div>
           <p class="label label-section">DATA</p>
           <button type="button" id="export-data" class="btn-secondary" aria-label="Export my data as JSON">EXPORT MY DATA</button>
         </div>
@@ -413,6 +458,13 @@
                   <svg id="report-chart-sleep" viewBox="0 0 320 160" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Sleep hours chart"></svg>
                 </div>
               </div>
+              <div class="report-chart-card">
+                <h4 class="report-chart-title">Expedition terrain energy</h4>
+                <p class="report-chart-desc">kcal logged when you stop an expedition (Mon–Sun)</p>
+                <div class="report-chart-svg-wrap">
+                  <svg id="report-chart-terrain-bars" viewBox="0 0 320 160" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Weekly expedition terrain kcal"></svg>
+                </div>
+              </div>
             </div>
           </div>
           <div class="report-goals-section">
@@ -467,6 +519,13 @@
               <div class="report-row"><span>This week</span><span id="report-exercise-week">—</span></div>
               <div class="report-row"><span>This month</span><span id="report-exercise-month">—</span></div>
               <div class="report-row"><span>This year</span><span id="report-exercise-year">—</span></div>
+            </div>
+            <h3>EXPEDITION TERRAIN (est.)</h3>
+            <div class="report-card">
+              <p class="hint hint-small" style="margin:0 0 0.5rem;">From stopped expeditions: GPS + grade + surface. Not the same as full-day burn above.</p>
+              <div class="report-row"><span>Today</span><span id="report-terrain-today">—</span></div>
+              <div class="report-row"><span>This week</span><span id="report-terrain-week">—</span></div>
+              <div class="report-row"><span>This month</span><span id="report-terrain-month">—</span></div>
             </div>
           </div>
           <div class="report-tracking-section">
@@ -577,10 +636,14 @@
     </div>
   </div>
 
+  <div id="progression-toast" class="progression-toast hidden" role="status" aria-live="polite"></div>
+
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <!-- Optional: set your backend URL to enable sync and push reminders (e.g. http://localhost:3030) -->
   <!-- <script>window.PATH_PULSE_API = 'http://localhost:3030';</script> -->
-  <script src="app.js?v=6"></script>
+  <script src="terrain-energy-core.js?v=1"></script>
+  <script src="progression.js?v=1"></script>
+  <script src="app.js?v=9"></script>
 </body>
 </html>

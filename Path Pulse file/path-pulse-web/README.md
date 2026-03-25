@@ -37,7 +37,7 @@ Run Path-Pulse in your **browser** — no Flutter or mobile SDK required.
 ## What’s in it
 
 - **Oath** — Accept the Explorer’s Oath to enter the app.
-- **Home** — Kinetic step ring, BMI/BMR, metabolic burn, Start Expedition, last route distance, and **Mission: Walk 2 km this week** with progress.
+- **Home** — Kinetic step ring; **auto step tracking defaults on** (browser motion while the app is open; iPhone needs one tap on “Auto track” for permission). **Stopping an expedition** adds GPS-based steps to today’s total. Sensitivity 1–5. Mission: walk 2 km this week.
 - **Map** — Dark map (CartoDB), your location, **Start/Stop Expedition** to record a route (cyan line). When you stop, distance is calculated and steps estimated from the route.
 - **Report** — Weekly diagnostic: distance this week, today's steps, verdict (OPTIMAL / STABLE / INITIATE).
 - **Profile** — Weight, height, age, sex; save baseline. BMI/BMR update from your inputs.

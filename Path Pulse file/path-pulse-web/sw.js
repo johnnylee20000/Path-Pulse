@@ -1,12 +1,14 @@
 /* Path-Pulse — minimal service worker for offline + map tiles */
 /* Bump CACHE_NAME when you ship breaking cache changes (deployments pick up new SW). */
-const CACHE_NAME = 'path-pulse-v3';
+const CACHE_NAME = 'path-pulse-v9';
 const TILES_CACHE = 'path-pulse-tiles-v1';
 
 const APP_ASSETS = [
   './',
   './index.html',
   './app.js',
+  './progression.js',
+  './terrain-energy-core.js',
   './styles.css',
   './manifest.json',
   './icon-512.png',

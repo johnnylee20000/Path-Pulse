@@ -37,6 +37,25 @@ body {
 
 #app { min-height: 100vh; }
 
+/* Milestone UI skins (data-pp-skin on #app) */
+#app[data-pp-skin="slate"] {
+  --obsidian: #080a0d;
+  --surface: rgba(255,255,255,0.06);
+  --border-subtle: rgba(0,245,255,0.22);
+}
+#app[data-pp-skin="prism"] {
+  --obsidian: #0a0c12;
+  --surface: rgba(180, 200, 255, 0.08);
+  --cyan: #7ee8ff;
+  --border-subtle: rgba(180, 220, 255, 0.2);
+}
+#app[data-pp-skin="carbon"] {
+  --obsidian: #050506;
+  --cyan: #00e8f0;
+  --lime: #00ffc6;
+  --surface: rgba(255,255,255,0.04);
+}
+
 #tab-content {
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
@@ -384,6 +403,28 @@ body {
 .map-distance-hud .hud-primary { font-weight: 700; color: var(--white); }
 .map-distance-hud .hud-expedition { color: var(--cyan); font-size: 0.7rem; }
 .map-distance-hud .hud-expedition #map-expedition-steps { color: var(--lime); font-weight: 800; font-size: 0.85rem; }
+.map-distance-hud .hud-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0.15rem 0;
+}
+.map-distance-hud .hud-terrain { flex-wrap: wrap; }
+.map-distance-hud .hud-terrain-label { flex-shrink: 0; }
+.map-distance-hud .map-surface-select {
+  flex: 1;
+  min-width: 0;
+  max-width: 12rem;
+  font-size: 0.65rem;
+  padding: 0.3rem 0.4rem;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 245, 255, 0.28);
+  background: rgba(11, 14, 17, 0.95);
+  color: var(--text);
+  font-family: inherit;
+}
+.map-distance-hud #map-terrain-kcal { color: var(--lime); font-weight: 700; font-size: 0.72rem; text-align: right; }
 
 .gps-unavailable-msg {
   position: absolute;
@@ -667,6 +708,52 @@ body {
   color: var(--gray);
   letter-spacing: 0.03em;
 }
+.step-sensitivity-row {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.step-sensitivity-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--gray);
+}
+.step-sensitivity-select {
+  width: 100%;
+  padding: 0.5rem 0.65rem;
+  font-size: 0.8rem;
+  font-family: inherit;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 245, 255, 0.25);
+  background: rgba(11, 14, 17, 0.9);
+  color: var(--text);
+  cursor: pointer;
+}
+.step-sensitivity-select:focus {
+  outline: 2px solid rgba(0, 245, 255, 0.45);
+  outline-offset: 2px;
+}
+.step-sensitivity-hint {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.45;
+  color: var(--gray);
+  letter-spacing: 0.02em;
+}
+.home-steps-platform-hint {
+  margin: 0.35rem 0 0;
+  padding: 0.5rem 0.55rem;
+  font-size: 9px;
+  line-height: 1.5;
+  color: rgba(156, 163, 175, 0.95);
+  letter-spacing: 0.02em;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.2);
+}
+.home-steps-platform-hint strong { color: var(--gray); }
 .ring-bg, .ring-fill {
   position: absolute;
   inset: 0;
@@ -1438,3 +1525,101 @@ button, input, select, textarea { font-family: inherit; }
   outline: 2px solid rgba(0,245,255,0.95);
   outline-offset: 2px;
 }
+
+/* Progression & epics */
+.progression-card {
+  margin-top: 1.25rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--border-subtle);
+}
+.progression-card h3 { margin: 0 0 0.5rem; font-size: 0.95rem; letter-spacing: 0.06em; color: var(--cyan); }
+.progression-card h4.epic-heading {
+  margin: 1rem 0 0.35rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--gray);
+}
+.progression-momentum-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--gray);
+  margin-top: 0.5rem;
+}
+.progression-momentum-val { color: var(--cyan); font-weight: 700; }
+.progression-momentum-bar {
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  overflow: hidden;
+  margin: 0.35rem 0 0.75rem;
+}
+.progression-momentum-fill {
+  height: 100%;
+  width: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(0,245,255,0.35), var(--cyan));
+  transition: width 0.35s ease;
+}
+.milestone-badge-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0.35rem 0 0.75rem;
+}
+.ms-badge {
+  font-size: 0.65rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: 4px;
+  border: 1px dashed rgba(255,255,255,0.25);
+  color: var(--gray);
+}
+.ms-badge-on {
+  border-color: rgba(0,245,255,0.55);
+  color: var(--cyan);
+  box-shadow: 0 0 0 1px rgba(0,245,255,0.12);
+}
+#select-ui-skin {
+  width: 100%;
+  max-width: 20rem;
+  margin: 0.25rem 0 0.5rem;
+  padding: 0.45rem 0.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(0,0,0,0.35);
+  color: var(--white);
+}
+.epic-expedition-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.epic-row {
+  padding: 0.5rem 0.65rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface);
+}
+.epic-row.epic-done { border-color: rgba(57,255,20,0.35); }
+.epic-row.epic-locked { opacity: 0.55; }
+.epic-row-head { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; }
+.epic-title { font-weight: 600; font-size: 0.85rem; }
+.epic-lvl { font-size: 0.7rem; color: var(--cyan); }
+.epic-need { margin: 0.35rem 0 0.25rem; font-size: 0.72rem; color: var(--gray); line-height: 1.35; }
+.epic-state { font-size: 0.68rem; color: var(--lime); text-transform: uppercase; letter-spacing: 0.04em; }
+.epic-row.epic-locked .epic-state { color: var(--gray); }
+
+.progression-toast {
+  position: fixed;
+  bottom: 5.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: min(92vw, 22rem);
+  padding: 0.65rem 1rem;
+  border-radius: 10px;
+  background: rgba(8,12,18,0.94);
+  border: 1px solid rgba(0,245,255,0.35);
+  color: var(--white);
+  font-size: 0.82rem;
+  line-height: 1.35;
+  z-index: 9999;
+  box-shadow: var(--shadow-1);
+  text-align: center;
+}
+.progression-toast.hidden { display: none !important; }

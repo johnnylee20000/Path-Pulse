@@ -5,14 +5,19 @@
  * - Cron sends reminder at stored reminderTime (requires VAPID keys in .env)
  */
 const fs = require('fs');
+const http = require('http');
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const cron = require('node-cron');
 const webpush = require('web-push');
+const terrainEnergy = require('./terrain-energy');
+const { mountV1 } = require('./api/v1');
+const { attachLiveWss } = require('./ws/live');
 
 const app = express();
 const PORT = process.env.PORT || 3030;
+const WEB_ROOT = path.join(__dirname, '..');
 const DATA_DIR = path.join(__dirname, 'data');
 const SYNC_FILE = (id) => path.join(DATA_DIR, `sync-${sanitizeId(id)}.json`);
 const PUSH_FILE = path.join(DATA_DIR, 'push-subscriptions.json');
@@ -62,6 +67,7 @@ function writePushSubscriptions(arr) {
 
 app.use(cors({ origin: true }));
 app.use(express.json({ limit: '2mb' }));
+app.use(express.static(WEB_ROOT, { index: false }));
 
 // ——— Sync ———
 app.get('/api/sync', function (req, res) {
@@ -124,6 +130,29 @@ app.get('/api/health', function (req, res) {
   res.json({ status: 'ok', service: 'path-pulse-api' });
 });
 
+mountV1(app);
+
+// ——— Terrain-aware expedition energy (same model as terrain-energy-core.js) ———
+app.post('/api/routes/energy', function (req, res) {
+  const body = req.body || {};
+  const points = body.points;
+  const weightKg = parseFloat(body.weightKg);
+  const surfaceKey = typeof body.surfaceKey === 'string' ? body.surfaceKey : 'pavement';
+  const defaultSpeedKmh = body.defaultSpeedKmh != null ? parseFloat(body.defaultSpeedKmh) : 5;
+  if (!Array.isArray(points) || points.length < 2) {
+    return res.status(400).json({ error: 'points array with at least 2 {lat,lng,alt?,t?} required' });
+  }
+  if (!Number.isFinite(weightKg) || weightKg <= 0) {
+    return res.status(400).json({ error: 'weightKg must be a positive number' });
+  }
+  try {
+    const out = terrainEnergy.estimateRouteTerrainKcal(points, weightKg, surfaceKey, defaultSpeedKmh);
+    res.json(out);
+  } catch (e) {
+    res.status(500).json({ error: e.message || 'terrain energy failed' });
+  }
+});
+
 // ——— Web Push (cron) ———
 const vapidPublic = process.env.VAPID_PUBLIC;
 const vapidPrivate = process.env.VAPID_PRIVATE;
@@ -180,8 +209,16 @@ if (vapidPublic && vapidPrivate) {
 }
 
 ensureDataDir();
-app.listen(PORT, function () {
+
+const httpServer = http.createServer(app);
+attachLiveWss(httpServer);
+
+httpServer.listen(PORT, function () {
   console.log('Path Pulse API on http://localhost:' + PORT);
+  console.log('WebSocket live tracking: ws://localhost:' + PORT + '/ws/live');
+  if (!process.env.DATABASE_URL) {
+    console.log('Optional: set DATABASE_URL for PostgreSQL (profile, XP, expeditions). Run: npm run db:migrate');
+  }
   if (!vapidPublic || !vapidPrivate) {
     console.log('Optional: set VAPID_PUBLIC and VAPID_PRIVATE for Web Push reminders. Run: npm run generate-vapid');
   }
