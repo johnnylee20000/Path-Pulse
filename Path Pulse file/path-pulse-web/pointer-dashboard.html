@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Path Pulse — Pointer Dashboard</title>
+  <link rel="stylesheet" href="pointer-dashboard.css" />
+</head>
+<body>
+  <header class="pp-head">
+    <h1>Path Pulse pointer</h1>
+    <p class="pp-sub">3D wireframe route · time-lapse replay</p>
+  </header>
+
+  <div class="pp-toolbar">
+    <label>API base <input type="text" id="apiBase" placeholder="http://localhost:3030" /></label>
+    <label>Expedition ID <input type="text" id="expeditionId" placeholder="uuid" /></label>
+    <button type="button" id="btnLoad">Load replay</button>
+    <label class="pp-live"><input type="checkbox" id="followLive" /> Follow live (same-origin / wss)</label>
+    <span id="status" class="pp-status"></span>
+  </div>
+
+  <div class="pp-stage-wrap">
+    <canvas id="c"></canvas>
+    <div class="pp-hud">
+      <div class="pp-meta" id="meta"></div>
+      <div class="pp-controls">
+        <button type="button" id="btnPlay">Play</button>
+        <label>Progress <input type="range" id="scrub" min="0" max="1000" value="0" /></label>
+        <label>Speed <input type="range" id="speed" min="1" max="50" value="12" /></label>
+      </div>
+    </div>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.170.0/build/three.module.js"
+    }
+  }
+  </script>
+  <script type="module" src="pointer-dashboard.js"></script>
+</body>
+</html>

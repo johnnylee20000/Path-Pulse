@@ -1,0 +1,139 @@
+:root {
+  --bg: #070a10;
+  --fg: #e8f0ff;
+  --accent: #3dffe8;
+  --muted: #6b7a99;
+  --panel: rgba(12, 18, 32, 0.92);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  background: radial-gradient(1200px 800px at 20% 0%, #122040 0%, var(--bg) 55%);
+  color: var(--fg);
+}
+
+.pp-head {
+  padding: 1.25rem 1.5rem 0.5rem;
+}
+
+.pp-head h1 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.35rem;
+  letter-spacing: 0.02em;
+}
+
+.pp-sub {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.pp-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  align-items: center;
+  padding: 0.75rem 1.5rem 1rem;
+  border-bottom: 1px solid rgba(61, 255, 232, 0.12);
+}
+
+.pp-toolbar label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.pp-toolbar label.pp-live {
+  color: var(--accent);
+}
+
+.pp-toolbar input[type="text"] {
+  min-width: 12rem;
+  padding: 0.4rem 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--fg);
+}
+
+#btnLoad,
+#btnPlay {
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(61, 255, 232, 0.35);
+  background: rgba(61, 255, 232, 0.08);
+  color: var(--accent);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#btnLoad:hover,
+#btnPlay:hover {
+  background: rgba(61, 255, 232, 0.16);
+}
+
+.pp-status {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.pp-stage-wrap {
+  position: relative;
+  margin: 0 1rem 1.5rem;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(61, 255, 232, 0.15);
+  min-height: 60vh;
+  background: #030508;
+}
+
+#c {
+  display: block;
+  width: 100%;
+  height: min(72vh, 720px);
+}
+
+.pp-hud {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.75rem 1rem;
+  background: var(--panel);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(61, 255, 232, 0.12);
+}
+
+.pp-meta {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.pp-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  align-items: center;
+}
+
+.pp-controls label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.pp-controls input[type="range"] {
+  width: 140px;
+}

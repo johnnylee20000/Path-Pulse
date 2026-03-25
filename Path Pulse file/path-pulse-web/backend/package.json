@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "db:migrate": "node scripts/migrate.js",
     "generate-vapid": "node -e \"const webpush=require('web-push'); const v=webpush.generateVAPIDKeys(); console.log('VAPID_PUBLIC='+v.publicKey); console.log('VAPID_PRIVATE='+v.privateKey);\""
   },
   "engines": { "node": ">=18" },
@@ -12,6 +13,8 @@
     "cors": "^2.8.5",
     "express": "^4.21.0",
     "node-cron": "^3.0.3",
-    "web-push": "^3.6.7"
+    "pg": "^8.13.1",
+    "web-push": "^3.6.7",
+    "ws": "^8.18.0"
   }
 }

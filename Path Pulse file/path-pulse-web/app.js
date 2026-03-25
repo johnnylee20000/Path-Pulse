@@ -36,11 +36,22 @@
     sleepLog: 'pathpulse_sleep_log',
     onboardingDismissed: 'pathpulse_onboarding_dismissed',
     motionAuto: 'pathpulse_motion_auto',
+    motionSensitivity: 'pathpulse_motion_sensitivity',
     expeditionStartTime: 'pathpulse_expedition_start_time',
     reminderEnabled: 'pathpulse_reminder_enabled',
     reminderTime: 'pathpulse_reminder_time',
     reminderLastSent: 'pathpulse_reminder_last_sent',
     deviceId: 'pathpulse_device_id',
+    expeditionSurface: 'pathpulse_expedition_surface',
+    progressionMomentum: 'pathpulse_momentum',
+    lastActiveDay: 'pathpulse_last_active_day',
+    restedXpBank: 'pathpulse_rested_xp_bank',
+    restedBoostUntil: 'pathpulse_rested_boost_until',
+    unlockedRewards: 'pathpulse_unlocked_rewards',
+    epicProgress: 'pathpulse_epic_progress',
+    unlockedEpics: 'pathpulse_unlocked_epics',
+    uiSkin: 'pathpulse_ui_skin',
+    dailyXpDay: 'pathpulse_daily_xp_day',
   };
 
   var MAX_SAVED_ROUTE_POINTS = 5000;
@@ -81,6 +92,17 @@
     expeditionStartTime: null,
     reminderEnabled: false,
     reminderTime: '18:00',
+    /** Server-side expedition (PostgreSQL) when PATH_PULSE_API + DB are available */
+    serverExpeditionId: null,
+    serverPointsSynced: 0,
+    progressionMomentum: 100,
+    progressionLastDay: '',
+    restedXpBank: 0,
+    restedBoostUntil: '',
+    unlockedRewards: {},
+    epicProgress: {},
+    unlockedEpics: {},
+    selectedUiSkin: 'default',
   };
 
   function heightToM(val, unit) {
@@ -117,6 +139,8 @@
   var calendarMonth = new Date().getMonth();
   var reportGraphPeriod = 'week'; // day | week | month | year
   var reportGraphSelectedKey = null; // dateKey for day/week/month; interval startKey for year
+  /** Last GPS altitude (m, WGS84) from watchPosition — used for first expedition point + terrain model. */
+  var lastGpsAlt = null;
 
   // WHO standard: BMI = weight (kg) / height (m)². Units SI (kg, m).
   function bmi() {
@@ -234,7 +258,7 @@
   }
   function visceralSource() { return state.waistCm != null ? 'waist' : 'BMI/age'; }
   function level() {
-    return Math.floor(0.1 * Math.sqrt(Math.max(0, state.xp)) + 1);
+    return Math.min(100, Math.floor(0.1 * Math.sqrt(Math.max(0, state.xp)) + 1));
   }
   function rank() {
     const l = level();
@@ -247,6 +271,192 @@
   function explorerId() {
     return 'PATHFINDER_' + (100 + (state.xp % 900)) + 'X';
   }
+
+  function loadProgressionFromStorage() {
+    try {
+      var m = localStorage.getItem(STORAGE_KEYS.progressionMomentum);
+      if (m != null) state.progressionMomentum = Math.max(0, Math.min(100, parseInt(m, 10) || 100));
+      state.progressionLastDay = localStorage.getItem(STORAGE_KEYS.lastActiveDay) || '';
+      var rb = localStorage.getItem(STORAGE_KEYS.restedXpBank);
+      if (rb != null) state.restedXpBank = Math.max(0, parseInt(rb, 10) || 0);
+      state.restedBoostUntil = localStorage.getItem(STORAGE_KEYS.restedBoostUntil) || '';
+      var ur = localStorage.getItem(STORAGE_KEYS.unlockedRewards);
+      state.unlockedRewards = ur ? JSON.parse(ur) : {};
+      if (!state.unlockedRewards || typeof state.unlockedRewards !== 'object') state.unlockedRewards = {};
+      var ep = localStorage.getItem(STORAGE_KEYS.epicProgress);
+      state.epicProgress = ep ? JSON.parse(ep) : {};
+      if (!state.epicProgress || typeof state.epicProgress !== 'object') state.epicProgress = {};
+      var ue = localStorage.getItem(STORAGE_KEYS.unlockedEpics);
+      state.unlockedEpics = ue ? JSON.parse(ue) : {};
+      if (!state.unlockedEpics || typeof state.unlockedEpics !== 'object') state.unlockedEpics = {};
+      var sk = localStorage.getItem(STORAGE_KEYS.uiSkin);
+      if (sk) state.selectedUiSkin = sk;
+    } catch (e) {}
+  }
+
+  function saveProgressionState() {
+    try {
+      localStorage.setItem(STORAGE_KEYS.progressionMomentum, String(state.progressionMomentum));
+      localStorage.setItem(STORAGE_KEYS.lastActiveDay, state.progressionLastDay || '');
+      localStorage.setItem(STORAGE_KEYS.restedXpBank, String(state.restedXpBank));
+      localStorage.setItem(STORAGE_KEYS.restedBoostUntil, state.restedBoostUntil || '');
+      localStorage.setItem(STORAGE_KEYS.unlockedRewards, JSON.stringify(state.unlockedRewards || {}));
+      localStorage.setItem(STORAGE_KEYS.epicProgress, JSON.stringify(state.epicProgress || {}));
+      localStorage.setItem(STORAGE_KEYS.unlockedEpics, JSON.stringify(state.unlockedEpics || {}));
+      localStorage.setItem(STORAGE_KEYS.uiSkin, state.selectedUiSkin || 'default');
+    } catch (e) {}
+  }
+
+  function getGameProgressPayload() {
+    return {
+      momentum: state.progressionMomentum,
+      lastActiveDay: state.progressionLastDay,
+      restedXpBank: state.restedXpBank,
+      restedBoostUntil: state.restedBoostUntil,
+      unlockedRewards: state.unlockedRewards || {},
+      epicProgress: state.epicProgress || {},
+      unlockedEpics: state.unlockedEpics || {},
+      selectedUiSkin: state.selectedUiSkin || 'default',
+    };
+  }
+
+  function mergeGameProgressFromServer(g) {
+    if (!g || typeof g !== 'object') return;
+    if (typeof g.momentum === 'number')
+      state.progressionMomentum = Math.max(state.progressionMomentum || 0, Math.min(100, g.momentum));
+    if (typeof g.restedXpBank === 'number')
+      state.restedXpBank = Math.max(state.restedXpBank || 0, g.restedXpBank);
+    if (typeof g.restedBoostUntil === 'string' && g.restedBoostUntil)
+      if (!state.restedBoostUntil || g.restedBoostUntil > state.restedBoostUntil) state.restedBoostUntil = g.restedBoostUntil;
+    var ur = g.unlockedRewards;
+    if (ur && typeof ur === 'object') {
+      Object.keys(ur).forEach(function (k) {
+        if (ur[k]) state.unlockedRewards[k] = true;
+      });
+    }
+    var ue = g.unlockedEpics;
+    if (ue && typeof ue === 'object') {
+      Object.keys(ue).forEach(function (k) {
+        if (ue[k]) state.unlockedEpics[k] = true;
+      });
+    }
+    var ep = g.epicProgress;
+    if (ep && typeof ep === 'object') {
+      if ((ep.singularityStreak || 0) > (state.epicProgress.singularityStreak || 0))
+        state.epicProgress.singularityStreak = ep.singularityStreak;
+      if ((ep.twinCount || 0) > (state.epicProgress.twinCount || 0)) {
+        state.epicProgress.twinCount = ep.twinCount;
+        state.epicProgress.twinTodayKey = ep.twinTodayKey;
+      }
+      if (ep.singLastDay) state.epicProgress.singLastDay = ep.singLastDay;
+    }
+    if (typeof g.selectedUiSkin === 'string' && g.selectedUiSkin) state.selectedUiSkin = g.selectedUiSkin;
+  }
+
+  function reconcileMilestoneUnlocksForLevel() {
+    if (typeof PathPulseProgression === 'undefined') return;
+    var lv = level();
+    var changed = false;
+    for (var i = 0; i < PathPulseProgression.MILESTONE_LEVELS.length; i++) {
+      var L = PathPulseProgression.MILESTONE_LEVELS[i];
+      if (lv >= L && !state.unlockedRewards['L' + L]) {
+        state.unlockedRewards['L' + L] = true;
+        var mm = PathPulseProgression.milestoneMeta(L);
+        if (mm.id) state.unlockedRewards[mm.id] = true;
+        changed = true;
+      }
+    }
+    if (changed) saveProgressionState();
+  }
+
+  function recordProgressionCheckIn() {
+    if (typeof PathPulseProgression === 'undefined') return;
+    var today = getTodayKey();
+    var last = state.progressionLastDay || '';
+    if (last === today) {
+      saveProgressionState();
+      return;
+    }
+    if (last) {
+      var gap = PathPulseProgression.daysBetweenKeys(last, today);
+      if (gap > 1) {
+        state.progressionMomentum = PathPulseProgression.decayMomentum(state.progressionMomentum, gap - 1);
+      }
+      if (gap >= 3) {
+        state.restedXpBank = PathPulseProgression.computeRestedBank(gap, level(), state.restedXpBank);
+        state.restedBoostUntil = PathPulseProgression.addCalendarDays(today, 3);
+      }
+    }
+    state.progressionLastDay = today;
+    state.progressionMomentum = Math.min(100, (state.progressionMomentum || 100) + 5);
+    saveProgressionState();
+  }
+
+  function showProgressionToast(msg) {
+    if (!msg) return;
+    var el = document.getElementById('progression-toast');
+    if (!el) return;
+    el.textContent = msg;
+    el.classList.remove('hidden');
+    clearTimeout(showProgressionToast._t);
+    showProgressionToast._t = setTimeout(function () {
+      el.classList.add('hidden');
+    }, 5200);
+  }
+
+  function applyUiSkinToDom() {
+    var app = document.getElementById('app');
+    if (!app) return;
+    var skin = state.selectedUiSkin || 'default';
+    var allowed = { default: true };
+    if (state.unlockedRewards && state.unlockedRewards.skin_slate) allowed.slate = true;
+    if (state.unlockedRewards && state.unlockedRewards.skin_prism) allowed.prism = true;
+    if (state.unlockedRewards && state.unlockedRewards.skin_carbon) allowed.carbon = true;
+    if (!allowed[skin]) skin = 'default';
+    app.setAttribute('data-pp-skin', skin);
+  }
+
+  function skinUnlocked(id) {
+    return !!(state.unlockedRewards && state.unlockedRewards[id]);
+  }
+
+  /**
+   * Award XP with momentum + rested boost. Returns amount actually added (after multipliers).
+   */
+  function addXp(base, tag) {
+    if (!state.oathAccepted || base <= 0) return 0;
+    if (typeof PathPulseProgression === 'undefined') {
+      state.xp += Math.floor(base);
+      saveOath();
+      return Math.floor(base);
+    }
+    var prevLv = level();
+    var today = getTodayKey();
+    var applied = PathPulseProgression.applyXpGain(base, {
+      momentum: state.progressionMomentum,
+      restedBank: state.restedXpBank,
+      todayKey: today,
+      restedBoostUntil: state.restedBoostUntil || '',
+    });
+    state.xp += applied.total;
+    state.restedXpBank = applied.restedBankAfter;
+    state.progressionMomentum = Math.min(100, (state.progressionMomentum || 100) + 3);
+    var newLv = level();
+    var milestones = PathPulseProgression.newMilestones(prevLv, newLv, state.unlockedRewards);
+    for (var mi = 0; mi < milestones.length; mi++) {
+      var L = milestones[mi];
+      state.unlockedRewards['L' + L] = true;
+      var meta = PathPulseProgression.milestoneMeta(L);
+      if (meta.id) state.unlockedRewards[meta.id] = true;
+      showProgressionToast('Milestone L' + L + ': ' + meta.name + ' unlocked.');
+    }
+    saveProgressionState();
+    saveOath();
+    applyUiSkinToDom();
+    updateHomeUI();
+    return applied.total;
+  }
+
   function burn() {
     const base = state.dailySteps * 0.04 * 1.2;
     return Math.round(base);
@@ -294,11 +504,50 @@
     prevVal: 0,
     lastPeakMs: 0,
     minIntervalMs: 320,
+    /** Linear-acceleration magnitude threshold (higher = stricter, fewer false steps). */
+    linearTh: 1.55,
+    /** Gravity-deviation threshold for Accelerometer fallback (higher = stricter). */
+    gravityTh: 1.45,
+    sensitivityLevel: 3,
     lastError: '',
     mode: '',
     stepsSincePersist: 0,
     persistTimer: null,
+    /** iOS: motion permission must follow a user tap; show hint until user taps Auto track. */
+    iosAwaitingPermissionTap: false,
+    _permissionFromUserGesture: false,
   };
+
+  /** 1 = strictest … 5 = most sensitive. Level 3 matches original tuning. */
+  function applyMotionSensitivityParams(level) {
+    var L = parseInt(level, 10);
+    if (isNaN(L) || L < 1 || L > 5) L = 3;
+    motion.sensitivityLevel = L;
+    var linear = [2.15, 1.88, 1.55, 1.32, 1.12];
+    var gravity = [1.95, 1.68, 1.45, 1.22, 1.02];
+    var intervals = [620, 460, 320, 260, 200];
+    motion.linearTh = linear[L - 1];
+    motion.gravityTh = gravity[L - 1];
+    motion.minIntervalMs = intervals[L - 1];
+  }
+
+  function loadMotionSensitivity() {
+    try {
+      var s = localStorage.getItem(STORAGE_KEYS.motionSensitivity);
+      var L = s != null && s !== '' ? parseInt(s, 10) : 3;
+      applyMotionSensitivityParams(L);
+    } catch (e) {
+      applyMotionSensitivityParams(3);
+    }
+  }
+
+  function saveMotionSensitivity(level) {
+    var L = Math.max(1, Math.min(5, parseInt(level, 10) || 3));
+    try {
+      localStorage.setItem(STORAGE_KEYS.motionSensitivity, String(L));
+    } catch (e) {}
+    applyMotionSensitivityParams(L);
+  }
 
   function saveMotionPreference() {
     try {
@@ -308,9 +557,14 @@
 
   function loadMotionPreference() {
     try {
-      motion.enabled = localStorage.getItem(STORAGE_KEYS.motionAuto) === '1';
+      var v = localStorage.getItem(STORAGE_KEYS.motionAuto);
+      if (v === null || v === '') {
+        motion.enabled = true;
+      } else {
+        motion.enabled = v === '1';
+      }
     } catch (e) {
-      motion.enabled = false;
+      motion.enabled = true;
     }
   }
 
@@ -351,12 +605,12 @@
 
   function processLinearSample(x, y, z) {
     var mag = Math.sqrt(x * x + y * y + z * z);
-    processThresholdCrossing(mag, 1.55);
+    processThresholdCrossing(mag, motion.linearTh);
   }
 
   function processGravityDeviationSample(mag) {
     var d = Math.abs(mag - 9.81);
-    processThresholdCrossing(d, 1.45);
+    processThresholdCrossing(d, motion.gravityTh);
   }
 
   function stopMotionTracking() {
@@ -464,19 +718,37 @@
     updateMotionUI();
   }
 
+  function isIOSDeviceMotionPermissionAPI() {
+    return typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function';
+  }
+
   function tryStartMotionTracking() {
     motion.lastError = '';
     if (!motion.enabled) return;
 
-    if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
+    if (isIOSDeviceMotionPermissionAPI()) {
+      if (motion.mode === 'ios' && motion.iosListener) {
+        updateMotionUI();
+        return;
+      }
+      if (!motion._permissionFromUserGesture) {
+        motion.iosAwaitingPermissionTap = true;
+        motion.lastError = 'Tap “Auto track” once to allow motion (required on iPhone).';
+        updateMotionUI();
+        return;
+      }
+      motion._permissionFromUserGesture = false;
+      motion.iosAwaitingPermissionTap = false;
       DeviceMotionEvent.requestPermission()
         .then(function (status) {
           if (status === 'granted') {
+            motion.iosAwaitingPermissionTap = false;
             startIOSDeviceMotionListener();
             updateMotionUI();
           } else {
             motion.lastError = 'Motion access denied';
             motion.enabled = false;
+            motion.iosAwaitingPermissionTap = false;
             saveMotionPreference();
             updateMotionUI();
           }
@@ -484,12 +756,14 @@
         .catch(function () {
           motion.lastError = 'Motion permission failed';
           motion.enabled = false;
+          motion.iosAwaitingPermissionTap = false;
           saveMotionPreference();
           updateMotionUI();
         });
       return;
     }
 
+    motion.iosAwaitingPermissionTap = false;
     startMotionTracking();
   }
 
@@ -500,10 +774,12 @@
       btn.textContent = motion.enabled ? 'Auto track: on' : 'Auto track: off';
       btn.setAttribute('aria-pressed', motion.enabled ? 'true' : 'false');
     }
+    var sensSel = document.getElementById('select-step-sensitivity');
+    if (sensSel && String(motion.sensitivityLevel) !== sensSel.value) sensSel.value = String(motion.sensitivityLevel);
     if (!hint) return;
     if (!motion.enabled) {
       hint.textContent =
-        'Turn on to estimate steps from movement. Expedition distance adds to your total only when auto track is off (avoids double count).';
+        'Off — turn on to count steps from phone motion while the app is open. Ending an expedition still adds GPS-based steps to your daily total.';
       return;
     }
     if (motion.lastError) {
@@ -511,9 +787,18 @@
       return;
     }
     if (motion.mode === 'linear')
-      hint.textContent = 'Live · counts in background while the app stays open (some devices pause sensors if you switch apps).';
-    else if (motion.mode === 'accel') hint.textContent = 'Live · accelerometer (estimate). Keeps running when you change tabs.';
-    else if (motion.mode === 'ios') hint.textContent = 'Live · motion (iPhone). Expedition steps use the map HUD; daily ring is your full total.';
+      hint.textContent =
+        'Live · counts in background while the app stays open (some devices pause sensors if you switch apps). Sensitivity ' +
+        motion.sensitivityLevel +
+        '/5.';
+    else if (motion.mode === 'accel')
+      hint.textContent =
+        'Live · accelerometer (estimate). Keeps running when you change tabs. Sensitivity ' + motion.sensitivityLevel + '/5.';
+    else if (motion.mode === 'ios')
+      hint.textContent =
+        'Live · motion (iPhone). Expedition steps use the map HUD; daily ring is your full total. Sensitivity ' +
+        motion.sensitivityLevel +
+        '/5.';
     else hint.textContent = 'Starting…';
   }
 
@@ -648,15 +933,33 @@
     } catch (e) {}
   }
 
-  function logToday(distanceKm) {
+  function logToday(distanceKm, meta) {
     const key = getTodayKey();
     const hist = loadHistory();
     var found = hist.find(function (e) { return e.date === key; });
+    function applyMeta(entry) {
+      if (!meta || typeof meta !== 'object') return;
+      if (typeof meta.terrainKcal === 'number' && meta.terrainKcal > 0) {
+        entry.terrainKcal = (entry.terrainKcal || 0) + meta.terrainKcal;
+      }
+      if (typeof meta.elevGainM === 'number' && meta.elevGainM > 0) {
+        entry.elevGainM = (entry.elevGainM || 0) + meta.elevGainM;
+      }
+      if (typeof meta.avgAbsGradePct === 'number') {
+        entry.avgAbsGradePct = meta.avgAbsGradePct;
+      }
+      if (meta.usedFlatFallback === true || meta.usedFlatFallback === false) {
+        entry.terrainModel = meta.usedFlatFallback ? 'flat_met' : 'grade_met';
+      }
+    }
     if (found) {
       found.distanceKm = (found.distanceKm || 0) + distanceKm;
       found.steps = state.dailySteps;
+      applyMeta(found);
     } else {
-      hist.push({ date: key, distanceKm: distanceKm, steps: state.dailySteps });
+      var entry = { date: key, distanceKm: distanceKm, steps: state.dailySteps };
+      applyMeta(entry);
+      hist.push(entry);
     }
     saveHistory(hist);
   }
@@ -746,6 +1049,328 @@
         if (cb) cb();
       })
       .catch(function () { if (cb) cb(); });
+  }
+
+  var v1XpSynced = null;
+  var v1XpTimeout = null;
+  var v1ProfileTimeout = null;
+  var serverPointsFlushTimer = null;
+  var ppLiveWs = null;
+
+  function wsUrlFromApiBase(api) {
+    if (!api) return '';
+    if (api.indexOf('https://') === 0) return 'wss://' + api.slice(8) + '/ws/live';
+    if (api.indexOf('http://') === 0) return 'ws://' + api.slice(7) + '/ws/live';
+    return '';
+  }
+
+  function closePpLiveWs() {
+    if (ppLiveWs) {
+      try {
+        ppLiveWs.onclose = null;
+        ppLiveWs.close();
+      } catch (e) {}
+      ppLiveWs = null;
+    }
+  }
+
+  function openPpLiveWs(expeditionId) {
+    var api = getApiBase();
+    var url = wsUrlFromApiBase(api);
+    if (!url || !expeditionId || typeof WebSocket === 'undefined') return;
+    closePpLiveWs();
+    try {
+      ppLiveWs = new WebSocket(url);
+      ppLiveWs.onopen = function () {
+        try {
+          ppLiveWs.send(JSON.stringify({ type: 'subscribe', expeditionId: expeditionId }));
+        } catch (e) {}
+      };
+      ppLiveWs.onerror = function () {};
+      ppLiveWs.onclose = function () { ppLiveWs = null; };
+    } catch (e) {
+      ppLiveWs = null;
+    }
+  }
+
+  function profilePayloadForV1() {
+    var wkg = weightToKg(state.weight, state.weightUnit);
+    var hm = heightToM(state.height, state.heightUnit);
+    var comp = {};
+    if (state.waistCm != null && isFinite(state.waistCm)) comp.waistCm = state.waistCm;
+    if (state.neckCm != null && isFinite(state.neckCm)) comp.neckCm = state.neckCm;
+    if (state.hipCm != null && isFinite(state.hipCm)) comp.hipCm = state.hipCm;
+    var body = {
+      weightKg: wkg,
+      heightM: hm,
+      age: state.age,
+      isMale: state.isMale,
+    };
+    if (Object.keys(comp).length) body.bodyComposition = comp;
+    return body;
+  }
+
+  function pullV1Profile(cb) {
+    var api = getApiBase();
+    if (!api) {
+      if (cb) cb();
+      return;
+    }
+    var dev = getDeviceId();
+    fetch(api + '/api/v1/explorers/' + encodeURIComponent(dev) + '/profile')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (!data || !data.ok) {
+          v1XpSynced = state.xp;
+          if (cb) cb();
+          return;
+        }
+        var changed = false;
+        var sx = typeof data.xp === 'number' ? data.xp : 0;
+        if (sx > state.xp) {
+          state.xp = sx;
+          try {
+            localStorage.setItem(STORAGE_KEYS.xp, String(state.xp));
+          } catch (e) {}
+          changed = true;
+        }
+        v1XpSynced = state.xp;
+        var pr = data.profile || {};
+        if (pr.weightKg != null && isFinite(pr.weightKg)) {
+          state.weight = weightFromKg(pr.weightKg, state.weightUnit);
+          changed = true;
+        }
+        if (pr.heightM != null && isFinite(pr.heightM)) {
+          state.height = heightFromM(pr.heightM, state.heightUnit);
+          changed = true;
+        }
+        if (pr.age != null) {
+          var ag = parseInt(pr.age, 10);
+          if (!isNaN(ag) && ag > 0) {
+            state.age = ag;
+            changed = true;
+          }
+        }
+        if (typeof pr.isMale === 'boolean') {
+          state.isMale = pr.isMale;
+          changed = true;
+        }
+        var bc = pr.bodyComposition;
+        if (bc && typeof bc === 'object' && !Array.isArray(bc)) {
+          if (bc.waistCm != null) {
+            var w = parseFloat(bc.waistCm);
+            if (!isNaN(w)) {
+              state.waistCm = w;
+              changed = true;
+            }
+          }
+          if (bc.neckCm != null) {
+            var n = parseFloat(bc.neckCm);
+            if (!isNaN(n)) {
+              state.neckCm = n;
+              changed = true;
+            }
+          }
+          if (bc.hipCm != null) {
+            var h = parseFloat(bc.hipCm);
+            if (!isNaN(h)) {
+              state.hipCm = h;
+              changed = true;
+            }
+          }
+        }
+        if (data.gameProgress && typeof data.gameProgress === 'object') mergeGameProgressFromServer(data.gameProgress);
+        if (changed) saveProfile();
+        saveProgressionState();
+        applyUiSkinToDom();
+        if (cb) cb();
+      })
+      .catch(function () {
+        v1XpSynced = state.xp;
+        if (cb) cb();
+      });
+  }
+
+  function scheduleV1ProfilePush() {
+    var api = getApiBase();
+    if (!api) return;
+    if (v1ProfileTimeout) clearTimeout(v1ProfileTimeout);
+    v1ProfileTimeout = setTimeout(function () {
+      v1ProfileTimeout = null;
+      var dev = getDeviceId();
+      var payload = profilePayloadForV1();
+      payload.gameProgress = getGameProgressPayload();
+      fetch(api + '/api/v1/explorers/' + encodeURIComponent(dev) + '/profile', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      }).catch(function () {});
+    }, 2000);
+  }
+
+  function scheduleV1XpSync() {
+    var api = getApiBase();
+    if (!api) return;
+    if (v1XpTimeout) clearTimeout(v1XpTimeout);
+    v1XpTimeout = setTimeout(function () {
+      v1XpTimeout = null;
+      var dev = getDeviceId();
+      var target = state.xp;
+      var base = v1XpSynced != null ? v1XpSynced : 0;
+      var delta = target - base;
+      if (delta === 0) return;
+      fetch(api + '/api/v1/explorers/' + encodeURIComponent(dev) + '/xp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ delta: delta }),
+      })
+        .then(function (r) {
+          return r.json();
+        })
+        .then(function (data) {
+          if (data && data.ok && typeof data.xp === 'number') {
+            v1XpSynced = data.xp;
+            if (data.xp !== state.xp) {
+              state.xp = data.xp;
+              try {
+                localStorage.setItem(STORAGE_KEYS.xp, String(state.xp));
+              } catch (e) {}
+            }
+          }
+        })
+        .catch(function () {});
+    }, 1200);
+  }
+
+  function getExpeditionSurfaceKey() {
+    var surfKey = 'pavement';
+    try {
+      var surfSel = document.getElementById('select-expedition-surface');
+      if (surfSel && surfSel.value) surfKey = surfSel.value;
+      else {
+        var sk = localStorage.getItem(STORAGE_KEYS.expeditionSurface);
+        if (sk) surfKey = sk;
+      }
+    } catch (e) {}
+    return surfKey;
+  }
+
+  function createServerExpedition() {
+    var api = getApiBase();
+    if (!api) return;
+    var surfKey = getExpeditionSurfaceKey();
+    var dev = getDeviceId();
+    fetch(api + '/api/v1/explorers/' + encodeURIComponent(dev) + '/expeditions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ surfaceKey: surfKey }),
+    })
+      .then(function (r) {
+        return r.json().then(function (j) {
+          return { ok: r.ok, j: j };
+        });
+      })
+      .then(function (o) {
+        if (!o.j || !o.j.ok || !o.j.expeditionId) return;
+        state.serverExpeditionId = o.j.expeditionId;
+        saveExpeditionState();
+        openPpLiveWs(state.serverExpeditionId);
+        scheduleServerPointsFlush();
+      })
+      .catch(function () {});
+  }
+
+  function mapRoutePointsForApi(batch) {
+    return batch.map(function (p) {
+      var o = { lat: p.lat, lng: p.lng };
+      if (p.alt != null && isFinite(p.alt)) o.alt = p.alt;
+      if (p.t != null) o.tMs = p.t;
+      return o;
+    });
+  }
+
+  function flushServerExpeditionPointsLoop(routePts, expeditionId, api, syncedIndex, done) {
+    var unsynced = routePts.slice(syncedIndex);
+    if (unsynced.length === 0) {
+      if (done) done();
+      return;
+    }
+    var batch = unsynced.slice(0, 500);
+    fetch(api + '/api/v1/expeditions/' + encodeURIComponent(expeditionId) + '/points', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ points: mapRoutePointsForApi(batch) }),
+    })
+      .then(function (r) {
+        return r.json().then(function (j) {
+          return { ok: r.ok && j && j.ok, next: syncedIndex + batch.length };
+        });
+      })
+      .then(function (o) {
+        if (o.ok) {
+          state.serverPointsSynced = o.next;
+          saveExpeditionState();
+          if (batch.length < unsynced.length) {
+            flushServerExpeditionPointsLoop(routePts, expeditionId, api, o.next, done);
+            return;
+          }
+        }
+        if (done) done();
+      })
+      .catch(function () {
+        if (done) done();
+      });
+  }
+
+  function scheduleServerPointsFlush() {
+    var api = getApiBase();
+    if (!api || !state.serverExpeditionId || !state.isMissionActive) return;
+    if (serverPointsFlushTimer) clearTimeout(serverPointsFlushTimer);
+    serverPointsFlushTimer = setTimeout(function () {
+      serverPointsFlushTimer = null;
+      if (!state.serverExpeditionId || !state.isMissionActive) return;
+      var unsynced = state.routePoints.length - state.serverPointsSynced;
+      if (unsynced <= 0) return;
+      flushServerExpeditionPointsLoop(
+        state.routePoints,
+        state.serverExpeditionId,
+        api,
+        state.serverPointsSynced,
+        function () {}
+      );
+    }, 1500);
+  }
+
+  function finalizeServerExpedition(km, terrainMeta, surfKey, routePts) {
+    var api = getApiBase();
+    var id = state.serverExpeditionId;
+    closePpLiveWs();
+    function clearSrv() {
+      state.serverExpeditionId = null;
+      state.serverPointsSynced = 0;
+    }
+    if (!api || !id) {
+      clearSrv();
+      return;
+    }
+    var pts = routePts && routePts.length ? routePts : [];
+    var tk = terrainMeta && terrainMeta.terrainKcal != null ? terrainMeta.terrainKcal : undefined;
+    function patchComplete() {
+      fetch(api + '/api/v1/expeditions/' + encodeURIComponent(id) + '/complete', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          distanceKm: km,
+          terrainKcal: tk,
+          surfaceKey: surfKey,
+        }),
+      })
+        .catch(function () {})
+        .finally(function () {
+          clearSrv();
+        });
+    }
+    flushServerExpeditionPointsLoop(pts, id, api, state.serverPointsSynced, patchComplete);
   }
   function registerPushWithBackend(subscription, reminderTime) {
     var api = getApiBase();
@@ -897,7 +1522,8 @@
     else if (steps >= getGoals().steps * 5) insight = 'Strong step count this week.';
     else if (dist >= EXPEDITION_MISSION_KM) insight = 'Mission distance achieved this week.';
     else insight = 'Log expeditions and steps to see insights.';
-    return { steps, burn, dist, ex, insight };
+    var terrainKcal = sumTerrainKcalInRange(rWeek.start, rWeek.end);
+    return { steps, burn, dist, ex, insight, terrainKcal };
   }
 
   function getNudgeMessage() {
@@ -1091,9 +1717,27 @@
     }
     var entry = hist.find(function (e) { return e.date === dateKey; });
     var distanceKm = entry && entry.distanceKm != null ? entry.distanceKm : 0;
+    var terrainKcal = entry && typeof entry.terrainKcal === 'number' ? entry.terrainKcal : 0;
+    var elevGainM = entry && typeof entry.elevGainM === 'number' ? entry.elevGainM : 0;
     var weightEntry = weightHist.find(function (e) { return e.date === dateKey; });
     var weight = weightEntry ? weightEntry.weight : null;
-    return { steps: steps, calories: calories, distanceKm: distanceKm, weight: weight };
+    return {
+      steps: steps,
+      calories: calories,
+      distanceKm: distanceKm,
+      weight: weight,
+      terrainKcal: terrainKcal,
+      elevGainM: elevGainM,
+    };
+  }
+
+  function sumTerrainKcalInRange(startKey, endKey) {
+    var hist = loadHistory();
+    var total = 0;
+    hist.forEach(function (e) {
+      if (e.date >= startKey && e.date <= endKey && typeof e.terrainKcal === 'number') total += e.terrainKcal;
+    });
+    return Math.round(total);
   }
 
   var ACTIVITY_STEPS_REF = 10000;
@@ -1280,6 +1924,13 @@
         '<div class="rp-row"><span class="rp-label">Water</span><span class="rp-val water">' + fmtInt(waterMl) + ' ml</span></div>' +
         '<div class="rp-row"><span class="rp-label">Exercise</span><span class="rp-val exercise">' + fmtInt(exMin) + ' min</span></div>' +
         '<div class="rp-row"><span class="rp-label">Burn (est.)</span><span class="rp-val">' + fmtInt(burnKcal) + ' kcal</span></div>' +
+        (d.terrainKcal > 0
+          ? '<div class="rp-row"><span class="rp-label">Expedition terrain</span><span class="rp-val">' +
+            fmtInt(d.terrainKcal) +
+            ' kcal' +
+            (d.elevGainM > 0 ? ' · Δ↑' + d.elevGainM + 'm' : '') +
+            '</span></div>'
+          : '') +
         (hrAvg != null ? '<div class="rp-row"><span class="rp-label">Heart rate avg</span><span class="rp-val">' + hrAvg + ' bpm</span></div>' : '') +
         (bp ? '<div class="rp-row"><span class="rp-label">Blood pressure</span><span class="rp-val">' + (bp.sys || '—') + '/' + (bp.dia || '—') + '</span></div>' : '') +
         (sleep ? '<div class="rp-row"><span class="rp-label">Sleep</span><span class="rp-val">' + sleep.hours + ' h (' + sleep.quality + ')</span></div>' : '');
@@ -1291,6 +1942,7 @@
       var burnTotal = sumBurnInRange(sKey, eKey);
       var waterTotal = sumWaterInRange(sKey, eKey);
       var exTotal = sumExerciseInRange(sKey, eKey);
+      var terrRange = sumTerrainKcalInRange(sKey, eKey);
       var title = point.label + ' · ' + sKey + ' — ' + eKey;
 
       detailsEl.innerHTML =
@@ -1299,7 +1951,10 @@
         '<div class="rp-row"><span class="rp-label">Distance</span><span class="rp-val">' + fmtKm(distTotal || 0) + ' km</span></div>' +
         '<div class="rp-row"><span class="rp-label">Water</span><span class="rp-val water">' + fmtInt(waterTotal) + ' ml</span></div>' +
         '<div class="rp-row"><span class="rp-label">Exercise</span><span class="rp-val exercise">' + fmtInt(exTotal) + ' min</span></div>' +
-        '<div class="rp-row"><span class="rp-label">Burn (est.)</span><span class="rp-val">' + fmtInt(burnTotal) + ' kcal</span></div>';
+        '<div class="rp-row"><span class="rp-label">Burn (est.)</span><span class="rp-val">' + fmtInt(burnTotal) + ' kcal</span></div>' +
+        (terrRange > 0
+          ? '<div class="rp-row"><span class="rp-label">Expedition terrain</span><span class="rp-val">~' + terrRange + ' kcal</span></div>'
+          : '');
     }
   }
 
@@ -1439,20 +2094,38 @@
     var burn = [];
     var ex = [];
     var sleepH = [];
+    var terrain = [];
     for (var i = 0; i < 7; i++) {
       var k = w.keys[i];
       steps.push(reportStepsForKey(k));
       var dd = getDayData(k);
       if (k === getTodayKey() && typeof state.dailySteps === 'number') {
-        dd = { steps: state.dailySteps, calories: dd.calories, distanceKm: dd.distanceKm, weight: dd.weight };
+        dd = {
+          steps: state.dailySteps,
+          calories: dd.calories,
+          distanceKm: dd.distanceKm,
+          weight: dd.weight,
+          terrainKcal: dd.terrainKcal,
+          elevGainM: dd.elevGainM,
+        };
       }
       dist.push(dd.distanceKm || 0);
       burn.push(estimatedBurnForDay(k));
       ex.push(getDayExerciseMinutes(k));
+      terrain.push(typeof dd.terrainKcal === 'number' ? dd.terrainKcal : 0);
       var sl = getSleepForDay(k);
       sleepH.push(sl && typeof sl.hours === 'number' ? sl.hours : 0);
     }
-    return { labels: w.labels, keys: w.keys, steps: steps, dist: dist, burn: burn, ex: ex, sleepH: sleepH };
+    return {
+      labels: w.labels,
+      keys: w.keys,
+      steps: steps,
+      dist: dist,
+      burn: burn,
+      ex: ex,
+      sleepH: sleepH,
+      terrain: terrain,
+    };
   }
 
   function chartGridLines(pad, chartW, chartH, divisions) {
@@ -1842,6 +2515,69 @@
           })
           .join('');
     }
+
+    var svgTerrain = document.getElementById('report-chart-terrain-bars');
+    if (svgTerrain && s.terrain) {
+      var maxTerr = Math.max.apply(null, s.terrain.concat([1]));
+      if (maxTerr < 1) maxTerr = 1;
+      var hT = 160;
+      var chT = hT - pad * 2 - 14;
+      var barWT = Math.max(4, xStep * 0.55);
+      var rectsT = [];
+      for (var ti = 0; ti < n; ti++) {
+        var cxt = pad + ti * xStep + xStep / 2;
+        var bht = (Math.max(0, s.terrain[ti]) / maxTerr) * chT;
+        var ybt = pad + chT - bht;
+        rectsT.push(
+          '<rect x="' +
+            (cxt - barWT / 2) +
+            '" y="' +
+            ybt +
+            '" width="' +
+            barWT +
+            '" height="' +
+            Math.max(2, bht) +
+            '" rx="3" fill="rgba(251,191,36,0.35)" stroke="rgba(251,191,36,0.65)" stroke-width="1"/>'
+        );
+        if (s.terrain[ti] > 0) {
+          rectsT.push(
+            '<text x="' +
+              cxt +
+              '" y="' +
+              (ybt - 3) +
+              '" text-anchor="middle" fill="rgba(253,224,71,0.95)" font-size="8">' +
+              Math.round(s.terrain[ti]) +
+              '</text>'
+          );
+        }
+      }
+      svgTerrain.innerHTML =
+        '<rect width="' + w + '" height="' + hT + '" fill="transparent"/>' +
+        chartGridLines(pad, chartW, chT, 4) +
+        '<line x1="' +
+        pad +
+        '" y1="' +
+        (pad + chT) +
+        '" x2="' +
+        (pad + chartW) +
+        '" y2="' +
+        (pad + chT) +
+        '" stroke="rgba(255,255,255,0.10)" />' +
+        rectsT.join('') +
+        labels
+          .map(function (lb, ti2) {
+            return (
+              '<text x="' +
+              (pad + ti2 * xStep + xStep / 2) +
+              '" y="' +
+              (hT - 4) +
+              '" text-anchor="middle" fill="rgba(156,163,175,0.9)" font-size="9">' +
+              lb +
+              '</text>'
+            );
+          })
+          .join('');
+    }
   }
 
   function renderProgressCalendar() {
@@ -1881,7 +2617,14 @@
       var key = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
       var data = getDayData(key);
       if (key === getTodayKey() && typeof state.dailySteps === 'number' && state.dailySteps > (data.steps || 0)) {
-        data = { steps: state.dailySteps, calories: data.calories, distanceKm: data.distanceKm, weight: data.weight };
+        data = {
+          steps: state.dailySteps,
+          calories: data.calories,
+          distanceKm: data.distanceKm,
+          weight: data.weight,
+          terrainKcal: data.terrainKcal,
+          elevGainM: data.elevGainM,
+        };
       }
       var parts = [];
       if (data.steps > 0) parts.push((data.steps >= 1000 ? (data.steps / 1000).toFixed(1) + 'k' : data.steps) + ' st');
@@ -2011,6 +2754,8 @@
       var rt = localStorage.getItem(STORAGE_KEYS.reminderTime);
       if (rt) state.reminderTime = rt;
       loadMotionPreference();
+      loadMotionSensitivity();
+      loadProgressionFromStorage();
     } catch (e) {}
   }
 
@@ -2026,6 +2771,8 @@
       localStorage.setItem(STORAGE_KEYS.xp, String(state.xp));
       setStepsForDate(getTodayKey(), state.dailySteps);
     } catch (e) {}
+    scheduleSync();
+    scheduleV1XpSync();
   }
 
   function getWeightHistory() {
@@ -2082,6 +2829,7 @@
       localStorage.setItem(STORAGE_KEYS.calorieGoal, state.calorieGoal);
       saveWeightToHistory();
     } catch (e) {}
+    scheduleV1ProfilePush();
   }
 
   function saveWidgetOptions() {
@@ -2179,6 +2927,93 @@
     updateRouteLine();
   }
 
+  function updateProgressionPanelUI() {
+    var momFill = document.getElementById('progression-momentum-fill');
+    var restedEl = document.getElementById('progression-rested');
+    var boostEl = document.getElementById('progression-boost');
+    var multEl = document.getElementById('progression-mult');
+    var momVal = document.getElementById('progression-momentum-val');
+    var m = Math.max(0, Math.min(100, state.progressionMomentum || 0));
+    if (momFill) momFill.style.width = m + '%';
+    if (momVal) momVal.textContent = String(Math.round(m));
+    if (restedEl) restedEl.textContent = String(Math.max(0, state.restedXpBank || 0));
+    var today = getTodayKey();
+    var boostOn = state.restedBoostUntil && today && today <= state.restedBoostUntil;
+    if (boostEl) {
+      boostEl.textContent = boostOn ? 'On (25% extra draws from rested bank until ' + state.restedBoostUntil + ')' : 'Off';
+    }
+    var mult =
+      typeof PathPulseProgression !== 'undefined'
+        ? PathPulseProgression.momentumMultiplier(state.progressionMomentum)
+        : 0.85 + 0.15 * (m / 100);
+    if (multEl) multEl.textContent = Math.round(mult * 1000) / 10 + '%';
+
+    var skinSel = document.getElementById('select-ui-skin');
+    if (skinSel) {
+      function ensureOpt(v, label) {
+        for (var i = 0; i < skinSel.options.length; i++) {
+          if (skinSel.options[i].value === v) return;
+        }
+        skinSel.appendChild(new Option(label, v));
+      }
+      ensureOpt('default', 'Default');
+      if (skinUnlocked('skin_slate')) ensureOpt('slate', 'Obsidian Slate (L10)');
+      if (skinUnlocked('skin_prism')) ensureOpt('prism', 'Prism Glass (L50)');
+      if (skinUnlocked('skin_carbon')) ensureOpt('carbon', 'Carbon Pulse (L90)');
+      var cur = state.selectedUiSkin || 'default';
+      var allowed = false;
+      for (var si = 0; si < skinSel.options.length; si++) {
+        if (skinSel.options[si].value === cur) allowed = true;
+      }
+      if (!allowed) cur = 'default';
+      skinSel.value = cur;
+      if (cur !== state.selectedUiSkin) {
+        state.selectedUiSkin = cur;
+        saveProgressionState();
+      }
+    }
+
+    var epicList = document.getElementById('epic-expedition-list');
+    if (epicList && typeof PathPulseProgression !== 'undefined') {
+      var defs = PathPulseProgression.epicDefinitions();
+      var html = '';
+      for (var ei = 0; ei < defs.length; ei++) {
+        var d = defs[ei];
+        var done = state.unlockedEpics[d.id];
+        var locked = level() < d.minLevel;
+        html += '<div class="epic-row' + (done ? ' epic-done' : '') + (locked ? ' epic-locked' : '') + '">';
+        html += '<div class="epic-row-head"><span class="epic-title">' + d.title + '</span>';
+        html += '<span class="epic-lvl">L' + d.minLevel + '+</span></div>';
+        html += '<p class="epic-need">' + d.need + '</p>';
+        html +=
+          '<span class="epic-state">' +
+          (done ? 'Cleared · +' + d.bonusXp + ' XP' : locked ? 'Locked' : 'Available — complete on expedition end') +
+          '</span></div>';
+      }
+      epicList.innerHTML = html;
+    }
+
+    var badgeStrip = document.getElementById('milestone-badge-strip');
+    if (badgeStrip && typeof PathPulseProgression !== 'undefined') {
+      var levels = PathPulseProgression.MILESTONE_LEVELS;
+      var parts = '';
+      for (var bi = 0; bi < levels.length; bi++) {
+        var lv = levels[bi];
+        var un = state.unlockedRewards && state.unlockedRewards['L' + lv];
+        var meta = PathPulseProgression.milestoneMeta(lv);
+        parts +=
+          '<span class="ms-badge' +
+          (un ? ' ms-badge-on' : '') +
+          '" title="' +
+          (meta.name || '') +
+          '">L' +
+          lv +
+          '</span>';
+      }
+      badgeStrip.innerHTML = parts;
+    }
+  }
+
   function updateHomeUI() {
     var onb = document.getElementById('onboarding-checklist');
     if (onb) onb.classList.toggle('hidden', isOnboardingDismissed());
@@ -2254,6 +3089,7 @@
         : missionLine;
     }
     updateFuelUI();
+    updateProgressionPanelUI();
   }
 
   var FUEL_ARC_LENGTH = Math.PI * 80;
@@ -2345,14 +3181,35 @@
     var milometerEl = document.getElementById('map-milometer-km');
     var extraRow = document.getElementById('map-expedition-extra-row');
     var expStepsEl = document.getElementById('map-expedition-steps');
+    var terrainSurfRow = document.getElementById('map-terrain-surface-row');
+    var terrainKcalRow = document.getElementById('map-terrain-kcal-row');
+    var terrainKcalEl = document.getElementById('map-terrain-kcal');
     var km = 0;
     if (state.isMissionActive) {
       km = routeDistanceKm();
       if (labelEl) labelEl.textContent = 'EXPEDITION';
       if (extraRow) extraRow.classList.remove('hidden');
       if (expStepsEl) expStepsEl.textContent = String(stepsFromDistanceKm(km));
+      if (terrainSurfRow) terrainSurfRow.classList.remove('hidden');
+      if (terrainKcalRow) terrainKcalRow.classList.remove('hidden');
+      if (typeof PathPulseTerrainEnergy !== 'undefined' && terrainKcalEl && state.routePoints.length >= 2) {
+        var sk = 'pavement';
+        try {
+          var sEl = document.getElementById('select-expedition-surface');
+          if (sEl && sEl.value) sk = sEl.value;
+          else {
+            var sto = localStorage.getItem(STORAGE_KEYS.expeditionSurface);
+            if (sto) sk = sto;
+          }
+        } catch (eH) {}
+        var live = PathPulseTerrainEnergy.estimateRouteTerrainKcal(state.routePoints, state.weight, sk, 5);
+        var suffix = live.hasAltitudeData ? ' · Δ↑' + live.elevGainM + 'm' : ' · flat+surface';
+        terrainKcalEl.textContent = String(live.totalKcal) + ' kcal' + suffix;
+      } else if (terrainKcalEl) terrainKcalEl.textContent = '—';
     } else {
       if (extraRow) extraRow.classList.add('hidden');
+      if (terrainSurfRow) terrainSurfRow.classList.add('hidden');
+      if (terrainKcalRow) terrainKcalRow.classList.add('hidden');
       if (lastRoutePoints && lastRoutePoints.length >= 2) {
         km = routeDistanceFromPoints(lastRoutePoints);
         if (labelEl) labelEl.textContent = 'Last';
@@ -2572,6 +3429,12 @@
     setElText('report-exercise-week', exWeek ? exWeek + ' min' : '—');
     setElText('report-exercise-month', exMonth ? exMonth + ' min' : '—');
     setElText('report-exercise-year', exYear ? exYear + ' min' : '—');
+    var terrToday = getDayData(todayKey).terrainKcal || 0;
+    var terrWeek = sumTerrainKcalInRange(rWeek.start, rWeek.end);
+    var terrMonth = sumTerrainKcalInRange(rMonth.start, rMonth.end);
+    setElText('report-terrain-today', terrToday > 0 ? '~' + terrToday + ' kcal' : '—');
+    setElText('report-terrain-week', terrWeek > 0 ? '~' + terrWeek + ' kcal' : '—');
+    setElText('report-terrain-month', terrMonth > 0 ? '~' + terrMonth + ' kcal' : '—');
     var tw = getTargetWeightKg();
     if (tw != null) {
       setElText('report-target-weight', state.weightUnit === 'lbs' ? weightFromKg(tw, 'lbs').toFixed(1) + ' lbs' : tw.toFixed(1) + ' kg');
@@ -2595,7 +3458,20 @@
     var sum = getWeeklySummary();
     var sumText = document.getElementById('report-summary-text');
     var sumInsight = document.getElementById('report-summary-insight');
-    if (sumText) sumText.textContent = 'This week: ' + sum.steps + ' steps, ' + sum.dist.toFixed(1) + ' km, ~' + sum.burn + ' kcal burned, ' + sum.ex + ' min exercise.';
+    if (sumText) {
+      var terrPart = sum.terrainKcal > 0 ? ' Expedition terrain energy ~' + sum.terrainKcal + ' kcal.' : '';
+      sumText.textContent =
+        'This week: ' +
+        sum.steps +
+        ' steps, ' +
+        sum.dist.toFixed(1) +
+        ' km, ~' +
+        sum.burn +
+        ' kcal burned (incl. BMR model), ' +
+        sum.ex +
+        ' min exercise.' +
+        terrPart;
+    }
     if (sumInsight) { sumInsight.textContent = sum.insight; sumInsight.className = 'report-summary-insight'; }
     var g = getGoals();
     setElText('report-goal-steps', g.steps + ' steps');
@@ -2713,6 +3589,7 @@
       var trendText = getWeightTrendText();
       trendEl.textContent = trendText != null ? trendText : '—';
     }
+    updateProgressionPanelUI();
   }
 
   function updateExpeditionButton() {
@@ -2982,13 +3859,17 @@
         lastPositionTime = now;
         var lat = pos.coords.latitude;
         var lng = pos.coords.longitude;
+        if (pos.coords.altitude != null && isFinite(pos.coords.altitude)) lastGpsAlt = pos.coords.altitude;
         updateMapPosition(lat, lng);
         if (state.isMissionActive) {
-          state.routePoints.push({ lat: lat, lng: lng });
+          var pt = { lat: lat, lng: lng, t: now };
+          if (lastGpsAlt != null && isFinite(lastGpsAlt)) pt.alt = lastGpsAlt;
+          state.routePoints.push(pt);
           updateRouteLine();
           /* Steps from expedition are added when you end the mission (distance → steps). */
           updateMapDistanceUI();
           if (state.routePoints.length % 5 === 0) saveExpeditionState();
+          scheduleServerPointsFlush();
         }
       },
       function () {},
@@ -3016,6 +3897,8 @@
         active: true,
         routePoints: points,
         savedAt: Date.now(),
+        serverExpeditionId: state.serverExpeditionId || null,
+        serverSynced: typeof state.serverPointsSynced === 'number' ? state.serverPointsSynced : 0,
       }));
     } catch (e) {}
   }
@@ -3028,6 +3911,8 @@
         if (data && data.active && Array.isArray(data.routePoints)) {
           state.isMissionActive = true;
           state.routePoints = data.routePoints;
+          state.serverExpeditionId = data.serverExpeditionId || null;
+          state.serverPointsSynced = typeof data.serverSynced === 'number' ? data.serverSynced : 0;
           var startRaw = localStorage.getItem(STORAGE_KEYS.expeditionStartTime);
           if (startRaw) state.expeditionStartTime = parseInt(startRaw, 10);
         }
@@ -3050,25 +3935,79 @@
   function toggleExpedition() {
     state.isMissionActive = !state.isMissionActive;
     if (state.isMissionActive) {
-      state.routePoints = state.currentPosition
-        ? [{ lat: state.currentPosition.lat, lng: state.currentPosition.lng }]
-        : [];
+      state.serverExpeditionId = null;
+      state.serverPointsSynced = 0;
+      if (state.currentPosition) {
+        var fp = { lat: state.currentPosition.lat, lng: state.currentPosition.lng, t: Date.now() };
+        if (lastGpsAlt != null && isFinite(lastGpsAlt)) fp.alt = lastGpsAlt;
+        state.routePoints = [fp];
+      } else {
+        state.routePoints = [];
+      }
       state.expeditionStartTime = Date.now();
       try { localStorage.setItem(STORAGE_KEYS.expeditionStartTime, String(state.expeditionStartTime)); } catch (e) {}
       updateRouteLine();
-      state.xp += 10;
-      saveOath();
+      addXp(10, 'expedition_start');
       saveExpeditionState();
+      createServerExpedition();
     } else {
+      var expStartMs =
+        state.expeditionStartTime ||
+        parseInt(localStorage.getItem(STORAGE_KEYS.expeditionStartTime) || '0', 10) ||
+        Date.now();
       var km = routeDistanceKm();
       state.lastRouteKm = km;
       var addedSteps = stepsFromDistanceKm(km);
-      /* Weekly mission uses GPS distance only (logToday). Avoid double-counting steps when auto-track is on — motion already counted your walk. */
-      if (!motion.enabled) {
-        state.dailySteps += addedSteps;
-      }
+      /* Always add GPS-derived steps when you stop an expedition so the daily total reflects walked distance + motion between walks. */
+      state.dailySteps += addedSteps;
       setStepsForDate(getTodayKey(), state.dailySteps);
-      logToday(km);
+      var ptsForTerrain = state.routePoints.slice();
+      var surfKey = 'pavement';
+      try {
+        var surfSel = document.getElementById('select-expedition-surface');
+        if (surfSel && surfSel.value) surfKey = surfSel.value;
+        else {
+          var sk = localStorage.getItem(STORAGE_KEYS.expeditionSurface);
+          if (sk) surfKey = sk;
+        }
+      } catch (eT) {}
+      var terrainMeta = null;
+      if (typeof PathPulseTerrainEnergy !== 'undefined' && ptsForTerrain.length >= 2) {
+        var est = PathPulseTerrainEnergy.estimateRouteTerrainKcal(ptsForTerrain, state.weight, surfKey, 5);
+        terrainMeta = {
+          terrainKcal: est.totalKcal,
+          elevGainM: est.elevGainM,
+          avgAbsGradePct: est.avgAbsGradePct,
+          usedFlatFallback: est.usedFlatFallback,
+        };
+      }
+      logToday(km, terrainMeta);
+      finalizeServerExpedition(km, terrainMeta, surfKey, ptsForTerrain);
+      if (typeof PathPulseProgression !== 'undefined') {
+        var tkEp = getTodayKey();
+        if (km >= 3) PathPulseProgression.updateTwinProgress(state.epicProgress, tkEp, km);
+        if (km >= 2) PathPulseProgression.updateSingularityProgress(state.epicProgress, tkEp, km);
+        saveProgressionState();
+        var epicResults = PathPulseProgression.runAllEpicChecks(
+          {
+            level: level(),
+            km: km,
+            points: ptsForTerrain,
+            startMs: expStartMs,
+            todayKey: tkEp,
+          },
+          state.epicProgress,
+          state.unlockedEpics
+        );
+        for (var eri = 0; eri < epicResults.length; eri++) {
+          var er = epicResults[eri];
+          state.unlockedEpics[er.epicId] = true;
+          addXp(er.bonusXp, 'epic_' + er.epicId);
+          showProgressionToast('Epic cleared: ' + er.title + ' (+' + er.bonusXp + ' XP)');
+        }
+        saveProgressionState();
+        scheduleV1ProfilePush();
+      }
       var startRaw = state.expeditionStartTime || localStorage.getItem(STORAGE_KEYS.expeditionStartTime);
       if (startRaw) {
         var startMs = parseInt(startRaw, 10);
@@ -3082,7 +4021,7 @@
       state.weekDistanceKm = getWeekStats().totalKm;
       if (!state.missionCompletedThisWeek && state.weekDistanceKm >= EXPEDITION_MISSION_KM) {
         state.missionCompletedThisWeek = true;
-        state.xp += 50;
+        addXp(50, 'mission_week');
         try {
           localStorage.setItem(STORAGE_KEYS.missionComplete, getWeekStart());
         } catch (e) {}
@@ -3169,6 +4108,14 @@
     document.getElementById('prism-continue').addEventListener('click', function () {
       try { localStorage.setItem(STORAGE_KEYS.prismSeen, '1'); } catch (e) {}
       showMainShellAndInit();
+      try {
+        var td = getTodayKey();
+        if (localStorage.getItem(STORAGE_KEYS.dailyXpDay) !== td && typeof PathPulseProgression !== 'undefined') {
+          localStorage.setItem(STORAGE_KEYS.dailyXpDay, td);
+          addXp(8, 'daily_pulse');
+        }
+      } catch (e2) {}
+      applyUiSkinToDom();
     });
     var prismPlayBtn = document.getElementById('prism-play');
     if (prismPlayBtn) prismPlayBtn.addEventListener('click', playPrismSpeech);
@@ -3309,6 +4256,16 @@
     });
     var loopCheck = document.getElementById('replay-loop');
     if (loopCheck) loopCheck.addEventListener('change', function () { replayLoop = loopCheck.checked; });
+
+    var uiSkinSel = document.getElementById('select-ui-skin');
+    if (uiSkinSel) {
+      uiSkinSel.addEventListener('change', function () {
+        state.selectedUiSkin = uiSkinSel.value || 'default';
+        saveProgressionState();
+        applyUiSkinToDom();
+        scheduleV1ProfilePush();
+      });
+    }
 
     document.getElementById('save-profile').addEventListener('click', function () {
       var wRaw = parseFloat(document.getElementById('input-weight').value);
@@ -3626,7 +4583,20 @@
     if (shareWeeklySummaryBtn) {
       shareWeeklySummaryBtn.addEventListener('click', function () {
         var sum = getWeeklySummary();
-        var text = 'Path-Pulse weekly summary: ' + sum.steps + ' steps, ' + sum.dist.toFixed(1) + ' km, ~' + sum.burn + ' kcal burned, ' + sum.ex + ' min exercise. ' + sum.insight;
+        var terrShare = sum.terrainKcal > 0 ? ' Expedition terrain ~' + sum.terrainKcal + ' kcal.' : '';
+        var text =
+          'Path-Pulse weekly summary: ' +
+          sum.steps +
+          ' steps, ' +
+          sum.dist.toFixed(1) +
+          ' km, ~' +
+          sum.burn +
+          ' kcal burned, ' +
+          sum.ex +
+          ' min exercise.' +
+          terrShare +
+          ' ' +
+          sum.insight;
         if (typeof navigator.share === 'function') {
           navigator.share({ title: 'Path-Pulse Summary', text: text }).catch(function () {
             navigator.clipboard.writeText(text).then(function () { shareWeeklySummaryBtn.textContent = 'Copied!'; setTimeout(function () { shareWeeklySummaryBtn.textContent = 'Share summary'; }, 1500); });
@@ -3658,15 +4628,45 @@
     var autoStepsBtn = document.getElementById('btn-auto-steps');
     if (autoStepsBtn) {
       autoStepsBtn.addEventListener('click', function () {
+        if (motion.enabled && motion.iosAwaitingPermissionTap && isIOSDeviceMotionPermissionAPI()) {
+          motion._permissionFromUserGesture = true;
+          tryStartMotionTracking();
+          return;
+        }
+        var wasOff = !motion.enabled;
         motion.enabled = !motion.enabled;
         saveMotionPreference();
         if (motion.enabled) {
+          if (wasOff && isIOSDeviceMotionPermissionAPI()) motion._permissionFromUserGesture = true;
           updateMotionUI();
           tryStartMotionTracking();
         } else {
+          motion.iosAwaitingPermissionTap = false;
           stopMotionTracking();
           updateMotionUI();
         }
+      });
+    }
+    var stepSensSel = document.getElementById('select-step-sensitivity');
+    if (stepSensSel) {
+      stepSensSel.value = String(motion.sensitivityLevel || 3);
+      stepSensSel.addEventListener('change', function () {
+        saveMotionSensitivity(parseInt(stepSensSel.value, 10));
+        updateMotionUI();
+        if (motion.enabled) tryStartMotionTracking();
+      });
+    }
+    var expSurfSel = document.getElementById('select-expedition-surface');
+    if (expSurfSel) {
+      try {
+        var esk = localStorage.getItem(STORAGE_KEYS.expeditionSurface);
+        if (esk && typeof PathPulseTerrainEnergy !== 'undefined' && PathPulseTerrainEnergy.SURFACE[esk]) expSurfSel.value = esk;
+      } catch (eS) {}
+      expSurfSel.addEventListener('change', function () {
+        try {
+          localStorage.setItem(STORAGE_KEYS.expeditionSurface, expSurfSel.value);
+        } catch (eS2) {}
+        updateMapDistanceUI();
       });
     }
     var onboardingDismissBtn = document.getElementById('onboarding-dismiss');
@@ -3753,8 +4753,23 @@
     }
 
     function finishInit() {
-      loadStorage();
       loadExpeditionState();
+      if (state.isMissionActive && state.serverExpeditionId && getApiBase()) openPpLiveWs(state.serverExpeditionId);
+      var todayPulse = getTodayKey();
+      var grantDaily = false;
+      try {
+        grantDaily = localStorage.getItem(STORAGE_KEYS.dailyXpDay) !== todayPulse;
+      } catch (e) {}
+      recordProgressionCheckIn();
+      if (grantDaily && state.oathAccepted && typeof PathPulseProgression !== 'undefined') {
+        try {
+          localStorage.setItem(STORAGE_KEYS.dailyXpDay, todayPulse);
+        } catch (e2) {}
+        addXp(8, 'daily_pulse');
+      }
+      reconcileMilestoneUnlocksForLevel();
+      applyUiSkinToDom();
+      updateProgressionPanelUI();
       updateReminderUI();
       if (state.reminderEnabled) startReminderLoop();
       document.getElementById('loader').classList.add('hidden');
@@ -3771,8 +4786,13 @@
       }
     }
     if (getApiBase()) {
-      syncFromServer(finishInit);
+      syncFromServer(function () {
+        loadStorage();
+        pullV1Profile(finishInit);
+      });
     } else {
+      v1XpSynced = state.xp;
+      loadStorage();
       finishInit();
     }
   }

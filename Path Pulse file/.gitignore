@@ -8,6 +8,9 @@ Thumbs.db
 # Microsoft Office lock files (opened document temp)
 ~$*
 
+# Node (Path Pulse web backend)
+path-pulse-web/backend/node_modules/
+
 # Flutter
 path_pulse/.dart_tool/
 path_pulse/.packages
