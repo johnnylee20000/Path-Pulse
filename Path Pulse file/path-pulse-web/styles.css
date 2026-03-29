@@ -2,6 +2,9 @@
 :root {
   --obsidian: #0B0E11;
   --bg: var(--obsidian);
+  --text: #ffffff;
+  --font-sans: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', monospace;
   --cyan: #00F5FF;
   --lime: #39FF14;
   --red: #FF3131;
@@ -23,7 +26,7 @@ html {
 
 body {
   margin: 0;
-  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-family: var(--font-sans);
   background:
     radial-gradient(900px circle at 15% -10%, rgba(0,245,255,0.10) 0%, transparent 55%),
     radial-gradient(700px circle at 90% 0%, rgba(57,255,20,0.06) 0%, transparent 50%),
@@ -256,6 +259,19 @@ body {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+@media (prefers-reduced-motion: reduce) {
+  .tab-pane { animation: none; }
+  .prism-silhouette,
+  .prism-silhouette::before { animation: none; }
+  .pulse-dot { animation: none; }
+  .pulse-ring.pulse-live .ring-fill { animation: none; }
+  #btn-expedition.home-feature-pulse { animation: none; }
+  .spinner { animation: none; opacity: 0.85; }
+  .fuel-gauge-fill,
+  .fuel-gauge-needle,
+  .mission-progress-fill,
+  .ring-fill { transition-duration: 0.05s; }
+}
 
 /* Map tab */
 #tab-map {
@@ -393,9 +409,11 @@ body {
   border: 1px solid var(--cyan);
   border-radius: 10px;
   padding: 0.5rem 1rem;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: var(--gray);
   z-index: 1000;
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
 }
 .map-distance-hud.hidden { display: none; }
 .map-distance-hud #map-distance-km { color: var(--lime); font-weight: bold; font-size: 1rem; }
@@ -782,6 +800,28 @@ body {
   color: var(--lime);
 }
 .ring-content .label { font-size: 10px; color: var(--gray); }
+
+/* Telemetry readouts — monospace Lab aesthetic */
+#steps,
+#explorer-id,
+#level,
+#fuel-gauge-value,
+#fuel-gauge-value-sub,
+.meal-ts,
+#map-distance-km,
+#map-perimeter-km,
+#map-milometer-km,
+#map-expedition-steps,
+#map-terrain-kcal,
+.report-row span:last-child,
+.progression-momentum-val,
+#progression-rested,
+.val-bmi,
+.profile-bmi-val {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
 .mission-btn {
   width: 100%;
   padding: 0.85rem 1rem;
@@ -1340,7 +1380,10 @@ body {
   color: var(--white);
   font-weight: bold;
   cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.12s ease;
 }
+.sex-btn:hover { background: rgba(255,255,255,0.08); }
+.sex-btn:active { transform: scale(0.98); }
 .sex-btn.active {
   background: rgba(0,245,255,0.15);
   border-color: var(--cyan);
@@ -1506,8 +1549,17 @@ body {
 .nav-btn:hover { color: var(--white); background: rgba(255,255,255,0.05); }
 .nav-btn:active { transform: scale(0.96); }
 .nav-btn .icon { font-size: 1.25rem; transition: transform 0.2s ease; }
-.nav-btn.active { color: var(--cyan); font-weight: bold; }
+.nav-btn.active {
+  color: var(--cyan);
+  font-weight: bold;
+  background: rgba(0, 245, 255, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(0, 245, 255, 0.22);
+}
 .nav-btn.active .icon { transform: scale(1.05); }
+.nav-btn:focus-visible {
+  outline: 2px solid rgba(0, 245, 255, 0.95);
+  outline-offset: 2px;
+}
 
 /* Global enhancements (common patterns in modern top apps) */
 button, input, select, textarea { font-family: inherit; }
@@ -1616,6 +1668,7 @@ button, input, select, textarea { font-family: inherit; }
   background: rgba(8,12,18,0.94);
   border: 1px solid rgba(0,245,255,0.35);
   color: var(--white);
+  font-family: var(--font-sans);
   font-size: 0.82rem;
   line-height: 1.35;
   z-index: 9999;

@@ -4,11 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Path-Pulse — Tactical Bio-Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/png" href="icon-512.png" sizes="32x32" />
   <link rel="icon" type="image/png" href="icon-512.png" sizes="192x192" />
   <link rel="apple-touch-icon" href="icon-512.png" />
   <link rel="manifest" href="manifest.json" />
-  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=4">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
@@ -20,8 +23,8 @@
     </div>
 
     <!-- Oath (shown before first accept) -->
-    <div id="oath-screen" class="screen hidden">
-      <h1>EXPLORER'S OATH</h1>
+    <div id="oath-screen" class="screen hidden" role="dialog" aria-modal="true" aria-labelledby="oath-title" aria-hidden="true">
+      <h1 id="oath-title">EXPLORER'S OATH</h1>
       <p class="subtitle">SYSTEM INITIALIZATION: SUBJECT VERIFICATION</p>
       <div class="oath-text">
         <p>I acknowledge that my body is the ultimate hardware. I recognize that movement is not a chore, but a mission to synchronize my physical output with the Global Grid.</p>
@@ -38,7 +41,7 @@
     </div>
 
     <!-- PRISM welcome (after first oath accept) -->
-    <div id="prism-screen" class="screen hidden" role="dialog" aria-label="PRISM welcome">
+    <div id="prism-screen" class="screen hidden" role="dialog" aria-label="PRISM welcome" aria-hidden="true">
       <div class="prism-silhouette" aria-hidden="true"></div>
       <div class="prism-content">
         <h2 class="prism-title">PRISM</h2>
@@ -56,7 +59,7 @@
     </div>
 
     <!-- Main shell: Map | Home | Profile -->
-    <div id="main-shell" class="screen hidden">
+    <div id="main-shell" class="screen hidden" aria-hidden="true">
       <div id="install-banner" class="install-banner hidden" role="region" aria-label="Install app">
         <span class="install-banner-text">Add Path-Pulse to Home Screen for quick access</span>
         <button type="button" id="install-banner-dismiss" class="install-banner-dismiss" aria-label="Dismiss">×</button>
@@ -644,6 +647,6 @@
   <!-- <script>window.PATH_PULSE_API = 'http://localhost:3030';</script> -->
   <script src="terrain-energy-core.js?v=1"></script>
   <script src="progression.js?v=1"></script>
-  <script src="app.js?v=9"></script>
+  <script src="app.js?v=10"></script>
 </body>
 </html>

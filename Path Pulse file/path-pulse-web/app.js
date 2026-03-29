@@ -392,16 +392,17 @@
     saveProgressionState();
   }
 
-  function showProgressionToast(msg) {
+  function showProgressionToast(msg, durationMs) {
     if (!msg) return;
     var el = document.getElementById('progression-toast');
     if (!el) return;
     el.textContent = msg;
     el.classList.remove('hidden');
     clearTimeout(showProgressionToast._t);
+    var ms = durationMs == null ? 5200 : durationMs;
     showProgressionToast._t = setTimeout(function () {
       el.classList.add('hidden');
-    }, 5200);
+    }, ms);
   }
 
   function applyUiSkinToDom() {
@@ -2842,9 +2843,13 @@
   function showScreen(id) {
     document.querySelectorAll('.screen').forEach(function (el) {
       el.classList.add('hidden');
+      el.setAttribute('aria-hidden', 'true');
     });
     const el = document.getElementById(id);
-    if (el) el.classList.remove('hidden');
+    if (el) {
+      el.classList.remove('hidden');
+      el.setAttribute('aria-hidden', 'false');
+    }
   }
 
   function setPrismExplorerId() {
@@ -4290,7 +4295,7 @@
       saveProfile();
       updateHomeUI();
       updateProfileUI();
-      alert('Baseline saved. Today\'s weight logged for trend.');
+      showProgressionToast('Baseline saved. Today\'s weight is logged for your trend.', 3200);
     });
 
     document.getElementById('sex-male').addEventListener('click', function () {
@@ -4389,6 +4394,8 @@
         if (isNaN(v) || v < 0) v = 0;
         saveMeal(meal, v, nowTimeString());
         updateFuelUI();
+        var mealLabel = meal === 'breakfast' ? 'Breakfast' : meal === 'lunch' ? 'Lunch' : meal === 'dinner' ? 'Dinner' : meal;
+        showProgressionToast(mealLabel + ' logged · ' + v + ' kcal', 2200);
       });
     });
 
@@ -4488,10 +4495,14 @@
         var unitSel = document.getElementById('target-weight-unit');
         if (!inp || !unitSel) return;
         var val = parseFloat(inp.value);
-        if (isNaN(val) || val < 20 || val > 300) return;
+        if (isNaN(val) || val < 20 || val > 300) {
+          showProgressionToast('Target weight: enter a value between 20 and 300 in your chosen unit.', 3200);
+          return;
+        }
         var kg = unitSel.value === 'lbs' ? weightToKg(val, 'lbs') : val;
         setTargetWeightKg(kg);
         updateReportUI();
+        showProgressionToast('Target weight saved.', 2200);
       });
     }
     var targetWeightUnitEl = document.getElementById('target-weight-unit');
@@ -4503,10 +4514,14 @@
         var inp = document.getElementById('input-water-ml');
         if (!inp) return;
         var ml = parseInt(inp.value, 10) || 0;
-        if (ml <= 0) return;
+        if (ml <= 0) {
+          showProgressionToast('Water: enter a positive amount in ml.', 2600);
+          return;
+        }
         addWaterToday(ml);
         inp.value = '';
         updateReportUI();
+        showProgressionToast('Added ' + ml + ' ml to today.', 2200);
       });
     }
     var logHrBtn = document.getElementById('log-heart-rate');
@@ -4515,10 +4530,14 @@
         var inp = document.getElementById('input-heart-rate');
         if (!inp) return;
         var bpm = parseInt(inp.value, 10);
-        if (isNaN(bpm) || bpm < 30 || bpm > 250) return;
+        if (isNaN(bpm) || bpm < 30 || bpm > 250) {
+          showProgressionToast('Heart rate: enter BPM between 30 and 250.', 2800);
+          return;
+        }
         addHeartRateEntry(bpm);
         inp.value = '';
         updateReportUI();
+        showProgressionToast('Logged ' + bpm + ' BPM.', 2000);
       });
     }
     var logBpBtn = document.getElementById('log-blood-pressure');
@@ -4529,10 +4548,14 @@
         if (!sysInp || !diaInp) return;
         var sys = parseInt(sysInp.value, 10);
         var dia = parseInt(diaInp.value, 10);
-        if (isNaN(sys) || isNaN(dia) || sys < 70 || sys > 250 || dia < 40 || dia > 150) return;
+        if (isNaN(sys) || isNaN(dia) || sys < 70 || sys > 250 || dia < 40 || dia > 150) {
+          showProgressionToast('Blood pressure: check systolic (70–250) and diastolic (40–150).', 3200);
+          return;
+        }
         addBloodPressureEntry(sys, dia);
         sysInp.value = ''; diaInp.value = '';
         updateReportUI();
+        showProgressionToast('Logged ' + sys + '/' + dia + ' mmHg.', 2200);
       });
     }
     var logExBtn = document.getElementById('log-exercise');
@@ -4541,10 +4564,14 @@
         var inp = document.getElementById('input-exercise-mins');
         if (!inp) return;
         var mins = parseInt(inp.value, 10);
-        if (isNaN(mins) || mins < 1 || mins > 300) return;
+        if (isNaN(mins) || mins < 1 || mins > 300) {
+          showProgressionToast('Exercise: enter minutes between 1 and 300.', 2800);
+          return;
+        }
         addExerciseEntry(mins);
         inp.value = '';
         updateReportUI();
+        showProgressionToast('Logged ' + mins + ' min of exercise.', 2200);
       });
     }
     var saveGoalsBtn = document.getElementById('save-goals');
@@ -4564,6 +4591,7 @@
         });
         updateReportUI();
         updateHomeUI();
+        showProgressionToast('Goals saved. Report and Home use your new targets.', 2600);
       });
     }
     var logSleepBtn = document.getElementById('log-sleep');
@@ -4573,10 +4601,15 @@
         var qualitySel = document.getElementById('input-sleep-quality');
         if (!hoursInp) return;
         var hours = parseFloat(hoursInp.value);
-        if (isNaN(hours) || hours < 0 || hours > 24) return;
-        addSleepEntry(getYesterdayKey(), hours, qualitySel ? qualitySel.value : 'Fair');
+        if (isNaN(hours) || hours < 0 || hours > 24) {
+          showProgressionToast('Sleep: enter hours between 0 and 24.', 2800);
+          return;
+        }
+        var q = qualitySel ? qualitySel.value : 'Fair';
+        addSleepEntry(getYesterdayKey(), hours, q);
         hoursInp.value = '';
         updateReportUI();
+        showProgressionToast('Logged last night: ' + hours + ' h · ' + q + '.', 2400);
       });
     }
     var shareWeeklySummaryBtn = document.getElementById('share-weekly-summary');
@@ -4616,12 +4649,16 @@
         var inp = document.getElementById('input-sync-steps');
         if (!inp) return;
         var steps = parseInt(inp.value, 10);
-        if (isNaN(steps) || steps < 0) return;
+        if (isNaN(steps) || steps < 0) {
+          showProgressionToast('Steps: enter a whole number, zero or more.', 2800);
+          return;
+        }
         state.dailySteps = steps;
         setStepsForDate(getTodayKey(), steps);
         inp.value = '';
         updateHomeUI();
         if (typeof updateReportUI === 'function') updateReportUI();
+        showProgressionToast('Today set to ' + steps.toLocaleString() + ' steps.', 2400);
       });
     }
 
@@ -4700,12 +4737,15 @@
         }
 
         Notification.requestPermission().then(function (p) {
-          if (p === 'granted') afterPerm();
-          else {
+          if (p === 'granted') {
+            showProgressionToast('Notifications enabled. Reminders will fire while the app can run.', 3200);
+            afterPerm();
+          } else {
             state.reminderEnabled = false;
             try { localStorage.setItem(STORAGE_KEYS.reminderEnabled, '0'); } catch (e) {}
             stopReminderLoop();
             updateReminderUI();
+            showProgressionToast('Notifications not allowed — enable them in browser settings to use reminders.', 4200);
           }
         }).catch(function () {
           state.reminderEnabled = false;
@@ -4726,6 +4766,9 @@
         if (state.reminderEnabled) {
           startReminderLoop();
           subscribePushAndRegister();
+          showProgressionToast('Reminder time saved. Nudges run while the app can stay active.', 3200);
+        } else {
+          showProgressionToast('Time saved. Tap “Enable notifications” to turn reminders on.', 3400);
         }
       });
     }
@@ -4740,6 +4783,7 @@
         } catch (e) {}
         stopReminderLoop();
         updateReminderUI();
+        showProgressionToast('Reminders disabled.', 2200);
       });
     }
 
