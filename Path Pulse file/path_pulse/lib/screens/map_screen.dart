@@ -6,6 +6,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../state/system_commander.dart';
+import '../theme/path_pulse_theme.dart';
 import 'ar_ghost_screen.dart';
 
 class MapScreen extends StatefulWidget {
@@ -79,7 +80,7 @@ class _MapScreenState extends State<MapScreen> {
                     Polyline(
                       points: cmd.routePoints,
                       strokeWidth: 5,
-                      color: const Color(0xFF00F5FF),
+                      color: PathPulseColors.cyan,
                     ),
                   ],
                 ),
@@ -109,8 +110,8 @@ class _MapScreenState extends State<MapScreen> {
                   onPressed: () {
                     _mapController.move(cmd.currentPosition!, 16);
                   },
-                  backgroundColor: const Color(0xFF0B0E11),
-                  child: const Icon(Icons.my_location, color: Color(0xFF00F5FF)),
+                  backgroundColor: PathPulseColors.obsidian,
+                  child: const Icon(Icons.my_location, color: PathPulseColors.cyan),
                 ),
               const SizedBox(height: 8),
               FloatingActionButton.extended(
@@ -124,16 +125,16 @@ class _MapScreenState extends State<MapScreen> {
                   }
                 },
                 backgroundColor: cmd.isMissionActive
-                    ? const Color(0xFFFF3131)
-                    : const Color(0xFF00F5FF),
+                    ? PathPulseColors.pulseRed
+                    : PathPulseColors.cyan,
                 icon: Icon(
                   cmd.isMissionActive ? Icons.stop : Icons.play_arrow,
-                  color: const Color(0xFF0B0E11),
+                  color: PathPulseColors.obsidian,
                 ),
                 label: Text(
                   cmd.isMissionActive ? 'STOP EXPEDITION' : 'START EXPEDITION',
                   style: const TextStyle(
-                    color: Color(0xFF0B0E11),
+                    color: PathPulseColors.obsidian,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

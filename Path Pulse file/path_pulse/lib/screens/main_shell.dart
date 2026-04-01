@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/path_pulse_theme.dart';
 import 'dashboard.dart';
 import 'map_screen.dart';
 import 'profile_screen.dart';
@@ -33,7 +34,7 @@ class _MainShellState extends State<MainShell> {
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: const Color(0xFF0B0E11),
+          color: PathPulseColors.obsidian,
           border: Border(top: BorderSide(color: Colors.white10)),
         ),
         child: SafeArea(
@@ -51,7 +52,7 @@ class _MainShellState extends State<MainShell> {
                     children: [
                       Icon(
                         icon,
-                        color: selected ? const Color(0xFF00F5FF) : Colors.grey,
+                        color: selected ? PathPulseColors.cyan : Colors.grey,
                         size: 26,
                       ),
                       const SizedBox(height: 4),
@@ -59,7 +60,7 @@ class _MainShellState extends State<MainShell> {
                         label,
                         style: TextStyle(
                           fontSize: 11,
-                          color: selected ? const Color(0xFF00F5FF) : Colors.grey,
+                          color: selected ? PathPulseColors.cyan : Colors.grey,
                           fontWeight: selected ? FontWeight.bold : FontWeight.normal,
                         ),
                       ),

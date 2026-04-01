@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../state/system_commander.dart';
+import '../theme/path_pulse_theme.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -47,7 +48,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 2,
-                      color: Color(0xFF00F5FF),
+                      color: PathPulseColors.cyan,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -149,10 +150,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 14),
         decoration: BoxDecoration(
-          color: selected ? const Color(0xFF00F5FF).withOpacity(0.15) : Colors.white10,
+          color: selected ? PathPulseColors.cyan.withOpacity(0.15) : Colors.white10,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: selected ? const Color(0xFF00F5FF) : Colors.white24,
+            color: selected ? PathPulseColors.cyan : Colors.white24,
           ),
         ),
         child: Center(
@@ -175,7 +176,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(label, style: const TextStyle(color: Colors.grey, fontSize: 12)),
-          Text(value, style: const TextStyle(color: Color(0xFF39FF14), fontWeight: FontWeight.bold)),
+          Text(value, style: const TextStyle(color: PathPulseColors.lime, fontWeight: FontWeight.bold)),
         ],
       ),
     );
@@ -191,7 +192,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: const Text('Baseline saved. Lab recalculated.'),
-        backgroundColor: const Color(0xFF39FF14).withOpacity(0.9),
+        backgroundColor: PathPulseColors.lime.withOpacity(0.9),
         behavior: SnackBarBehavior.floating,
       ),
     );

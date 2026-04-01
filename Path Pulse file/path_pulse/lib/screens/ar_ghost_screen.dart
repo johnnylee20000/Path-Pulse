@@ -9,6 +9,7 @@ import 'package:ar_flutter_plugin/managers/ar_location_manager.dart';
 import 'package:latlong2/latlong.dart';
 import '../ar_engine.dart';
 import '../state/system_commander.dart';
+import '../theme/path_pulse_theme.dart';
 
 /// Full-screen AR view showing the Ghost path (neon cyan nodes) from current GPS route.
 class ArGhostScreen extends StatefulWidget {
@@ -64,7 +65,7 @@ class _ArGhostScreenState extends State<ArGhostScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0B0E11),
+      backgroundColor: PathPulseColors.obsidian,
       body: Stack(
         children: [
           ARView(
@@ -79,7 +80,7 @@ class _ArGhostScreenState extends State<ArGhostScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(12),
                     child: IconButton(
-                      icon: const Icon(Icons.close, color: Color(0xFF00F5FF)),
+                      icon: const Icon(Icons.close, color: PathPulseColors.cyan),
                       onPressed: () => Navigator.of(context).pop(),
                     ),
                   ),
@@ -90,7 +91,7 @@ class _ArGhostScreenState extends State<ArGhostScreen> {
                   child: Text(
                     _pathPlaced ? 'GHOST PATH ACTIVE' : 'PLACING GHOST PATH...',
                     style: const TextStyle(
-                      color: Color(0xFF00F5FF),
+                      color: PathPulseColors.cyan,
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 2,

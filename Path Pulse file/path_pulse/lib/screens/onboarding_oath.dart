@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../state/system_commander.dart';
+import '../theme/path_pulse_theme.dart';
 import '../prism_audio.dart';
 
 /// Explorer's Oath screen — first thing after identity sync.
@@ -30,7 +31,7 @@ class _OnboardingOathScreenState extends State<OnboardingOathScreen> {
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF00F5FF),
+                  color: PathPulseColors.cyan,
                   letterSpacing: 2,
                 ),
               ),
@@ -75,8 +76,8 @@ class _OnboardingOathScreenState extends State<OnboardingOathScreen> {
                   });
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF00F5FF),
-                  foregroundColor: const Color(0xFF0B0E11),
+                  backgroundColor: PathPulseColors.cyan,
+                  foregroundColor: PathPulseColors.obsidian,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 ),
@@ -110,7 +111,7 @@ class _OnboardingOathScreenState extends State<OnboardingOathScreen> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('• ', style: TextStyle(color: Color(0xFF39FF14), fontSize: 14)),
+          const Text('• ', style: TextStyle(color: PathPulseColors.lime, fontSize: 14)),
           Expanded(
             child: Text(
               text,

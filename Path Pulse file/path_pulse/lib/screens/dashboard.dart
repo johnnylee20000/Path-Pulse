@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../engine.dart';
 import '../state/system_commander.dart';
+import '../theme/path_pulse_theme.dart';
 import 'ar_ghost_screen.dart';
 
 class MainCommandCenter extends StatelessWidget {
@@ -45,7 +46,7 @@ class MainCommandCenter extends StatelessWidget {
                   'LEVEL ${cmd.level} · ${cmd.rankTitle}',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF00F5FF),
+                    color: PathPulseColors.cyan,
                     fontSize: 16,
                   ),
                 ),
@@ -83,7 +84,7 @@ class MainCommandCenter extends StatelessWidget {
                   value: progress,
                   strokeWidth: 8,
                   backgroundColor: Colors.white10,
-                  valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF39FF14)),
+                  valueColor: const AlwaysStoppedAnimation<Color>(PathPulseColors.lime),
                 ),
               ),
               Column(
@@ -127,11 +128,11 @@ class MainCommandCenter extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: cmd.isMissionActive
-                  ? const Color(0xFF00F5FF).withOpacity(0.1)
+                  ? PathPulseColors.cyan.withOpacity(0.1)
                   : Colors.white10,
               borderRadius: BorderRadius.circular(15),
               border: Border.all(
-                color: cmd.isMissionActive ? const Color(0xFF00F5FF) : Colors.white24,
+                color: cmd.isMissionActive ? PathPulseColors.cyan : Colors.white24,
               ),
             ),
             child: Row(
@@ -170,7 +171,7 @@ class MainCommandCenter extends StatelessWidget {
             _diagnosticRow('BMR', '${cmd.bmr.round()} KCAL/DAY'),
             _diagnosticRow('METABOLIC BURN', '${protocol['burn']} KCAL'),
             _diagnosticRow('FUELING PROTOCOL', protocol['suggestion'] as String),
-            _diagnosticRow('SYSTEM STATUS', 'OPTIMAL', color: const Color(0xFF39FF14)),
+            _diagnosticRow('SYSTEM STATUS', 'OPTIMAL', color: PathPulseColors.lime),
           ],
         );
       },

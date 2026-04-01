@@ -1,62 +1,25 @@
 (function () {
   'use strict';
 
-  const STORAGE_KEYS = {
-    oath: 'pathpulse_oath',
-    weight: 'pathpulse_weight',
-    height: 'pathpulse_height',
-    age: 'pathpulse_age',
-    male: 'pathpulse_male',
-    xp: 'pathpulse_xp',
-    dailySteps: 'pathpulse_daily_steps',
-    history: 'pathpulse_history',
-    missionComplete: 'pathpulse_mission_week',
-    calories: 'pathpulse_calories',
-    weightHistory: 'pathpulse_weight_history',
-    bmiAsian: 'pathpulse_bmi_asian',
-    installDismissed: 'pathpulse_install_dismissed',
-    expedition: 'pathpulse_expedition',
-    heightUnit: 'pathpulse_height_unit',
-    weightUnit: 'pathpulse_weight_unit',
-    waist: 'pathpulse_waist',
-    neck: 'pathpulse_neck',
-    hip: 'pathpulse_hip',
-    showFuelWidget: 'pathpulse_show_fuel_widget',
-    showExpeditionWidget: 'pathpulse_show_expedition_widget',
-    stepsByDate: 'pathpulse_steps_by_date',
-    calorieGoal: 'pathpulse_calorie_goal',
-    prismSeen: 'pathpulse_prism_seen',
-    lastRoute: 'pathpulse_last_route',
-    heartRateLog: 'pathpulse_heart_rate_log',
-    bloodPressureLog: 'pathpulse_blood_pressure_log',
-    exerciseTimeLog: 'pathpulse_exercise_time_log',
-    targetWeight: 'pathpulse_target_weight',
-    waterLog: 'pathpulse_water_log',
-    goals: 'pathpulse_goals',
-    sleepLog: 'pathpulse_sleep_log',
-    onboardingDismissed: 'pathpulse_onboarding_dismissed',
-    motionAuto: 'pathpulse_motion_auto',
-    motionSensitivity: 'pathpulse_motion_sensitivity',
-    expeditionStartTime: 'pathpulse_expedition_start_time',
-    reminderEnabled: 'pathpulse_reminder_enabled',
-    reminderTime: 'pathpulse_reminder_time',
-    reminderLastSent: 'pathpulse_reminder_last_sent',
-    deviceId: 'pathpulse_device_id',
-    expeditionSurface: 'pathpulse_expedition_surface',
-    progressionMomentum: 'pathpulse_momentum',
-    lastActiveDay: 'pathpulse_last_active_day',
-    restedXpBank: 'pathpulse_rested_xp_bank',
-    restedBoostUntil: 'pathpulse_rested_boost_until',
-    unlockedRewards: 'pathpulse_unlocked_rewards',
-    epicProgress: 'pathpulse_epic_progress',
-    unlockedEpics: 'pathpulse_unlocked_epics',
-    uiSkin: 'pathpulse_ui_skin',
-    dailyXpDay: 'pathpulse_daily_xp_day',
-  };
+  /** @see js/storage-keys.js — must load before this file */
+  var STORAGE_KEYS = PathPulseStorageKeys;
+  /** @see js/lab-units.js */
+  var LabU = PathPulseLabUnits;
+
+  function heightToM(val, unit) {
+    return LabU.heightToM(val, unit);
+  }
+  function heightFromM(m, unit) {
+    return LabU.heightFromM(m, unit);
+  }
+  function weightToKg(val, unit) {
+    return LabU.weightToKg(val, unit);
+  }
+  function weightFromKg(kg, unit) {
+    return LabU.weightFromKg(kg, unit);
+  }
 
   var MAX_SAVED_ROUTE_POINTS = 5000;
-  var KG_PER_LB = 0.453592;
-  var M_PER_FT = 0.3048;
   var KCAL_PER_KG_FAT = 7700; // ~7700 kcal deficit ≈ 1 kg fat loss
 
   const EXPEDITION_MISSION_KM = 2; // "Walk 2 km this week"
