@@ -1,0 +1,22 @@
+{
+  "source": "caselaws and other information used in policing/past papers for exams/DO 112-2017 Establishment of YTC as child rehabilitation Centre .pdf",
+  "size_bytes": 134459,
+  "ok": true,
+  "pages": 1,
+  "chars_total": 956,
+  "chars_per_page": 956,
+  "verdict": "OCR",
+  "category": "dept-orders",
+  "subcategory": "",
+  "txt_out": "dept-orders/DO 112-2017 Establishment of YTC as child rehabilitation Centre.txt",
+  "ocr": {
+    "engine": "tesseract",
+    "lang": "eng",
+    "dpi": 300,
+    "config": "--oem 3 --psm 6",
+    "elapsed_sec": 5.19
+  },
+  "page_text": [
+    "ak Police Orders by\n(ey) Commissioner of Police\nCAS Police Administration Building\nvs Cor. Edward & Sackville Streets\nwy, ohh Port of Spain\npi _— Tuesday 19\" September 2017\nee (This is an official document entrusted to members and civilian\nemployees of the Police Service and is not for publication in the Press)\nNo. 112 Departmental Order PART I - NIL\nPART II\nDesignation of the Youth Training Centre at Golden Grove as a Child Rehabilitation Centre\nWith immediate effect the Youth Training Centre at Golden Grove has been designated a Child Rehabilitation\nCentre by Legal Notice No. 39, in accordance with the Child Rehabilitation Centre Act, Chapter 13:05.\nThe Interim Child Rehabilitation Centre established at St Michael’s Industrial School for boys has not been\ndesignated under the Act and no longer has the authority to house or accept boys on remand.\nHereunder is a reproduction of the Legal Notice No. 39.\nPART III — NIL\nVW Wile\nCommissio Police\n"
+  ]
+}

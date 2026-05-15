@@ -1,0 +1,22 @@
+{
+  "source": "caselaws and other information used in policing/past papers for exams/21-2025 PT II Amendment to Sanctioned Strength.pdf",
+  "size_bytes": 35384,
+  "ok": true,
+  "pages": 1,
+  "chars_total": 962,
+  "chars_per_page": 962,
+  "verdict": "OCR",
+  "category": "dept-orders",
+  "subcategory": "",
+  "txt_out": "dept-orders/21-2025 PT II Amendment to Sanctioned Strength.txt",
+  "ocr": {
+    "engine": "tesseract",
+    "lang": "eng",
+    "dpi": 300,
+    "config": "--oem 3 --psm 6",
+    "elapsed_sec": 9.18
+  },
+  "page_text": [
+    "Police Orders by\nCommissioner of Police\nPolice Administration Building\nCor. Edward & Sackville Streets\nPort-of-Spain\nOmRorecr a Friday 14\" February, 2025\nWITH PRIDE\n(This is an official document entrusted to members and civilian employees of\nthe Trinidad and Tobago Police Service and is not for publication in the Press)\nNo. 21 Departmental Order PART I & Ti - NIL\nPART U\nAMENDMENT TO THE SANCTIONED STRENGTH\n\nSANCTIONED 1. The Sanctioned Strength of the Human Resource Branch has been\nSTRENGTH __ increased by one (1) post of Senior Superintendent of Police consequently the\nAmendmentto Sanctioned Strength of the Anti-Corruption Investigations Bureau has been\n\ndecreased by one (1) post of Senior Superintendent of Police.\n\nThe Senior Superintendent Financial Investigations Bureau (FIB) will assume\n\nthe additional responsibilities as the head of the Anti-Corruption Investigations\n\nBureau (ACIB), with effect from 17\" February, 2025.\n\nCommissioner of ~ are\n"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "source": "caselaws and other information used in policing/past papers for exams/152-2024 PT II Rescindment of DO 282-2006.pdf",
+  "size_bytes": 31041,
+  "ok": true,
+  "pages": 1,
+  "chars_total": 888,
+  "chars_per_page": 888,
+  "verdict": "OCR",
+  "category": "dept-orders",
+  "subcategory": "",
+  "txt_out": "dept-orders/152-2024 PT II Rescindment of DO 282-2006.txt",
+  "ocr": {
+    "engine": "tesseract",
+    "lang": "eng",
+    "dpi": 300,
+    "config": "--oem 3 --psm 6",
+    "elapsed_sec": 8.52
+  },
+  "page_text": [
+    "ts) Police Orders by Mrs Erla Christopher\n. — . . .\nCommissioner of Police\nPolice Administration Building\nCor. Edward & Sackville Streets\nPemorecr ses 9 Thursday 17 October, 2024\n(This is an official document entrusted to members and civilian employees of\nthe Trinidad and Tobago Police Service and is not for publication in the Press)\nie ——EE eee eee\nNo. 152 Departmental Order PART 1 & HI — NIL\nPART II\nAuthorized Use of Tactical Uniform\nDEPARTMENTAL 1. Departmental Order No. 282, dated 18.10.2006 and Departmental Order 110,\nORDER paragraph 17, dated 03.06.2011, are hereby rescinded.\nRescindment\nOnly the undermentioned units are authorized to wear Digital Camouflage\nOperational Uniforms: -\ne Guard and Emergency Branch (GEB)\ne Inter-Agency Task Force (IATF)\ne National Operational Task Force (NOTF)\ne Multi-Operational Police Section (MOPS)\nLA rsarap ber Co?\nOmmissioner of Police\n"
+  ]
+}

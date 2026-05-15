@@ -1,0 +1,22 @@
+{
+  "source": "caselaws and other information used in policing/past papers for exams/Corporal Exam 2024 - Police Duties I.pdf",
+  "size_bytes": 54056,
+  "ok": true,
+  "pages": 1,
+  "chars_total": 296,
+  "chars_per_page": 296,
+  "verdict": "OCR",
+  "category": "manuals",
+  "subcategory": "",
+  "txt_out": "manuals/Corporal Exam 2024 - Police Duties I.txt",
+  "ocr": {
+    "engine": "tesseract",
+    "lang": "eng",
+    "dpi": 300,
+    "config": "--oem 3 --psm 6",
+    "elapsed_sec": 5.85
+  },
+  "page_text": [
+    "Study Areas for the 2024 Corporal Exams\nFocus Areas for Police Duties I Corporal Exams\n\ne Domestic Violence\n\ne Occurrences\n\ne Care and Custody of Property\n\ne Firearms and Ammunition\n\ne Prisoners\n\ne Standing Orders 54, 52, 41, 28 and 22\n\ne Community Policing ALO\n\ne Summary Offences Act\n\n©\nauyosy\n"
+  ]
+}

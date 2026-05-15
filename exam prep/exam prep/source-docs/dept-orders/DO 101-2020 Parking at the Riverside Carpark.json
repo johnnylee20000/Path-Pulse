@@ -1,0 +1,22 @@
+{
+  "source": "caselaws and other information used in policing/past papers for exams/DO 101-2020 Parking at the Riverside Carpark.pdf",
+  "size_bytes": 189498,
+  "ok": true,
+  "pages": 1,
+  "chars_total": 879,
+  "chars_per_page": 879,
+  "verdict": "OCR",
+  "category": "dept-orders",
+  "subcategory": "",
+  "txt_out": "dept-orders/DO 101-2020 Parking at the Riverside Carpark.txt",
+  "ocr": {
+    "engine": "tesseract",
+    "lang": "eng",
+    "dpi": 300,
+    "config": "--oem 3 --psm 6",
+    "elapsed_sec": 6.78
+  },
+  "page_text": [
+    "(ey Police Orders by Mr. Gary Griffith\nFAS Commissioner of Police\nYEO Police Administration Building\nCor. Edward & Sackville Streets\n— Port of Spain\nPomorecr po Wednesday 17\" June, 2020\n(This is an official document entrusted to members and civilian\nemployees of the Police Service and is not for publication in the Press)\nNo. 101 Departmental Order PART I—NIL PARTI] y\nParking at the Riverside Carpark\nIn an effort to reduce rental expenditure and with the demonstrated underuse of\nthe Riverside Plaza carpark, the decision was taken in 2019 to reduce the\nnumber of parking spaces the TTPS would use. We communicated same to the\nlandlord who has now written to TTPS indicating that parking on floors 1-5\nmust desist immediately.\nAs such, parking for TTPS at the Riverside Carpark is restricted to floors 6 and\n7 ONLY with immediate effect.\nPART III — NIL\nCommissioner of Police\n"
+  ]
+}

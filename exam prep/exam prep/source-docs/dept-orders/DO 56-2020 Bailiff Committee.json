@@ -1,0 +1,23 @@
+{
+  "source": "caselaws and other information used in policing/past papers for exams/DO 56-2020 Bailiff Committee.pdf",
+  "size_bytes": 983775,
+  "ok": true,
+  "pages": 2,
+  "chars_total": 2365,
+  "chars_per_page": 1182,
+  "verdict": "OCR",
+  "category": "dept-orders",
+  "subcategory": "",
+  "txt_out": "dept-orders/DO 56-2020 Bailiff Committee.txt",
+  "ocr": {
+    "engine": "tesseract",
+    "lang": "eng",
+    "dpi": 300,
+    "config": "--oem 3 --psm 6",
+    "elapsed_sec": 17.65
+  },
+  "page_text": [
+    "2) Police Orders by\n\nPrey Commissioner of Police\n\naK 'olice Administration Building\n\nFS or. Edward & Sackville Streets\na Port of Spain\nP Proper ano Tuesday 17\" March, 2020\n(This is an official document entrusted to members and civilian\nemployees of the Police Service and is not for publication in the Press)\na ee\nNo. 56 Departmental Order PART I\nPART II\nReproduced hereunder is a letter from the Bailiff Committee in the Ministry of the\nAttorney General\n\nFebruary 3, 2020\nGary Griffith\nCommissioner of Police\nOffice of the Commissioner of Police\nPolice Administration Building\nCorner Sackville and Edward Street\nPort of Spain\nDear Commissioner,\nImplementation of section 5(3)(d) Bailiff Act, Chap 4:61 — Private Bailiff Intake Exercise\nThe subject caption refers. :\nOn behalf of the Honourable Attorney General, I wish to inform you of the following;\n\n1. The Ministry of the Attorney General and Legal Affairs will commence the Private Bailiff\n\nIntake Exercise in February, 2020 with the publication of an advertisement inviting suitable\npersons to submit their interest to be interviewed and examined.\nSection 5(3) of the Bailiff Act, provides the Registrar of the Supreme Court with the power to\nlicense an individual as a bailiff, once certain criteria are met. Section 5(3)(d), in particular,\nestablishes special criteria for private bailiff licensing and impliedly places a statutory\nmandate upon the Ministry. The mandate is to interview and examine suitable persons, hence\nthe advertisement.\n\n2. Asa matter of policy, any public officer including Police Officers, Special Reserve Police\n(fulltime and part-time) and Municipal Police cannot participate in the exercise\n(emphasis ours). The principal reasons are two fold and concerns the likely impact upon the\nduties and availability of Police Officers to the state. Private Bailiffs-\n\n(a) Operate during working hours and lawfully execute bailiff functions between the\nhours 6:00am to 6:00pm, Monday to Saturday, and\ntia ;\n",
+    "(b) May from time to time lawfully seek the assistance of the police to maintain the\npeace.\nI refer you to paragraphs 19 and 23 of the Code of Conduct, made further to Regulations 12 of\nthe Bailiffs Regulations, 2001. For your convenience, I have enclosed a copy of the Act and its\nRegulations.\nPaula Ann Cross-Horton\nChairman, Bailiff Committee\nPART Il — NIL\nCommissioner of Police\n"
+  ]
+}

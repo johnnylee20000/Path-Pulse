@@ -1,0 +1,22 @@
+{
+  "source": "caselaws and other information used in policing/past papers for exams/DO 163-2020 Extension of Employment.pdf",
+  "size_bytes": 473550,
+  "ok": true,
+  "pages": 1,
+  "chars_total": 1530,
+  "chars_per_page": 1530,
+  "verdict": "OCR",
+  "category": "dept-orders",
+  "subcategory": "",
+  "txt_out": "dept-orders/DO 163-2020 Extension of Employment.txt",
+  "ocr": {
+    "engine": "tesseract",
+    "lang": "eng",
+    "dpi": 300,
+    "config": "--oem 3 --psm 6",
+    "elapsed_sec": 8.06
+  },
+  "page_text": [
+    "CAS Police Orders by\nSeaK Commissioner of Police\nNa Police Administration Building\nes Cor. Edward & Sackville Streets\n7% .\nARomsct aos Port of Spain\nMonday 16\" November, 2020\n(This is an official document entrusted to members and civilian employees of\nthe Trinidad and Tobago Police Service and is not for publication in the Press)\nNo. 163 Departmental Order PART I - NIL\nPART II\nExtension of Employment — Officers (SRP) exceeding the age of 60\nThe Trinidad and Tobago Police Service (TTPS) retains retired personnel to function as\nSpecial Reserve Police (SRP) officers at various ranks on part-time, full-time and contractual\ncapacities.\nThe retirement age for Second Division Officers (SDOs) and First Division Officers (FDOs)\nwithin the TTPS is 55 and 60 years respectively, however there exists several SRP officers\nwho have exceeded the age of sixty (60) years and continue to serve.\nIt is to be noted that numerous officers over the age of 60 are granted extension of service\nfrom time to time on a case by case basis owing to the exigency of the service. It is therefore\nrecommended that all requests for continuation of employment, be done on an absolute needs\nbasis and must be accompanied with the following documents: -\n1. Staff Report\n2. Certificate of Fitness\n3. Recommendation of Head of Division/Branch/Section\nThis has become necessary to justify the rehiring of officers over the age of 60 given the\nstrict budgetary and financial constraints at this point in time.\nPART III — NIL\nCommissioner of Police\n~ —— a ’\n"
+  ]
+}

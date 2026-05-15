@@ -1,0 +1,3043 @@
+ 
+
+
+
+
+1 
+ 
+Acknowledgements 
+The creation of this Strategic Plan 2025 -2027 should be regarded as a significant achievement in 
+our obligation to improve community partnerships, amplify operational excellence, build on our 
+organizational development and enhanc e public safety. To this end, the Commissioner of Police 
+acknowledges in particular the contribution of our external stakeholders , our Second Division 
+Officers and junior civilian staff, who have made significant contributions in the development of 
+this strategic plan. Additionally, this achievement may not have been possible without the collective 
+efforts, insights, experience and dedication of many individuals and departments within the TTPS. 
+Heartfelt gratitude is extended to the Executive of the TTPS and  all other First Division Officers 
+and senior civilian officers of the TTPS who have been very supportive and passionate every step 
+of the way. Their vision and guidance has assisted in preparing this document which is broad in 
+scope. The dedication to service excellence by members of staff who contributed their expertise and 
+provided timely feedback in the creation of this strategic plan, continues to be inspirational. The 
+TTPS is also tremendously appreciative of all other stakeholders, particularly our businesspersons 
+and our station council representatives. Your collaboration, willingness to be forthright and shared 
+commitment to the safety and well -being of our fellow citizens have refined and enhanced the 
+planning process and ensured inclusivity of different voices.  
+Ultimately, the people of Trinidad and Tobago, virtutem vocis – the power of your voice, your 
+concerns and aspirations have been integral in this strategic plan. Through your continued support 
+and collaboration with the TTPS, we can achieve the goals outlined for the growth, development 
+and strengthening of Trinidad and Tobago.   
+Now, as we undertake this new journey from 2025 to 2027, we continue to profess our commitment 
+to integrity, accountability, respect, professionalism, dignity, tran sparency, excellence and 
+innovation in bringing about a safer, more secure Trinidad and Tobago. 
+  
+  
+
+
+
+2 
+ 
+Glossary of Terms 
+Governance - refers to the system, structure and/or practices that an organisation establishes to 
+ensure that policies, plans, programs, a nd projects relative to its strategic direction order are being 
+implemented. Governance is also concerned with overseeing the delivery of services, monitoring 
+and mitigating key risks, reporting on performance in achieving intended results and using 
+performance information to drive ongoing improvements and corrective actions.  
+Oversight - is the tool or process that is used to ensure that a strategic plan is achieving the 
+implementation of expected policies and strategies as intended. Additionally, oversigh t monitors 
+that the strategic outcomes comply with required policies, laws, regulations and ethical standards.  
+Major accomplishment - Major accomplishments refers to those significant achievements of the 
+TTPS which is indicative of extreme effort, skill and dedication based on organisational goals, 
+values and context of the accomplishment.  
+Crime Prevention Through Environmental Design – Crime Prevention Through Environmental 
+Design (CPTED) is “a multi -disciplinary approach to crime prevention that uses urban and 
+architectural design and the management of built and natural environments” (NSW, 2024). A 
+CPTED project focuses on Territoriality, Surveillance and Access Control and is a written plan  
+developed and intended to reduce crime by changing the design of a building’s physical 
+infrastructure, changing the design of streets, parks and other public spaces to reduce crime 
+opportunities.  
+Focused deterrence  – strategies that seek to change offender behaviour by understanding the 
+underlying dynamics and implementing a blended strategy involving specific sanctions (or 
+“levers”), as well as clear incentives for not engaging in crime. 
+Precision Policing – According to Bratton and Murad (2018), precision policing is “a framework 
+to ensure that the police collaborate with the community in meaningful ways – building police 
+legitimacy because the methods are integrated into the heart of patrol wor k, not viewed as an 
+ancillary function. Precision policing ensures that police use connectivity more than enforcement 
+and that when enforcement is necessary, it is accurately focused”. Thus, precision policing allows 
+us to “make every police-citizen interaction an act of collaboration”.   
+
+
+
+3 
+ 
+Precision Patrol – Precision Patrol is a patrol strategy focused on a specific geographic area to 
+prevent crime but more importantly to build the relationship between the police and communities in 
+the specific geographic a rea. Thus, it involves significant communication with members of those 
+communities to build trust and confidence whilst patrolling areas where legitimacy might be low 
+and which are prone to criminal and deviant conduct.   
+ 
+ 
+ 
+ 
+  
+
+
+
+4 
+ 
+Abbreviations 
+CAPA – Crime and Problem Analysis (Branch) 
+CASU – Coastal and Air Support Unit 
+CASMU – Cyber and Social Media Unit 
+CP – Community Partnership 
+CPTED – Crime Prevention Through Environmental Design  
+EMSS – Executive Management Services Secretariat 
+ERP – Emergency Response Patrol 
+FMU – Facilities Management Unit 
+GORTT – Government of the Republic of Trinidad & Tobago 
+LMV – Larceny Motor Vehicle 
+MC – Minor Crime 
+MECU – Monitoring, Evaluation and Compliance Unit 
+MO – Minor Offence 
+OD – Organisational Development 
+OE – Operational Excellence 
+OSH – Occupational Safety and Health 
+PHF – Police Health Facility 
+PIOC – Police Internal Oversight Committee 
+PR & PI – Planning, Research and Project Implementation Unit 
+PS – Public Safety 
+PRIDE – Professionalism, Respect, Integrity, Dignity and Excellence 
+RTA – Road Traffic Accident 
+
+
+
+5 
+ 
+SRC – Serious Reported Crime  
+SSS – Social Support Services 
+TTPS – Trinidad and Tobago Police Service 
+VWSU – Victim and Witness Support Unit 
+ 
+ 
+ 
+  
+
+
+
+6 
+ 
+Table of Contents 
+Acknowledgements ........................................................................................................................... 1 
+Glossary of Terms ............................................................................................................................ 2 
+Abbreviations .................................................................................................................................... 4 
+Commissioner’s Foreword .............................................................................................................. 9 
+Executive Summary ....................................................................................................................... 10 
+1.0 Introduction ......................................................................................................................... 12 
+1.1 Background ..................................................................................................................... 12 
+1.2 Purpose ........................................................................................................................... 14 
+1.3 Guiding Organisational Framework ............................................................................... 15 
+1.4 Shared Values ................................................................................................................. 16 
+1.5 5 PCs of Strategic Implementation ................................................................................. 17 
+1.6 Demographics ................................................................................................................. 19 
+1.7 History of the Trinidad and Tobago Police Service ....................................................... 20 
+2.0 Five-Year Incident Pattern and Trend Analysis (2020 – 2024) ...................................... 22 
+2.1 Fatal Road Traffic Accidents (RTAs) ............................................................................ 22 
+2.2 Serious Reported Crimes (SRCs) ................................................................................... 23 
+2.3 Minor Crimes (MCs) ...................................................................................................... 24 
+2.4 Minor Offences (MOs) ................................................................................................... 25 
+3.0 Situational Analysis ............................................................................................................. 26 
+3.1 Political Environment ..................................................................................................... 26 
+3.2 Socio-Economic Environment ........................................................................................ 26 
+3.3 Technological Environment ........................................................................................... 27 
+3.4 Legal Environment ......................................................................................................... 28 
+3.5 Environmental ................................................................................................................ 29 
+3.6 SWOT Analysis .............................................................................................................. 30 
+4.0 Major Accomplishments and Challenges .......................................................................... 31 
+4.1 Major Accomplishments of the TTPS for 2022 - 2024 .................................................. 31 
+4.2 Major Challenges of the TTPS for 2022 - 2024 ............................................................. 33 
+4.3 Interpretation .................................................................................................................. 33 
+5.0 Methodology ........................................................................................................................ 34 
+
+
+
+7 
+ 
+5.1 Timeline .......................................................................................................................... 34 
+5.2 Justification for a Bottom-up Approach ......................................................................... 36 
+5.3 Data Collection Methods ................................................................................................ 38 
+5.4 Results and Analysis ....................................................................................................... 40 
+5.5 Generating the Outcomes and Action Items ................................................................... 40 
+5.6 Limitations and Delimitations ........................................................................................ 41 
+6.0 Stakeholder Analysis ........................................................................................................... 45 
+6.1 Purpose of Stakeholder Analysis .................................................................................... 45 
+7.0 Components of Legal and Policy Framework .................................................................. 49 
+8.0 Strategic Pillars ................................................................................................................... 50 
+8.1 Community Partnerships ................................................................................................ 51 
+8.2 Organisational Development .......................................................................................... 54 
+8.3 Operational Excellence ................................................................................................... 57 
+8.4 Public Safety ................................................................................................................... 62 
+8.5 Longer-Term Goals ........................................................................................................ 65 
+9.0 Implementation Plan ........................................................................................................... 66 
+9.1 Governance and Oversight ............................................................................................. 66 
+9.2 Stakeholder Engagement ................................................................................................ 66 
+9.3 External Stakeholders ..................................................................................................... 66 
+9.4 Internal Stakeholders ...................................................................................................... 67 
+9.5 Monitoring, Evaluation and Compliance........................................................................ 70 
+9.6 Monitoring and Evaluation Framework ......................................................................... 71 
+9.7 Feedback Mechanisms .................................................................................................... 71 
+9.8 Risk Management ........................................................................................................... 72 
+9.9 Communication Strategy ................................................................................................ 74 
+10.0 Conclusion and Call to Action............................................................................................ 76 
+10.1 Conclusion ...................................................................................................................... 76 
+10.2 Call to Action ................................................................................................................. 76 
+11.0 Appendices ........................................................................................................................... 78 
+Appendix 1: Fatal Road Traffic Accidents 2018-2024 ............................................................. 78 
+Appendix 2: Serious Crimes by Year 2018-2024 ..................................................................... 79 
+Appendix 3: Serious Crimes by Category 2018-2024 .............................................................. 80 
+
+
+
+8 
+ 
+Appendix 4: Minor Crimes by Category 2018-2024 ................................................................ 81 
+Appendix 5: Minor Offences by Category 2018-2024 .............................................................. 82 
+Appendix 6: PIOC Brief ............................................................................................................ 83 
+ 
+Figure 1.1: Strategic Pillars of TTPS’ 2025-2027 Strategic Plan .................................................... 13 
+Figure 1.2: Strategy Statements of the TTPS ................................................................................... 16 
+Figure 1.3: TTPS’ Shared Core Values ............................................................................................ 17 
+Figure 1.4: 5PCs of Strategic Implementation ................................................................................. 19 
+Figure 1.5: Demographics for Trinidad and Tobago and the TTPS (December 2024) ................... 20 
+Figure 2.1: Fatal Road Traffic Accidents 2020-2024 ...................................................................... 23 
+Figure 2.2: Selected Violent Crimes 2020-2024 .............................................................................. 24 
+Figure 5.1: Timeline for the Development of the TTPS Strategic Plan ........................................... 35 
+ 
+Table 5.1: Stakeholder Meetings/Initiatives – Strategic Plan 2025-2027 ........................................ 39 
+Table 6.1: Stakeholder Analysis Table ............................................................................................ 46 
+Table 6.2: Key Stakeholders of TTPS and Expectations ................................................................. 47 
+Table 8.1: Strategic Pillars and Outcomes ....................................................................................... 50 
+Table 8.2: Number of Pillars, Action Items, Outcomes and Metrics for Success ............................ 51 
+Table 8.3: Community Partnerships – Metrics for Success ............................................................. 53 
+Table 8.4: Action Items and Outcomes for the Strategic Pillar of Community Partnerships .......... 53 
+Table 8.5: Organisational Development – Metrics for Success ....................................................... 55 
+Table 8.6: Action Items and Outcomes for the Strategic Pillar of Organisational Development .... 55 
+Table 8.7: Operational Excellence – Metrics for Success ................................................................ 58 
+Table 8.8: Action Items and Outcomes for the Strategic Pillar of Operational Excellence ............. 59 
+Table 8.9: Public Safety – Metrics for Success ................................................................................ 62 
+Table 8.10: Action Items and Outcomes for the Strategic Pillar of Public Safety ........................... 63 
+Table 9.1: Stakeholder Engagement Plan for TTPS Strategic Plan 2025-2027 ............................... 68 
+Table 9.2: Communication Plan ....................................................................................................... 75 
+ 
+  
+
+
+
+9 
+ 
+Commissioner’s Foreword 
+It is with great pride and an immense sense of responsibility that I 
+present this, our 5th Strategic Plan 2025 -2027. As we embark on this 
+next segment of our journey outlined in this strategic plan, we are 
+reminded of the unwavering commitment and resilience that define our 
+service. This plan is essentially a roadmap but more so a pledge to our 
+citizens and visitors to Trinidad and Tobago. This pledge is being 
+manifested through 4 strategic pillars and with the intention of 
+safeguarding, protecting and serving with professionalism, integrity and 
+purpose. 
+The crime and violence challenges with which we are confronted are 
+very complex and changing over time. Moreover, these challenges have been threatening our safety 
+and our communities. Therefore, if we are to address these challenges we must innovate, adapt and 
+ensure unity of direction. This strategic plan underscores the need for us to be transparent, 
+accountable, have integrity and seek the relentless pursuit of excellence. 
+It is our belief that safety, security and justice are the foundation for national development. 
+Therefore, given the mandate of the TTPS, every initiative identified in this strategic plan i s a 
+reflection of our commitment to restore public trust  and confidence, increase police legitimacy, 
+reduce crime and nurture cooperation and collaboration with our internal and external stakeholders. 
+It is a fact that for us to evolve and develop as an or ganisation we need to engage, educate and 
+empower our stakeholders and not just enforce the laws of Trinidad and Tobago. 
+I now call upon every police and civilian officer in the TTPS as well as our external stakeholders, 
+inclusive of our citizens, to embra ce our strategic direction, embrace our initiatives, embrace our 
+officers. It is only through these collaborative efforts can our citizens thrive and can we build a safer 
+and more secure society which equates to a stronger Trinidad and Tobago. 
+In conclusion let us always be reminded to be steadfast in our dedication and commitment, inspired 
+through the values we hold near and dear and resolute in protecting our future through 
+professionalism, passion and partnership. 
+Mr. Junior Benjamin 
+Commissioner of Police (Ag.)  
+
+
+
+
+10 
+ 
+Executive Summary 
+This Trinidad and Tobago Police Service Strategic Plan outlines a comprehensive approac h which 
+addresses our four critical strategic pillars - Community Partnerships, Organisational Development, 
+Operational Excellence and Public Safety.  The formulation of The Plan , which is themed 
+“Protecting our Future through Professionalism, Passion and Partnership” , involved a 
+comprehensive and systematic p rocess which drew upon a variety of inputs to ensure its 
+effectiveness. 
+The Community Partnership pillar highlights the need for mutual trust, respect and the responsibility 
+for the creation of safe and healthy communities which must be shared between the TTPS and all 
+communities. Through the outlined strategies in this area, the results expected include: 
+ Improve Public Trust & Confidence 
+ Foster Effective Community Engagements 
+ Strengthen Stakeholder Partnerships 
+ Enhance Youth Engagement 
+Organizational Devel opment involves the analysis and strengthening of systems, processes, 
+procedures and human resources to generate a culture of PRIDE, accountability and continuous 
+development and improvement. This pillar encompasses the following expected outcomes: 
+ Improve Occupational Health and Wellness  
+ Improve Psycho-social Support 
+ Improve OSH Compliance 
+ Develop Supervision and Leadership Capabilities  
+ Enhance Professional Development 
+Operational Excellence focuses on improving the efficiency, effectiveness and overall performance 
+of the TTPS. This strategic pillar is intended to enhance the TTPS’ ability to improve service 
+delivery to our internal and external public, with the following expected results: 
+ Improve the Efficiency and Effectiveness of TTPS’ Operations and Equipment 
+ Optimize Technologies for Organisational Efficiency and Effectiveness 
+ Improve Case Management Systems 
+ Improve Manpower Capacity, Development and Utilisation  
+
+
+
+11 
+ 
+The Public Safety pillar  refers to the activities the TTPS engages in to facilitate the p rotection, 
+security, safety and well -being of individuals and communities . The following outcomes are 
+expected to be derived under this pillar: 
+ Reduction in Violent Crime 
+ Enhance Road Safety 
+ Improve Crime Prevention 
+ Improve Crime Detection 
+ Increase Safety in Public Places 
+ Reduce School Violence 
+As we move forward, continuous evaluation, inter -agency collaboration and stakeholder 
+engagement will be essential in order to quickly adapt to challenges as they arise, even while we 
+remain committed to the overarching vision, thereby ensuring the successful execution of The Plan. 
+  
+
+
+
+12 
+ 
+1.0 Introduction 
+1.1 Background 
+According to Cheung and Yu (2020), “strategic planning aims to shift traditional focus on existing 
+challenges towards the exploration and understanding of possible futures”. Police strategic planning 
+has changed from a traditional reactive-orientated policing to focus more on proactive policing with 
+the intention of responding to the requirement for adjustment to our changing operating environment 
+(Zhao et al., 2008). A Strategic Plan is therefore a pro-active tool that provides the guidance to an 
+organization on how to attain its vision and fulfil its mission with maximum efficiency and impact.   
+This Trinidad and Tobago Police Service (TTPS) Strategic Plan spans the period 2025 to 2027 and 
+charts the bold course for evolution and excellence in policing which is aligned to the principles of 
+an effective law enforcement system as outlined in our National Development Plan . It is grounded 
+in our mission to provide safe and secure communities and other places in collaboration with our 
+stakeholders through professional policing, focused leadership and consistent high quality service. 
+The plan also reflects  our vision to make every place in Trinidad and Tobago safe, as well as our 
+steadfast commitment to protecting the communities we serve, improving police legitimacy, 
+nurturing trust and confidence and driving innovation throughout the organisation.  
+This Strategic Plan will be used by internal stakeholders who will be aware of and work towards 
+achieving our targets. Our external stakeholders will also utilize this Plan and will become au 
+courant with the activities in which th e TTPS will engage and hold us accountable. This plan was 
+formulated internally by the Trinidad and Tobago Police Service with the assistance and support of 
+members of the Planning Research and Project Implementation Unit, the Monitoring Evaluation and 
+Compliance Unit and the Executive Management Services Secretariat.  
+The formulation of The Plan involved a comprehensive and systematic process which drew upon a 
+variety of inputs to ensure its effectiveness. Further, it was developed in alignment with the 
+organizational goals, and responsiveness to the needs of the TTPS stakeholders. Key elements of 
+The Plan include internal and external assessments, policies and legal guidelines, strategic inputs, 
+benchmarking and best practices, identification of potential risks and threats, community and 
+cultural considerations and monitoring and evaluation processes.  The integration of these elements 
+provides for an actionable framework tailored to the unique needs , challenges and opportunities 
+facing the TTPS and communities in Trinidad and Tobago.  
+
+
+
+13 
+ 
+The Trinidad and Tobago Police Service (TTPS) 2025-2027 Strategic Plan (hereinafter referred to 
+as The Plan) focuses on how the TTPS can deliver on the expectations of its various stakeholders 
+in a manner that is structured, c onsistent, efficient and cost effective. The Plan, which is themed 
+“Protecting our Future through Professionalism, Passion and Partnership” will be the fifth of its 
+kind implemented by the organisation since the first was rolled out in 2014. The theme demonstrates 
+the TTPS’ sustainability objectives. As the TTPS endeavours to make every place in Trinidad and 
+Tobago safer, four strategic interdependent goals shown in the figure below will be pursued, namely:   
+ Community Partnerships 
+ Organisational Development  
+ Operational Excellence  
+ Public Safety 
+ 
+Figure 1.1: Strategic Pillars of TTPS’ 2025-2027 Strategic Plan 
+The Plan focuses on the expectations of both internal and external stakeholders with the overarching 
+objective of restoring public trust and confidence in the TTPS . It emphasises purposeful teamwork 
+that enables the organisation to efficient ly realise its vision and fulfil its mission , with the Police 
+working in partnership with the various stakeholders being integral to the success of The Plan.    
+Organizational 
+Development
+Operational 
+ExcellencePublic Safety
+Community 
+Partnerships
+
+
+
+14 
+ 
+In the formulation of this plan, a ‘bottom -up’ approach was adopted , which enabled a wide cross 
+section of staff to contribute to the final product through ideas, suggestions and recommendations 
+expressed. This process was used to create a sense of ownership among the TTPS’ internal 
+stakeholders whose input and contribution is greatly needed for successful implementation and 
+discharge of The Plan.  
+1.2 Purpose 
+The purpose of The  Plan i s to provide a clear, structured roadmap which guides the TTPS in 
+achieving its goals, addressing challenges and delivering effective, efficient and equitable services 
+to the public. To establish a clear sense of purpose and unified direction, the four strategic objectives 
+for the TTPS over the period 2025 to 2027 will be highlighted and elaborated upon. It is integral for 
+the TTPS to address the critical issues such as public safety and crime prevention and align the 
+necessary resources to these issues if we are to be successful.  
+Considering the TTPS does not function in a vacuum and understanding the importance of 
+accountability and transparency, the strategic initiatives in this plan demonstrate the TTPS’ 
+commitment to transparency by outlining priorities, key performance indicators, expected outcomes 
+and targets .  These principles provide a basis for measuring the performance of the TTPS and 
+holding the organization accountable to its many internal and external stakeholders.  
+This plan is also aimed at improving service delivery. Therefore, The Plan guides the 
+implementation of the selected initiatives which would assist in improving operational efficiency , 
+officer training and the use of technology. It will ensure that policing strategies are responsive to the 
+needs and expectations of the local communities and aligned with national expectations. As such, it 
+is necessary that in The Plan, there is an integration of the police service’s objectives with broader 
+national security and public safety strategie s. Similarly, emerging challenges such as crime trends 
+which are evolving, technological advances and societal expectations will also be addressed in The 
+Plan.  It is in this regard, Trinidad and Tobago ’s development strategies, the Strategic Plan of the 
+Ministry of National Security and the Public Sector Investment Programme are some of the key 
+documents and initiatives for such integration.   
+In taking into account the Police Service Commission survey and other key research documents, 
+there is the clear and unambiguous need for us to do more to build public trust and confidence. As 
+such The Plan reinforces the TTPS’ commitment to serving with integrity and professionalism. It is 
+
+
+
+15 
+ 
+only through the public, we are given the legitimate authority to carry out our functions. Thus, if the 
+TTPS is not seen as a legitimate body, it makes our work difficult if not impossible. As such, The 
+Plan will highlight the need for us to strengthen relationships between the police and the 
+communities we serve through transparent and community-focused initiatives.    
+The Plan has a critical role to play in guiding the organization over the 2025 to 2027 period. In the 
+Plan, some of the challenges the TTPS faces will be addressed through different strategic initiatives.  
+Consequently, The Plan is integral in achieving our goals and meeting the expectations of citizens 
+and stakeholders.   
+1.3 Guiding Organisational Framework 
+The TTPS’ guiding organisational framework is represented in the organization’s:  
+a. Mission  
+b. Vision 
+c. Motto  
+d. Mandate  
+e. Oath  
+f. Shared Values  
+and is reflected hereunder:  
+ 
+
+
+
+16 
+ 
+ 
+Figure 1.2: Strategy Statements of the TTPS 
+1.4 Shared Values  
+The Trinidad and Tobago Police Service prides itself in its shared values. In fulfilling its motto to 
+“protect and serve with P.R.I.D.E”, the TTPS is committed to sustaining the following core values.  
+ 
+Vision
+• To make every place in Trinidad and Tobago safe.
+Mission
+• In partnership with the citizens of Trinidad and Tobago, we provide for safe and
+secure communities and other places through professional policing, focused
+leadership and consistent, high quality service.
+Motto
+• To protect and serve with P.R.I.D.E.
+Mandate
+• The Trinidad and Tobago Police Service has a responsibility to: i. Maintain law and
+order; ii. Preserve peace; iii. Protect life and property; iv. Prevent and detect
+crime; v. Apprehend offenders; and vi. Enforce all laws and regulations with
+which it is charged.
+Oath
+• I do swear that I will well and truly serve Trinidad & Tobago in the office of Police
+Officer without favor or affection, malice or ill will, and that I will cause the
+peace to be kept and preserved in Trinidad & Tobago, and that I will prevent, to
+the utmost of my power, all offences against the same; and that while I shall
+continue to hold the said office I will, to the best of my skill and knowledge,
+discharge all the duties thereof faithfully according to law and will not, without
+due authority in that behalf, in any manner whatsoever publish or communicate
+any facts or information being facts or expressions of opinion based on such
+facts that come to my knowledge by reason of my being the holder of such
+office. So help me God.
+
+
+
+17 
+ 
+ 
+Figure 1.3: TTPS’ Shared Core Values 
+1.5 5 PCs of Strategic Implementation 
+The TTPS will employ an adapted version of the 5P’s Human Resource Management m odel to 
+ensure that all sectors of the organization are working towards the same goal s and objectives, with 
+the best possible outcomes for both external and internal stakeholders. 
+1 Purpose & Commitment 
+Purpose is the foundation of what you do, and Commitment embodies our dedication to service in 
+realising and fulfilling our responsibility. Every action or decision should be driven by a clear sense 
+of purpose, with the determination towards achieving our goal. 
+Shared 
+Values
+Professionalism
+we will work harder at being 
+efficient, diligent, thorough and 
+informed when performing our 
+duties and will adopt a deliberate 
+approach to be humble, kind, 
+understanding, empathetic and 
+considerate when interacting with 
+our customers
+Respect
+we will exhibit courtesy, 
+tolerance and sensitivity to 
+everyone
+Integrity
+we will be honest, applying the highest 
+ethical standards in the performance 
+of all aspects of our duties, doing 
+always what we are obligated to do in 
+an objective and equitable manner, not 
+compromising ourselves or allowing 
+personal benefit to influence our 
+decisions. We will do what is right 
+because it is the right thing to do
+Dignity
+we will protect human dignity and 
+maintain and uphold the rights of all 
+persons
+Excellence
+we will strive to achieve 
+excellence in every service that 
+we provide through our 
+commitment, communication, 
+learning, mentoring, teamwork, 
+and in the implementation of 
+effective strategies
+
+
+
+18 
+ 
+2 Principles & Character 
+Principles are our core values that guide our behaviour and decision-making. Character defines who 
+we are, our actions, interaction and decision making. Principles a nd Character together symbolize  
+our strength, culture, integrity, as well as our ability to foster a positive environment for all. 
+3 Processes & Creativity 
+Processes are the methods an d systems used to achieve our goals. Creativity defines our ability to 
+adapt, lead and inspire with new ideas while overcoming all challenges.  
+4 People & Compassion 
+People are the heart of our organization and Compassio n speaks to our genuine concern  with the 
+well-being of others whether it be customers, employees, or stakeholders. 
+The embodiment of these two (People and Compassion) promotes healthy communication, foster s 
+strong relationships, encourages a sense of belongingness, cultivates a culture of feeling valued and 
+cared for which drives high performance; offering hope amid struggles and making others feel 
+valued whilst providing a safe environment for all. 
+5 Performance & Competence 
+Performance is our ability to execute our task with exceptional quality. Competence is the skill and 
+knowledge we possess as experts in law enforcement that enable us to be effective and decisive in 
+our actions.  Performance and Competence work together in harmony, fuelled by unwavering 
+commitment, that allows us to achieve meaningful results.  
+ 
+ 
+  
+
+
+
+19 
+ 
+ 
+5 PCs OF STRATEGIC IMPLEMENTATION 
+PURPOSE & 
+COMMITMENT 
+PRINCIPLES & 
+CHARACTER 
+PROCESSES & 
+CREATIVITY 
+PEOPLE & 
+COMPASSION 
+PERFORMANCE & 
+COMPETENCY 
+ Vision 
+ Mission 
+ Motto 
+ Mandate 
+ Oath 
+ Professionalism 
+ Respect 
+ Integrity 
+ Dignity 
+ Excellence 
+ Courage 
+ Accountability 
+ Discretion 
+ Exemplary 
+qualities 
+ Focused 
+Leadership 
+ Professional 
+Policing 
+ Substantial 
+Collaborations 
+ Transformative 
+Innovations 
+ Passion & 
+Equitable 
+Service 
+ Adaptability  
+ Inclusiveness 
+ Resourceful 
+ Solution Driven 
+ Clear 
+communication 
+ Excellent Customer 
+Service 
+ Supportive Work 
+Environment 
+ Promotion of 
+Health & 
+Happiness 
+ Increased 
+Workplace 
+Enthusiasm 
+ Recognition and 
+Reward System 
+ Family Support 
+Systems 
+ Positive 
+Stakeholder 
+Engagement 
+ Improved 
+appraisal methods 
+ Enhanced 
+recruitment and 
+placement systems 
+ Improved Public 
+Trust & Confidence 
+ Increased Police 
+Legitimacy 
+ Enhanced 
+Transparency & 
+Accountability 
+ Fortified Safety & 
+Security 
+ SMART Objectives 
+ Proficient 
+Evaluation 
+ 
+Figure 1.4: 5PCs of Strategic Implementation 
+With the integr ation of the five PC’s: Purpose with Commitment, Principles with Character, 
+Processes with Creativity, People with Compassion and Performance with Competence, we will be 
+building an organization that  is focused on delivering meaningful results while maintaining the 
+highest standards of ethics, empathy, and excellence; that will impact individuals, strengthen 
+communities and make Trinidad and Tobago a safer place. 
+1.6 Demographics 
+Figure 1.4 hereunder provides the demographics for Trinidad and Tobago and for the Trinidad and 
+Tobago Police Service. 
+
+
+
+20 
+ 
+ 
+Figure 1.5: Demographics for Trinidad and Tobago and the TTPS (December 2024) 
+1.7 History of the Trinidad and Tobago Police Service 
+Undoubtedly, the Trinidad and Tobago Police Service (TTPS) has a rich history which informs this 
+Strategic Plan for the 2025 to 2027 period. Key historical milestones include:  
+a. 1592 marked the early e stablishment of the Trinidad and Tobago Police Force . Founded 
+under Spanish rule, the initial police force was limited to duties in the towns with a small 
+team of officers.  
+b. Post-Emancipation Expansion (1838): Following the abolition of slavery, the force expanded 
+to rural areas, establishing multiple stations to serve the needs of a growing population.  
+c. Organizational Reforms (1869): An ordinance improved the force's organization and 
+discipline, enhancing surveillance and public order capabilities.  
+National Demographics
+Area: 5,130 sq. km. 
+Population: 1,368,333 
+Gross Domestic Product: US$ 28.14 billion 
+Gross Domestic Product Per Capita: US$ 
+18,332.96 
+Adult Literacy Rate: 97.9% 
+Unemployment Rate: 4.8%
+TTPS Demographics 
+Regular Officers: 5,648
+Special Reserve Police: 2,312 (full-time) 
+Special Reserve Police: 446 (part-time)
+Contracted Full Time Returnees:  218
+Contracted Part-TimeTime Returnees:  10
+Other Contracted SRPs: 16
+Unsworn Staff: Established - 550
+Unsworn Staff: Contracted - 562
+No. of Police Stations: 67 
+No. of Police Posts: 10 
+No. of Police Vehicles (Operational): 1,559
+No. of Horses: 31
+No. of Canines: 55
+Budget 2024/2025: $2,508,277,200
+
+
+
+21 
+ 
+d. In 1955 women police were included as p art of the force: Recognizing the need to address 
+juvenile and female-related issues, the service inducted its first female officers.  
+e. With the need to show a more humanitarian face and service orientation, the police force 
+transitioned to the Trinidad and Tobago Police Service in 1966: Legislative changes shifted 
+the focus from a militaristic force to a service -oriented organization, emphasizing 
+community engagement.  
+f. 1970 to present, represents an era of modernization and growth : The TTPS has grown to a 
+total of 8,650 officers inclusive of Special Reserve Police Officers , introducing specialized 
+units and embracing technology to enhance operational efficiency.  
+These historical developments have shaped the TTPS' current structure and strategies, emphasizing 
+community partnership s, technological advancement, and organizational effectiveness. The 
+strategic plan for 2025 to 2027 builds upon this legacy, aiming to further enhance public safety and 
+service delivery in Trinidad and Tobago. 
+  
+
+
+
+22 
+ 
+2.0 Five-Year Incident Pattern and Trend Analysis (2020 – 2024) 
+The analysis presented in this section was carried out by the Crime and Problem Analysis (CAPA) 
+Branch. It is shared to provide for data-driven decision-making by helping to identify patterns, trends 
+and hotspots which are extremely crucial in setting informed priorities and the effective allocation 
+of resources. The analysis in this plan specifically allows for the comparison of data over a 5 -year 
+period in which we can assess whether past initiatives have been effective in achieving the TTPS’ 
+policing objectives. Taking the opportunity to share such detailed data with our stakeholders is 
+evidence of the TTPS’ intention to build trust by demonstrating acco untability and evidence-based 
+planning. The TTPS sees the provision of historical data supporting the forecast of future crime and 
+incident patterns and trends  and even the identification of potential risks enabling proactive 
+measures. This comprehensive review of these patterns and trends helps to ensure the strategic plan 
+is in alignment with current and emerging challenges, such as spikes in specific types of crime or 
+changes in population demographics. Moreover, it is also crucial to examine what events  occurred 
+over the years which may have had an impact on criminal offending and deviance. These revelations 
+can better position the TTPS in planning for its future.   
+The TTPS, as an organization, bore the devastating loss of over 30 officers due to the pa ndemic, 
+highlighting the critical importance of its Occupational Health and Wellness initiatives. These new 
+priority areas underscored the TTPS’ focus on safeguarding the well-being of its officers, whilst also 
+utilising technology to facilitate communicat ion and minimize physical interactions. However, the 
+pandemic’s ripple effects were not confined to the internal challenges of the TTPS; it also affected 
+communities and criminal elements engaged in illicit activities. This shifting dynamic presented 
+new c hallenges for law enforcement, as crime patterns evolved in ways that impacted the 
+organization's objectives. 
+2.1 Fatal Road Traffic Accidents (RTAs) 
+A key focus of the TTPS is road safety, and significant strides were made in this area through the 
+implementation of traffic exercises, breathalyzer testing, and static highway patrols.  
+During the period 2020 – 2024, a total of 471 fatal road traffic accidents was recorded representing 
+a 32% increase in 2024 compared to 2020. Over the last 5 years, 2024 had the h ighest number of 
+fatal RTAs with 115 RTAs whereas 2021 recorded the lowest with 76 RTAs. This can be attributed 
+to the stay at home measures implemented to reduce the spread of the COVID 19 virus during the 
+
+
+
+23 
+ 
+pandemic.  Figure 2.1 below provides a  visual display highlighting the occurrence of fatal RTAs 
+over the period 2020 to 2024. Further details can be found at Appendix 1.  
+ 
+Figure 2.1: Fatal Road Traffic Accidents 2020-2024 
+2.2 Serious Reported Crimes (SRCs) 
+Cumulatively, there were 59,041 reported Serious Crimes over the last five years from 2020 to 2024 
+as highlighted in Appendix 2 . The TTPS made notable strides in crime reduction, recording a 
+moderate decrease in Serious Reported Crime (SRC) in 2024 by 8.4% with 11,788 at the end of 
+December 2024 compared to 12,874 for the same period in 2023.  
+The decrease noted for 2020 which was the lowest over the 5-year period, and the maintained 
+lowered figures for 2021 can be attributed to the global context which was profoundly impacted by 
+the Covid 19 pandemic, its accompanied lockdown procedures and various measures enacted during 
+the pandemic.  While the restrictions began to lift midway through 2022, it was not until May 2023 
+that the World Health Organization  and the Government of Trinidad and Tobago  officially 
+declared the end of the pandemic. This announcement marked the conclusion of a crisis that had 
+significantly affected society across economic, psychological, and emotional dimensions. 
+Additionally, woundings and shootings saw the highest number of incidents in 2023. However, the 
+murder rate posed a significant challenge. The detection rate for murders stood at 14% in 2022 and 
+had a marginal improvement of 0.8% in 2023. Despite a slight 4.8% decrease in murders from 2022 
+87
+76
+97 96
+115
+0
+20
+40
+60
+80
+100
+120
+140
+2020 2021 2022 2023 2024
+Fatal Road Traffic Accidents 2020-2024
+
+
+
+24 
+ 
+to 2023, murders saw the highest peak in 2024 with 625 murders recorded. Breakings saw a steady 
+decline between 2019 and 2021 and Larceny Motor Vehicle saw a similar pattern of decline followed 
+by a significant surge between 2022 and 20 24. Further, Larceny Dwelling House showed a steady 
+decline across the five-year period, whilst Sexual Offences had a major surge in 2021. Kidnapping 
+for Ransom, while remaining relatively low, has been steadily increasing from 2022 to 2024. The 
+trend with respect to all SRCs is represented at Appendix 3 and Selected Violent Crimes can be seen 
+at Figure 2.2 below.  
+ 
+Figure 2.2: Selected Violent Crimes 2020-2024 
+2.3 Minor Crimes (MCs) 
+Larceny cases saw a steady decline during the Pandemic years and thereafter in 2022 and 2023 did 
+not return to the previous high of 2019. Praedial Larceny on the other hand saw a rise during 2020, 
+however, figures stabilized and a five-year low was seen in 2024. Larceny Dwelling House steadily 
+declined from 2019 to 2023. Conversely, the number of Embezzlement cases significantly declined 
+after 2020 whilst cases of I ndecent Assault had a steady and sharp rise between 2019 and 2022. 
+While there has been a steady decrease in  cases these figures are still significantly higher than the 
+low of 2019. 
+0
+200
+400
+600
+800
+1000
+1200
+2020 2021 2022 2023 2024
+403 452
+605 577 625
+525
+674
+755 762 746680
+1172
+763
+978
+697
+Selected Violent Crimes 2020-2024
+Murders Wounding & Shootings Sexual Offences
+
+
+
+25 
+ 
+2.4 Minor Offences (MOs) 
+Loitering cases increased in 2021 likely due to pandemic restrictions. Similarly, cases of Breaching 
+the Peace saw a sharp rise and though decreased thereafter, still maintained a higher rate than 2019 
+and 2020. Other Minor Offences included cases of Assault by Threats, Aiding and Abetting, Illegal 
+Entry and Breach of Curfew which accounted for the most incidents in this category and would have 
+contributed extensively to the significant increase in the year 2021. Conversely reports of Assault 
+by Beating declined in 2021. 
+  
+
+
+
+26 
+ 
+3.0 Situational Analysis 
+3.1 Political Environment 
+The Government of Trinidad and Tobago has made a clear commitment to tackling crime and 
+enhancing the safety and security of the nation. This ongoing effort is evident in the support provided 
+to the Trinidad and Tobago Police Service (TTPS) to improve its effectiveness and operational 
+capacity. Key initiatives include increasing the number of police officers and ensuring the provision 
+of the necessary tools, equipment, and technology needed for effective intelligence gathering and 
+investigations. 
+In July 2024, the Honorable Keith Scotland was appointed as a Minister within the Ministry of 
+National Security, with a specific focus on overseeing the TTPS. His appointment was aimed at 
+addressing the challenges faced by the police service, and ensuring that the necessary resources were 
+provided to enhance its operational effectiveness.  Similarly, d uring the last  strategic period, 
+significant strides were made in strengthening the leadership and governance of the police service. 
+The Police Service Commission appointed a substantive Commissioner of Police, along with three 
+(3) Deputy Commissioners of Police. This a ppointment has had a substantial positive impact, 
+providing much-needed leadership stability to the operations of the TTPS. 
+Through these concerted efforts, the Government of Trinidad and Tobago is demonstrating its 
+determination to create a safer environment for its citizens while reinforcing the capabilities of the 
+TTPS to address the evolving challenges of crime and law enforcement in the country. 
+3.2 Socio-Economic Environment  
+The energy sector continues to face several challenges which causes a ripple effect on the wider 
+economy. Domestically, the decline in production levels is exacerbating an already volatile global 
+energy market, leading to price fluctuations that can disrupt economic stability. This volatility has 
+had a negative impact on government  revenues and foreign exchange reserves, further straining 
+external liquidity. As foreign exchange reserves deplete, the foreign exchange mar ket is facing 
+imbalances, which in turn, has a detrimental effect on the non -energy sector. The limited access to 
+US dollars has created significant difficulties for businesses that rely on imports. This not only 
+strains relationships with international partners but also slows down business operations, leading to 
+an increase in costs that are eventually passed on to consumers. 
+
+
+
+27 
+ 
+While inflation has been on a downward trajectory which is a positive sign for purchasing power, 
+rising food prices remain a persistent issue for citizens. This issue contributes to broader economic 
+pressure and could potentially fuel social unrest. The strain on consumer spending, especially in the 
+face of food insecurity, may create a fertile ground for criminal activity. Consequently, the TTPS 
+faces heightened pressure as it grapples with both the increasing incidence of crime and a growing 
+demand for resources, which are already stretched thin.  
+3.3 Technological Environment 
+The TTPS is increasingly lever aging technological advances  to improve its effectiveness in 
+managing crime prevention and ensuring public safety. However, this comes with both opportunities 
+and challenges, as technology can be used by criminals to bypass detection, while also providing 
+law enforcement with the tools to better combat crime. 
+The TTPS has acquired new technologies such as: 
+ Body worn cameras  - these are b eing utilized by police officers to capture footage of 
+interactions between officers and the public, offering an objective record of events. This can 
+be critical in enhancing accountability, protecting both officers and civilians, and providing 
+evidence in investigations. 
+ Closed-circuit television (CCTV)  – these systems are used to monitor public spaces, 
+providing real-time surveillance. This helps in c rime detection, deterring criminal activity, 
+and assisting in post-crime investigations by providing valuable video evidence. 
+ Dashboard Cameras – these cameras are mounted in police vehicles and are essential for 
+documenting traffic stops, pursuits, and ot her police activities. They provide an additional 
+layer of accountability, offering evidence in case of disputes. 
+ Drones – drones allow the TTPS to monitor large areas from the air, providing enhanced 
+surveillance during major public events, search and res cue operations, or crime scene 
+investigations. Drones can access hard -to-reach areas, improving response times and 
+operational efficiency. 
+ E-ticketing systems  are helping law enforcement officers issue citations for traffic 
+violations more efficiently. The se devices automate the process, making it easier to track 
+offences and reduce paperwork. 
+
+
+
+28 
+ 
+ GPS Handsets technology enables real-time tracking of police officers and vehicles. This 
+can improve response times to incidents and enhance coordination during operations. It also 
+provides a way to monitor the whereabouts of officers for safety and efficiency. 
+ Laser speed guns are used to detect speeding vehicles with greater accuracy than traditional 
+radar guns. This technology enhances road safety by allowing officers to enforce speed limits 
+more effectively. 
+While the introduction of these technologies can significantly enhance the TTPS' capacity to prevent 
+and respond to crime, it also presents challenges. Criminals are increasingly using sophisticated 
+methods such as hacking, encryption, 3D printing, quantum computing and digital anonymity to 
+commit crimes and evade detection. The TTPS must therefore continuously evolve and integrate 
+new tools and strategies to stay ahead of these threats. 
+As technology advances, the TTPS must balance the benefits of these tools with the ethical, legal, 
+and privacy concerns that may arise. Adequate training, policies, and oversight will be key in 
+ensuring that these technologies are used effectively to protect both public safety and  individual 
+rights. The integration of Artificial Intelligence, machine learning, and other emerging technologies 
+could further transform policing, enabling predictive policing and improving overall public safety 
+management. 
+3.4 Legal Environment 
+The TTPS as the primary institution responsible for law enforcement in the country, faces a dynamic 
+and ever -evolving legal environment. This environment necessitates that the TTPS stays well -
+informed about the current laws and is adaptable to the demands imposed by ne wly introduced or 
+revised legislation. Meeting these obligations can be particularly challenging, as the requirements 
+often involve a broad range of adjustments. These may include modifications to standing orders, 
+regulations and procedures, changes in the  assignment and training of personnel, as well as the 
+provision of necessary physical infrastructure and other essential resources. Such comprehensive 
+and ongoing changes require the TTPS to be agile and responsive to maintain its effectiveness in 
+upholding the law. 
+Recently the Administration of Justice Indictable Proceedings Act repealed and replaced the 
+Indictable Offences (Preliminary Inquiry) Act, Chap. 12:01 wh ich eliminates the preliminary 
+inquiries in indictable matters. The removal of Preliminary Inquiries and the introduction of a more 
+
+
+
+29 
+ 
+effective case management process allows for the criminal justice system to experience a reduction 
+in the backlog of cases, fewer hearings and significantly less delays in proceedings.  
+The Public Procurement and Dis posal of Public Property Act was fully proclaimed on April 26, 
+2023, through Legal Notice No. 106 of 2023. In accordance with this legislation, the TTPS is 
+required to comply with the provisions of this Act, which governs public procurement and the 
+management, retention, and disposal of public property. The Act is founded on the core principles 
+of good governance, accountability, integrity, transparency, and value for money. It also aims to 
+encourage sustainable procurement practices, support sustainable de velopment, and foster the 
+growth of local industry. Over the course of this three (3) year strategic period, the TTPS plans to 
+acquire several major assets, all of which will be procured under the framework established by this 
+legislation. 
+3.5 Environmental 
+Trinidad and Tobago grapples with high rates of violent crime, including homicides, robberies, and 
+gang-related activities. This poses significant challenges to the TTPS in maintaining public safety 
+and security. The Caribbean region serves as a major transit point for transnational criminal activities 
+such as drug trafficking, human trafficking, arms smuggling, and money laundering.  
+This critical issue is further compounded by the prevalence of illegal firearm s and drugs which 
+increase gang-related activities within the country. The Caribbean region is plagued by transnational 
+crime syndicates involved in drug trafficking, arms smuggling, human trafficking, and other illicit 
+activities. Organized crime networks often operate across national borders, presenting a formidable 
+challenge to law enforcement agencies. The porous nature of maritime borders in the Caribbean 
+exacerbates these issues, making it difficult to intercept illegal shipments and apprehend criminal 
+elements. 
+
+
+
+30 
+ 
+3.6 SWOT Analysis 
+ 
+ 
+  
+INTERNAL FACTORS 
+STRENGTHS  + WEAKNESSES  – 
+ Committed Leadership  Low Detection Rates 
+ Clear Strategic Direction with Clear 
+Targets 
+ Errant Police Officers 
+ Accredited Police Academy  Lack of adherence to existing SOs, DOs, 
+policies and guidelines 
+ Trained Staff in Specialized Areas  Lack of Public Confidence and Trust in the 
+TTPS 
+ Positive Engagement of Youths through 
+PYCs 
+ 
+EXTERNAL FACTORS 
+OPPORTUNITIES  + THREATS  – 
+ Continued relationship and partnerships 
+with the community 
+ Negative socio -economic impacts of 
+unemployment and poverty 
+ Partnerships with regional and international 
+organizations  Reduce Budgetary Allocation 
+ Partnerships with foreign law enforcement 
+bodies  Dynamic nature of crime and criminals 
+ Advancements in technology to assist in 
+combating crime  Porous Borders 
+
+
+
+31 
+ 
+4.0 Major Accomplishments and Challenges 
+The following are the major accomplishments and challenges for the TTPS for the period January 
+2022 to December 2024. It must be noted that there were many other accomplishments which are 
+not highlighted in this plan as they were not categorised as major. These accomplishments 
+demonstrate the TTPS’ ability to achieve our goals and deliver expected results, fostering a sense of 
+pride and motivation amongst staff, whose collective efforts led to these achievements. It is clear 
+that these successes are in alignment with the organisation’s strategy statements, more so our vision 
+and mission. An acknowledgement of these success es will also allow us to identify our major 
+strengths which can be used in developing goals and future decision -making. It is hoped that even 
+with the accomplishments identified the TTPS can build trust amongst stakeholders as we seek to 
+deliver returns on investment. Similarly, hereunder one will find the major challenges for the TTPS. 
+These challenges are highlighted as we recognise the need to promote transparency and 
+accountability. Through the examination of these challenges the TTPS can identify poten tial risks 
+and proactively address them, which reduces the possibility of future complexities. In identifying 
+these challenges, the TTPS’ resource allocation can be better aligned to enhance the effectiveness 
+and efficiency of the organisation. Certainly, the recognition and identification of our challenges 
+will encourage innovativeness in seeking to find solutions to these challenges in the TTPS. Some of 
+these challenges are not new but as the TTPS continues to work to address them, is testimony of our 
+resilience and the need to enhance our strategic focus and set expectations which are more realistic 
+given the climate in which we operate. Thus, against this background, The Plan is comprehensive, 
+practical and actionable which ensures a greater likelihood of success.  
+4.1 Major Accomplishments of the TTPS for 2022 - 2024 
+The 2022–2024 Strategic Plan of the TTPS commenced with great anticipation, aiming to elevate 
+the organization to new levels of excellence. Amongst the key initiatives adopted were the 
+restructuring of the Northern Division into Northern North and North Central, and the introduction 
+of Health and Wellness and Information Communication and Technology as new strategic priority 
+areas. These efforts marked the TTPS’ commitment to enhancing its intern al operations and 
+leveraging modern tools to increase efficiency. Amongst the major accomplishments for the 
+Trinidad and Tobago Police Service were the following: 
+ Reduction in reported minor crimes 
+
+
+
+32 
+ 
+ Reduction in road traffic accidents 
+ Decrease of Expenditure on Vehicle Maintenance  - In terms of resource management, the 
+TTPS demonstrated a constant decrease in vehicle maintenance expenditures between 2022 
+and 2024, alongside a 17% reduction in vehicle rental costs. The introduction of the Fleet 
+Management Policy provided officers with clearer guidelines for vehicle usage and 
+maintenance, promoting greater accountability. 
+ Investing in the training and development of officers has been a co rnerstone of the TTPS’ 
+strategy. Between 2022 and 2024, officers participated in a range of training programs, 
+including those focused on White Collar Crime Investigations, Conflict Management, 
+Forensic Artistry, Information Communication and Technology, and even Mandarin. 
+ The Police Internal Oversight Committee (PIOC), established during this period, further 
+ensured the maintenance of high ethical standards and accountability within the organization. 
+ Increase in referrals to VWSU  - Through its Victim and Witness Suppo rt Unit, the TTPS 
+saw a 15% increase in referrals, demonstrating a growing commitment to providing 
+psychosocial support to those affected by crime.  
+ The Community Justice Clinic, a partnership between the TTPS and volunteer attorneys, 
+offered free legal advice on non -criminal matters, reinforcing the TTPS’s role in holistic 
+community support. 
+ Increase in community meetings - Crime prevention remained a central focus for the TTPS, 
+with a commitment to community engagement being key to the plan’s success. The TTPS’s 
+efforts to build relationships with the public were evidenced by increased community 
+meetings, station councils, and community walkabouts.  
+ Social responsibility and Conflict Resolution - The Police Youth Club (PYC) continued to 
+make an impact, celebrating its 50th anniversary in 2024. The PYC’s work in fostering 
+education, culture, entrepreneurship, social community, and sport among young people has 
+contributed significantly to fostering nationalism and social responsibility. Additionally, the 
+PYC’s Community Conflict Resolution Centre provided vital psychosocial support, further 
+strengthening the TTPS’ relationship with the public. 
+ Training in customer service - The Customer Service Unit, launched in 2024 , further 
+bolstered the organization’s commitment to providing high-quality service to the public, over 
+3,000 officers have benefitted from this training within the last 2 years. 
+
+
+
+33 
+ 
+4.2 Major Challenges of the TTPS for 2022 - 2024 
+ Increase in the Murder Rate  
+ Detection Rate for Violent Crime  
+ Increase in the Road Traffic Accident Fatalities  
+ Public Trust in police officers to follow up on reports made 
+ Timely release of funds 
+ Ability to successfully recruit and induct officers at levels that meet manpower requirements 
+4.3 Interpretation 
+To achieve its goals, the TTPS will focus on the four strategic areas: Community Partnerships, 
+Public Safety, Operational Excellence, and Organizational Development and continue to build from 
+the previous plan. Therefore, the plan will provide direction an d focus to ensure the strategic 
+objectives are achieved. The strategic intent of each of the strategic pillars are highlighted under the 
+pillars in the ensuing pages. However, providing an interpretation for the strategic pillars is essential 
+for ensuring clarity and alignment.  Each pillar is essentially a foundational element of The Plan, 
+which guides the organisation’s priorities and actions. This approach provides clarity, aligns goals, 
+fosters commitment, integrates with the organization, engages stakeh olders, and enables 
+performance tracking. Providing the interpretation ensures that the TTPS’ pillars are well articulated 
+but also ensures that the TTPS’ significance is understood, the obje ctives are actionable and our 
+impact measurable.  
+  
+  
+
+
+
+34 
+ 
+5.0 Methodology  
+5.1 Timeline 
+With the mandate of developing a Strategic Plan for the period 2025 to 2027 and Operating Plans 
+for 2025, 2026 and 2027, multiple sessions were held, which focused primarily on reviewing the 
+organization’s past strategic plans, the identificatio n of the key steps and the development in 
+chronological order of a timeline for the activities in which the TTPS was to engage. The 
+diagrammatical representation of the timeline is shown at Figure 5.1 hereunder.  
+   
+        
+Engage CoP to prepare for development of Strategic Plan - 23rd April, 2024 
+Distribute Flyer with QR Code for all staff to access Feedback Form via Google Doc.  -
+3rd July, 2024
+Visit, Stations, Sections, Branches & Units to sensitise & encourage Police & Civilian 
+Staff to provide feedback - 4th to 9th July, 2024
+Hold 1st Stakeholder Engagement - Station Councils - 27th September, 2024
+Hold 2nd Stakeholder Engagement - Divisions, Branches, Sections & Units - 14th October, 
+2024
+
+
+
+35 
+ 
+ 
+  
+ 
+Figure 5.1: Timeline for the Development of the TTPS Strategic Plan 
+This timeline sought to:  
+ Arrange the TTPS’ activities in sequence for clarity and coherence.  
+ Allowed the TTPS to track the progress of the activities and monitor m ilestones and the 
+stages of the various activities.  
+Hold 3rd Stakeholder Engagement - Divisions, Branches, Sections & Units - 23rd October, 
+2024
+Hold 4th Stakeholder Engagement - Police Retirees Association - 4th November, 2024
+Hold 5th Stakeholder Engagement - Tobago Division - 11th November, 2024
+Input already gathered data into template - 12th November, 2024
+Hold 6th Stakeholder Engagement - Superintendents, ASPs & SHROs  - 13th November, 2024
+All Input gathered data placed into template - 18th November, 2024
+Host Workshop for Executive, Civilian Heads, Div./Section Heads - 23rd November, 
+2024
+Meet with Executive to determine Final Content - 12th December, 2024
+Meet with CoP & DCPs to confirm Final Content - 17th December, 2024
+Sensitisation of Divisions, Sections, Branches & Units - March 2025
+
+
+
+36 
+ 
+ Showed the connection between the various activities and the influence one activity had 
+over the other.  
+ Allowed the TTPS to set deadlines and visualise future tasks or events in a structured 
+manner.  
+ It showed a clear sequence of events , allowing all parties, regardless of their involvement 
+in the process, to be fully au courant of the next steps. 
+5.2 Justification for a Bottom-up Approach 
+On this occasion, the TTPS decided to use a bottom -up approach in dev eloping the Strategic Plan 
+for 2025 -2027 and the Operating Plans for 2025, 2026 and 2027. It was felt that a bottom -up 
+approach could derive the following benefits:  
+i. Enhanced relevance and practicality: -  
+a. This will allow officers at different levels and ranks in the TTPS to contribute to the 
+development of the plan, especially the most junior members of staff. The ground level 
+officers have first -hand experience with the needs of communities, and know and 
+understand their challenges and operational realit ies in providing for safe and secure 
+communities and other places. Thus, incorporating grassroots perspectives can assist in 
+ensuring the strategic plan effectively addresses real issues. 
+b. A bottom-up approach allows input from various Divisions, Sections, Branches and Units, 
+thus tailoring the action items, targets and strategies to the specific needs of diverse 
+stakeholders across Trinidad and Tobago.  
+ 
+ii. Increased buy-in and commitment to task:-  
+a. Ownership of the Plan - The employees are more likely to take ownership of the plan and 
+feel a sense of belonging and the need for accountability for its outcomes, when they have 
+contributed to the planning process.  
+b. Improved Morale  – With inclusion, a sense of value and respect amongst sworn and 
+unsworn officers is  fostered. This will in turn boost morale and motivation in the 
+implementation of the plan. 
+ 
+iii. Better communication and collaboration:- 
+
+
+
+37 
+ 
+a. Bridging Gaps - Through the bottom -up approach, we encouraged dialogue within the 
+Executive, amongst other First Division Officers and between Civilian Staff and Second 
+Division Officers. Thus, obtaining the perspectives of personnel at all levels sought to 
+promote greater understanding and collaboration in an attempt to minimize possible 
+disconnects and avoid the Ivory Tower Syndrome, where managers can lose touch with 
+the beat of the organization and the communities they serve.  
+b. Breaking Hierarchical Barriers - A bottom-up approach fosters a culture of inclusivity, 
+which breaks down silos within the TTPS.  
+ 
+iv. Adaptability and Innovation:-  
+a. Diverse Perspectives – It was assumed that with a bottom -up approach the TTPS would 
+be able to obtain the views from a broad range of civilian and police personnel at various 
+Divisions and Departments. These officers represented different ranks , positions, ages, 
+gender, ethnicities, religious persuasions and communities in which they reside. 
+Therefore, it was felt that the diverse backgrounds can lead to more innovative solutions 
+which a top-down approach may have overlooked.   
+b. Flexibility – The TTPS felt that grassroots input would ensure that the plan remains 
+adaptable to the dynamic challenges, for example, evolving crime trends or community 
+concerns or rapid changes in technology.  
+ 
+v. Alignment with Community-Oriented Policing Goals:- 
+a. Strengthening Community Trust – It was thought that a bottom -up approach is in 
+alignment with community -oriented policing principles by integrating insights from 
+officers who interact directly with the public.  
+As a starting point, we reviewed several documents, inclusive of, but not limited to the following:  
+ Police Service Commission Report 2023 
+ Police Service Commission Public Satisfaction Survey 
+ National Development Plan  
+ UN Sustainable Development Goals  
+ Central Statistical Office Report - CSO statistics June 2024 
+ Agenda 2030  
+
+
+
+38 
+ 
+ CAPA’s 5-Year Analysis  
+ TTPS’ Strategic Plans from 2014 to 2024 
+ TTPS’ Operating Plans 2022 to 2024 
+ TTPS’ Employee Satisfaction Report 2020 
+ Ministry of National Security (MNS) Strategic Plan 2019 to 2023 
+ Ministry of National Security Employee Satisfaction Survey Final Report 2022 
+ Commissioner of Police Half Yearly Reports January 2022 to June 2024  
+ PIOC Operating Plan status updates 
+5.3 Data Collection Methods 
+The bottom -up approach was operationalized during six forums. Consultat ions, via focus group 
+meetings, were held during the planning stage with various stakeholders, such as retirees, all ranks 
+of first and second division officers, junior and senior civilian officers employed in the TTPS, and 
+Station Council representatives. There was also an online element that allowed internal stakeholders 
+to make recommendations. 
+The TTPS sought to obtain the views of its members (police and civilian personnel) in keeping with 
+its timeline. The following identifies the methods through which such information was obtained: 
+i. Survey 
+A survey was designed through Google, placed on the TTPS’ portal and sent to our internal 
+stakeholders via e-mail and to some officers via Whats App. The period of this survey spanned 2 
+months, from May to July 2024.  
+After one month, there were three hundred and thirty-one (331) survey responses. These responses 
+were examined and analysed. This low response rate was unsatisfactory however, other methods 
+aimed at getting the views of officers and which were outlined above, provided more opportunities 
+for sworn and unsworn officers to participate in the process.  
+ii. Station/Department Visits 
+Additionally, a team of officers visited every Division, Branch, Section and Unit to place flyers 
+designed with a QR Code at strategic areas which allowed personnel to access the survey link. The 
+objective of these visits was also intended to encourage staff to participate in the anonymous survey.  
+
+
+
+39 
+ 
+iii. Focus Group Interviews 
+The TTPS convened multiple focus group interviews to discuss the proposed Strategic Objective 
+areas. Stakeholders were carefully assembled into focus groups to reflect a diverse cross-section of 
+persons knowledgeable about the strategic needs and challenges in the TTPS. This approach  
+facilitated rich discussions focused on identifying specific outcomes and pot ential action items 
+related to the strategic priorities. Each team presented their perspectives followed by a collaborative 
+critique session, allowing all participants to share comments, suggestions, and additional insights. 
+This iterative feedback process ensured that the final outcomes were well-rounded and reflective of 
+the collective insights. 
+Focus Group Interviews were held with the following groups:  
+a. Station Council Representatives 
+b. Second Division Officers (from Constable to Inspector) and Junior Civilian Staff 
+c. Police Retirees 
+d. First Division Officers and Senior Civilian Staff (ASP to Superintendent and Senior Human 
+Resource Officers) 
+e. Senior Superintendents and Assistant Commissioners of Police  
+The engagement of our internal and external stakeholders is displayed hereunder at Table 5.1 and 
+allowed us to frame a vision for the future by engaging them at all levels. Thus, this plan aims to 
+create a holistic and inclusive framework that embodies the TTPS’ vision, mission, and core values.  
+Table 5.1: Stakeholder Meetings/Initiatives – Strategic Plan 2025-2027 
+Date Stakeholder Group Location No. of 
+Persons 
+1.5.2024 – 
+31.7.2024  
+Strategic Planning Survey involving all TTPS 
+employees (police officers and civilians) 
+Online and in-person 331 
+27.09.2024 External Stakeholder - Station Council Solomon McLeod 
+Conference Room 
+17 
+14.10.2024 Focus Group 1 - Second Division officers 
+within Divisions, Branches and Units of the 
+TTPS and junior civilian employees 
+Solomon McLeod 
+Conference Room 
+36 
+
+
+
+40 
+ 
+Date Stakeholder Group Location No. of 
+Persons 
+23.10.2024 Focus Group 2 - Second Division officers 
+within Divisions, Branches and U nits of the 
+TTPS and junior civilian employees 
+Solomon McLeod 
+Conference Room 
+24 
+07.11.2024 Focus Group 3 - Trinidad and Tobago Police 
+Retirees’ Association (TTPRA) 
+TTPRA’s Mess Hall, 
+Riverside Plaza  
+3 
+11.11.2024 Focus Group 4 - Second Division Officers of 
+the Tobago Division 
+AV Room, 
+Scarborough Public 
+Library 
+27 
+13.11.2024 Focus Group 5 - Superintendents, Assistant 
+Superintendents and Senior Human Resource 
+Officers.   
+Police Training 
+Academy 
+37 
+ 
+Following these engagements, a workshop was held over a 2-day period with the following persons:  
+i. Executive of the TTPS - comprising the CoP, DCPs ACPs, and Civilian Heads; 
+ii. Other First Division Officers – holding posts as Heads of Divisions, Sections, Branches and 
+Units;  
+iii. Other Senior Civilian Staff – holding such posts as Managers or Consultants 
+iv. Other Second Division officers who also lead Sections, Branches and Units   
+5.4 Results and Analysis 
+Valuable information was unearthed from the documents reviewed; an examination of past TTPS’ 
+strategic plans; and the results and analysis of the survey. This assisted tremendously in formulating 
+the four key imperatives or strategic objective areas. The strategic objectives served as guidelines 
+for the focus group sessions and future consultations, ensuring alignment with the TTPS’ long-term 
+goals. 
+5.5 Generating the Outcomes and Action Items 
+The tasking in developing the plan, involved collating all information gathered, identification of 
+individuals with executive and functional responsibilities relevant to the strategic priorities, 
+specifying expected outcomes, action items, achievable targets and timelines for implementation. 
+
+
+
+41 
+ 
+5.6 Limitations and Delimitations  
+Overview 
+As the TTPS moves forward with the 2025 –2027 Strategic Plan, the organization reflects on the 
+achievements and challenges of the previous period, recognizing areas that were succe ssful and 
+identifying those that require further attention. In doing so, the TTPS acknowledges the external and 
+internal limitations and delimitations that influenced the 2022 -2024 plan. These factors, such as 
+political shifts, budget constraints, and societal changes—including an aging population, increased 
+immigration, and evolving crime patterns—will continue to shape the strategies and priorities of the 
+TTPS in the coming years. 
+The political climate, particularly in the lead -up to the 2025 general elections, remains a key 
+consideration. Political decisions, including budget allocations and policy changes, will impact the 
+TTPS’s ability to implement its crime -fighting initiatives.  The TTPS’ operations will also be 
+influenced by the economy, society, technology, legal issues and the environment. The TTPS must 
+navigate these external pressures while remaining focused on its core mission: to make Trinidad and 
+Tobago a safe and secure environment for all its citizens, residents and visitors. 
+Limitations 
+These limitations —including resource constraints, funding issues, bureaucratic challenges, 
+represent significant hurdles for the TTPS in achieving the objectives outlined in the 2025 -2027 
+Strategic Plan. However, by reco gnizing these limitations early, strategies can be developed to 
+mitigate their impact, and the TTPS will be better able to navigate these challenges and continue to 
+evolve as an effective law enforcement agency in the year s ahead. The limitations with this Plan 
+include the following:  
+ Crime Focus – Given our current circumstances and what is predicted, the plan has targeted 
+serious criminal offending, with a focus on firearms, gang and drug-related matters. The Plan 
+therefore does not address every crime category equally as some crime activities were 
+considered to be of lower priority.   
+ Geographical Challenges  – Some remote and high -crime areas are difficult to patrol 
+effectively due to terrain or lack of infrastructure. 
+
+
+
+42 
+ 
+ Availability of Financial Resources – The quantum of the allocation to TTPS in the coming 
+fiscal years, as well as the timeliness of disbursements received will impact all aspects of 
+implementation. 
+ System Integration Issues – The lack of interoperability between police databases and other 
+government systems can hinder the TTPS’ efficiency. 
+ Political and Administrative Boundaries – The Plan must align with national security 
+policies which are set by the GO RTT and may be restricted by political will, changes i n 
+government leadership, and timely budgetary allocations which are controlled by the 
+Ministry of Finance.  
+ International Law and Treaties – The TTPS is bound by international agreements, treaties 
+and laws which can limit our ability to implement some strategies. 
+ Legal and Judicial System Constraints – Policing efforts are largely dependent on other 
+aspects of the criminal justice system. Thus limitations such as court backlog, inefficiency 
+in prosecuting matters and even outdated laws may hinder enforcement, prevention and 
+deterrence efforts. 
+ Environmental and Disaster-Related Factors – The Plan does not directly cover policing 
+efforts during unscheduled events, such as earthquakes, tsunamis, pandemics and hurricanes, 
+for example and if any of these events should occur it could disrupt police operations.  
+ Cultural and Social Considerations – The Plan aims to address crime on many fronts and 
+includes social activities, but cultural barriers (such as low levels of police legitimacy / 
+distrust of police, the influence of gangs in targeted communities) may limit our 
+effectiveness with some of these initiatives.  
+ Public perception and resistance – Some proposed initiatives may face resistance from 
+members of the public in targeted communities and civil rights / human rights groups and 
+this can adversely affect full implementation of The Plan.  
+ International Criminal Networks – Drug trafficking and gun smuggling involve 
+international actors, which limits TTPS’ ability to combat them independently, thus 
+involving external stakeholders who may not share the same interest can compromise  the 
+TTPS’ operations. 
+ Technological Implementation Limits – Whilst The Plan proposes to further modernise 
+the TTPS through technology, it is limited by TTPS’ technological infrastructure, 
+cybersecurity risks and budgetary constraints.   
+
+
+
+43 
+ 
+ Human Resource Con straints – The TTPS does not currently have all the required 
+personnel including specialised support to implement all aspects of The Plan fully.  
+ Data and Intelligence Gaps – For crime prevention and detection to be effective, accurate 
+crime data and intel ligence sharing is required. However, limitations in data collection, 
+accuracy in reporting, and perhaps an outdated Records Management System (RMS) could 
+compromise the full realization of our strategic objectives. 
+Delimitations 
+In the preparation of this  Trinidad and Tobago Police Service Strategic Plan 2025-2027 the 
+following delimitations arose:  
+ Time Frame – The Plan covers a period 2025-2027, so it does not factor long-term policing 
+strategies which go beyond the 3-year period.  
+ Geographic Scope – The Plan focuses primarily on Trinidad and Tobago and excludes in 
+the main regional or international policing collaborations. 
+ Jurisdictional Boundaries – The TTPS operates within its legal mandate related to public 
+safety. However, issues which relate to defence are handled essentially by the Trinidad and 
+Tobago Defence Force or other international bodies, such as Interpol and were therefore not 
+included.   
+ Policy and Legislative Constraints – The Plan is aligned to the current Laws of Trinidad 
+and Tobago and policies of the Government of Trinidad and Tobago (GO RTT). Therefore, 
+recommendations or initiatives which require constitutional/legislative amendments were 
+not included but will be proposed otherwise.  
+ Community Involvement Scope – Whilst the ideal vision of community policing is key for 
+what the TTPS would like to achieve, the extent of public engagement is limited given 
+available resources.   
+ Inter-Agency Cooperation Limits  – Whilst the TTPS usually work s with other agencies 
+and departments, such as the Customs and Excise Division, the Immigration Division, the 
+Licensing Authority, the Trinidad and Tobago Fire Service and others, cooperation is 
+restricted by bureaucratic inefficiencies, legal boundaries and lack of full and complete inter-
+agency data sharing.   
+
+
+
+44 
+ 
+ Training and Development Restrictions – Although The Plan includes capacity building 
+initiatives for officers - training resources, certified instructors or application of international 
+best practice may be limited due to financial or logistical constraints.  
+Whilst the TTPS’ Strategic Plan 2025-2027 outlines a comprehensive fra mework for improving 
+policing throughout Trinidad and Tobago , the above limitations highlight the constraints within 
+which the plan will operate. Factors such as the limitations with resources, legislative restrictions, 
+the challenges with technology and infrastructure and even the socio -economic realities which we 
+face may adversely affect the full implementation of these robust and ambitious strategic initiatives. 
+However, as the TTPS clearly acknowledges these boundaries, adaptive strategies will be developed 
+to address them. Further critical areas will be prioritised as we seek innovative solutions that would 
+serve to overcom e these constraints. Consequently, as we move forward , continuous evaluation, 
+inter-agency collaboration and stakeholder engagement will be essential in mitigating these 
+delimitations and ensuring the successful execution of The Plan. 
+  
+
+
+
+45 
+ 
+6.0 Stakeholder Analysis 
+6.1 Purpose of Stakeholder Analysis 
+A stakeholder analysis is an essential step in developing a strategic plan for the police service. This 
+process enables the Trinidad and Tobago Police Service (TTPS) to identify individuals and groups 
+with a vested interes t in its operations, understand their needs, and incorporate their perspectives 
+into the planning process. Hereunder is provided, a detailed list of stakeholders who are directly or 
+indirectly affected by, or can influence, the TTPS’ operations. This includes an assessment of their 
+levels of influence, interest, impact, and expectations. 
+By thoroughly analysing and understanding its stakeholders, the TTPS can achieve the following: 
+ Foster Collaboration : Engaging key stakeholders builds strong partnerships, which are 
+crucial for effective policing and for co-creating solutions to public safety challenges. 
+ Enhance Transparency: Open communication of goals, strategies, and progress fosters trust 
+among stakeholders, including citizens, international organizations, and internal personnel. 
+ Promote Mutual Understanding : Addressing diverse stakeholder priorities —ranging from 
+community safety to resource allocation for officers —ensures alignment with societal 
+expectations and organizational objectives. 
+ Improve Policy Implementation: Identifying potential areas of resistance or support allows 
+the TTPS to design communication and engagement strategies that secure stakeholder buy -
+in and mitigate implementation risks. 
+ Support Informed Decision -Making: Considering stakehold ers' perspectives enables the 
+TTPS to anticipate conflicts, address concerns, and align strategic goals with broader societal 
+needs. 
+By leveraging stakeholder analysis, the TTPS can create a more inclusive, transparent, and effective 
+strategic plan, strengthening its ability to serve and protect the community. 
+
+
+
+46 
+ 
+Table 6.1: Stakeholder Analysis Table 
+Stakeholder Role/ Relationship  Level of 
+Influence 
+Level of 
+Impact 
+Key Concerns/ 
+Expectation  
+Staff (Sworn and 
+Unsworn) 
+Directly involved in 
+operations and 
+decision-making 
+High High Adequate resources and 
+clear policies 
+Community 
+Members 
+Affected by policies, 
+initiatives and crime 
+/ collaborate with the 
+TTPS 
+Medium High Safety and responsiveness 
+Business 
+Community 
+Affected by policies, 
+initiatives and crime 
+/ collaborate with the 
+TTPS 
+Medium High Visible presence and quick 
+response time 
+NGOs, FBOs, 
+CBOs 
+Affected by policies, 
+initiatives and crime 
+/ collaborate with the 
+TTPS 
+Medium Medium Effective and efficient 
+delivery of Services 
+Government Oversee and 
+Regulate activities 
+High High  Transparency and 
+measurable outcomes 
+Budget efficiency, 
+compliance with laws, and 
+crime statistics 
+Judicial System Adjudicating 
+in an impartial 
+manner on cases 
+brought before the 
+court 
+High High  Aligned strategies leading 
+to improved case handling 
+and outcomes. 
+Other Protective 
+Services 
+Partners in law 
+enforcement 
+Medium Medium  Partner to ensure safety 
+and security 
+Media Journalists and 
+media organizations 
+that report on police 
+activities 
+Low Medium  Inform periodically to 
+maintain transparency 
+
+
+
+47 
+ 
+Stakeholder Role/ Relationship  Level of 
+Influence 
+Level of 
+Impact 
+Key Concerns/ 
+Expectation  
+International 
+Agencies 
+Meaningful 
+partnership to  
+achieve TTPS’s 
+goals 
+Low Medium  Partnerships to ensure the 
+safety and security of T&T 
+ 
+Table 6.2: Key Stakeholders of TTPS and Expectations 
+Stakeholder The TTPS’s expectations of 
+Stakeholders  
+The Stakeholders’ expectations 
+of the TTPS 
+Staff (Sworn and 
+Unsworn) 
+High level performance Availability of resources for staff 
+to perform jobs, Adequate  
+Compensation, high quality 
+Human Resource services, safe, 
+comfortable and healthy working 
+environment 
+Community 
+Members 
+Collaborative efforts with 
+communities to improve intelligence 
+gathering and address crime issues. 
+Strengthening community relations 
+and improving public perception 
+Targeted engagement with 
+communities where the TTPS can 
+design strategies that address 
+crime concerns, foster trust, and 
+encourage cooperation, such as 
+community policing initiatives 
+Business Community Collaborative efforts to assist with 
+safety and security of citizens 
+Reduced crime rates and timely 
+responses to crime, particularly to 
+enable economic stability 
+NGOs, FBOs, CBOs Collaborative efforts to assist with 
+safety and security of citizens eg. 
+through advocacy and support 
+groups 
+Reduced crime rates and timely 
+responses to crime 
+Government Government to provide funding and 
+set regulatory guidelines 
+Resource management 
+operational readiness/ excellence 
+and crime reduction 
+
+
+
+48 
+ 
+Stakeholder The TTPS’s expectations of 
+Stakeholders  
+The Stakeholders’ expectations 
+of the TTPS 
+Judicial System Streamlining processes and reducing 
+case backlog 
+Aligned strategy with the broader 
+criminal justice system to 
+improve case handling and 
+outcomes 
+Other Protective  
+Services 
+Collaborative efforts and 
+streamlining interagency processes  
+Improved Partnership 
+Media Report accurate/ credible 
+information. 
+Highlight public safety initiatives, 
+community partnership programs, 
+and success stories 
+Transparency and p rovision of 
+accurate information 
+International 
+Agencies 
+Meaningful partnership to  
+achieve TTPS strategic  
+objectives 
+Meaningful partnership to ensure 
+the safety and security of T&T 
+ 
+  
+
+
+
+49 
+ 
+7.0 Components of Legal and Policy Framework 
+The Legal and Policy Framework are rules and guidelines that govern the operations of the Trinidad 
+and Tobago Police Service. These frameworks establish the authority, guidelines, operational and 
+administrative manuals for operations of the Trinidad and Tobago Police Service. B elow shows a 
+depiction of the various authorities that guide the function of the organization and serve as blueprints 
+for its operations and functions.  
+ 
+  
+Figure 7.1: Legal and Policy Framework that Governs the TTPS 
+Constitution of Trinidad and Tobago   
+Police Service Act (Amendment Act) 
+2007 
+Police Service Regulations 2007 
+PRIMARY 
+LEGISLATION 
+------------------ 
+Trinidad and Tobago Police Service -
+Standing Orders 
+------------------
+-- 
+Departmental Orders 
+Standing Orders 
+Policies, Procedures and Guidelines 
+Notifications and Circulars 
+------------------
+- 
+SECONDARY 
+LEGISLATION 
+POLICY FRAMEWORK 
+
+
+
+50 
+8.0 Strategic Pillars 
+As the Trinidad and Tobago Police Service (TTPS) plans for the 2025-2027 period, it was essential 
+to review the previous strategic plan to assess what was successful and what areas ne eded 
+improvement. The five pillars from the previous plan —Community Partnership s, Public Safety, 
+Operational Excellence, Information Communication and Technology, and Occupational Health and 
+Wellness—were reassessed and condensed into four key areas: Community Partnerships, 
+Organisational Development, Operational Excellence and Public Safety . Information and 
+Communication Technology has now been integrated into Operational Excellence, while 
+Occupational Health and Wellness is now part of Organizational  Development. These changes 
+reflect a more targeted approach, specificity in focus and the TTPS' commitment to improving safety 
+in Trinidad and Tobago, as demonstrated by the theme for the 2025 -2027 Strategic Plan: 
+“Protecting Our Future – Through Professionalism, Passion, and Partnership.” 
+This plan provides a roadmap to address emerging challenges and enhance public safety. As it is 
+anchored on the 4 pillars, it is a reflection of our vision for a progressive and people-centred TTPS. 
+Guided by these pillars the TTPS is committed to delivering a safer, stronger and more united nation 
+for all. Displayed hereunder are the 4 Strategic Pillars and the 18 Outcomes which emanate from 
+them.  Under these 18 Outcomes are 118 Action Items as highlighted in Table 8.2.  
+Table 8.1: Strategic Pillars and Outcomes 
+Strategic Pillars Outcomes 
+Community Partnerships 
+ 
+1. Improve public trust and confidence 
+2. Foster Effective Community Engagements 
+3. Strengthen Stakeholder Partnerships 
+4. Enhance Youth Engagement  
+ 
+ 
+Organisational Development   
+ 
+1. Develop Supervision and Leadership Capabilities  
+2. Enhance Professional Development   
+3. Improve Occupational Health and Wellness  
+4. Improve Psycho-social Support 
+5. Improve Occupational Health and Safety Compliance 
+6. Enhance Self Image of Employees  
+Operational Excellence  
+ 
+ 
+ 
+1. Improve the Efficiency and Effectiveness of TTPS ’ 
+Operations and Equipment 
+2. Optimize Technologies for Organisational Efficiency 
+and Effectiveness 
+
+
+
+51 
+Strategic Pillars Outcomes 
+ 3. Improve Case Management Systems 
+4. Improve Manpower Capacity, Development and 
+Utilisation  
+Public Safety 1. Reduce Violent Crime 
+2. Reduce Serious Crime 
+3. Enhance Road Safety 
+4. Improve Crime Prevention 
+5. Improve Crime Detection 
+6. Increase Safety in Public Places 
+ 
+Table 8.2: Number of Pillars, Action Items, Outcomes and Metrics for Success 
+No. Strategic Pillars Outcomes Metrics for 
+Success 
+Action Items 
+1 Community Partnerships 4 7 15 
+2 Organisational Development 5 7 25 
+3 Operational Excellence  4 12 43 
+4 Public Safety  6 18 28 
+Total 19 44 111 
+ 
+8.1 Community Partnerships 
+Strategic Intent - The strategic pillar of Community Partnerships  is a direct reference to the 
+collaborative efforts between the TTPS and members of communities, governmental and non -
+governmental organisations, faith -based organisations, cultural groups, sporting groups and other 
+stakeholders to address public safety issues, to solve problems and to improve the overall quality of 
+life. The relationship between the police service  and the community is vital for effective crime 
+prevention and public safety. Community partnerships highlights the need for mutual trust, respect 
+and the responsibility for the creation of safe and healthy communities which must be shared 
+between the TTPS and all communities. In light of this, the TTPS will prioritize building trus t and 
+fostering partnerships with the public. This collaboration is intended to ensure a safer environment 
+for all citizens, encouraging active participation in crime prevention efforts and strengthening the 
+bond between the police and the communities they serve. 
+
+
+
+52 
+Further, i ncreased immigration could lead to a more diverse society, requiring officers to be 
+culturally sensitive and adaptable in dealing with different communities. To address these 
+challenges, the TTPS plans to continue investing in officer tra ining that includes cultural 
+competency, age -specific law enforcement techniques, and crisis management strategies. These 
+investments will be critical in ensuring that the TTPS remains responsive to the evolving needs of 
+society and continues to provide effective service to all citizens, irrespective of their background or 
+demographic characteristics. 
+The TTPS will place a strong emphasis on community policing as a cornerstone of its strategy to 
+ensure public safety. This approach fosters collaboration and encourages citizens to play an active 
+role in maintaining order and preventing crime in their communities.  The TTPS will organize 
+initiatives such as Station Council meetings, community walkabouts, and focused patrols to engage 
+directly with local resident s and address their concerns. These interactions will help build trust 
+between the police service and the public, creating a safer environment where crime prevention 
+becomes a shared responsibility. However, The TTPS understands that tackling crime require s 
+collaboration beyond the police service. Therefore, it will work closely with a range of other 
+stakeholders, including the judiciary, government agencies, and non -governmental organizations 
+(NGOs), to provide a holistic approach to crime prevention. These collaborations will help create a 
+comprehensive framework for addressing crime at all levels —from prevention and intervention to 
+legal proceedings and rehabilitation.  Stakeholder engagement is also critical to the succ ess of the 
+TTPS’ crime reduction strategy. By coordinating with other agencies, the TTPS will ensure that its 
+efforts are aligned with broader national goals and policies. These collaborations will also enhance 
+the ability of the TTPS to secure funding from various sources, including governm ent grants and 
+international partnerships. 
+Additionally, the TTPS will continue to uphold professionalism, ensuring that all public reports are 
+handled through its one -door policy, a process that guarantees efficiency and transparency.  The 
+success of community policing will also depend on budgetary considerations, as resources will be 
+needed to support outreach activities, station council meetings, and community engagement efforts. 
+It will be important for the TTPS to secure sufficient funding for these initiatives while maintaining 
+its core operations. 
+ 
+ 
+ 
+ 
+
+
+
+53 
+Table 8.3: Community Partnerships – Metrics for Success 
+No. Outcomes Metrics for Success 
+1 Improve Public Trust & 
+Confidence 
+Improved image of the Police Service 
+Increased public confidence in police follow up on reports 
+Increased accountability of officers in the performance of 
+their duties 
+Reduction in allegations against police officers 
+2 Foster Effective 
+Community Engagements 
+Improved cooperation with police officers in the execution of 
+their duties 
+3 Strengthen Stakeholder 
+Partnerships 
+Increased joint initiatives with police and community 
+organizations 
+4 Enhance Youth 
+Engagement 
+Increased positive youth engagement through Police Youth 
+Clubs  
+ 
+Table 8.4: Action Items and Outcomes for the Strategic Pillar of Community Partnerships 
+No. Action Item Executive 
+Responsibility 
+Timeline 
+1.1 Outcome: Improve Public Trust and Confidence  
+1.1.1 Develop and implement specific training courses on 
+procedural justice for frontline officers 
+DCP Operations Year 1-3 
+1.1.2 Continuous training on customer service in 
+alignment with the TTPS’ customer service policy 
+DCP Administration Year 1-3 
+1.1.3 Publicize community satisfaction reports on media 
+platforms 
+DCP Administration Year 1-3 
+1.1.4 Increase deployment of body worn cameras DCP Operations Year 1-3 
+1.2  Outcome: Foster Effective Community Engagements 
+1.2.1 Host town hall meetings, forums, and online 
+surveys for community input.  
+DCP Operations Year 1-3 
+1.2.2 Appoint Community Liaison Officers in each 
+station district. 
+DCP Administration Year 1-3 
+1.2.3 Integrate app features to allow for community 
+dialogue. 
+DCP Administration 
+& Support 
+Year 1-3 
+1.2.4 Conduct public awareness on domestic violence in 
+each Division. 
+DCP Intelligence & 
+Investigations 
+Year 1-3 
+
+
+
+54 
+No. Action Item Executive 
+Responsibility 
+Timeline 
+1.2.5 Establish and implement Police Community 
+Outreach Programme in all Divisions. 
+DCP Operations Year 1-2 
+1.3 Strengthen Stakeholder Partnerships 
+1.3.1 Develop a policy to standardize internal 
+communication and collaboration between various 
+Units/Sections/Branches geared towards 
+intelligence led community intervention strategies. 
+DCP Intelligence & 
+Investigations 
+Year 1 
+1.3.2 Enforce guidelines established for the operation of 
+station councils. 
+DCP Operations Year 1 
+1.3.3 Continue partnerships with community 
+organizations/councils, community leaders, NGOs 
+and academia to co-produce safety and crime 
+prevention strategies. 
+DCP Operations Year 1-3 
+1.3.4 Formalize Neighbourhood Watch group guidelines. DCP Operations Year 1 
+1.4 Outcome: Enhance Youth Engagement 
+1.4.1 Facilitate implementation of structured sporting and 
+cultural programmes through Police Youth Clubs. 
+CoP Year 1-3 
+1.4.2 Review and enforce policies regarding the 
+management of Police Youth Clubs.  
+DCP Administration Year 1 
+ 
+8.2 Organisational Development  
+Strategic Intent - Organisational Development (OD) in the TTPS relates to the systematic, planned 
+and strategic process that would serve to enhance the effectiveness, efficiency and adaptability of 
+the TTPS, to meet its current and future goals which will place the TTPS in a better position to serve 
+the needs of communities. OD involves the analysis and strengthening of systems, processes, 
+procedures and human resources to generate a culture of PRIDE, accountability and continuous 
+development and improvement. The 2025-2027 strategic plan will also prioritize investment in its 
+internal pub lic—its officers—through training, leadership development, and welfare support. A 
+well-equipped and motivated police service is seen as essential for enhancing safety across Trinidad 
+and Tobago. The TTPS acknowledges that its ability to deploy effective crime-fighting strategies is 
+highly contingent on the skills and preparedness of its officers. Thus, the budgetary allocation will 
+be designed to ensure that officers are equipped with state-of-the-art technology, tools, and ongoing 
+
+
+
+55 
+professional development to respond effectively to the evolving threats posed by criminals. 
+Additionally, the TTPS will focus on creating a conducive working environment to prevent burnout 
+and ensure long-term retention of its workforce. Therefore, it is crucial that the organization focuses 
+on enhancing the internal environment, including providing necessary training, development, and 
+support for its officers. This ensures they are adequately equipped to handle the complex and 
+evolving nature of law enforcement. 
+Table 8.5: Organisational Development – Metrics for Success 
+No. Outcomes Metrics for Success 
+1 Improve O ccupational Health and 
+Wellness  
+Increase in the number of police officers accessing 
+PHF services 
+2 Improve Psycho-social Support Enhanced satisfaction with Employee Support 
+Services 
+3 Improve OSH Compliance Improved compliance with the OSH Act 
+4 Develop Supervision and Leadership 
+Capabilities  
+Increased employee satisfaction with strategic 
+leadership 
+ 
+ 
+Improved overall employee satisfaction with their 
+job 
+5 Enhance Professional Development 
+ 
+Increase in number of officers completing 
+professional certification programmes 
+Increased employee satisfaction with training 
+opportunities 
+ 
+Table 8.6: Action Items and Outcomes for the Strategic Pillar of Organisational Development 
+No. Action Item Executive 
+Responsibility 
+Timeline 
+2.1  Outcome:  Improve Occupational Health and Wellness 
+2.1.1 Operationalise facility for delivery of health and 
+wellness services in the South Central Region 
+DCP Administration Year 1 
+2.1.2 Develop MOU with each RHA for various 
+medical services to complement the PHF 
+DCP Administration Year 1-2 
+2.1.3 Establish a Board of Management for the PHF CoP Year 1-2 
+2.1.4 Acquire Health and Wellness Facility in Tobago DCP Administration Year 1-3 
+2.1.5 Conduct Healt h and Wellness Caravans in each 
+Division 
+DCP Administration Year 1-3 
+
+
+
+56 
+No. Action Item Executive 
+Responsibility 
+Timeline 
+2.1.6 Publish and promote fitness and wellness policy DCP Administration Year 1-3 
+2.1.7 Equip trained personnel with specialized medical 
+equipment (preventative with one per Unit, 
+Section, Branch, Division) 
+DCP Administration Year 2-3 
+2.1.8 Acquire certified PPE for officers in accordance 
+with best practice / international standards 
+CoP Year 2-3 
+ 
+2.2  Outcome:  Improve Psychosocial Support 
+2.2.1 Establish three Hotline mobile phone numbers to 
+access Social Workers for police officers in crisis 
+and emergencies 
+DCP Administration Year 1-2 
+2.2.2 Review and implement the EAP policy DCP Administration Year 1 
+2.2.3 Increase sensitization on stress management and 
+mental health for police officers 
+DCP Administration Year 1 
+2.3  Outcome: Improve OSH Compliance 
+2.3.1 Contract the services of an OSH consultant  
+according to International Standards to spearhead 
+the OSH team 
+DCP Operations Year 3 
+2.3.2 Develop and implement Evacuation Plans for all 
+Police Buildings 
+DCP Operations Year 1-2 
+2.3.3 Review and update  Emergency Crisis Response 
+Policy 
+DCP Operations Year 1-2 
+2.3.4 Upgrade infrastructure at Police Buildings to 
+enhance physical appearance 
+DCP Administration Year 1-3 
+2.4  Outcome: Develop Supervision and Leadership Capabilities 
+2.4.1 Continuous leadership and management training 
+for all ranks 
+DCP Administration Year 1-3 
+2.4.2 Review and Revise the PMAS training manual DCP Administration Year 1-2 
+2.4.3 Establish and implement training needs 
+assessment platform on PMAS System 
+DCP Administration Year 1-3 
+2.5 Outcome: Enhance Professional Development 
+2.5.1 Re-Establish Games and Amusement committees 
+to conduct team building exercises throughout the 
+year 
+DCP Operations Year 1-3 
+
+
+
+57 
+No. Action Item Executive 
+Responsibility 
+Timeline 
+2.5.2 Train and retrain persons in the effective use of 
+the Body Worn Camera 
+All DCPs Year 1-3 
+2.5.3 Conduct t raining in Computer Literacy and 
+software use 
+DCP Administration Year 1-3 
+2.5.4 Implement an Associate Degree in Applied 
+Policing Programme at the Police Training 
+Academy 
+DCP Administration 
+ 
+Year 3 
+2.5.5 Develop an induction training policy for specialist 
+sections 
+DCP Administration 
+DCP Intelligence & 
+Investigations 
+Year 1-3 
+2.5.6 Implement mandatory ‘Hot pu rsuit’ driving 
+training for police officers. 
+DCP Administration Year 1-3 
+2.5.7 Continue re-certification of firearm training    DCP Administration Year 2-3 
+ 
+8.3 Operational Excellence 
+Strategic Intent - Operational Excellence is a key strategic pillar for the Trinidad and Tobago Police 
+Service (TTPS). This focuses on improving the efficiency, effectiveness and overall performance of 
+the TTPS. This strategic pillar is developed to enhance the TTPS’ ability to improve service delivery 
+to our internal and external public. The action items outlined under this pillar will allow the TTPS 
+to achieve operational excellence by building a more responsive, efficient and professional police 
+service. The TTPS aims to s ignificantly reduce serious crimes, particularly murders and firearms -
+related offences, by leveraging advanced technology. The adoption of cutting -edge tools, such as 
+data analytics, predictive policing, and surveillance systems, will continue to enable the TTPS to 
+identify crime hotspots, track criminal activity in real-time, and make more informed decisions about 
+resource allocation.  
+The success of this crime reduction strategy is expected to boost the legitimacy and effectiveness of 
+the TTPS. However, this will require adequate funding and resource allocation. The TTPS will need 
+to secure budgetary support for the procurement and maintenance of advanced technology, as well 
+as for training officers to use these tools effectively. Budgetary constraints may also require careful 
+prioritization of resources to ensure that technological advancements are integrated to improve 
+service delivery without compromising other areas of policing.  
+
+
+
+58 
+Technological innovations are rapidly transforming law enforcement practices, and the TTPS aims 
+to stay ahead of these trends. Key investments include:  
+a)  Artificial Intelligence Software:  Automating data entry and report generation to increase 
+administrative and operational efficiency. This allows officers to focus more on critical duties.  
+b) Body-Worn Cameras (BWC):  These devices will enhance accountability and  improve 
+evidence collection during police interactions. 
+c) Facial Recognition Technology: This will help identify suspects in real time or from video 
+footage. A possible integration with the Licensing Office could link vehicle license plates to 
+their owners, further enhancing this capability.  
+d) Drones for Aerial Surveillance:  Drones will assist in monitoring and gathering crucial 
+information from the skies, supporting various aspects of crime prevention and investigation.  
+e) DNA Databases: These databases will facilitate the identification of suspects and link them 
+to crimes more efficiently.  
+f) Predictive Policing Software: By analysing crime patterns, this software can predict potential 
+crime hotspots, enabling proactive law enforcement efforts.  
+g) Social Media Monitoring Tools: These tools will help track online threats and prevent harm 
+to the public by monitoring conversations that may indicate potential risks. 
+Table 8.7: Operational Excellence – Metrics for Success 
+No. Outcomes Metrics for Success 
+1 Improve the Efficiency and 
+Effectiveness of TTPS’ Operations 
+and Equipment 
+Increased organisational ability to respond 
+effectively based on communication and 
+intelligence-sharing across internal units 
+Increased employee satisfaction with internal 
+technological infrastructure 
+Increased use of centralized electronic data 
+collection systems 
+Reduction in the number of non-functional police 
+vehicles 
+2 Optimise Technologies for 
+Organisational Efficiency and 
+Effectiveness 
+Increase in services available to the public via 
+TTPS website 
+Improvement in data driven decisions 
+3 Improve Case Management Systems Reduce case backlog 
+
+
+
+59 
+No. Outcomes Metrics for Success 
+Reduce non-attendance of complainants  
+Increase in persons trained in case management 
+4 Improve Manpower Capacity, 
+Deployment and Utilisation  
+Employee satisfaction with the PMAS system 
+Effective deployment of human resources 
+Increased employee satisfaction with internal 
+services 
+ 
+Table 8.8: Action Items and Outcomes for the Strategic Pillar of Operational Excellence 
+No. Action Item Executive 
+Responsibility 
+Timeline 
+3.1 Outcome: Improve the Efficiency and Effectiveness of TTPS’ Operations and Equipment 
+3.1.1 Strengthen the FMU DCP Administration Year 1-3 
+3.1.2 Strengthen the MECU DCP Administration Year 2 
+3.1.3 Develop a database for all fixed assets of the 
+TTPS (Assets registry) 
+DCP Administration Year 2 
+3.1.4 Conduct a needs assessment of the current 
+fixed assets (Not limited to infrastructure and 
+equipment) 
+DCP Administration Year 1 
+3.1.5 Develop an integrated fleet management 
+system 
+DCP Administration Year 2 
+3.1.6 Enforce the Revised Fleet Management Policy DCP Operations Year 1 
+3.1.7 Review analysis on vehicle needs of each 
+division, station / unit (with a view of 
+purchasing fuel efficient vehicles) 
+DCP Administration Year 1 
+3.1.8 Disposal of existing unserviceable police 
+vehicles  
+CoP Year 1-3 
+3.1.9 Disposal of impounded and abandoned civilian 
+vehicles 
+CoP Year 1-3 
+3.1.10 Establish a framework for the procurement 
+process 
+CoP Year 1 
+3.1.11 Develop and implement an E-tendering 
+platform for contracts 
+CoP 
+DCP Administration 
+Year 2-3 
+
+
+
+60 
+No. Action Item Executive 
+Responsibility 
+Timeline 
+3.1.12 Establish Service Level Agreements (SLAs) 
+for new purchases of equipment 
+DCP Administration Year 1-2 
+3.1.13 
+ 
+Fully equip all Divisional Operating Centres    DCP Operations Year 1 
+DCP Administration Year 3 
+3.1.14 Reduce response time to calls for service DCP Administration Year 1-3 
+3.1.15 Develop a green policy outlining the TTPS’ 
+commitment to sustainability (buildings, 
+vehicles etc.) 
+CoP 
+DCP Administration 
+Year 1 
+3.1.16 Conduct audit of electrical power usage for 
+TTPS buildings 
+CoP Year 2 
+3.1.17 Reduce single use plastics CoP Year 2 
+3.2 Outcome: Optimise Technologies for Organisational Efficiency and Effectiveness 
+3.2.1 Acquisition and utilisation of software and 
+hardware technological devices to assist in 
+police tactical operations and traffic stops 
+DCP Administration Year 1-3 
+3.2.2 Digitization of crime reporting processes and 
+feedback on police follow-up. 
+DCP Administration Year 1-2 
+3.2.3 Acquire and utilise smart vehicles-tablets (to 
+view offenders, crime maps, directions, search 
+info., dashcam, GPS, etc.) 
+DCP Administration Year 3 
+3.2.4 Acquire and implement the use of technology 
+for Facial and License Plate Recognition 
+software   
+DCP Administration Year 3 
+3.2.5 Implement use of Open-Source Software DCP Administration Year 3 
+3.2.6 Redesign Portal as home page for all TTPS 
+logins 
+DCP Administration Year 2 
+3.2.7 Enhance TTPS’ website to give online public 
+access to TTPS’ services (e.g. RTA reports, 
+online payment and updates on reports). 
+DCP Administration Year 2 
+3.2.8 Include ICT training in the Curriculum on all 
+policing aspects at the Police Academy.  
+DCP Administration Year 2 
+3.2.9 Expand Direct Data Entry Project DCP Intelligence & 
+Investigations 
+Year 1-2 
+
+
+
+61 
+No. Action Item Executive 
+Responsibility 
+Timeline 
+3.2.10 Digitise personnel records, pay record cards 
+etc. 
+DCP Administration Year 1-3 
+3.2.11 Establish robust redundancy and backup 
+systems 
+DCP Administration  Year 2-3 
+3.2.12 Establish and enable minimum standards for 
+hardware and software at different levels in 
+Sections, Units, Branches and Stations 
+DCP Administration  Year 1 
+3.3 Outcome: Improve Case Management Systems 
+3.3.1 Collaborate with the Judiciary to integrate the 
+court records with the records held at the 
+Criminal Records Office 
+DCP Intelligence & 
+Investigations  
+CoP 
+Year 2-3 
+3.3.2 Improve Case Management Framework to 
+enhance deliverables   
+DCP Intelligence & 
+Investigations 
+DCP Operations 
+Year 1 
+Year 2 
+3.3.3 Train officers in the proper handling and 
+management of technological devices for 
+evidential purposes  
+DCP Administration Year 1-3 
+3.3.4 Train qualified officers to be sworn in as ex 
+officio JPs 
+DCP Administration Year 1-3 
+3.3.5 Establishment of a digital case management 
+system to efficiently handle incoming and 
+outgoing exhibits 
+DCP Administration Year 3 
+3.3.6 Reinforce policies and procedures to ensure 
+the court attendance of complainants 
+DCP Operations  Year 1 
+3.4 Outcome: Improve Manpower Capacity, Deployment and Utilisation 
+3.4.1 Develop a charter for strategic, administrative 
+and operational meetings 
+CoP Year 2 
+3.4.2 Conduct workforce analysis on the 
+functionality of specialised units 
+CoP 
+DCP Administration 
+Year 1-3 
+3.4.3 Conduct employee satisfaction survey 
+biennially and consider recommendations 
+DCP Administration Year 1-3 
+3.4.4 Review and implement incentive programmes 
+for both sworn and unsworn officers 
+DCP Administration Year 2 
+
+
+
+62 
+No. Action Item Executive 
+Responsibility 
+Timeline 
+3.4.5 Review and enforce Field Training Policy 
+pertaining to newly graduated recruits 
+DCP Administration Year 2-3 
+3.4.6 Conduct quarterly Secondary Schools outreach 
+caravan in each division with emphasis on 
+TTPS Recruitment. 
+DCP Administration Year 1-3 
+3.4.7 Implement SOPs at each 
+Section/Branch/Unit/Division   
+DCP Operations 
+DCP Intelligence & 
+Investigations 
+Year 1-2 
+ 
+3.4.8 Introduce a work from home policy CoP Year 2-3 
+ 
+8.4 Public Safety  
+Strategic Intent - In The Plan, this refers to the activities the TTPS engages in to facilitate the 
+protection, security, safety and well -being of individuals and communities. Under this strategic 
+pillar, the ultimate objective is to prevent harm to individuals, to maintain law and order and to 
+create an environment in which persons can live, work, recreate and thrive without the fear of crime 
+or danger. Under this strategic pillar one will see t he implementation of strategies, policies, and 
+practices aimed at reducing crime, preventing road traffic accidents, deterring potential offenders, 
+reducing school violence  and enhancing the overall sense of security and well -being among 
+community members. It involves several activities and initiatives adopted by the TTPS and aimed 
+at ensuring the safety and protection of individuals and groups in public spaces, business-places, as 
+well as within their homes, schools and neighbourhoods.   
+Table 8.9: Public Safety – Metrics for Success 
+No. Outcomes Metrics for Success 
+1 Reduce Violent Crime Reduction in violent crimes 
+Reduction in murders 
+Increase in persons charged for gang related 
+offences under the Anti-Gang Act 
+Increase in arrests of priority offenders 
+2 Reduce Serious Crime Reduction in Serious Crimes 
+Reduction in Domestic Violence 
+
+
+
+63 
+No. Outcomes Metrics for Success 
+Reduction in Larceny of Motor Vehicles 
+Increase in illegal Firearms recovered 
+3 Enhance Road Safety Reduction in Fatal RTAs 
+Reduction in RTAs 
+4 Improve Crime Prevention CPTED Projects completed successfully based on 
+verification process 
+Focussed deterrence initiative s completed 
+successfully based on verification process 
+5 Improve Crime Detection Increase in detection of murders 
+Increase in detection of violent crimes 
+Increase in detection of white-collar crime 
+6 Increase Safety in Public Places Reduction in fear of crime 
+Improved public perception  of safety in public 
+places 
+Reduction in reported incidents of school violence 
+ 
+Table 8.10: Action Items and Outcomes for the Strategic Pillar of Public Safety 
+No. Action Item Executive 
+Responsibility 
+Timeline 
+4.1 Outcome:  Reduce Violent Crime 
+4.1.1 Expand Eagle Eye initiative in all 10 Divisions DCP Operations Year 1-3 
+4.1.2 Establishment of seismic center (analytical  and 
+technological crime response center) in each ACP 
+Region/Division 
+CoP, All DCPs Year 3 
+4.1.3 Implementation and roll out of geo fencing to 
+identify areas prone to Violent Crime 
+DCP Operations 
+DCP Administration 
+Year 1 
+4.1.4 Enhance capacity for disruption of priority 
+offenders 
+DCP Intelligence & 
+Investigations 
+DCP Operations 
+Year 1-3 
+4.2  Outcome:  Reduce Serious Crime 
+
+
+
+64 
+No. Action Item Executive 
+Responsibility 
+Timeline 
+4.2.1 Increase in number of Warrants executed DCP Operations 
+DCP Intelligence & 
+Investigations 
+Year 1-2 
+4.2.2 Increase patrols in areas identified as susceptible 
+to LMV 
+DCP Operations Year 1-3 
+ See 4.1.2, 4.1.4, 4.4.7 & 4.6.1 for other relevant items  
+4.3  Outcome:  Enhance Road Safety 
+4.3.1 Increase precision patrols in areas prone to fatal 
+and Serious RTAs 
+DCP Operations 
+DCP Administration 
+Year 1-3 
+4.3.2 Enhance social media campaigns to sensitise the 
+public on road safety practices 
+DCP Administration Year 1-3 
+4.3.3 Continue enforcement of Speed and DUI 
+Exercises 
+DCP Administration 
+DCP Operations 
+Year 1-3 
+4.3.4 Increase capacity to enforce Traffic Breaches DCP Administration Year 1-3 
+4.3.5 Partner with Stakeholders to improve road safety 
+(Arrive Alive) 
+DCP Administration Year 3 
+4.4  Outcome:  Improve Crime Prevention 
+4.4.1 Develop and implement focused deterrence 
+strategies 
+DCP Operations Year 1-3 
+4.4.2 Implementation of CPTED initiatives  DCP Operations Year 1-3 
+4.4.3 Train officers in crime prevention s trategies and 
+best practices 
+DCP Administration Year 1-3 
+4.4.4 The establishment of an Academic Research 
+Department to assist in crime fighting efforts 
+DCP Administration Year 1-2 
+4.4.5 Expand CASU for better border protection DCP Operations  Year 1-3 
+4.4.6 Increase border protection in coastal areas DCP Operations  Year 1-3 
+4.4.7 Conduct periodic home visits to at -risk 
+households with (protection/ restraining orders in 
+force) 
+DCP Operations 
+DCP Intelligence & 
+Investigations 
+Year 2 
+4.4.8 Partner with private and public sector 
+stakeholders to implement location -based crime 
+prevention interventions 
+DCP Intelligence & 
+Investigations 
+Year 1 
+4.5  Outcome: Improve Crime Detection 
+
+
+
+65 
+No. Action Item Executive 
+Responsibility 
+Timeline 
+4.5.1 Review the operations of CSMU Labs DCP Intelligence & 
+Investigations 
+Year 1 
+4.5.2 Re-establish CSMU as an investigative and 
+operational unit 
+DCP Intelligence & 
+Investigations 
+Year 2 
+4.5.3 Improve the usage of data mining software to 
+combat Cybercrime via Social Media 
+DCP Intelligence & 
+Investigations 
+Year 2 
+4.5.4 Increase investigative capacity in all Divisions. DCP Operations Year 1-3 
+4.6 Outcome: Increase Safety in Public Places 
+4.6.1 Optimize patrols, mobile/foot, using data 
+analytics for high-priority areas 
+DCP Operations  Year 1-3 
+4.6.2 Design a social media ambassador program me to 
+share crime prevention strategies and related  
+content across social media platforms 
+DCP Administration Year 2 
+4.6.3 Implement a School Adoption P rogramme in 
+collaboration with other stakeholders. 
+DCP Operations Year 1-3 
+4.6.4 Collaborate with selected schools to develop 
+projects aimed at reducing and preventing school 
+violence  
+DCP Operations Year 2-3 
+4.6.5 Expand mentorship programs for at-risk youth DCP Operations 
+DCP Administration 
+Year 1-2 
+ 
+8.5 Longer-Term Goals 
+A number of additional action items were  suggested by various stakeholders , some of these 
+initiatives will no doubt still be undertaken, although not highlighted in this document. Others were 
+either deferred or could not be included for various reasons, including cost, logistical challenges or 
+inadequate human resources . Thus, some initiatives which are aspirational rather than actionable, 
+were not considered for inclusion in this plan. Many of these suggestions were valuable and may be 
+considered viable in the future.   
+
+
+
+66 
+9.0 Implementation Plan 
+9.1 Governance and Oversight  
+The role of governance of The Plan has been assigned to the executive a rm of the TTPS – that is, 
+the Commissioner of Police , Deputy Commissioners, Assistant Commissioners  of Police and 
+Civilian Heads. These individuals have been given executive responsibility in the case of the 
+Commissioner and Deputy Commissioners and functional responsibility in the case of the Assistant 
+Commissioners and Civilian Heads, for the implementation of the Plan, and will be held accountable 
+for the plan’s success or failure. Such responsibility is supported by the Constitution of the Republic 
+of Trinidad and Tobago and the Police Service Act and Regulations, 2007. Whilst the outcome of 
+The Plan hinges on the stewardship of the  Executive, the Police Internal Oversight Committee 
+(PIOC) will also have oversight of The Plan (Appendix 6 refers).   
+9.2 Stakeholder Engagement  
+As the TTPS  strategic planning process unfolds, consistent stakeholder engagement and 
+participation are paramount to the successful implementation of the Strategy. Th is emphasis is 
+aligned with the adoption of a bottom -up approach, which fosters greater buy -in by providing 
+stakeholders with opportunities to influence decisions. This approach represents a significant 
+departure from traditional practices. Consequently, the TTPS’s leadership is committed to continue 
+prioritizing stakeholder engagement to ensure alignment and commitment throughout the strategy’s 
+implementation. 
+Effective stakeholder engagement involves identifying, mapping, and prioritizing stakeholders to 
+determine the most effective tactics for communication and collaboration during the strategic 
+planning process. 
+9.3 External Stakeholders 
+A critical component of the strategic planning process is gathering input from external stakeholders. 
+To facilitate this, the review team engaged in discussions through various mechanisms des igned to 
+capture diverse perspectives and insights. 
+
+
+
+67 
+9.4 Internal Stakeholders 
+Internally, the bottom-up approach was applied through the administration of surveys. These surveys 
+collected valuable information that was integrated into the planning process, providing e ssential 
+context and direction for setting priorities. Additionally, workshops with the TTPS executive team 
+were conducted to explore and refine the potential strategic pillars. 
+Throughout the review period, internal and external stakeholders collaborated to examine current 
+and future actions towa rd achieving shared objectives and timelines. To effectively communicate 
+the strategic plan, the TTPS has developed a range of engagement mechanisms, as outlined in the 
+table below. 
+Stakeholder engagement is not a one-time activity but a continuous and ongoing process. The TTPS 
+is committed to proactively addressing the needs of each key stakeholder group to ensure sustained 
+collaboration and alignment with the strategic plan. 
+The following is the Stakeholder Engagement Plan for the operationalisation of The Plan 2025 -
+2027.   
+ 
+
+
+
+68 
+ 
+Table 9.1: Stakeholder Engagement Plan for TTPS Strategic Plan 2025-2027 
+Stakeholder Areas(s) of influence/ 
+Interest 
+Engagement Strategy/ 
+Approach 
+Engagement Method Timing 
+Staff  
+(Sworn & Unsworn) 
+Improved Operations and 
+Safety  
+To announce and sensitize new 
+strategic plan. 
+ 
+To identify the key shifts in our 
+strategy, and implications for staff 
+and the organization. 
+ Roll Out Sessions with all 
+Divisions/ Units/ Sections/ 
+Branches. 
+ Design a Strategic Booklet. 
+ Upload Strategic Plan on Portal. 
+ In force Workshop (Frontline 
+Officer & Civilians staff). 
+ Email strategic plan to all 
+Executive Members and Head of 
+each Division, Unit, Section and 
+Branch.  
+ Create strategic pillars 
+infographics with action items for 
+the portal (showing timelines for 
+completion) 
+ The BEAT Newsletter 
+After the strategic plan 
+is approved. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Monthly  
+Community Members  Community Safety and Trust  To announce new strategic plan 
+and share implications for future 
+initiatives 
+ 
+To obtain feedback 
+ 
+To provide and share information 
+ Town Meeting  
+ Station Council Meeting  
+ Social Media Posts (videos, 
+infographics) 
+ Community Caravans (leaflets, 
+brochures) 
+ Feedback Surveys 
+ Monthly 
+ Monthly 
+ Weekly 
+ 
+ Bi – annually 
+ 
+ Annually 
+
+
+
+69 
+Stakeholder Areas(s) of influence/ 
+Interest 
+Engagement Strategy/ 
+Approach 
+Engagement Method Timing 
+Business Community Reduced crime for economic 
+stability 
+To present the strategic plan 
+ 
+To share information 
+ 
+ 
+ Station Council Meeting 
+ Panel Discussion  
+ Breakfast Meeting with each 
+Chamber 
+ Website 
+After the strategic plan is 
+approved. 
+NGOs, FBOs, CBOs Advocacy and support 
+groups for issues like 
+domestic violence, road 
+safety, etc.  
+To announce new strategic plan 
+and share information for future 
+programs and service. 
+ Workshop After the strategic plan is 
+approved, then as 
+needed. 
+ 
+Government Accountability and policy 
+alignment 
+ 
+To inform and obtain feedback  Meeting 
+ Email  
+At the end of the 
+strategic planning 
+process. 
+Judicial System Align its strategies with the 
+broader criminal justice 
+system 
+To inform and obtain feedback  Meeting 
+ Email  
+At the end of the 
+strategic planning 
+process. 
+Other Protective 
+Services 
+Effective Collaboration To Inform and obtain feedback  Meeting At the end of the 
+strategic planning 
+process. 
+Media Accurate reporting of matters 
+impacting the country  
+ 
+To inform the public and staff 
+member 
+  Press Conference  
+ Media Release  
+ Briefings  
+ The BEAT Newsletter 
+At the end of the 
+strategic planning 
+process. 
+International Agencies Enhancing the safety and 
+security of T&T 
+To inform and obtain feedback  Meeting 
+ Email 
+At the end of the 
+strategic planning 
+process. 
+
+
+
+70 
+ 
+9.5 Monitoring, Evaluation and Compliance  
+Monitoring and Evaluation (M&E) mechanisms are  woven into this strategic plan to ensure its 
+effective implementation and assess the impact on both our internal and external customers. This is 
+facilitated through the development of  annual operating plans , with clear and measurable targets  
+related to every aspect of this strategic plan, which provide a systematic approach to track progress 
+of action items, measure outcomes, and identify areas for improvement. 
+Both quantitative and qualitative research methods will be employed to track the progress of stated 
+action items and evaluate the effectiveness of our overall objectives. 
+Quantitative  
+This represents data captured on a monthly, quarterly and Half Yearly basis by CAPA, Divisions 
+and respective Sections, Units and Branches on the following: 
+ Crime rates (overall and specific offenses) 
+ Response times to calls for service 
+ Solve rates 
+ Arrest rates 
+ Operational Activities 
+ Assets and Equipment 
+ Case Management 
+ Accountability 
+ Human Resource Matters 
+ Client Data 
+Qualitative  
+This represents data gathered from surveys and feedback forms from all employees, community 
+members and stakeholders to measure satisfaction levels in the following areas: 
+ Public perception of police services 
+ Officer morale and job satisfaction 
+ Community engagement levels 
+ Compliance with policies and procedures 
+
+
+
+71 
+9.6 Monitoring and Evaluation Framework 
+This framework will be a useful guide for both functional and Executive Heads to be transparent 
+and accountable for their assigned areas of responsibilities which will enable timely and reliable 
+updates on the status of action item targets. 
+o Timeline: Quarterly and Half Yearly reviews will be conducted to assess progress and 
+identify any necessary adjustments. 
+o Responsibility: The Monitoring Evaluation and Compliance Unit will be responsible 
+for data collection and reporting on the plan . The PIOC will be responsible for 
+overseeing the implementation process. 
+The Senior Superintendent as the commander of the Division/Section has overall responsibility for 
+all data collated under his/her purview and must ensure that the data is verified for reliability and 
+accuracy for submission to the Monitoring Evaluation and Compliance Unit  (MECU) at required 
+timelines. It is the responsibility of each ACP to ensure that the Senior Superintendent comply with 
+all the procedures for accurate reporting of their areas of responsibility and provide a status report 
+to MECU on a quarterly basis. 
+o Data Analysis: The data collected from the various Divisions, Sections, B ranches and 
+Units will be analysed using statistical methods and data visualization tools to identify 
+trends and patterns. 
+o Reporting: Performance reports on Key Initiatives will be generated on a Quarterly 
+basis. This will inform decision -making so that corrective actions can be t aken by the 
+Executive to address the issues identified in an effort for outcomes to be realized. 
+By effectively implementing this M&E framework, the TTPS will be able to: 
+1. Make data-driven decisions to improve operational efficiency. 
+2. Enhance public safety and community trust. 
+3. Ensure accountability and transparency in the use of resources. 
+4. Identify areas for improvement and implement necessary changes. 
+9.7 Feedback Mechanisms 
+The feedback mechanism will involve the following:  
+
+
+
+72 
+o Regular Reviews: Each ACP must conduct quarterly assessments of their strategies 
+and initiatives under their functional areas of responsibility to identify major 
+challenges and successes and formulate corrective action plans to address them. 
+o Stakeholder Input:  Seek input from officers, comm unity members, and other 
+stakeholders through surveys, focus groups, and community meetings. 
+o Lessons Learned: Identify lessons learned from past experiences to inform future 
+strategies. 
+9.8 Risk Management 
+In this Strategic Plan, risk management is a critical component where unique challenges such as 
+natural disasters, cross-border crime, and socio-economic issues often arise. Therefore, these risks 
+will be managed through a systematic process which allows us to identify, assess, mitigate and 
+monitor potential obstacles which may arise but which will hinder the achievement of the TTPS’ 
+organisational goals.   
+Understanding the Strategic Context 
+Before incorporating risk management, it is essential to define the context for our strategic goals as 
+discussed in the sections above, which cover: 
+ Community Partnerships  
+ Organisational Development  
+ Operational Excellence & 
+ Public Safety  
+To mitigate against risks there must be an engagement of stakeholders, including all ranks and levels 
+of officers and community  representatives, to identify priorities. It is therefore imperative for our 
+strategic plan to be aligned with the wider national objectives and international standards. 
+Identification of Risks 
+Risks can stem from internal and external factors that may impact success of The Plan, such as: 
+ Natural Disasters: Hurricanes, floods, and earthquakes can disrupt operations. 
+ Crime Trends: Gang violence, drug trafficking, and cybercrime. 
+ Resource Limitations: Budget constraints, outdated equipment, or insufficient staffing. 
+ Public Relations: Loss of public trust due to misconduct or perceived inefficiency. 
+
+
+
+73 
+ Legislative and Policy Changes: New laws or political instability. 
+Therefore, the TTPS acknowledges that its operations are influenced by many factors. As such, the 
+action taken in The Plan includes the conduct of a risk assessment using a SWOT analysis to identify 
+Strengths, Weaknesses, Opportunities and Threats and a PESTLE analysis looking at the political, 
+economic, social, technological, legal and environmental conditions.  Notably, the year 2025 is an 
+election year in Trinidad and Tobago, which could introduce political volatility and potential shifts 
+in public policy. The TTPS recognizes that the gov ernment’s priorities and budgetary allocations 
+during this period will directly impact its ability to execute crime -fighting initiatives. Changes in 
+political leadership or shifts in public opinion may also affect the implementation of security policies 
+or the public's trust in law enforcement. 
+Evaluate and Prioritize Risks 
+We also recognise that not all risks are equal. We will determine which risk poses the greatest threat 
+to our strategic objectives by assessing their: 
+ Likelihood: Probability of occurrence; and 
+ Impact: Potential consequences for operations, reputation, or finances. 
+The TTPS will use a risk matrix to classify risks as low, medium, high, or critical and we will focus 
+our resources on addressing high and critical risks. 
+Mitigation Strategies 
+For each identified risk, we have developed strategies to minimize its likelihood or impact. Our 
+mitigation measures are realistic and tailored to our context.  Some of our mitigation strategies will 
+involve for example, in the case of a natural disaster; disaster response protocols; the  conduct of 
+regular drills, and the establishment of  partnerships w ith regional emergency agencies such as 
+CDEMA. 
+Mitigation strategies based on crime trends will result in i ncreased intelligence sharing with 
+neighbouring countries, investment in technology like CCTV and data analytics, and deployment of 
+specialized units. Similarly, with resource limitations, the TTPS will advocate for budget increases 
+and improved efficiency through training. Public relations will be critical, thus, community outreach 
+programs will be fundamental and our campaign must enhance transparency.  Additionally, to allow 
+for feedback, a system to encourage an independent complaint mechanism will be adopted. Further, 
+
+
+
+74 
+legislative changes may also be possible, so this would require all TTPS staff to be proactive, stay 
+informed about upcoming laws and actively participate in policy discussions. 
+Implement Risk Monitoring and Response Plans 
+The TTPS will i ntegrate risk manag ement into our day-to-day operations to ensure continuous 
+monitoring and adaptability. Therefore, the action to be taken will involve the assignment of a risk 
+management officer or team to oversee implementation of the Risk Monitoring and Response Plan. 
+Thus, key performance indicators (KPIs) will be established to measure progress and contingency 
+plans for high -priority risks, detailing specific actions, responsibilities, and communication 
+protocols will be created. 
+Review and Adjust Regularly 
+In recognition of the fact that r isk management is an ongoing process, p eriodic reviews will allow 
+us to adapt to evolving challenges and opportunities.  Therefore, quarterly or semi -annual ris k 
+reviews will be adopted and after-action reports will be prepared following major inciden ts to 
+identify lessons learnt. Consequently, The Plan will be updated as and when necessary to reflect 
+changes in the risk landscape. 
+A fundamental objective is to reduce gang-related violence.  Consequently, there could be the risk 
+of retaliatory violence from gangs which could escalate tensions and disrupt progress of The Plan. 
+In such circumstances, to mitigate against such a risk, it may become necessary to implement a 
+targeted gang intervention programme or collaborate with community leaders to mediate conflicts. 
+As such, intelligence capabilities which can anticipate and prevent retaliation will be strengthened. 
+Effective risk management is essential for the success of The Plan. By identifying, evaluating, and 
+addressing risks proactively, we can enhance our resilience and achieve  our long-term objectives. 
+This approach not only ensures operational success but also strengthens public trust and safety 
+within the national community. 
+9.9 Communication Strategy 
+Awareness of the contents  of the Strategic Plan 2025 – 2027 is crucial to its successful 
+implementation. Hence it will be effectively disseminated throughout the TTPS and to the wider 
+public using the following Communication Strategy: 
+
+
+
+75 
+Objective: to sensitise employees and members of the public of the intended goals and objectives 
+of the TTPS over the next 3 years and to make them aware of their roles and responsibilities in 
+achieving them. 
+Target Audiences: All employees of the TTPS as well as the public would be targeted. 
+Key Messages: Overall theme of the plan, Strategic Pillars, Outcomes and Action Items. 
+Communication Channels: A full version of the plan and a shorter, condensed version would be 
+published and distributed via the following media: 
+1)  Rollout presentations and question and answer sessions targeting both police officers and civilian 
+staff of the various divisions, branches, sections and units of the TTPS.  
+2) TTPS Portal – uploaded to the portal so that it can be viewed or downloaded by employees.  
+3) TTPS Website – uploaded to the website so that it can be viewed or downloaded by members of 
+the public. 
+4) Social Media – Recognizing the effectiveness of Social Media in broadcasting information, the 
+condensed version of the plan would be appropriately designed for sharing on social media, e.g. 
+WhatsApp groups. 
+ 
+Table 9.2: Communication Plan 
+Communication 
+Channels 
+Target Audiences Responsibility Timeline 
+Rollout presentations TTPS employees DCP Administration, 
+Human Resource Branch, 
+Corporate Communications 
+February-March 
+2025 
+TTPS Portal TTPS employees ICT Unit March 2025 
+TTPS Website Public ICT Unit March 2025 
+Social Media TTPS employees Corporate Communications March 2025 
+ 
+
+
+
+76 
+10.0 Conclusion and Call to Action 
+10.1 Conclusion 
+The 2025-2027 Strategic Plan of the TTPS represents a bold but transformative roadmap toward a 
+safer nation and more resilient police service. The Plan is rooted in the four pillars of Community 
+Partnerships, Organisational Develo pment, Operational Excellence and Public Safety . Thus, this 
+plan is designed to modernise policing and restore public trust. Over the next three years the TTPS 
+will take daring and decisive action to strengthen our operational effectiveness, we will levera ge 
+cutting-edge technology and deepen partnerships with communities. It is through data -driven 
+decision-making, proactive management and crime prevention, looking after the health and welfare 
+of our most valuable resource – our human resource and the enhancement of officer training that we 
+will work extremely hard to ensure that every citizen feels safe in their home, school, workplace and 
+community.  
+Whilst we will always have challenges, The Plan outlines clear strategies to address violent crime, 
+improve road safety, combat corruption and enhance service delivery. It is through strong leadership, 
+integrity and collaboration with our internal and external stakeholders, the TTPS  is committed to 
+upholding its mission in protecting and serving its citizens wi th professionalism, respect, integrity, 
+dignity and excellence. 
+10.2 Call to Action 
+The success of this strategic plan is closely tied to the dedication, well -being, and efficiency of its 
+workforce and depends not only on the TTPS but also on collaborative effo rts between other arms 
+of law enforcement, government agencies, businesses, community leaders and all Trinidad and 
+Tobago citizens. Therefore, we call on:  
+i. TTPS police officers and civilian staff to embrace The Plan with dedication, humility, ethics, 
+continuously improving your skills and engaging the public.  
+ii. Community members and civil society to actively participate in crime prevention initiatives, 
+neighbourhood watch programs, station councils and youth development efforts.  
+iii. The private sector and international partners to invest in security innovations and contribute 
+to sustainable solutions such as the Eagle Eye intended for crime reduction.  
+The vision of making every place in Trinidad and Tobago safe, will also result in improved security 
+and prosperity in Trinidad and Tobago and these ideals are within reach. So, by uniting efforts, 
+
+
+
+77 
+embracing innovation and fostering trust, we can build a police service that is not only effective, 
+efficient and accountable but also truly reflective of the values and aspirations of the people whom 
+we continuously serve.  In closing, we can all agree that there can be no other time, now is the time 
+to act! Together, we can create a future where every citizen feels protected, justice prevails and the 
+Trinidad and Tobago Police Service stands as a beacon of excellence, hope and resilience.  
+ 
+  
+
+
+
+78 
+11.0 Appendices 
+Appendix 1: Fatal Road Traffic Accidents 2018-2024 
+DIVISIONS 2018 2019 2020 2021 2022 2023 2024 
+Central 26 20 20 27 21 22 26 
+Eastern 7 5 16 7 8 6 8 
+North Central 14 10 14 3 16 15 10 
+North Eastern 7 7 11 5 8 9 14 
+Northern North 12 20 3 4 6 10 11 
+Port Of Spain 10 4 1 4 4 6 2 
+Southern 24 18 12 11 16 14 21 
+South Western  7 5 3 4 6 4 7 
+Tobago 8 4 5 5 3 7 10 
+Western 4 9 2 6 9 3 6 
+Total Fatal RTA 119 102 87 76 97 96 115 
+Source: Crime and Problem Analysis Branch, March 2025 (provisional figures for 2024) 
+ 
+  
+
+
+
+79 
+Appendix 2: Serious Crimes by Year 2018-2024 
+ 
+Source: Crime and Problem Analysis Branch, March 2025 (provisional figures for 2024) 
+ 
+  
+13444 13158
+10536 11041
+12802 12874
+11788
+2018 2019 2020 2021 2022 2023 2024
+
+
+
+80 
+Appendix 3: Serious Crimes by Category 2018-2024 
+OFFENCES 2018 2019 2020 2021 2022 2023 2024 
+Murders 516 539 403 452 605 577 625 
+Wounding & Shootings 721 686 525 674 755 762 746 
+Sexual Offences 788 814 680 1172 763 978 697 
+Kidnapping 133 148 85 95 102 124 109 
+Kidnapping For Ransom 20 0 0 0 2 3 6 
+Burglaries & Breakings 2026 2214 1736 1510 1733 1677 1613 
+Robberies 3246 3019 2082 1868 2516 2613 2400 
+Fraud Offences 545 547 503 545 509 633 552 
+General Larceny 2075 2006 1619 1874 2084 1854 1695 
+Larceny Motor Vehicles 575 678 548 415 994 1023 1091 
+Larceny Dwelling House 194 196 162 151 144 120 112 
+Narcotic Offences 469 416 316 314 313 397 277 
+Possession of Firearm & 
+Ammo 
+1264 1084 1009 959 1166 1265 1182 
+Other Serious Crimes    872 811 868 1012 1116 848 683 
+Total Serious Crimes 13444 13158 10536 11041 12802 12874 11788 
+Source: Crime and Problem Analysis Branch, March 2025 (provisional figures for 2024) 
+ 
+  
+
+
+
+81 
+Appendix 4: Minor Crimes by Category 2018-2024 
+OFFENCES 2018 2019 2020 2021 2022 2023 2024 
+Indecent Assault 89 55 65 99 79 75 62 
+Assault on Police and Peace 
+Officers 
+99 126 92 142 115 119 59 
+Possession of H ouse Breaking 
+Implements 
+5 6 4 9 5 2 1 
+Embezzlement, False Pretences, 
+Fraud, etc. 
+1737 1615 1655 412 234 263 290 
+Larceny 2358 1902 1558 1452 1691 1534 1461 
+Larceny Dwelling House 180 130 127 106 95 91 70 
+Praedial Larceny 126 126 174 128 124 114 90 
+Unlawful Possession 18 22 15 20 37 13 9 
+Malicious Wounding 269 234 218 274 223 206 164 
+Possession of Narcotics 3630 3424 800 851 729 932 584 
+Possession of Apparatus 248 214 103 130 131 161 117 
+Other Minor Crimes 381 327 365 495 469 467 389 
+Total Minor Crimes 9140 8181 5176 4118 3932 3977 3296 
+Source: Crime and Problem Analysis Branch, March 2025 (provisional figures for 2024) 
+ 
+  
+
+
+
+82 
+Appendix 5: Minor Offences by Category 2018-2024 
+OFFENCES 2018 2019 2020 2021 2022 2023 2024 
+Loitering 12 15 12 21 6 1 4 
+Assault by Beating / 
+Threats 
+16827 14606 13439 6026 10112 9541 9566 
+Assault on Police, Peace 
+Off. 
+575 392 289 490 509 321 209 
+Breach of the Peace 1131 849 728 1086 1054 908 714 
+Armed with a Weapon 137 113 106 133 138 128 92 
+Malicious Damage 718 748 658 761 971 833 821 
+Gambling & Betting 5 4 2 17 30 9 4 
+Other Minor Offences 1002 1021 1168 3492 1083 1023 693 
+Total Minor Offences 20407 17748 16402 12026 13903 12764 12103 
+Source: Crime and Problem Analysis Branch, March 2025 (provisional figures for 2024) 
+ 
+  
+
+
+
+83 
+Appendix 6: PIOC Brief 
+Police Internal Oversight Committee (PIOC) 
+The Police Internal Oversight Committee (PIOC) was established  by the Commissioner of Police 
+(CoP) in October 2023, as an essential component of TTPS commitment to maintaining the highest 
+standards of professionalism, ethics, accountability and performance. 
+Composition: 
+1. Commissioner of Police – Chairman 
+2. Deputy Commissioner of Police ‘Administration and Support’ – Deputy Chairman / 
+Member 
+3. Deputy Commissioner of Police ‘Intelligence and Investigations’ – Deputy Chairman / 
+Member 
+4. Deputy Commissioner of Police ‘Operations’ – Deputy Chairman / Member 
+5. Manager ‘Monitoring, Evaluation and Compliance Unit’ – Member  
+6. Assistant Commissioner of Police – The ACP will rotate but he/she must not be the line 
+ACP for the officer/s who is/are before the Committee 
+Purpose: 
+a. Policy Formulation: - Advise on the formulation of policies for the efficient management 
+of the TTPS arising from information brought to the Committee’s attention; 
+b. Reviewing, Monitoring and Evaluation: - Participate in the review, monitoring and 
+evaluation of activities identified in the Strategic and Operational Plans by holding persons 
+to account; 
+c. Transparency and Accountability - To enforce further transparency, integrity, impartiality, 
+fairness and hold officers accountable whilst maintaining strict confidentiality regarding 
+sensitive information; and  
+d. Assess - Review the strategic direction of the TTPS in achieving its qualitative and 
+quantitative results and outcomes. 
+Meetings: 
+A quorum of three (3) committee members will constitute a sitting, but either the Chairman or 
+Deputy Chairman must be present at all times. Meetings will take place at least once per quarter. 
+ 

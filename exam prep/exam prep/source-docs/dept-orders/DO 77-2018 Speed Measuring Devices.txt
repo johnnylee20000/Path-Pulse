@@ -1,0 +1,329 @@
+SS Police Orders by
+a Commissioner of Police
+a Police Administration Building
+vs Cor. Edward & Sackville Streets
+70 th
+PRovecr ae SO Tuesday 12" June, 2018
+(This is an official document entrusted to members and civilian
+employees of the Police Service and is not for publication in the Press)
+No. 77 Departmental Order PART I—NIL
+PART II
+Speed Measuring Devices
+Legal Reference(s): Act 12 of 2014 (Section 62 MVRTA Chap 48:50); Legal Notice 60 of 2016
+(1) In this Order :-
+“pre-operational checks” is a quality control measure for speed measuring devices to be conducted
+to confirm the speed measuring device is in satisfactory condition, properly calibrated and working
+properly as per manufacturer’s instructions and guidelines on approved devices.
+“approved devices keeper” is a police officer of the rank of Corporal and above who is a Certified
+Speed Measuring Device Operator.
+“approved device” means the device approved by Order issued by the Minister with responsibility
+for Works and Transport used to measure the speed at which a vehicle is being driven in accordance
+with Section 62(6A) of the Motor Vehicle and Road Traffic Act.
+“authorised officer” means a Police Constable who has been authorized by the Commissioner of
+Police to operate a speed measuring device approved for measuring the speed of vehicles in
+accordance with Section 62(6F)(a) of the Motor Vehicle and Road Traffic Act.
+“speed measurement” is the quantitative measurement of the speed at which a vehicle is being
+driven as displayed by an approved device.
+“calibration” is a procedure which sets the device to a known standard value;
+“custodian” means a First Division Officer appointed by Division/Branch/Section Commander to
+be the manager of all approved devices.
+“constable” carries the same meaning as under Section 3 of the Police Service Act and Special
+Reserve Police Act.
+“consumables” refers to all equipment necessary for the effective and accurate use of the approved
+speed measurement devices as per manufacturers requirements.
+woe 2
+
+
+--- page break ---
+
+77/2
+“certificate of vehicle speed measurement” refers to the printout from the speed measuring device
+in accordance with Section 62(6E) (b) of the Motor Vehicle and Road Traffic Act.
+Identification, Requisition and Recording of Speed Measuring Devices
+(2) All speed measuring devices shall be permanently marked with a Trinidad and Tobago Police
+Service (TTPS) number as identified in Appendix A.
+(3) The Assistant Commissioner of Police responsible for Operations shall be responsible for
+the requisition of all approved devices, peripheral supporting equipment and consumables.
+(4) The Head of Information Technology shall keep a record of all approved devices and
+peripheral equipment issued to the Police service noting specifically —
+1. The Serial Number and corresponding TTPS number of each device;
+2. The Date of Issue to the Police Service:
+3. The Division/Branch/Section to which each instrument has been assigned:
+4. The Date of Assignment to the Division/Branch/Section.
+Record Keeping of List of Authorised Officers in the TTPS
+(5) The Assistant Commissioner of Police (ACP) Operations shall be provided with an updated
+nominal role of all authorized officers attached to the TTPS by the Senior Superintendent of
+the Police Training Academy on the first week of January and first week of July every year.
+a) This list shall reflect the following:
+e The number, rank and name of the officer
+e The Division Section, Branch, Unit he is attached
+e Validation period of Training i.e. — Date of Course and Expiration Date
+e Certificate Number issued from the Commissioner of Police
+(6) The Senior Superintendent Police Training Academy shall have responsibility for the
+following —
+a) Training of all Police Constables in the use and operation of all approved devices.
+b) Training selected officers in Train the Trainer Programmes in use of approved devices.
+wow
+
+
+--- page break ---
+
+77/3
+
+c) Submit to the Commissioner of Police a nominal role of all successfully trained officers
+for authorization.
+
+d) Retaining a copy of all authorized certificates signed and issued by the Commissioner
+Police.
+
+e) Provide an updated nominal role of all authorized officers to the
+Division/Branch/Section Commanders upon request.
+
+f) Appoint wherever necessary a Liaison officer(s) to assist the Division/Branch/Section
+Commanders in effective implementation of procedures, equipment evaluation and
+ensure compliance with this order.
+
+Speed Measuring Device Equipment Management
+
+(7) The Commander in Charge of a Division/Branch/Section shall appoint a Custodian for a
+Division/Branch/Section.
+
+(8) The Custodian shall appoint an Approved Devices Keeper at each
+Station/Section/Branch/Unit where the approved devices have been issued or kept.
+
+(a) The Approved Devices Keeper handing over responsibility for the management and
+
+custody of approved devices shall transfer all approved devices under his control, along with
+
+all supplies of consumables, files, records and registers related to the management and
+custody of the approved devices, to the officer taking over.
+
+(b) It shall be the duty of both the Approved Devices Keeper handing over and the officer
+
+taking over to make a physical check of all the approved devices, consumables, files,
+
+records and registers assigned to the Division/Branch/Section, Unit noting in particular the
+device(s) Serial and TTPS numbers.
+
+(c) It shall be the duty of the Approved Devices Keeper handing over and the officer taking
+
+over to prepare a “Handover” in a manner set out in Appendix “B”.
+
+(d) The “Handover” shall be prepared in quadruplicate, each officer retaining a copy, one
+
+copy filed in the Division/Branch/Section’s administrative office and one copy forwarded
+
+to the Custodian.
+(9) The Approved Device Keeper Shall:
+
+a) Keep a record of each approved speed measuring device assigned to his
+
+Station/Branch/Section/Unit recording the TTPS Number and Serial Number.
+/4
+
+
+--- page break ---
+
+77/4
+b) Maintain a pre-operational check log book for approved speed measuring devices at his
+Station/Section/Unit.
+c) Keep a record of all speed measurement devices and supporting equipment issued to his
+Station/Section/Unit:
+d) Make and application as necessary to the Head of Information Technology via the
+Custodian for re-issue of any associated consumables as listed in Appendix C:
+
+Speed Gun Equipment Checks and Evidence Management
+
+(10) The Approved Devices Keeper shall be responsible for all maintenance and readiness of
+Speed Measuring Devices as well as allocated vehicles equipped with speed enforcement
+equipment.
+
+(11) The Approved Devices Keeper shall ensure that at a station where approved devices are kept
+and used there is a TTPS Desktop Computer which shall be used to facilitate the secure
+download of all digital files created from speed enforcement operations.
+
+(12) The Approved Devices Keeper shall ensure that the digital files created from a speed
+enforcement exercise are immediately transferred to an assigned TTPS Desktop Computer
+after every speed enforcement exercise with folders created and labelled according to the
+date of the use device.
+
+(13) The Approved Devices Keeper shall review the files after transfer and verify the offence
+detection to fixed penalty notices issued.
+
+(14) The Approved Devices Keeper shall ensure that only trained and certified officers operate a
+speed measuring device.
+
+Pre-Operational Checks (Appendix D)
+
+Laser Speed Gun
+
+(15) Before operating any laser speed measuring device, the following procedures shall be
+followed by the authorised officers :-
+
+The officer shall perform the following checks prior to operational use:
+a. Physical Check
+b. System Check
+wld
+
+
+--- page break ---
+
+THS
+c. Heads Up Display Check
+d. Scope Alignment Check
+e. Camera Alignment Check
+f. Fixed Distance Check (Certified Distance)
+
+(16) Upon verification that the Speed Measuring Device is in proper working order, the
+authorised officer shall make an entry in the Speed Device Log Book station stating his
+Regimental Number, Rank and Name, date and time and the Serial and TTPS Number of
+the Speed Measuring Device together with an entry in the Station Diary confirming that all
+checks have been completed and the device is found to be in proper working condition.
+
+(17) Any Speed Measuring Device found not to be in proper working condition shall be
+immediately taken out of service and an entry made in the station diary stating the Speed
+Measuring Devices serial number has been found not to be in proper working order.
+
+(18) The Authorised Officer shall immediately report any Speed Measuring Devices found not
+to be in proper working order to the Approved Devices Keeper and SDO/IC.
+
+(19) It shall be the responsibility of the Custodian to ensure that all speed measuring devices
+and/or associated equipment in need of repair or service are delivered to the Head of
+Information Technology, ensuring a copy of the device’s TTPS & Serial Number is
+recorded together with the date and time it was sent for service or repair.
+
+In Vehicle Tablet Computer & In Vehicle Printer
+
+(20) Before commencing any speed enforcement operation, an authorised officer shall make the
+following checks to ensure the in vehicle tablet and printer are in proper working order:
+
+a. When the tablet is mounted in the vehicle the officer shall ensure the power supply,
+printer cable and Laser Speed Device cable are connected to the tablet.
+
+b. The officer shall power on the device and confirm the operating system is functioning
+properly. He shall confirm connectivity by performing a test print.
+
+c. Before commencing any speed enforcement exercise the authorised officer shall ensure
+that there is sufficient paper in vehicle printer.
+
+Laser Speed Measuring Device Operations
+
+(21) Before utilising any Speed Measuring device for traffic enforcement operations an
+Authorised Officer shall enter the following information into the device :-
+
+ilb
+
+
+--- page break ---
+
+77/6
+a. His Regimental Number and Name
+b. Date and Time (Verification)
+c. Name of Roadway on which the Speed check is to be conducted
+d. Speed Limit of the Roadway
+e. Capture speed of the Device
+(22) The authorised officer must ensure that the last Scope Alignment/Calibration Date and
+Time matches the current date and time before commencing use in operations.
+(23) Use the device and relevant accessories in accordance with training.
+Issuance of Certificate of Vehicle Speed Measurement
+(24) Where a vehicle has been detected to be exceeding a roadway speed limit by the approved
+device, the authorised officer shall:
+e Cause the offending vehicle to be stopped.
+e Ensure that the image of the offending vehicles’ number plate is clearly depicted on the
+Certificate of Vehicle Speed Measurement.
+e Place his signature on the Certificate of Vehicle Speed Measurement.
+e Ensure the Certificate of Vehicle Speed Measurement is delivered to the offending driver
+together with the fixed penalty notice for the offence of exceeding the speeding limit.
+e Verbally warn the driver of intended prosecution in accordance with Section 73 (1) of
+the MVRTA Chap 48:50.
+Post Operational Procedures
+(25) Upon return to the Station/Section Unit after use of an approved device in enforcement
+operations, the authorised officer shall:
+e Ensure approved devices and associated equipment are removed from the police vehicle
+and secured in the supplied protective casings.
+e Make and entry in the Station Diary having retuned TTPS & Serial Number of the
+approved device.
+e Download the digital image speed evidence files from the In-Vehicle Tablet and Laser
+Speed Device onto the assigned TTPS Desktop Computer by creating a digital folder for
+the downloaded files which shall be labelled according to date.
+wad?
+
+
+--- page break ---
+
+77/7
+e Secure the approved devices and associated equipment in the area designated for storage.
+e Where a Complainant requires a printed copy of the Certificate of Speed Measurement
+for Court, the Approved Devices Keeper shall ensure that two printed copies are
+provided for the Complainant’s case file.
+Speed Team Deployment
+(26) For speed enforcement operations a speed team should comprise of a minimum of four (4)
+officers during the daytime and six (6) for night operations including the Authorised Officer.
+Operational Site Selection, Health and Safety
+(27) When setting up a site for speed enforcement operations the Authorised Officer shall take
+the following into consideration.
+
+a) The safety of all officers and the public.
+
+b) The amount of roadway space for the safe stopping and shoulder space for bringing
+offending vehicles safely to the side of the roadway for retrieving driver documents and
+issuance of Fixed Penalty Notices.
+
+c) Roadway lighting
+
+d) Clearance for safely deploying night flash equipment onto the roadway.
+
+(28) All officers engaged in stopping or directing vehicular traffic shall be attired in Police
+Uniform and must wear a Reflective Traffic Safety Vest.
+wok
+
+
+--- page break ---
+
+77/8
+
+APPENDIX A — TTPS DEVICE MARKING
+
+e TTPS-TCLSG-001 (TRU CAM LASER SPEED GUN-1)
+
+e TTPS-TCF-001 (TRU CAM FLASH-1)
+
+e TTPS-IVT-001 (IN-VEHICLE TABLET-1)
+
+e TTPS-TRI-001 (TRIPOD-1)
+APPENDIX B— SPEED DEVICE HAND OVER
+Approved Devices Keeper Hand-Over (Speed Devices)
+I handed over the duties of the Authorized Speed Devices Keeper Office to No.
+Rank. Name. together with all keys and all government property
+on hand:
+Laser Speed Devices
+1. Manufacturers Serial #
+Trinidad and Tobago Police Service #
+Log Book Serial #
+2. Manufacturers Serial #
+Trinidad and Tobago Police Service #
+Log Book Serial #
+Night Flash Kit
+1. Manufacturers Serial #
+Trinidad and Tobago Police Service #
+2. Manufacturers Serial #
+Trinidad and Tobago Police Service #
+
+.../9
+
+
+--- page break ---
+
+77/10
+APPENDIX D —- SPEED DEVICE PRE-OPERATIONAL CHECKS
+| | PHYSICAL CHECK
+a SYSTEMS CHECK
+|| HUD CHECK
+| | SCOPE ALIGHMENT CHECK
+| | CAMERA ALIGNMENT CHECK
+| | VERTICAL DISTANCE/ ZERO VELOCITY CHECK
+| | IN-VEHICLE TABLET AND PRINTER CHECK (TEST PRINT)
+a FLASH KIT BATTERY LEVEL CHECK (NIGHT OPERATIONS)
+PART III — NIL
+easel
+- Commissioner of Police

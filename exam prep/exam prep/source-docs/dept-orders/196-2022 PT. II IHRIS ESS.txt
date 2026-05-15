@@ -1,0 +1,144 @@
+~T!)
+C)
+a Police Orders by
+YY, “4K Commissioner of Police
+Wa Police Administration Building
+Se oS Cor. Edward & Sackville Streets
+‘ .
+nore ann so Port of Spain
+Wednesday 16" November, 2022.
+(This is an official document entrusted to members and civilian employees of
+the Trinidad and Tobago Police Service and is not for publication in the Press)
+No. 196 Departmental Order PART I & III - NIL
+PART II
+ROLL OUT OF THE IGP/THRIS EMPLOYEE SELF SERVICE MODULE (ESS)
+In an effort to improve service delivery to employees within the Public Service, the Treasury
+Division has embarked on an initiative to leverage the IGP/ThRIS to allow personnel to view and
+verify their Biodata and Job information. To achieve this, the Project Management Office is
+operationalizing the ESS Module of the IGP/JhRIS.
+
+1. A significant feature of this Module is the ability to download and print your pay slips.
+This facility will allow personnel the convenience of accessing and printing their pay
+slips from the comfort of their home or at their desks.
+
+2 As we move forward towards digitalization and the use of technology, you are advised
+that additional features are being developed and will be implemented incrementally, such
+as request for Job Letters and submission of Leave applications.
+
+3. The ESS will allow users a ‘view only access’, in this instance, to their personal
+information. Listed hereunder are the functionalities of the ESS available for viewing by
+employees:
+
+I. Personal information such as: -
+a. Emergency contacts
+b. Home and Mailing address
+c. Name and name change
+d. Contact information
+e. Date of Birth
+f. Gender
+g. Highest educational level
+h. Marital Status
+Ih. Bank information including Account numbers and Bank name
+Ill. Pay slips (which are downloadable)
+IV. Add/update Email Addresses to forward pay slip
+/2
+
+
+--- page break ---
+
+196/2
+
+4, This Circular Memorandum seeks to update employees’ personal information, in
+particular, bank account information by August 5, 2022. All personnel are therefore asked
+to access the ESS through the URL link below:
+
+https://ess.ihris. gov.tt:7 150/ess/signon.html
+
+5. Employees will need to create a user profile to access the ESS and set up their ‘personal
+authentication’ on the system. To do this, the employee must have a copy of a recent
+pay slip on hand to register as the information contained therein is required to create the
+user profile.
+
+6. The 'ESS Registration’ link is available on the ‘sign on’ page. You will be required to
+register for an ‘ESS username and password’ which would be emailed to you.
+Therefore, please ensure a valid email address is entered in the system. This username
+and password can then be used to login to the system. Complete Instructions on accessing
+the ESS online and registering a profile are shown at Appendix I.
+
+ue Should discrepancies be identified by an employee, an ESS Data Maintenance Form must
+be completed, signed and submitted to the respective Human Resource/Payroll
+Department along with supporting documents to effect the change. If changes are
+justifiable, the Human Resource or Payroll Department would update the system
+accordingly. The Data Maintenance Form can be downloaded on the ESS web page. See
+Appendix II.
+
+8. A Training Manual, which will guide the registration process and provide guidelines for
+the use of the ESS, is available on the ESS Site to facilitate this exercise.
+
+9. Also, the Subject Matter Experts (SMEs) for IGP/ThRIS, will also provide the necessary
+support to the Human Resource/Payroll Officers in guiding them through this exercise
+and can be contacted at 627-0320 or 623-5991.
+
+10. All Permanent Secretaries and Heads of Departments must ensure that the contents of this
+Circular Memorandum are brought to the attention of all personnel in their
+Ministry/Department.
+
+wn Gon) eg
+ommissioner of Police
+
+
+--- page break ---
+
+Appendix I
+Instructions to Create an ESS Profile
+
+1. The ESS web page can be accessed through the URL
+
+https://ess.ihris.gov.tt:7 150/ess/signon.html
+
+2. Employees need to create an ESS profile and set up their personal authentication by
+clicking on the register link on the ESS web page.
+
+3. A recent copy of a pay slip is needed to register, as the information contained therein is
+required to create a user profile.
+
+4, A valid email address must be entered on the ESS profile. The email address can be a
+‘gov.tt’ or personal email.
+
+5. After entering the required information to create an ESS profile, a user name and
+password will be sent to the email address entered on the system. This user name and
+password is used to login to the ESS.
+
+6. There is the option to download and print pay slips or send it to the email address entered
+on the system.
+
+7. On the ESS web page there is a link to download an ESS user training manual. This
+manual provides guidance on using the ESS.
+
+8. In cases where the employee's Bio data is incorrect, a Data Maintenance Form must be
+completed, signed and submitted to the respective Human Resource/Payroll Department
+along with supporting documents. The Data Maintenance Form can be downloaded on
+the ESS web page.
+
+
+--- page break ---
+
+Data Maintenance Form i I
+1. Date ;
+Year Month Day Employee Self-Service (ESS)
+2. Employee ID (if known):
+3. Surname:
+4. First Name:
+5. Ministry / Dept:
+6. Maintenance (please tick one): Data incorrect and needs changing
+Pr O New Data needs to be added
+ote: Please use separate
+forms for each of these 0 Please reset my password
+categories.
+) Other:
+7. Data (attach as many pages as you need):
+Field Name* New Data / Updated Data
+* Use the same field name as it appears on the ESS pages
+For Official Use:
+1. HR Officer Received: Employee’s Signature (dated above)
+2. Maintenance Complete:

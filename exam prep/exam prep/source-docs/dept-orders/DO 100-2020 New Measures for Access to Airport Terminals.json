@@ -1,0 +1,22 @@
+{
+  "source": "caselaws and other information used in policing/past papers for exams/DO 100-2020 New Measures for Access to Airport Terminals.pdf",
+  "size_bytes": 267733,
+  "ok": true,
+  "pages": 1,
+  "chars_total": 1793,
+  "chars_per_page": 1793,
+  "verdict": "OCR",
+  "category": "dept-orders",
+  "subcategory": "",
+  "txt_out": "dept-orders/DO 100-2020 New Measures for Access to Airport Terminals.txt",
+  "ocr": {
+    "engine": "tesseract",
+    "lang": "eng",
+    "dpi": 300,
+    "config": "--oem 3 --psm 6",
+    "elapsed_sec": 9.87
+  },
+  "page_text": [
+    "Police Orders by Mr. Gary Griffith\nCommissioner of Police\nPolice Administration Building\nCor. Edward & Sackville Streets\nPort of Spain\n7 ot\nOE eee Friday 12\"\" June, 2020\n(This is an official document entrusted to members and civilian\nemployees of the Police Service and is not for publication in the Press)\nNo. 100 Departmental Order PART I— NIL PART II\nReproduced here is correspondence from the General manager of the Airport Authority of\nTrinidad and Tobago. Please be guided by same.\nREF: 092-06/20-(GM)\n02\" June 2020\nMr. Gary Griffith\nCommissioner of Police\nHeadquarters, Trinidad and Tobago Police Service\nAdministration Building\nCor. Edward and Sackville Streets\nPORT OF SPAIN\nDear Commissioner.\nNEW_MEASURES FOR ACCESS TO AIRPORT TERMINALS AND ASSOCIATED\nSPACES\nPlease be advised that with immediate effect and until further notice, the Airports Authority of\nTrinidad and Tobago (“the Authority”) would be enforcing a strict facemask requirement for\npersons entering the terminals and associated public spaces of the Piarco and ANR Robinson\nInternational Airports. This measure is in accordance with national public health guidelines and\nbest practice aimed at mitigating the spread of the COVID-19 virus.\nAccordingly, the Authority is requesting the assistance of the Commissioner of Police, as a\nprincipal stakeholder in airport and border security, to have this measure communicated to your\npersonnel stationed at both airports. The authority also requests that your personnel, through your\noffice, be instructed to comply with these measures.\nWe thank you for your understanding and support during these challenging times and look forward\nto continuing our partnerships as we move towards post COVID-19 recovery and return to normal\noperations.\nPART II —NIL\nCommissioner of Police\n"
+  ]
+}

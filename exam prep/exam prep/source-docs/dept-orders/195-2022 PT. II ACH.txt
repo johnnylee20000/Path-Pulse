@@ -1,0 +1,289 @@
+Py Police Orders by
+
+EK Commissioner of Police
+ae Police Administration Building
+
+yt Cor. Edward & Sackville Streets
+"OPRorecr ao SO Port of Spain
+WaTH Prive
+Wednesday 16" November, 2022.
+(This is an official document entrusted to members and civilian employees of
+the Trinidad and Tobago Police Service and is not for publication in the Press)
+ee
+No. 195 Departmental Order PARTI & Ill - NIL
+PART II
+COLLECTION OF BANK ACCOUNT NUMBERS FOR THE PAYMENT OF SALARIES TO
+GOVERNMENT EMPLOYEES VIA AUTOMATED CLEARING HOUSE (ACH)
+
+BACKGROUND
+
+The Government of the Republic of Trinidad and Tobago (GORTT) is seeking to strengthen its
+financial management capacity to improve the efficiency of public expenditure. In light of this a
+comprehensive Public Financial Management (PFM) reform strategy has been approved, of which
+the implementation of an Integrated Financial Management Information System (IFMIS) forms a
+strategic part. This provides for the improvement of the quality of service delivery to the population
+by delivering greater accountability and efficiency of revenue collection and public expenditure.
+A significant feature of this Module is the ability to download and print your pay slips. This facility
+will allow personnel the convenience of accessing and printing their pay slips from the comfort of
+their home or at their desks.
+
+1. Further, the Government of Trinidad and Tobago is pursuing methods to improve the
+financial systems throughout the public service, by the creation of a cashless society. This
+digital thrust will greatly enhance the accountability framework within the Public Service.
+
+a In this regard, the Treasury Division in partnership with the Central Bank of Trinidad and
+Tobago (CBTT) and the Bankers Association of Trinidad and Tobago (BATT) is
+aggressively pursuing Electronic Funds Transfer (EFT), which will be done on a phased
+basis. Phase 1 being the payment of Government employees' salaries via the Automated
+Clearing House (ACH) system. All other local payments will be done incrementally.
+
+3. Further, due to the increased requirements placed on the international banking sector with
+respect to compliance with the Anti Money Laundering (AML) Act and Foreign Accounts
+Tax Compliance Act (FATCA), banks are moving away from paper- based payment
+methods i.e. Cash and cheques, to digital payments such as ACH and Real Time Gross
+Settlement (RTGS).
+
+. /2
+
+
+--- page break ---
+
+195/2
+4, ACH is an electronic clearing system in which payment orders or instructions are
+exchanged among financial institutions and processed in batches by a data processing
+centre i.e. the ACH system facilitates payments by moving money between bank
+accounts. The ACH payment system provides a reliable and secure platform for
+processing transactions used in payroll, direct deposit, tax refunds, consumer bills, and
+many more payment services worldwide. Employees will need to create a user profile to
+access the ESS and set up their ‘personal authentication’ on the system. To do this, the
+employee must have a copy of a recent pay slip on hand to register as the information
+contained therein is required to create the user profile.
+Challenges with the current system
+5. Currently, salaries of Government employees are processed by banks via cheques
+accompanied by employee listings provided by the Ministries and Departments. The
+banks utilize employees’ NIS Numbers to map to their bank accounts. This current
+method requires significant manual effort by the banks and is not only time consuming
+but can result in errors. Additionally, the commercial banks have advised of their
+intention to replace the manual processing of government's payroll with automated
+processing via the ACH System in an effort to improve the efficiency of salary payments
+across the Public Service.
+Benefits of Salary Payments using the ACH
+6. The ACH platform provides a faster, more efficient system for processing salaries. It is
+anticipated that salaries will be credited directly to employees' accounts via ACH within
+24/hrs of receipt by a bank. Banks will no longer require the time for manual processing
+of salaries from Ministries i.e. requirement for cheques to be sent four (4) days prior to
+payment date. The risk of bank processing errors and the associated delays with manual
+processing will be eliminated. The above will result in less employee queries/complaints
+related to delayed salary payments.
+ACH Requirements
+7. In preparation for the implementation of this new payment method the Comptroller of
+Accounts is seeking to update your information on the IGP/IhRIS to ensure a seamless
+transition. Therefore, it is necessary to obtain the bank account numbers for all employees
+within your Ministry/Department. A query of the IGP/ThRIS database revealed that only
+58% of employees’ bank account numbers were captured on the system.
+Procedure for Collection of Bank Account Numbers
+Employees paid on IGP/ IhRIS
+8. Employees whose net salaries/allowances are currently paid through Commercial Banks
+are required to use the recently implemented Employee Self Service (ESS) to verify your
+banking information. Comptroller of Accounts Circular Memorandum dated June 24,
+2022 - "Roll out of the IGPAHRIS Employee Self Service Module (ESS)" refers. In
+this regard, you are directed as follows: -
+../3
+
+
+--- page break ---
+
+195/3
+
+a. Where your account number is accurately recorded on the IGP/ThRIS you are required to
+‘sign off on Form IA "Verification of Bank Account Number" This form ts to be
+submitted to your Pay Sheet Clerk. See Appendix 1.
+
+b. Where your account number is inaccurately recorded on the IGP/IhRIS you are required
+to complete the ESS Data Maintenance Form and submit to your Pay Sheet Clerk. See
+Appendix 11.
+
+c. Where your bank account number is not recorded on the system you are required to
+complete Form IB "Input of Bank Account Number" by:
+
+(i) Inputting your account number preferably type written, and
+
+(ii) Submitting the form to the Pay Sheet Clerk for input on the IGP/IhRIS with
+supporting documentation i.e. Copy of the top of your bank statement. Please
+note you are not to provide your financial information. See Appendix 111.
+
+NB: The soft copies of the above mentioned forms will be made available to all accounting
+
+units,
+
+Employees paid Via Separate Cheques
+
+9. Where employees’ net salaries/allowances are currently paid via manual pay sheets they
+are requested to complete a bank authorization form to immediately arrange to have such
+payments made through their respective Commercial Bank. The existing Bank
+Authorization Form (AG-21A) is to be used for this purpose. The employee is therefore
+also required to verify that the information inputted on the IGP/ ThRIS is accurate by
+using the ESS.
+
+10. Ministries/Departments are advised that the relevant forms must reach the Pay Sheet
+Clerks not later than August 05, 2022.
+
+11. Permanent Secretaries/ Head of Departments must ensure that this exercise is completed
+within the given time frame. You can monitor the input of account numbers in your
+Ministry/Department by requesting a report from JIGP/ITHRIS on the achievement of this
+process. You may also request a report with respect to the officers who have yet to comply
+with the directive.
+
+Updating the IGP/IhRIS Database
+
+12. Upon receipt of the banking details from employees, it is the responsibility of the Pay
+Sheet Clerks in the Ministries and Departments to carry out the following procedures as
+outlined hereunder:
+
+a. The inputting of banking details on the IGP /IhRIS system for both zero (0)
+and one (1) record where applicable;
+b. The printing of the Daily Transaction Report on the data inputted on the
+system (Daily/weekly/monthly depending on volume) for verification.
+4
+
+
+--- page break ---
+
+195/4
+
+13. The Pay Sheet Clerk must ensure that the correct account numbers have been entered on
+the system and that the various documents are properly completed. Due care and accuracy
+is required in completing this exercise to ensure that salaries are credited to the correct
+assigned accounts. The Government of the Republic of Trinidad and Tobago will not be
+held liable for improperly verified information signed off by employees.
+
+14. Once the Report is validated by the Pay Sheet Clerk and a senior officer in the Accounting
+Unit, no changes will be made thereafter unless written authorization is sent by the
+employee to the Officer-in Charge of the Sub-Accounting Unit i.e. if he/she requests a
+change in banking institution which would be done in the usual manner.
+
+15. | The onus is on the employee to validate the accuracy of the information inputted by
+using the ESS. If at any stage of the process there is a variation between the information
+on the system, he/she is requested to confirm the correct details and sign off on a new
+Form 1 A Ministries/Departments must ensure that the verification process is completed
+for all employees not later than August 30, 2022.
+
+Security of Information
+
+16. | Employees are advised that the procedures as outlined in this Circular Memorandum have
+incorporated internal control measures that would ensure the confidentiality of bank
+account numbers and the preservation of the integrity of the information on the system.
+These internal control measures include:
+
+a) The segregation of duties between the Pay Sheet Clerk and the Verification
+Officer. This ensures that no one individual has the authority to enter
+information on the system without proper confirmation by another delegated
+officer;
+
+b) Restriction of access to bank account information, both in terms of the
+physical documents and the computerized data. Proper arrangements must
+therefore, be made to store completed forms and Reports in a locked cabinet,
+to which only the Officer in Charge of the Sub-Accounting Unit has access.
+These documents must be securely stored until correct assignment of salaries
+has been confirmed.
+
+General
+17.‘ The full co-operation of all Permanent Secretaries, Heads of Departments and staff of
+Payroll and Accounting Units is critical to the successful implementation of the ACH
+method of payment. Should you require further information you can contact the Financial
+Management Branch, Treasury Division, Level 19, Eric Williams Financial Building,
+Independence Square, Port-of-Spain at Telephone No. 612-9700 Ext 2913/2912.
+ommissioner of Poli
+
+
+--- page break ---
+
+Form 1A Appendix 1
+Verification of Bank Account Number
+Official Use Only
+Employee ID
+
+BLOCK LETTERS SURNAME FIRST NAME OTHER NAME
+
+sts.nomber TT TT TT TTT
+Bank Name.............ccccecsscccccscceccecsscesceesssesssceeeessensensesceseeeseneesescescrecessnes
+Bank Address: ..........cccccccescecsrcescccausenccsecescecscseteessecscscseeseeeceescescecesessesees
+
+penkaccmnomie TT TT TT PE TTT
+TYPE OF ACCOUNT (Please Tick)
+
+Savings [| Chequeing [_]
+
+Thereby certify that the banking information detailed above as viewed through the
+Employee Self Service and stored on the IhRIS is accurate.
+
+
+--- page break ---
+
+Data Maintenance Form i ‘
+1. Date ;
+wa on pay Employee Self-Service (ESS)
+2. Employee ID (if known):
+3. Surname:
+4. First Name:
+5. Ministry / Dept:
+6. Maintenance (please tick one): ( Data incorrect and needs changing
+Note: Please use separate O New Data needs to be added
+forms for each of these O Please reset my password
+categories.
+O Other:
+7. Data (attach as many pages as you need):
+Field Name* New Data / Updated Data
+* Use the same field name as it appears on the ESS pages
+For Official Use:
+A, ie Ofriceghecelved: Employee’s Signature {dated above)
+2. Maintenance Complete:
+
+
+--- page break ---
+
+Form 1B Appendix 111
+Input of Bank Account Number
+Official Use Only
+Employee ID
+
+BLOCK LETTERS SURNAME FIRST NAME OTHER NAME
+
+sas namie TT TT TT TTT
+Bank Name...........cscscscccccceccecvasscccssccessnscsccccesesenessssessescecsescecseececseessseues
+Bank Address: ..........ccccccsssscssscececcccccesscessssssseesccessssececssseceneeesseneesscance sess
+
+frac asomrmenbe [TTT TP
+TYPE OF ACCOUNT (Please Tick)
+
+Savings [| Chequeing [ |
+
+I hereby certify that the banking information detailed above is accurate.
+
+
+--- page break ---
+
+A Official Use Only
+ran Form 1B Employee ID
+7p. rc ne Input of Bank Account Number ded dew endo heer h OE RE METER OEE FOOD EOE
+To be completed by all Regular Police Officers/Civilians of the TTPS, paid through IHRIS.
+
+A copy of the top of your bank statement showing the account number through which you are
+currently receiving salary, along with this form MUST be submitted by August 5, 2022.
+Completed forms are to be submitted to the Chief Clerk of
+Divisional Offices/Branch/Units/Sections or scanned and emailed to ess(@ ttps.gov.tt
+For any concerns or queries contact 612-0102 ext 12455 or 12381
+MINISTRY/DEPARTMENT: .... YINS/TT IPS. oo... cceccescccsseccecceeneceesseveneecneeesneoeenaeensens
+
+REGULAR POLICE OFFICER |__| CIVILIAN OFFICER |_|
+If Regular Police Officer; REGIMENTAL NUMBER .......sccsseececececees
+BLOCK LETTERS SURNAME FIRST NAME OTHER NAME
+Contact Number: ........sccccscccseccsccssscccccccccsccscvecccsscccnscsessessccccsscecscnccccnvecoussecessesesousees
+Email ACCreSS: .......cscreccascvecserevccsvenccessesscccssescnccosecscccenensvcrvses sors sosseseesensesenessensenoeees
+exw TTT TTT TTT
+IBAMENAINCS occ e cesses tose 8s one nGacsne To ToceTe> Sus ine sUseus Sue Nee SSasaesarsisensenassosaseSsersseesesceneess sues
+Branch Address: .......-.ccceesccccseccrscccccccccscccceccsscnccsscconccesuctansansseeanssessenecanesanccssessucaons
+Sc
+TYPE OF ACCOUNT (Please Tick)
+Savings| _| Chequeing [|
+I hereby certify that the bank information detailed above is accurate.

@@ -1,0 +1,23 @@
+{
+  "source": "caselaws and other information used in policing/past papers for exams/DO 60-2018 FIREARM OFFENCES AS SERIOUS CRIMES.pdf",
+  "size_bytes": 45959,
+  "ok": true,
+  "pages": 2,
+  "chars_total": 2558,
+  "chars_per_page": 1279,
+  "verdict": "OCR",
+  "category": "dept-orders",
+  "subcategory": "",
+  "txt_out": "dept-orders/DO 60-2018 FIREARM OFFENCES AS SERIOUS CRIMES.txt",
+  "ocr": {
+    "engine": "tesseract",
+    "lang": "eng",
+    "dpi": 300,
+    "config": "--oem 3 --psm 6",
+    "elapsed_sec": 13.26
+  },
+  "page_text": [
+    "Police Orders by\nCommissioner of Police\nPolice Administration Building\neo Cor. Edward & Sackville Streets\nyy, 3 Port of Spain\n=== Thursday 17'* May 2018\nPrecre ne aos (This is an official document entrusted to members and civilian\nabide employees of the Police Service and is not for publication in the Press)\nNo. 60 Departmental Order PART I- NIL\nPART II\nFIREARM OFFENCES AS SERIOUS CRIMES\nBACKGROUND Within the last decade Trinidad and Tobago has seen the prevalence of\nfirearm-related offences inclusive of firearm-related Murders. Whilst the\npenalties for these offences increased on two occasions since 1995 by virtue\nof amendments to Section 6 of the Firearm Act, Chapter 16:01 through Act\n22 of 1995 and later on Act 2 of 2011, there has not been a concomitant\ndecrease in these offences. In 1995, the penalty for the offence of Possession\nof a Firearm on summary conviction changed from a fine of 4,000 and\nimprisonment for 2 years to a fine of 10,000 and imprisonment for 5 years.\nThis penalty, was again amended in 2011 to a fine of 15,000 and\nimprisonment for 8 years. On the other hand, the penalty for the offence of\nPossession of Firearm on indictment changed in 1995, from imprisonment\nfor 5 years to imprisonment for 10 years. This was later amended in 2011\nto imprisonment for 15 years.\nNATURE AND The prevalence with which crimes are committed via the use of firearms,\nPURPOSE the increasing number of firearms found, recovered and seized remains a\nconcern for not only the Trinidad and Tobago Police Service (TTPS) but\nalso, the public at large. It is no secret that firearms can be destructive\nweapons and its illegal (or legal) use can cause tremendous physical,\nemotional, psychological and social harm, even death. It is for the reasons\noutlined above and the fact that by virtue of the amendment to the Firearm\nAct, Chapter 16:01, Section 6, the offence of possession of a firearm can\nnow be classified as a Serious Crime and will adopt the classification code\nof 67. Therefore, with effect from 1st January, 2017, all firearm and firearm-\nrelated offences would be classified as Serious Crimes.\n./2\n",
+    "60/2\nAMENDMENT TO In view of the above, the Trinidad and Tobago Police Service Standing\nS.0, NO.28 Order No. 28 — Procedure for Dealing with Classification, Investigation\nand Statistical Recording of Crimes — appertaining to the classification of\nserious crimes, Class VI of SO 28 is amended to include under\nClassification Code 67, Section 6 (1) and 6 (2) of the Firearms Act, Chapter\n16:01.\nPART II] — NIL\nfy\nCommissioner of Police\n"
+  ]
+}

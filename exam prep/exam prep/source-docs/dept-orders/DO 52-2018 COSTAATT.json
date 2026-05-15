@@ -1,0 +1,23 @@
+{
+  "source": "caselaws and other information used in policing/past papers for exams/DO 52-2018 COSTAATT.pdf",
+  "size_bytes": 47168,
+  "ok": true,
+  "pages": 2,
+  "chars_total": 2693,
+  "chars_per_page": 1346,
+  "verdict": "OCR",
+  "category": "dept-orders",
+  "subcategory": "",
+  "txt_out": "dept-orders/DO 52-2018 COSTAATT.txt",
+  "ocr": {
+    "engine": "tesseract",
+    "lang": "eng",
+    "dpi": 300,
+    "config": "--oem 3 --psm 6",
+    "elapsed_sec": 13.37
+  },
+  "page_text": [
+    "Police Orders by\nCe) Commissioner of Police\nSf Police Administration Building\nCAS Cor. Edward & Sackville Streets\nRK Port of Spain\naster Wednesday 25\" April 2018\nPProrecr sag (This is an official document entrusted to members and civilian\nemployees of the Police Service and is not for publication in the Press)\nap\nNo. 52 Departmental Order PARTS 1 & Il - NIL\nPART II\nNOTICE\n\nCOSTAATT Applications for: Associate Science Degree in Management Studies for the\n\nINVITATION Protective Services\nThe College of Science Technology and Applied Arts of Trinidad and Tobago\n(COSTAATT), is inviting applications from Police Officers of the Trinidad and\nTobago Police Service for the Associate Science Degree in Management Studies\nfor the Protective Services.\nThis programme exposes participants to managerial concepts both in theory and\npractice, as well as other critical skills such as communication, ethics, information\ntechnology and law. These are all designed to enhance their skills and allow for\ngreater efficiency, which today is the focal point in the transformation of the public\nsector. This will also allow successful participants to respond effectively as change\nagents upon their return to the organization.\nThis full-time programme will be delivered in two (2) years, twenty-four (24)\ncalendar months and this years’ intake will begin on 28\" August, 2018, with an\nanticipated end date in August, 2020.\nInterested personnel of the rank of Assistant Superintendent of Police, Inspector of\nPolice and Sergeant of Police are required to complete the prescribed COSTAATT\nregistration forms along with their Curriculum Vitae which must be forwarded\nthrough their respective Heads of Divisions/Sections/Branches/Units to reach the\nDeputy Commissioner of Police ‘Administration’ no later than 31** May, 2018.\nPersons are also required to submit in writing in no more than 1000 words, their\nreason(s) for applying to do this programme and how undertaking this programme\nwill benefit both themselves and the organization.\nRegistration forms are available at the Human Resource Branch (Second Floor) Training\nSection. Administration Building, Corner Edward and Sackville Streets, Port of Span and\nCOSTAATT’s website.\n\nwel\n",
+    "52/2\nCOSTAATT Complete COSTAATT forms must be accompanied with the following\nINVITATION Con’t documents:-\n1 Certified Copy of Birth Certificate\nI. Certified Copy of National Identification Card\nIII. Certificate of Academic Qualifications\nIV. Recent Performance Appraisal\nV. Curriculum Vitae\nPolice Officers who are holders of Masters, First Degree and/or an Associate\nDegree from a recognized University are not eligible to apply for this programme.\nay,\nCommissioner of Police\n"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "source": "caselaws and other information used in policing/past papers for exams/DO 76-2019 Recuitment MOPS.pdf",
+  "size_bytes": 183809,
+  "ok": true,
+  "pages": 1,
+  "chars_total": 1569,
+  "chars_per_page": 1569,
+  "verdict": "OCR",
+  "category": "dept-orders",
+  "subcategory": "",
+  "txt_out": "dept-orders/DO 76-2019 Recuitment MOPS.txt",
+  "ocr": {
+    "engine": "tesseract",
+    "lang": "eng",
+    "dpi": 300,
+    "config": "--oem 3 --psm 6",
+    "elapsed_sec": 9.68
+  },
+  "page_text": [
+    "a Police Orders by\nCommissioner of Police\n. 4 Police Administration Building\neo Cor. Edward & Sackville Streets\n0p rer aos Port of Spain\n= Friday 12\" April 2019\n(This is an official document entrusted to members and civilian employees\nof the Trinidad and Tobago Police Service and is not for publication in the Press)\n —————\nNo. 76 Departmental Order PART I-NIL\nPART Il\nRECRUITMENT OF APPLICANTS INTO THE MULTI OPTION POLICE SECTION\nThe Multi Option Police Section (MOPS) are in the process of recruiting suitable\nmembers of the Trinidad and Tobago Police Service (TTPS). Persons who are interested\nin becoming members are invited to submit an application.\nApplicants will have to undergo physical and medical examinations. They must be\nable to at least complete a one and a half (1%) mile run in 15 minutes maximum,\ntwo (2) mile run according to APFT standards for their age group, three (3) pull ups\nminimum, forty (40) sit ups minimum in 2 minutes, forty (40) push-ups minimum in\n2 minutes and ten (10) parallel bar dips minimum in two (2) minutes in the first\nassessment. Applicants should also be comfortable with heights exceeding sixty (60)\nfeet for abseiling and fast rope training and must not be claustrophobic.\nInterested persons are asked to apply to the Assistant C ommissioner of Police, “Special\nBranch” through their respective Heads of their Division/Branch to reach no later than\n01.07.2019. For further information, applicants can contact the Multi Option Police\nSection (MOPS) office at 621-3492 or 621-2203.\nPART III-NIL\ngil\nCommissioner of Police\n"
+  ]
+}

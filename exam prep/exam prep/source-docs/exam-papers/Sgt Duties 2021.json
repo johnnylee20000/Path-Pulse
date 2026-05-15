@@ -1,0 +1,25 @@
+{
+  "source": "caselaws and other information used in policing/past papers for exams/Sgt Duties 2021.pdf",
+  "size_bytes": 142761,
+  "ok": true,
+  "pages": 4,
+  "chars_total": 4366,
+  "chars_per_page": 1091,
+  "verdict": "OCR",
+  "category": "exam-papers",
+  "subcategory": "",
+  "txt_out": "exam-papers/Sgt Duties 2021.txt",
+  "ocr": {
+    "engine": "tesseract",
+    "lang": "eng",
+    "dpi": 300,
+    "config": "--oem 3 --psm 6",
+    "elapsed_sec": 29.95
+  },
+  "page_text": [
+    "wee\n2021 POLICE PROMOTION (MAIN) EXAMINATION TO\nTHE RANK OF SERGEANT\nSUBJECT : POLICE DUTIES\nDATE : 7h AUGUST, 2021\nTIME ALLOWED : 2% HOURS\nINSTRUCTIONS:\nTHIS PAPER CONTAINS TWELVE (12) QUESTIONS. CANDIDATES ARE REQUIRED\nTO ANSWER ANY TEN (10) QUESTIONS EACH OF WHICH WILL CARRY TEN (10)\nMARKS,\nTHE PASS MARK IS 50%\nIN A BLACK OR BLUE INK PEN, WRITE YOUR EXAMINATION NUMBER ON THE\nCOVER OF THE EXAMINATION ANSWER BOOKLET AND ON THE TOP OF EVERY\nPAGE THROUGHOUT THE BOOKLET.\nYOU ARE REMINDED OF THE NEED TO USE PROPER DICTION, CORRECT\nSPELLING, STANDARD GRAMMAR AND AN ORDERLY, LEGIBLE AND NEAT\nPRESENTATION OF YOUR WORK.\nEACH QUESTION MUST BEGIN ON A NEW PAGE.\nDO NOT WRITE YOUR NAME, INITIALS OR REGIMENTAL NUMBER\nANYWHERE IN YOUR EXAMINATION ANSWER BOOKLET.\nDO NOT IDENTIFY YOURSELF IN ANYWAY OTHER THAN YOUR\nEXAMINATION CANDIDATE NUMBER.\nNB:- QUESTIONS ANSWERED IN EXCESS OF TEN WILL NOT BE CORRECTED.\n",
+    "ee |\nSection A - Procedural Processes\n1. (a) As the SDO in charge of a Station, you receive a firearm application\nfor investigation. In accordance with Standing Order 40, what are\nyour responsibilities. (2 marks)\n(b) In accordance with Standing Order No. 40, state eight (8) issues that\nmust be addressed when investigating applications for Firearm\nUser’s Licenses or Firearm User’s (Employee’s) Certificates. (8 marks)\n_2.  Inaccordance with Standing Order No. 17, state ten (10) tasks that must be\nperformed regarding the keeping of the station diary (10 marks)\n3. Inaccordance with Standing Order No. 41, what are your duties, as SDO in\ncharge of a Police Station, in relation to firearms and ammunition which\nare assigned to your station. (10 marks)\n4. Inaccordance with Standing Order 34, what is your role as the Senior Police\nOfficer detailed for duty at the scene of a fire. (10 marks)\n5. In accordance with Standing Order No. 54:-\n‘ (a) Define the following terms:\ni. “Obstruction” (2 marks)\nii. “Public Place” (2 marks)\nili. “Protest/ Demonstration” (2 marks)\n(b) What are your duties as the Senior SDO in charge of a station with\nresponsibility for a district where a protest/demonstration is\noccurring? (4 marks)\n6. The Judges’ Rules guide Police Officers conducting investigations:\n. (a) How would non-conformity with these Rules affect subsequent\ncriminal proceedings? (2 marks)\n(b) In accordance with Standing Order No. 32 Part III (a), (b) and (c).\nexplain when an officer should use Rule II of the Judges’ Rules in\nquestioning a suspected person. (3 marks)\n(c) State the caution to be used (3 marks)\n(d) State the procedure to be followed after the Rule II caution is applied (2 marks)\nSection B - Police Provisions/Regulations\n7. (a) Explain the term ‘Dying Declaration’ (2 marks)\n",
+    "(b) State the procedure for recording a ‘Dying Declaration’ (4 marks)\n(c) State four (4) grounds on which a ‘Dying Declaration’ is admissible\nin evidence in the Court (4 marks)\n8. As the SDO in charge of your station, you are asked to lecture to personnel\nat your station on ‘returning of kit’. In accordance with Standing Order\nNo. 12. State five (5) salient points that you would include in your lecture. (10 marks)\n9. (a) Inaccordance with Standing Order No. 9:-\ni. Define the term “Daily Handover” (2 marks)\nii. Describe the procedures in carrying out the ‘Daily Handover’ (4 marks)\n(b) As the SDO in charge of a station, state the procedure that must be\nfollowed if you are required to handover that station to another SDO. (4 marks)\n10. In accordance with Standing Order No. 51:\na. Define the term ‘Missing person’. (2 marks)\nb. State the procedure to be followed on receipt of a report of a\nmissing person. (8 marks)\n11. As the SDO in charge at your station, what are the key points to include in\na lecture to probationers on the following topics in accordance with\nSections 99, 100 and 109 of the Police Service Regulations.\n(a) ‘Keys for the female cells’ (6 marks)\n(b) ‘The opening of cells’ (1 mark)\n(c) “The Numerical strength of escort’ (3 marks)\n_ 12. (a) As the SDO, advise the Police Investigator in your station of the\nprocedure that should be followed in interviewing a Spanish\nspeaking foreigner who was a recent victim of a robbery. (5 marks)\n(b) Explain to the junior officers at your station about the procedure that\nshould be followed when interviewing a child under the age of 18,\nwhether suspected of an offense or not. (5 marks)\nEND\n",
+    "~>\n"
+  ]
+}

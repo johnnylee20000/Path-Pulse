@@ -1,0 +1,22 @@
+{
+  "source": "caselaws and other information used in policing/past papers for exams/19-2023 PT II Increase in Messing-Catering Rates.pdf",
+  "size_bytes": 233314,
+  "ok": true,
+  "pages": 1,
+  "chars_total": 855,
+  "chars_per_page": 855,
+  "verdict": "OCR",
+  "category": "dept-orders",
+  "subcategory": "",
+  "txt_out": "dept-orders/19-2023 PT II Increase in Messing-Catering Rates.txt",
+  "ocr": {
+    "engine": "tesseract",
+    "lang": "eng",
+    "dpi": 300,
+    "config": "--oem 3 --psm 6",
+    "elapsed_sec": 12.84
+  },
+  "page_text": [
+    "“ft Police Orders by\nCommissioner of Police\nPolice Administration Building\nRaanceee Cor. Edward & Sackville Streets\na i Port-of-Spain\nital Thursday 2\" February, 2023\n(This is an official document entrusted to members and civilian employees of\nthe Trinidad and Tobago Police Service and is not for publication in the Press)\nNo. 19 Departmental Order PARTS I & II-NIL\nPART If\nINCREASE IN MESSING/CATERING RATES\nNEW RATES | I. With effect from 17.02.2023 the new rates of messing/catering are as\nMESSING follows:-\nTRINIDAD\nType of Meals Present Cost Non-VAT VAT\n(All meals must include a drink) registered registered\n35.00 45.00 50.63\n45.00 55.00 61.88\n35.00 45.00 50.63\nTOBAGO\nType of Meals Present Cost Non-VAT\n(All meals must include a drink) registered registered\n40.00 50.00 56.25\n50.00 60.00 67.50\n40.00 50.00 56.25\nCEMrurioplos\nCommissioner of Police\n"
+  ]
+}

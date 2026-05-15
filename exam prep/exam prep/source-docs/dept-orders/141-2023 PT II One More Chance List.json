@@ -1,0 +1,22 @@
+{
+  "source": "caselaws and other information used in policing/past papers for exams/141-2023 PT II One More Chance List.pdf",
+  "size_bytes": 32305,
+  "ok": true,
+  "pages": 1,
+  "chars_total": 926,
+  "chars_per_page": 926,
+  "verdict": "OCR",
+  "category": "dept-orders",
+  "subcategory": "",
+  "txt_out": "dept-orders/141-2023 PT II One More Chance List.txt",
+  "ocr": {
+    "engine": "tesseract",
+    "lang": "eng",
+    "dpi": 300,
+    "config": "--oem 3 --psm 6",
+    "elapsed_sec": 7.59
+  },
+  "page_text": [
+    "te) Police Orders by Mrs Erla Christopher\n_ 7 os a\nCommissioner of Police\nPolice Administration Building\nCor. Edward & Sackville Streets\nPemorecr sage oF Thursday 9\" November, 2023\n(This is an official document entrusted to members and civilian employees of\nthe Trinidad and Tobago Police Service and is not for publication in the Press)\noe eee\nNo. 141 Departmental Order PART I & Il - NIL\nPART-II\nResults of the 2022 Promotional Examinations to the ranks of Corporal and Sergeant\nThe Police Service Examination Board advises that candidates who sat the 2022 Promotional\nExaminations to the rank of Corporal and Sergeant, and were placed on the One More Chance\nList, vide Departmental Orders No. 68 of 2023 and No. 69 of 2023 respectively, their marks will\nbe held for the 2024 Promotional Examinations and the candidates will only be required to sit\nthe failed component of the respective examination.\nCommissioner of Police\n"
+  ]
+}

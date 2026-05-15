@@ -1,0 +1,2204 @@
+ 
+COMPTROLLER OF ACCOUNTS 
+ 
+Ministry of Finance 
+Government of the Republic of Trinidad Tobago 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Accounting Manual 
+ 
+ 
+ 
+ 
+ 
+ 
+Prepared by the Financial Management Branch,  
+Treasury Division, Ministry of Finance  
+  
+
+
+
+ i
+ 
+ 
+TABLE  OF  CONTENTS 
+ 
+                    Page 
+ 
+ Introduction ……………………………………………………………….. .     iii 
+ 
+1. The Budgetary Process/Accountability Cycle ……………………………..     1 
+  
+2. Structure and Functions of the Accounting Unit …..………………………    6 
+ 
+ 2.1 Request for Release of Funds  and Application for Credit...............    8    
+ 
+    2.1.1 Request for the Release of Funds …………………………….     8 
+    2.1.2 Application for Credit on the Exchequer Account……………    10 
+ 
+  2.2 General Process Flow of Vouchers…………………………………    13 
+ 
+ 2.3 Processing of Payments by the Sub Accounting Unit……………..     20  
+ 
+  2.3.1 Payment Vouchers…………………………………………….    20 
+  2.3.2 Schedule of Accounts………………………………................    23 
+  2.3.3 Vote Book……………………………………………………..    24 
+ 
+ 2.4 Processing of Payments by the Accounting Unit ………………….    26 
+ 
+  2.4.1 Check Staff………………………………………….…………   26  
+2.4.2 Cheque Preparation……………………………………………   30 
+ 
+  2.5 Payroll  
+ 
+  2.5.1 Determination of Salaries……………………………………… 
+  2.5.2 Payroll Process…………………………………………………. 
+  2.5.3  Statutory and other Deductions………………………………… 
+  
+ 2.6 Overpayments......................................................................................... 
+ 
+ 3. Non-Cash Transactions 
+ 
+3.1 Inter-departmental Adjustments……………………………………….. 
+ 
+3.2 Overseas Mission Payments.................................................................... 
+ 
+3.3 Other Government and Administrations……………………………….. 
+ 
+4. Reconciliation …………………………………………………………………. 
+ 
+5.  Preparation of Appropriation Accounts …………………………………..... 
+ 
+6.  Other Functions of the Accounting Unit …………………………………….. 
+
+
+
+ ii
+ 
+ 
+6.1 NIS Schedule…………………………………………………………… 
+ 
+6.2 Health Plan Schedule…………………………………………………… 
+ 
+6.3 Other Statutory Deductions…………………………………………….. 
+ 
+6.4 Insurance of Government Vehicles…………………………………….. 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+ iii
+ 
+ 
+INTRODUCTION 
+(i) Purpose 
+The development of this training manual is one of the initia tives undertaken by 
+the Treasury Division in recognition of the important role that training has to play 
+in the efficient operation of Financial Management Systems. Consequently, the 
+manual has been developed to provide guidance to Ministries/Departments 
+thereby equipping them with the necessary  material to empower them in the 
+performance of their acc ounting functions within the ambit of the laws, 
+regulations, policies and guidelines, which have been issued over time. 
+ 
+This manual defines the legal framework within which Ministries/Departments 
+operate and gives detailed procedures on the various functions of the Accounting 
+Unit. It also defines the roles of ma jor parties involved in the monitoring, 
+implementation and control of government accounting systems. 
+ 
+This manual is therefore intended to assi st officers of Ministries and Departments 
+in the better performance of their dutie s resulting in improved efficiency and 
+enhanced productivity, while operating in  an environment of accountability 
+transparency and integrity. 
+(ii) Legal Framework  
+The legal basis for dealing with matters relating to revenue and expenditure by  
+Government is found in the following documents:- 
+• The Constitution of the Republic of Trinidad and Tobago Chapter 1:01;  
+• The Exchequer and Audit Act, Chapter 69:01;  
+• The Financial Regulations; 
+• The Financial Instructions 1965;  
+These are supplemented from time to time by Circulars / Instructions issued by 
+the Treasury on specific accounting matters. 
+ 
+(iii) Establishment of the Consolidated Fund 
+ 
+Chapter 8 Section 112 (1) to (4) of  The Constitution Of The Republic of 
+Trinidad and Tobago provides for the establishment of the Consolidated Fund as 
+follows: 
+ 
+(1)   “All revenues or other moneys rais ed or received by Trinidad and Tobago, 
+not being revenues or other moneys payable under this Constitution or any 
+other law into some public fund esta blished for a specific purpose shall, 
+unless Parliament otherwise provid es, be paid into and form one 
+Consolidated Fund.” 
+          
+
+
+
+ iv
+ 
+(2)    “No moneys shall be withdrawn from the Consolidated Fund except to 
+meet expenditure that is charged upon the Fund by this Constitution or any 
+Act or where the issue of those moneys has been authorized by an 
+Appropriation Act or an Act passed in pursuance of section 114 or in 
+accordance with any other law.”  
+ 
+(3)   “No moneys shall be withdrawn from any public fund other than the 
+Consolidated Fund unless the issue of those moneys has been authorized 
+by an Act.” 
+ 
+(4)  “No moneys shall be withdrawn from the Consolidated Fund or any other 
+public Fund except in the manner prescribed.” 
+ 
+(iv) Role of the Minister of Finance  
+ 
+(a) Authorization of Expenditure from the Consolidated Fund
+ 
+ 
+Chapter 8, Section 113 (1) and (2) of the Constitution states: 
+ 
+(1)   “The Minister respons ible for finance causes to be  prepared and laid before 
+the House of Representatives before or not later than thirty  days after the 
+commencement of each financial year, estimates of the revenues and 
+expenditure of Trinidad and Tobago for that year.”  
+ 
+(2)  “The heads of expenditure cont ained in the estimates, other than 
+expenditure charged upon the Consolidated Fund by this Constitution or 
+any Act, shall be included in a Bill,  to be known as an Appropriation Bill, 
+providing for the issue from the Consolidated Fund of the sums necessary 
+to meet that expenditure and the a ppropriation of those sums for the 
+purposes specified therein.” 
+ 
+Further, if within any financial year it is found that the sum appropriated may be 
+insufficient, or that there is need  to expend on an item for which no 
+appropriation was made, or that mone y may have been over-expended on an 
+appropriated item, a supplementary estimat e, showing the sum required or spent 
+shall be laid before the House of Repr esentatives and the heads of any such 
+expenditure shall be included in a Supplementary Appropriation Bill.  
+  
+If the Appropriation Act in respect of any financial year does not come into 
+operation by the beginning of that financ ial year, the Minister of Finance may 
+authorize the withdrawal of moneys fr om the Consolidated Fund to meet the 
+expenditure necessary to carry on the services of the Government, until the 
+expiration of thirty (30) days from the beginning of that financial year of the 
+coming into operation of the Act, whichever is the earlier.  
+ 
+Parliament may also provide for the es tablishment of a Contingencies Fund, and 
+for authorizing the Minister of Finance to make advances from that Fund, if he is 
+satisfied that there has arisen an urgent  and unforeseen need for expenditure for 
+which no other provision exists.  
+ 
+ 
+
+
+
+ v
+ 
+ 
+ 
+ 
+ (b) Control and Management of Public Finance
+ 
+ 
+The Minster of Finance,  under the Constitution a nd the provisions of the 
+Exchequer and Audit Act Chapter 69:01 is  responsible for the management of 
+the Consolidated Fund and the supervision, control and direct ion of all matters 
+relating to the financial affairs of the State which are not law assigned to any 
+other Minister.   
+ 
+ (v) Role of the Auditor General  
+ 
+The role of the Auditor General is defined under Chapter 8 Section 116 (1) to (6) 
+of  the Constitution of The Republic of Trinidad and Tobago  as follows: 
+ 
+(1)    “There shall be an Auditor General for Trinidad and Tobago, whose 
+office shall be a public office.” 
+ 
+(2)  “The public accounts of Trinidad an d Tobago and of all officers, courts 
+and authorities of Trinidad and Toba go shall be audited and reported on 
+annually by the Auditor General, and for that purpose the Auditor 
+General or any person authorized by hi m in that behalf shall have access 
+to all books, records, returns and other documents relating to those 
+accounts.”  
+ 
+(3)  “The Auditor General is hereby em powered to carry ou t audits of the 
+accounts, balance sheets and other financ ial statements of all enterprises 
+that are owned or controlled by or on behalf of the State.”  
+ 
+(4)  “The Auditor General shall submit  his reports annually to the Speaker, 
+the President of the Senate and the Minister of Finance.” 
+ 
+(5)     “The President of the Senate and the Speaker shall cause the report to be 
+laid before the Senate and the House of Representatives, respectively, at 
+the next sitting of the Senate and th e House of Representatives after the 
+receipt thereof, respectively.”  
+ 
+(6)     “In the exercise of his f unctions under this Constitution the Auditor 
+General shall not be subj ect to the direction or control of any other 
+person or authority.”  
+ 
+(vi) Role of the Accounting Officer 
+ 
+The Accounting Officer is defined in the Exchequer and Audit Act, Chapter 69:01 
+Section 2 Part I as: 
+ 
+ “any person appointed by the Treasury and charged with the duty of accounting 
+for any service in respect of which m oneys have been appropriated by the 
+Constitution or by Parliament, or any person to whom issues are made from the 
+Exchequer Account.”  
+ 
+
+
+
+ vi
+ 
+ 
+ 
+ 
+ 
+ 
+The responsibilities of the Accounting Officer are as follows: 
+ 
+ Ensure the proper conduct of the fina ncial business of the State for which 
+ he is responsible 
+ 
+ Ensure that the funds entrusted to his care are properly safe-guarded 
+ 
+ Ensure that funds are applied only for the purposes intended by Parliament 
+ 
+ Ensure that expenditure does not exceed the sum authorized by Parliament 
+ 
+The Accounting officer shall be answerable to the Public Accounts Committee for 
+the formal regularity and propriety of accounts of all the expenditure out of the 
+votes for which he is responsible. 
+ 
+ (vii) Role of the Internal Audit  
+ 
+Section 13 (4) of the Fina ncial Regulations to the Exchequer and Audit  Act 
+Chapter 69:01  provides for the establishment of an independent internal audit 
+section as follows: 
+ 
+(4)  “Each accounting unit shal l have a check staff and an independent internal 
+audit section.” 
+ 
+The overall objective of the internal audit is  to assist Management in the effective 
+discharge of its responsibilities by furnishing objec tive analyses, appraisals, 
+recommendations and pertinent comments on the activities reviewed. The Internal 
+Auditor must therefore be involved in any phase of activity in which he can be of 
+service to management. 
+ 
+The Internal Auditor is ther efore expected to provide an  effective examination or 
+review of the accounting operations to en sure that the internal controls and 
+accounting systems are operating efficiently and to report same to the Accounting 
+Officer. 
+ 
+The scope of work undertaken by the In ternal Auditor is determined by his 
+Accounting Officer to whom he is responsible. 
+ 
+(viii) Role of the Receiver of Revenue 
+ 
+In accordance with Section 2 Part I of the Exchequer and Audit Act Chapter 69:01 
+“receiver of revenue” means: 
+ 
+“an officer appointed by the Treasury for the collection of, and the accounting for, 
+such items of Revenue as the Treasury may specify.” 
+ 
+Duties of the receiver of revenue are de fined in the Part V Section 51 of the 
+Financial Regulations to the Exchequer and Audit Act Chapter 69 :01 as follows: 
+
+
+
+ vii
+ 
+ 
+(51)   “A receiver of revenue shall supervise and ensure— 
+(a) the punctual collection of revenue in accordance with the laws and 
+ regulations rela ting thereto; and 
+(b) that the revenue collections are properly brought to account.” 
+ 
+ (ix) The Public Accounts Committee and the Public Accounts Enterprises 
+Committee  
+ 
+The Constitution of the Republic of Trin idad and Tobago establishes the Public 
+Accounts Committee (PAC) and the Pub lic Accounts Enterprises Committee 
+(PAEC).  
+The PAC is charged with the responsib ility of examining the appropriation 
+accounts of moneys granted by Parliament to meet the public expenditure of 
+Trinidad and Tobago. This Committee therefore examines the audited accounts of 
+Government Ministries and Departments, paying close attention to the comments 
+made by the Auditor General which relate to financial management.  
+In the performance of its work, the PAC calls to account many Permanent 
+Secretaries and Heads of Government Departments and has been instrumental in 
+the establishment of a more responsive attitude on the part of Administrative 
+Heads of Government Ministries/Departmen ts to the advice and requirements of 
+the Auditor General’s Department.  
+The PAEC was established as a result of the growth of the public sector. Since the 
+early 1970’s there has been an increase in the number of Statutory Corporations 
+and State Enterprises covering a wide range of industrial and other economic 
+activities. Consequently, it was considered  that since parliamentary control was 
+too remote and not continuous, a mechanis m should be created for Parliament to 
+keep an effective watch over public se ctor projects in which millions of 
+taxpayers’ dollars had been invested.  
+The PAEC examines the reports and accounts of the public undertakings and 
+determines whether the affairs of thes e institutions are being managed in 
+accordance with sound business principles and prudent commercial practices.  
+The work of both the PAC and PAEC ar e facilitated by the assistance of 
+personnel from the Offices of the Comptro ller of Accounts as well as the Auditor 
+General whose audited reports of Govern ment Ministries and Departments and 
+public sector enterprises form the ba sis of the scrutiny exercised by these 
+Committees. 
+(x) Role of the Treasury  
+In accordance with Section (2) Part I of  the Exchequer and Audit Act Chapter 
+69:01: 
+ “Treasury means the Minister, and includes such officer or officers in the 
+Ministry of Finance as may be deputed by the Minister to exercise powers and to 
+perform duties under this act.” 
+
+
+
+ viii
+ 
+The Minister of Finance is responsible for the control and management of the 
+financial affairs of the St ate. One of the core agen cies through which this is 
+accomplished is the Treasury Division. 
+ 
+ (a) Mission 
+ 
+To contribute to enhancing the qualit y of life of citizens, by promoting good 
+governance of the state’s resources through the provi sion of dynamic Financial 
+Management Systems and Services in a timely and professional manner.  
+ 
+ (b) Vision 
+ 
+To be the premier Public Sector ins titution in the region for innovative public 
+financial management and accountability systems.  
+ 
+(c) Responsibilities  
+ 
+The core responsibilities of the Treasury Division are as follows: 
+ 
+• to provide financial management and accounting services to Ministries and 
+Departments; 
+•  to produce the consolidated accounts of the Republic of Trinidad and Tobago;  
+• to administer superannuation and/or te rminal benefits to retired public 
+officers/beneficiaries; 
+• to ensure that the appropriation acc ount of the Republic of Trinidad and 
+Tobago are laid in Parliament on a timely basis.  
+ 
+To facilitate these operations the Treasury Division is divided into three broad 
+functional areas as follows:- 
+i. Financial Management;  
+ii. Treasury Management; and  
+iii. Pensions Management.  
+In the execution of its respons ibilities for the management of the financial affairs 
+of the State, the Treasury Division deve lops, implements and monitors financial 
+management and accounting systems throughout  the Public Service. In addition, 
+the Division is also responsible for en suring that the internal audit operates 
+effectively.  
+ 
+(xi) Government Accounting System  
+ 
+The current Government financial mana gement accounting system is cash based 
+and involves several manual operations. The manual processes place high reliance 
+on human verification and are thus very time consuming. Further, the system is 
+unable to provide managers neither with the tools for the proper management of 
+their assets and liabilities nor with info rmation to assess the performance of their 
+Ministry or Department.  
+ 
+ 
+
+
+
+ ix
+ 
+ (a) Integrated Financial Management Information System (IFMIS) 
+ 
+To effectively and efficiently manage their resources, managers require financial 
+information that is timely, accurate, reliable and relevant. This means that the core 
+functions of a financial management system  must be configured in an integrated 
+manner to allow the organization’s busine ss transactions to be entered only once 
+with simultaneous updating of all the related accounts in the subsystems.  
+ 
+An IFMIS facilitates this and will also assist managers in monitoring cash flow 
+and preparing forecasts. IFMIS is also capable of producing the Appropriation 
+Accounts of Ministries/Departments a nd the Consolidated Accounts of the 
+Republic of Trinidad and Tobago in a much  shorter timeframe than is currently 
+required. This will lead to increased productivity and will enable Accounting 
+Officers to focus key resources on thei r core business. Acquisition of such a 
+system for the Public Service is under consideration for the near future. 
+  
+ (b) Output Management 
+ 
+The present Budgetary System allocates funding based on inputs, i.e. line items 
+such as Personnel Expenditure, Goods and Services, and Minor Equipment 
+Purchases that comprise the Estimate s of Expenditure. Although it provides 
+detailed information on how much public money is spent, it does not provide 
+information on what is being achieved a nd whether the goods/services (outputs) 
+satisfy the purpose intended.    
+ 
+An Output Management System is one that focuses decision-making and 
+accountability arrangements on outcomes a nd outputs rather than inputs. This 
+system seeks to create a culture of planning in Government agencies by the 
+introduction of Corporate and Business Plans.  These plans provide a link 
+between Government’s anticipated outco mes and Departmental objectives and 
+outputs. In addition, performance measures  and targets are set for each output 
+which will provide information for ev aluation of performance and strategic 
+decision making. Public Service Managers are now required to provide Corporate 
+and Business Plans for their respective Ministry/Department. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+NB.  Please note that this Accounting Manual is  currently a work in progress. Inclusions 
+will be inserted as the various sections are developed, reviewed and verified. 
+
+
+
+ 1
+ 
+Chapter 1 
+ 
+The Budgetary Process/Accountability Cycle 
+ 
+A flowchart of the Budgetary Process is shown at Figure 1 on page 5.  Following are the 
+notes to the flowchart:-   
+ 
+(i) Call Circular 
+ 
+The Minister of Finance, in pursuance of his statutory obligation under Section 113 of the 
+Constitution of the Republic of Trinidad and Tobago, issues the Call Circular whereby 
+Ministries, Departments and Other Agencies are required to submit their Draft Estimates 
+of Revenue and Expenditure.   
+ 
+This Circular sets out the requirements that must be followed in the preparation of the 
+Draft Estimates of Revenue and Expenditure using as a basis, the Exchequer and Audit 
+Act Chapter 69:01, the Financial Regulations and Financial Instructions 1965.   
+ 
+The Call Circular prescribes the format in which the Estimates must be presented for 
+consistency as well as provides guidance on how they must be prepared. 
+  
+The Minister of Finance usually issues the Call Circular between February and March. 
+ 
+(ii) Ministries/Departments - Submission of proposals by April 30
+  
+  
+The Draft Estimates of Revenue and Expe nditure are based on the projections of 
+revenue and expenditure for the ensu ing year. The preparation must be 
+circumscribed by: 
+ 
+a. The Strategic Plan of each Ministry/Department 
+b. Customer Service Delivery Plan 
+ 
+            Ministries, Departments and Agencies are required to submit these Draft 
+ Estimates of Revenue and Expenditure by 30 April of each financial year to the 
+            Budget Division, Ministry of Finance.  
+ 
+(iii)   Budget Division - Examination Process
+  
+ 
+On receipt of the Draft Estimates of  Revenue and Expenditure, the Budget 
+Division of the Ministry of Finance ex amines, analyses and holds discussions 
+with Ministries, Departments and other Agenci es for justification of expenditure.     
+Adjustments are made where necessary. This examination and consultation 
+process is done from May to the middle of September. The Minister of Finance 
+seeks Cabinet’s approval for specific measures after which the Budget is 
+presented in Parliament.    
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+ 2
+ 
+(iv) Parliament  
+ 
+The Minister of Finance in pursuance of his statutory obligation lays and presents 
+in the House of Representatives, the A ppropriation Bill along with other Budget 
+Documents. These Budget Documents include: 
+ 
+• The Draft Estimates of Expenditure  
+• Draft Estimates – Details of Estimates of Recurrent Expenditure  
+• Draft Estimates of Revenue and Expend iture of the Statutory Boards and 
+Similar Bodies and of the Tobago House of Assembly 
+• Draft Estimates of Development Programme  
+• Draft Estimates of Revenue 
+• Social Sector Investment Programme 
+• Public Sector Investment Programme 
+• Public Sector Investment Programme Tobago  
+• Supplementary Public Sector Investment Programme 
+• Review of the Economy   
+• The Value Added Tax Act (Amendment to Schedule 2) when necessary 
+• The Provisional Collection of Taxes Order   
+ 
+The Budget Speech is presented and the A ppropriation Bill is debated and passed 
+in the House of Representatives. The Bill is then brought before the Senate where 
+it is also debated and passed after which it is forwarded to the President of the 
+Republic of Trinidad and Tobago for his assent. It then becomes the 
+Appropriation Act for the particular year. 
+ 
+(v)  Approval of Funding
+ 
+ 
+The General Warrant
+ 
+ 
+After the Appropriation Act has been passe d by Parliament, a General Warrant is 
+issued by the Minister of Finance to th e Comptroller of Accounts authorising him 
+to make withdrawals from the Consolid ated Fund within the limits approved 
+under the Act and in accordance with Treasury directives. 
+ 
+Release of Funds
+ 
+ 
+After the General Warrant has been issue d, the Ministries and Departments must 
+apply to the Budget Division of the Ministry of Finance for the Release of Funds.    
+ 
+Grant of Credit on the Exchequer Account
+ 
+ 
+After the Release of Funds has been a pproved, the Ministry/Department applies 
+for a Grant of Credit on the Excheque r Account which is needed to incur 
+expenditure. This is the authority necessary to issue specific sums from the 
+Exchequer Account.  
+ 
+ 
+Application for Grant of Credit on the Ex chequer Account must be made by the 
+Accounting Officer to the Comptroller of Accounts (COA). After checking the 
+
+
+
+ 3
+ 
+relevant documents the COA may authori ze and require the Auditor General to 
+approve the application. If the Audito r General is satisfied that the sums 
+authorized are in accordance with the pr ovisions of the Appropriation Act and the 
+amount requisitioned does not exceed th e sum authorized by the Treasury the 
+Grant of Credit on the Exchequer Account is approved. 
+ 
+(vi)  Execution of Budget - Payments and Collections 
+ 
+The Accounting Unit can proceed to spend in accordance with Parliamentary 
+approval on receipt of both the Release of Funds and the Gran t of Credit on the 
+Exchequer Account. In order to ensure  there is proper transparency and 
+accountability, all transactions must be properly processed, recorded and reported 
+in accordance with the Financial Regulati ons and Financial Instructions 1965 as 
+well as Circular/Instructions issued by the Comptroller of Accounts and Minister 
+of Finance from time to time.  
+ 
+ Processing
+  
+ 
+All payments must be supported by source documents to ensure the validity of the 
+payments to be made. These documents ar e scrutinized by different levels of 
+officers who ensure that all requirements necessary for proper accountability and 
+transparency are met before it is approved. The payment is then authorized and a 
+cheque is prepared. 
+ 
+In expending funds officers must ensure at  all times that votes are sufficient to 
+meet all commitments.  
+ 
+Recording
+ 
+ 
+Essential records must be maintained at all stages to ensure that proper control 
+and accountability is kept over expenditure. These include vouchers, Schedule of 
+Accounts, Vote Books, Expenditure Notification, Abstract of Payments etc.  
+ 
+Reporting
+ 
+  
+Accounting Officers must prepare A ppropriation Accounts showing actual 
+expenditure compared with estimates on the votes for which they are responsible. 
+These Accounts must be submitted to the Auditor General four (4) months after 
+the end of each financial year i.e. by January 31
+st. 
+ 
+Additionally the Treasury is required to submit to the Auditor General, accounts 
+showing fully the financial position of the country as at 30 th September of each 
+year. 
+  
+ Revenue   
+ 
+ Revenue is raised by fiscal measures introduced in the Budget and is given legal 
+ effect by the issuance of a Provisiona l Collection of Taxes Order, the Value 
+ Added Tax Act or by Special Legislation. Receivers and Collectors of Revenue   
+
+
+
+ 4
+ 
+ are authorized to collect and account fo r revenue. All collection must be paid 
+ into the Exchequer Account which is a bank account maintained at the Central 
+ Bank.  
+ 
+A Receiver of Revenue is an officer appoi nted by the Treasury for the collection 
+of, and the accounting for, such items of revenue as the Treasury may specify. 
+ 
+A Collector of Revenue is any person appointed by a Receiver of Revenue to 
+collect public moneys and may include any person to whom a collector may 
+delegate a part of his duties. 
+  
+(vii)   Audit
+ 
+ 
+In accordance with Section 25 (1) of th e Exchequer and Audit Act, the Auditor 
+General is required to audit the accounts of Ministries, Departments and other 
+Government Agencies to ensure that e xpenditure was carried out in accordance 
+with the Appropriation Act. The Auditor General, in the exercise of his/her 
+functions shall not be subject  to the direction or cont rol of any other person or 
+authority. This independence is necessary for an unbiased opinion on the accounts 
+examined. 
+ 
+The Appropriation Accounts t ogether with the Auditor General’s Report must be 
+submitted to the Speaker of the House of Representatives, the President of the 
+Senate and the Minister of Finance by April 30
+th. On receipt of such reports, the 
+Speaker and the President of the Senate are obliged to lay such reports before the 
+respective houses of Parliament at the first sitting after receipt thereof. It is then 
+referred to the Public Accounts Committee for examination. 
+ 
+(vii) Public Accounts Committee
+ 
+ 
+The Public Accounts Committee (PAC), ch aired by a member of the Opposition, 
+is the institution by which Parliament exerci ses its role in the oversight of public 
+finance. The PAC carries out this responsibility by examining the Auditor 
+General’s Report in great detail . The Accounting Officers of each 
+Ministry/Department are summoned and examined by the Committee on the 
+management of the funds under their control and on the comments of the Auditor 
+General’s Report. 
+ 
+The PAC must submit a report on its find ings to the Parliament where it is 
+debated.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+Figure 1
+ 5
+ 
+4
+PARLIAMENT
+Presentation of Budget by Minister of 
+Finance 
+Appropriation Bill Laid, debated
+and passed
+8
+PAC
+- Examination of 
+Accounts based on 
+Auditor General’s report
+- Present report
+6
+EXECUTION OF BUDGET –
+Expenditure and Collection of 
+Revenue
+- Processing
+- Recording transactions
+- Reporting by January 31
+st
+REVENUE COLLECTION
+7
+AUDIT
+- Audit of the Financial Statements by 
+the Auditor General
+- Laying of the the Auditors General’s 
+Report with the Public Accounts in 
+Parliament by April 30th
+2
+MINISTRIES/
+DEPARTMENTS
+- submission of 
+proposals by April 
+30th
+3
+BUDGET 
+DIVISION
+Examination 
+process wef April
+1
+CALL CIRCULAR
+Issued by the Min. 
+of Finance
+THE BUDGETARY PROCESS/
+ACCOUNTABILITY CYCLE
+5
+APPROVAL OF FUNDING
+- Issue of General Warrant
+- Release of Funds
+- Grant of Credit
+Assented  by the President
+Appropriation Act
+Auditor General Report
+Public Accounts
+ 
+ 
+ 
+
+
+
+ 6
+ 
+Chapter 2 
+    
+Structure And Functions Of The Accounting Unit 
+ 
+Authority: 
+ 
+Financial Regulations Section 13 paragraphs (1)-(3) state: 
+ 
+“(1) A department may be divided into accounting and sub-accounting units according 
+ to the number of sections under its control. 
+ 
+(2) An accounting unit is a section of a de partment where vouchers are passed by its 
+ own check staff and vote control divi sion for the preparation of cheques. 
+ 
+(3)  A sub-accounting unit is a section of a de partment where the placing of orders is 
+ undertaken, and where payment vouch ers are prepared and certified.” 
+ 
+The Accounting Unit is made up of the ma in Accounting Unit and the Sub-Accounting 
+Unit. A flowchart showing the functions of the Sub-Accounting Unit and the Accounting 
+Units can be seen at Figure 2 on page 7. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+ 
+ 7
+ 
+
+
+
+ 8
+ 
+ 
+2.1 Request For The Release Of Funds And Application For Grant Of Credit 
+ 
+2.1.1 Request for the Release of Funds  
+ 
+(i) Authority  
+ 
+ Estimates for the financial year as provided by 
+ the Budget Division, Ministry of Finance 
+ General Warrant 
+ Cabinet Minute                           
+ Ministerial Approval                  
+ Permanent Secretary’s Approval                
+ 
+ (ii) Process                         
+ 
+ a. Ministries/Departments apply for release of funds on a quarterly basis 
+from the Budget Division, Ministry of Finance. 
+ 
+b. The Accounting Unit completes a sp readsheet request by indicating the 
+dollar value of releases that is required under each sub-item of 
+expenditure. Justification for releases should be submitted along with the 
+Request for Releases to the Budget Di vision.  The spreadsheet reflects all 
+the accounts under the control of th e relevant Accounting Unit and the 
+releases already granted to date.    
+ 
+c. When the approved release is rece ived (see Appendix 2.1.1A), the details 
+are recorded in The Release Control Sheet. 
+ 
+d. Copies are distributed to the Chec k Staff Officer and the designated 
+officer in the Accounting Unit for preparation of the application for Grant 
+of Credit on the Exchequer Account. 
+ 
+ (iii) Transfer of Funds
+ 
+ 
+When the original provision for a particular sub-head is insufficient, 
+Ministerial approval is n eeded for a Transfer of Funds from one sub-head 
+to another. A request is made to the Minister of Finance giving the status 
+of the votes  to which funds are required and the votes from which funds 
+are to be transferred. Justification for the Transfer of Funds should be 
+provided along with the request for Tran sfer of Funds to the Ministry of 
+Finance. 
+ 
+ (iv) Virements
+ 
+ 
+ A Virement is the transfer of funds between sub-items under the same sub-
+head.  This is approved by the Accoun ting Officer for the relevant Head 
+of Expenditure. 
+
+
+
+ 9
+ 
+ 
+  
+ (v) Transfer of Releases  
+ 
+Where there are insufficient releases under a particular sub-item, releases 
+may be transferred from one sub-item to  another. The request for transfer 
+of released funds must be submitted to the Budget Division for approval. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+ 10
+ 
+2.1.2 Application For Credit On The Exchequer Account  
+ 
+Grant of Credit on the Exchequer Account must be obtained in respect of monies 
+authorized by an Appropriation Act to be withdrawn from the Consolidated Fund. 
+ 
+(i) Authority  
+ 
+Section 18 of the Exchequer and Audit Act Chapter 69:01  
+Paragraphs 21 and 22 of the Financial Regul ations to the Exchequer and Audit Act 
+Chapter 69:01  
+Paragraphs 20 and 21 of the Financial Instructions 1965  
+Comptroller of Accounts Circular No. 6 dated 1988.02.08 
+ 
+(ii) Purpose
+ 
+ 
+The Grant of Credit on the Exchequer Account  provides the authority to make issues 
+from the Exchequer Account and the necessary  authority to issue both cheques and other 
+payments e.g. IDAs, OSMs. 
+ 
+(iii) Process  
+ 
+The Accounting Unit prepares an application for Credit on the Exchequer Account on the 
+prescribed form in quadruplicate (see A ppendix 2.1.2A). The following are the steps 
+involved in the application: 
+ 
+Part A
+ 
+ 
+ (a) Complete details on application as follows: 
+ 
+Record details in lines 1-9, which are certified correct by the Head of the 
+Accounting Unit and signed by the Internal Audit. The Application for 
+Credit on the Exchequer Account must reflect the full amount of approved 
+releases. Approved releases must include the amount now being requested 
+on the current Application for Credit. 
+ 
+(b) Part E
+ 
+ 
+Complete details on the following: 
+ 
+• Approved Ministry of Finance releases 
+• Details of allocations to other Ministries/Departments 
+• Details of estimated foreign expenditure 
+• Inter Departmental Adjustments 
+• Details of Notification of Credit 
+ 
+ 
+ 
+ 
+
+
+
+ 11
+ 
+(c) Part B 
+ 
+Application for Credit on the Exche quer Account must be personally 
+certified by the Accounting Officer. 
+ 
+ Submit application signed and date d by the Accounting Officer together 
+with a copy of the relevant approved release of funds a nd other relevant 
+memoranda, to the Exchequer Management Unit, General Ledger Services 
+of the Treasury Division for examination and authorization. 
+ 
+ (d) Part C
+ 
+ 
+  This section must be prepared, sign ed and dated by an authorised officer  
+  of the Treasury Division on behalf of  the Permanent Secretary, Ministry of 
+  Finance. 
+ 
+ The application for Credit on the Exchequer Account must be forwarded 
+to the Auditor General’s Department for approval after verification and 
+completion.  
+ 
+ ( e) Part D
+ 
+ 
+Approve application by signature of an  authorised officer of the Auditor 
+General’s Department. 
+ 
+ The approved application is then returned to the Treasury Division to be 
+distributed in accordance with Paragraph 21 of the Financial Instructions 
+1965: 
+  
+Original  - Comptroller of Accounts 
+Duplicate  - Auditor General 
+Triplicate  - Ministry/Department 
+Quadruplicate  - Budget Division 
+ 
+(iv) Notes 
+ 
+ (a) No expenditure shall be incurred or cheques prepared until the   
+  approved Application for Credit is received by the Accounting Unit. 
+ 
+ (b) Applications dated a particular  month must reach the Treasury   
+  Division and the Auditor General’ s Department for processing during  
+  the same month and must be submitt ed to allow for three (3) days   
+  processing. 
+ 
+ 
+ 
+ 
+ 
+
+
+
+ 12
+ 
+ (v) General 
+ 
+ Any Ministry/Department which may be required to disburse funds through the 
+ Agency of another Ministry/Department should adhere to the normal procedures 
+ which require:- 
+ 
+ (a) the principal Ministry/Department to apply for the credit; 
+ 
+ (b) the principal Ministry/Department to surrender the credit to the   
+  Agency, Ministry/Department; 
+ 
+ (c) the Agency Ministry/Department to apply for credit of an amount   
+  equivalent to the amount surr endered by the principal Ministry. 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+ 13
+ 
+
+
+
+
+2.2 General Process Flow of Vouchers 
+ 
+A voucher is a document used in an internal c ontrol system to facili tate the control of 
+payments for goods and services acquired. It  recognizes liability for a transaction, 
+authorizes its payment and i ndicates the accounts (head and sub-head) under which the 
+expenditure has to be recorded. It must record full particulars of service that accurately 
+represent the facts contained in the s upporting document. Vouchers are prepared, 
+scheduled, voted and certified in the Sub-Acc ounting Unit before they are passed to the 
+Accounting Unit for authorization and processing of payment. It must be emphasized that 
+at each stage of processing the voucher, a di fferent officer must perform each check and 
+affix his/her signature to the document for purposes of internal control.  
+ 
+Prescribed voucher forms are: 
+ 
+• Other Charges-Payment Vouchers 
+ 
+• Department Vouchers 
+(only applicable to large Ministries / Departments where there are outside 
+divisions) 
+ 
+• Invoice Orders  
+(processed as a voucher when returned by supplier) 
+ 
+• Paysheets 
+ 
+• Travelling Expenses Vouchers-Mileage Claims 
+ 
+• Travelling Expenses Vouchers (Subsistence Allowance) 
+ 
+• Other Governments & Administrations 
+(only applicable to the Treasury Division) 
+ 
+• Overseas Missions Payment Vouchers  
+(only applicable to Overseas Diplomatic Missions for all foreign payments  
+throughout the Government service) 
+ 
+• Adjustment Vouchers  
+(Inter Departmental-for non-cash transactions) 
+ 
+The General Process Flow of Vouchers is described as follows:  
+ 
+1. Receive Supporting Documents for Payment 
+ 
+A request for payment must be accompanied by supporting documents which 
+provide evidence that proper authority has been granted to incur expenditure and 
+that the goods and services have been received. These documents give details of 
+the transaction which has given rise to the payment. Some examples include: 
+ 14
+ 
+ 
+
+
+
+ 15
+ 
+• Original invoices from suppliers along with Delivery Notes 
+• Copy of Cabinet Minute, DPA Approval for salaries 
+• Copy of contract, Certificate of satisfactory completion 
+ 
+Supporting documents must be securely attached to the voucher. 
+ 
+2. Prepare Appropriate Voucher 
+ 
+Before a voucher is prepared, the offi cer responsible for preparation must 
+determine the item of expenditure to be charged and ensure that funds are 
+available. He must exercise due care in completing the form so as to ensure 
+accuracy of every detail.  
+ 
+Details to be recorded on the voucher include: 
+ 
+• The item of expenditure to be charged 
+• Payee 
+• Description of the goods and services 
+• Authority for the expenditure  
+• Amount to be paid. 
+ 
+After the voucher is prepared the officer must stamp ‘Prepared by’ on the voucher 
+and insert his signature and date in the appropriate space. 
+ 
+All vouchers must reflect the full details of the transactions as recorded on the 
+supporting documents. 
+ 
+3. Certified Correct Voucher 
+ 
+In accordance with Financial Regulations 78 (2), in instances where the certifying 
+officer is not personally acquainted with th e facts relating to the transaction , 
+the voucher must be certified correct/e ndorsed by a senior officer who is so 
+acquainted. 
+ 
+E.g. An officer who is assigned to a schedule d travelling post, must have his 
+travelling expenses voucher certified correct by his supervisor before the 
+Certifying Officer signs the certificate.   
+ 
+In cases where this endorsement is not required, the certifying officer may still 
+wish to have the voucher certified in order to strengthen internal controls, 
+accuracy and validity of information. This necessitates that another officer within 
+the sub-accounting unit checks for correct headings in accordance with Estimates, 
+agreement of the details of the vouche r as against the supporting documents, 
+arithmetical accuracy and completeness. This procedure of certifying correct must 
+not be confused with certification (see Note 5).  
+ 
+
+
+
+ 16
+ 
+The officer certifying correct  must sign and date the voucher in the appropriate 
+space as evidence that an independent check  has been performed to ensure that 
+the voucher was properly prepared and that funds are available.  
+ 
+4. Prepare Schedule of Accounts and record in Vote Book 
+ 
+Both the Schedule of Accounts and Vote Book serve as a control over expenditure 
+to ensure that the budgetary provision is not exceeded. The vouchers with 
+supporting documents are received by the Vote Book clerk for preparation of the 
+Schedule of Accounts and the recording of  entries in the Departmental Vote 
+Book. The Schedule of Accounts collates vouchers under the same sub-item of 
+expenditure and replicates the informati on recorded in the Vote Book. Since the 
+Vote Book record is kept in the Sub-Accounting Unit, the Schedule of Accounts 
+provides the Check Staff in the Accounting Unit with the information to ensure 
+expenditure does not exceed authorised rel eases and is within the limits of the 
+provision.  
+ 
+Separate Schedule of Accounts must  be prepared for cash and non-cash 
+transactions.  
+ 
+The Vote Book and Schedules of Accounts r ecord releases to date, expenditure to 
+date including commitments and the balance of provisions. It is advisable, that the 
+Vote Book clerk opens a “Release Control Sheet” for each item of Expenditure at 
+the beginning of the financial year. This control sheet serves as a reference for 
+total releases to date and is secured as th e first page of each sub item of the Vote 
+Book. In this way expenditure can be monitored and kept within releases.  
+ 
+Where possible, there should be separation of duties between the preparation of 
+the voucher and the maintenance of the Vote Book.  
+ 
+5. Certify Voucher, Schedule of Accounts, Initial Vote Book (Certifying Officer) 
+ 
+The Certifying Officer who is delegated in writing by the Accounting Officer, 
+performs the last independent check on the voucher before it leaves the Sub-
+Accounting Unit. The Certifying Officer must  exercise the greatest care to ensure 
+that the certificates he signs are in acco rdance with the facts. He must ensure 
+availability of adequate funding as well as releases and the accuracy of every 
+detail in the voucher.  
+. 
+If any errors are discover ed by the Certifying Officer , the documents are to be 
+returned to the relevant officer for correction. 
+ 
+Once satisfied, the Certifying Officer signs  the certificate on the vouchers and the 
+Schedule of Accounts and forwards them  to the Check Staff Section in the 
+Accounting Unit. At the same time the Vote Book is initialed and dated and 
+returned to the Vote Book clerk. 
+ 
+ 
+
+
+
+ 17
+ 
+6. Authorize Payment (Check Staff) 
+ 
+The different checks done in the Sub-Acc ounting Unit must be carried out with 
+due diligence so as to ensure the vouche r is properly prepared before it is 
+forwarded to the Check Staff section. Check  Staff performs the final independent 
+check on certified vouchers before authorizing payment (i.e. pass for payment).  
+ 
+The Check Staff section must be located in the Accounting Unit in a secured area 
+which is not easily accessible by unauthor ized personnel to ensure security of 
+documents. 
+ 
+The Check Staff officer veri fies that funding is availa ble, that the vouchers are 
+accurately completed and the necessary  approvals for payment have been 
+obtained. He authorizes payment by in itialing and dating the vouchers and 
+Schedule of Accounts. 
+ 
+ The Check Staff officer maintains a ‘Control Sheet’ for each Item of Expenditure 
+and Other Matters transactions. This C ontrol Sheet summarizes the information 
+on each Schedule of Accounts including Releases to Date. It is a useful tool which 
+provides Check Staff with information fr om the previous Schedules of Accounts 
+which would accompany the vouchers sent for cheque preparation.  
+ 
+It is recommended that a Voucher Regi ster containing information from the 
+Schedule of Accounts also be maintained  to facilitate the accounting for all 
+vouchers leaving the check staff unit a nd being forwarded to the Approver/ 
+Verifier for payment.  
+ 
+Please note that vouchers with  respect to non-cash transa ctions do not go through 
+the cheque preparation stage. 
+ 
+7. Process Cheque Payment 
+ 
+In order to preserve the system of internal checks and controls over payments, it is 
+essential to ensure that there is segreg ation of duties between Approver/Verifier, 
+Data Entry, Printer and Reprinter. The separate checks performed by these 
+officers also serve to minimize the occurrence of errors.  
+ 
+Another aspect of the internal control procedures is the confidential use of 
+passwords by the authorized officers to ensure the security of the Government 
+Payment System is not compromised.  
+ 
+The stages involved in the preparation of cheques include: 
+• Batching of vouchers 
+• Data Entry 
+• Verification of cheques information 
+• Printing of cheques and Reports 
+ 
+ 
+
+
+
+ 18
+ 
+Batching of vouchers 
+ 
+The Approver/Verifier receives authori zed vouchers and Schedule of Accounts 
+and signs the Voucher Regist er from Check Staff. The vouchers are then batched 
+using a Batch Form according to Head of Expenditure and type of payment. The 
+date of Payment is then recorded in the Voucher Register. The Batch Forms, 
+Schedules of Accounts and Vouchers are sent to Data Entry 
+ 
+Data Entry
+ 
+ 
+On receipt of the documents, the seque ncing of Schedules is checked. The 
+payment data from the vouchers is inputted to the Government Payment System 
+and a Data Entry Report is printed. This report along with the other documents is 
+returned to the Approver/Verifier for approval.  
+ 
+Verification of Cheque Information
+ 
+ 
+The Approver/Verifier prints an Approve r Report and compares the information 
+with the vouchers. The verification Report is certified if the information is correct 
+and it is sent electronically to the Prin ter. The vouchers, Schedules of Accounts 
+and Batch Forms are also forwarded to the Printer.  
+ 
+Printing of Cheques and Reports
+ 
+ 
+On receipt of the documents from the A pprover/Verifier, the printer confirms the 
+request for payment by printing a Re quest Report against which the voucher 
+information is checked. Cheques are then printed as well as a Cheque Register 
+Report.  
+ 
+All documents are then returned to the A pprover/Verifier for insertion of cheque 
+information on relevant Schedules, vouchers  and the Cheque Register. He then 
+enters the cheque information in a Regi ster and forwards the cheques to the 
+Dispatch Officer for prompt dispatch. 
+. 
+At the end of the day, a General Ledger Report and an Abstract Report is printed 
+and sent to the Approver/Verifier for in serting stock/cheque no. The Expenditure 
+Notification is then prepared and is sent to Exchequer Management, Treasury 
+along with the General Ledger Report. The Abstract Report is forwarded to the 
+Reconciliation officer. 
+ 
+8. Perform Reconciliation  
+ 
+Monthly reconciliations must be done to en sure that all adjustments are cleared in 
+a timely manner. Failure to do so, will impact on how efficiently the annual 
+Appropriation Accounts are produced. 
+ 
+The vouchers are used in the reconciliati on process whereby th ey are sorted for 
+each Head into Sub Items of expenditure on a daily basis. 
+
+
+
+ 19
+ 
+The reconciliation officer should balance the vouchers with the Abstract Report, 
+the Cheque Register Report, Expenditure Notifications, and Vote Book. The 
+vouchers are totalled and the amounts entered in the Daily  Abstract of Payments 
+under the various Items/S ub-Items of expenditure. The Daily Abstract of 
+Payments records the cumula tive total of expenditure (c ash and non-cash) to date 
+for the Head of Expenditure. 
+ 
+A Monthly Reconciliation Statement is pr epared, certified and forwarded to the 
+Comptroller of Accounts and the Auditor General. 
+ 
+9. File Vouchers, Schedule of Accounts & Other Records 
+       
+Accounting records are required to be preserved and must be filed in a manner for 
+easy retrieval.  
+ 
+On completion of the reconciliation proce ss, the Schedule of A ccounts is filed in 
+the Check Staff Unit so that easy reference can be made to verify brought forward 
+totals on Schedules sent for authorization.  
+ 
+Vouchers must be stored in a fire-proof  safe in the Accounting Unit. Access to 
+stored vouchers must be restricted to au thorized persons. These measures ensure 
+that there is no duplication of vouchers being processed for payment by the Sub-
+Accounting Unit.  
+ 
+
+
+
+ 20
+ 
+2.3 PROCESSING OF PAYMENTS BY THE SUB-ACCOUNTING UNIT 
+ 
+2.3.1 PAYMENT VOUCHERS 
+  
+A payment voucher is a document which is used to effect payment for goods and services 
+received and must record the account to be  charged, payee, details of the goods and 
+services, amount to be paid, the authority for payment and certification of payment.    
+ 
+ 
+(i) Authority
+ 
+ 
+Paragraphs 112-116 of the Financial Instructions 1965;  
+Paragraphs 13 (3), 14, 16, 17 and 75-78 of the Financial Regulations to the 
+Exchequer and Audit Act, Chapter 69:01.   
+ 
+(ii) Purpose  
+ 
+To record details of a transaction in order to effect payment. 
+ 
+(iii) Process  
+ 
+Refer to flowchart and details at pages 13-16 for the process in the sub-accounting 
+unit.  
+ 
+(iv) Types of Vouchers used by Ministries/Departments 
+ 
+a. Other Charges Payment Voucher (see Appendix 2.3.1A). 
+  
+Used to make miscellaneous payments, eg. utility bills, miscellaneous  fees, 
+redemption of Imprest, payments under Current Transfers and Subsidies. 
+           
+b. Invoice Orders (see Appendix 2.3.1B).   
+ 
+When goods and/or services ordered have been supplied, the Invoice Order 
+returned by the supplier is completed with information on the cost using the 
+original supplier’s invoice. The Invoice Order is certified correct by the 
+officer responsible for the procurement and then processed as a voucher in the 
+normal manner. 
+  
+c. Department Vouchers (see Appendix 2.3.1C). 
+ 
+Used by sub-offices of a Ministry/Dep artment for miscellaneous payments 
+e.g. utility bills. The vouchers are forwarded to the Sub-Accounting Unit at 
+the Head Office where it is alloca ted a Head Office voucher number for 
+processing in the normal manner.
+  
+ 
+ 
+
+
+
+ 21
+ 
+ 
+d. Travelling Expenses Voucher (Subsistence) (see Appendix 2.3.1D). 
+  
+Used by officers who make subsistence claims under Regulation 43 of the 
+Travelling Allowances Act. 
+ 
+e. Travelling Expense Voucher (Mileage Claim) (see Appendix 2.3.1E). 
+  
+Used by scheduled traveling officers  and officers claiming mileage under 
+Regulation 16 of the Travelling Allowances Act.  
+ 
+f. Paysheets    
+     
+Used to effect payment of earnings to  employees for services rendered for a 
+specific period. The Paysheet must show eg. the gross amount due, deductions 
+made and the net amount payable. 
+ 
+g. Adjustment Vouchers (IDAs) (see Appendix 2.3.1F). 
+     
+Used to effect adjustments between accounts  in the same financ ial year   e.g. 
+transfer of expenditure fr om one Ministry to anothe r, correction of errors 
+between sub-heads. The Adjustment voucher is processed as a non-cash 
+transaction. 
+   
+h. Overseas Missions Voucher (see Appendix 2.3.1G).       
+ 
+Overseas Missions (OSM) prepare OS M vouchers to make payments to 
+foreign suppliers on behalf of Ministri es/Departments. Upon receipt of the 
+vouchers from the Mission, the Treasury Division forwards them to the 
+relevant Ministry/Department for processing as a non-cash transaction.  
+ 
+                  Note: Details regarding (f) to (h) above are covered later in this manual. 
+        
+(v) Supporting documents
+ 
+ 
+ Supporting documents are those which gi ve rise to the payment and must 
+ accompany the payment voucher. They must be sufficient to identify the payment 
+ to be made. Some examples include: 
+ 
+(a) Salary Particulars 
+(b) Return of Personnel 
+(c) Utility Bills i.e. electricity, telephone 
+(d) Approval and authority for payments 
+(e) Delivery Notes 
+(f) Certificate of Satisfactory Completion 
+(g) Copy of Cabinet Minute/Warrant/Approval for payment 
+(h) Copy of contract 
+
+
+
+ 22
+ 
+ 
+(vi) General Points to be observed in Completing Vouchers  
+ 
+ (a) On receipt of authority/source document for payment, identify the item of  
+  expenditure (vote) to be char ged by reference to the Chart of  
+  Accounts/Estimates. 
+ 
+ (b) A voucher is prepared using the deta ils from the original source document. 
+  The information on the source documents  must be sufficient to identify the 
+  payment to be made i.e. they must include: Name of payee/address,  
+  goods and services provided, co st, date, appropriate signatures. 
+ 
+ (c)  All sections of the voucher must  be properly and legibly completed  
+   with details such as:   
+ 
+• Head eg. 18 - Ministry of Finance 
+• Sub-head/Item/Sub-item e.g. 02/005/01-Goods and Services/Treasury 
+Division/Travelling 
+• Trinidad Government Dr. to (Name of Payee)    
+• Detailed description of goods and/or  service (reason for payment - full 
+particulars are necessary) 
+• Total Expenditure in figures 
+• Authority to pay e.g. Cabinet Minute No. , Warrant No, etc. 
+ 
+(d) Signatures i.e. “Prepared by”, “Che cked by/Certified Correct”. All   
+  signatures must be dated.  This is to ensure that there is a system of  
+  internal control. 
+ 
+ (e) On the Certificate of the voucher, the Certifying Officer must state the  
+  total expenditure in words which mu st agree with the figures in the body  
+  of the voucher. The Certifying Officer must sign, date and affix the  
+  Ministry/ Department  stamp.  There  must be no alterations on the  
+  certificate. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+ 23
+ 
+ 
+ 
+2.3.2 SCHEDULE OF ACCOUNTS  (See Appendix 2.3.2A) 
+ 
+(i) Authority 
+ 
+Part II, Paragraphs 14 and 16 of the Financial Regulations to the Exchequer and 
+Audit Act Chapter 69:01 Part V, Paragra phs 103-105 of the Financial Instructions 
+1965  
+ 
+(ii) Purpose
+ 
+ 
+All Payment Vouchers must be accompa nied by a Schedule of Accounts (Form 
+Gen 94) before they can be passed for pa yment. Schedule of Accounts are to be 
+prepared for cash transactions and Schedule of Accounts for non-cash transactions 
+should be prepared separate from those for cash payments. 
+ 
+(iii) Process
+ 
+ 
+All information required on Schedule of A ccounts must be inserted in accordance 
+with paragraph 103 (2) of the Financial Instructions 1965. The procedures are as 
+follows:- 
+ 
+a. Insert the date in the “Date submitted”. This must be the same date on 
+which the Vouchers are recorded in the Vote Book. 
+b. Record details of amounts added and deducted from the original provision 
+(transfers, virements) to date. 
+c. Insert initials in “Verified”  column when accepting virements and 
+transfers.  This is done by the Certifying Officer. 
+d. Record Voucher numbers previous ly scheduled and previous total 
+expenditure to date. 
+e. Record Voucher numbers and amount s in ascending numerical sequence 
+as detailed in the Vote Book. 
+f. The total value of the Vouchers recorded in the Vote Book and on the 
+Schedule of Accounts must agree. 
+g. Add total of Vouchers to the brought forward (b/f) amount to arrive at the 
+total expenditure to date. 
+h. Close the Schedule of Accounts by drawing a diagonal line in the amount 
+column from the last entry to the line before ‘TOTAL’.  
+i. Stamp with official Min/Dept stam p, sign and date the certificate. This 
+must be done by the Certifying Officer certifying that the information is 
+correct. 
+j. Certify Schedule of Accounts al ong with Vote Book and Vouchers. 
+ 
+ 
+
+
+
+ 24
+ 
+2.3.3 VOTE BOOK (See Appendix 2.3.3A) 
+ 
+(i) Authority  
+ 
+Paragraphs 66 - 69 of the Financial Regul ations to the Exchequer and Audit Act 
+Chapter 69:01; 
+Comptroller of Accounts Circular No. 6 of 1988 Paragraph 5; 
+Ministry of Finance Circular No. 23 dated 29th October 1959. 
+ 
+(ii) Purpose 
+ 
+The Vote Book is a control ledger designed to ensure that expenditure incurred in 
+respect of each sub-item does not exceed  the funds allocated for the current 
+financial year and the releases granted to  date.  The Vote Book is maintained in 
+the Sub-Accounting Unit. 
+ 
+(iii) Process
+ 
+ 
+At the beginning of each financial year: 
+ 
+a. Prepare Vote Book ledger pages fo r each sub-item of expenditure in 
+accordance with the Approved Estimates for that year. 
+ 
+During the financial year: 
+ 
+a. Record and monitor releases by preparing a Release Control Sheet and 
+place on the front page of each sub-item. (See Appendix 2.3.3B) 
+ 
+b. Verify and initial the provisions re corded before any transactions are 
+processed. This must be done by the Certifying Officer. 
+ 
+c. Complete “Part A” of the Vote Book page which relates to the particular 
+sub-item of expenditure. Ensure all re levant information is recorded in 
+detail. 
+ 
+d. Complete “Part B” of the Vote Book by recording Voucher information 
+when expenditure is incurred under the relevant sub-item. 
+ 
+e. Forward the Vote Book, Vouchers with supporting documents and 
+Schedules of Accounts to the Certifying Officer. 
+ 
+ 
+ 
+ 
+ 
+
+
+
+ 25
+ 
+Commitments 
+ 
+Complete columns 1-5, 8 and 14 of the Vo te Book when invoice orders are issued, 
+requests made for overseas payments or contra cts awarded, etc. This records the amount 
+committed and should be written in red ink. The total expenditure must be reduced by 
+this amount. 
+ 
+Adjustments 
+ 
+When adjustments are made in the Vote Book, the amount in figures should be written in 
+red ink for easy identification.  
+ 
+
+
+
+ 26
+ 
+2.4 Processing Of Payments By The Accounting Unit  
+ 
+2.4.1  CHECK STAFF   
+ 
+(i)  Authority  
+ 
+Paragraphs 13 (4) and 65 (3) of the Financial Regulations to the Exchequer and 
+Audit Act Chapter 69:01;  
+Paragraphs 3, 4 and 105 of the Financial Instructions1965.  
+ 
+(ii)  Purpose
+ 
+ 
+To conduct an independent check of th e Vouchers, Schedules of Accounts and 
+supporting documents and to Pass for Payment. 
+   
+(iii)  Process
+ 
+ 
+a. Check Vouchers and Schedules of  Accounts to ensure the following:- 
+ 
+i. The correct Head, Sub Head, It em and Sub-Item of Expenditure 
+are charged in accordance with the Estimates. 
+ 
+ii. The Head, Sub Head, Item and Sub-Item of Expenditure on the 
+vouchers and the Schedules of Accounts agree. 
+ 
+iii. The availability of funds and releases to incur expenditure. 
+ 
+iv. The authority to incur expenditu re is appropriat e e.g. Cabinet 
+Minute, Ministerial Approval, Estimates of Expenditure, etc.  
+ 
+v. Arithmetical accuracy – check figures; check bills and supporting 
+documents. Ensure figures on  the vouchers agree with 
+Invoices/bills.  
+ 
+vi. Name of payee on each voucher is the person/firm to whom 
+payment is due. The name on each voucher is the same as that on 
+the Schedule of Accounts and other supporting documents. 
+ 
+vii. The body of the vouchers has ade quate information with respect to 
+the goods/services so that each  voucher can stand on its own 
+without reference to any other document. 
+ 
+viii. All vouchers must be supported by documents relating to the 
+transaction e.g. Invoice, Receipt, application by Payee in respect of 
+refunds, etc. 
+ 
+ 
+
+
+
+ 27
+ 
+ix. Any errors made on the body of th e vouchers are crossed off with a 
+single line, initialed and re-written correctly.   
+ 
+x. No changes are to be made on the certificate of the vouchers and 
+Schedules of Accounts. 
+ 
+xi. The official stamp of the Mi nistry/Department is placed on the 
+“Certificate” of the vouchers and in  the appropriate space on the 
+Schedules of Accounts. 
+ 
+xii. Ensure that Schedules of Accounts are closed off and brought 
+forward (b/f) totals agree with th e total to date on the preceding 
+Schedule of Accounts of the same vote.  
+ 
+b. The Check Staff Officer must use red ink in the verification of the 
+documents.  
+ 
+c. The vouchers are ‘passed for paymen t’ when the Check Staff Officer has 
+been satisfied that the vouchers and Schedules of Accounts are in 
+compliance with the relevant provisions of the Financial Regulations, 
+Instructions and Circulars and has inserted his initials and the date in the 
+appropriate space provided on the vouchers and Schedules of Accounts.  
+ 
+d. When the vouchers and Schedules of Accounts have been “passed for 
+payment”, the details are recorded in a Voucher Register and submitted to 
+the Approver/Verifier for Batching 
+ 
+(iv)  Queries
+ 
+ 
+Where a voucher and/or Schedule of Acc ounts does not meet the requirements of 
+a.(i) to (xii) above, the Check Staff Officer shall:- 
+  
+a. Enter a query in duplicate in a Query Register detailing the reason for 
+same. (Appendix 2.4.1A) 
+ 
+b. Return the voucher and Schedule of A ccounts together with the original of 
+the query to the Head of the relevant Sub Accounting Unit for correction.  
+  
+c. Retain the duplicate query in the Query Register. 
+ 
+d. Monitor the duplicate at appropriate intervals to ensure that the voucher 
+and Schedule of Accounts are returned. Take follow up action i.e. verbally 
+or in writing if a response is not received. 
+ 
+e. Attach the original query to the re levant duplicate in the Query Register on 
+receipt of the amended documents. 
+ 
+
+
+
+ 28
+ 
+f. Confirm that appropriate action has been taken by checking documents re-
+submitted (i.e. amended voucher and Adjusting Schedule of Accounts). 
+ 
+ 
+(v)  Records Maintained in Check Staff 
+ 
+ a.  Vote Control Sheet (Appendix 2.4.1B) 
+ 
+At the beginning of each financial year  the Check Staff Of ficer must open a 
+Control Sheet for each Sub Item of E xpenditure and each Sub Head for Other 
+Matters transactions.   This Control Sh eet is updated whenever a voucher is 
+passed for payment during the year. 
+       
+Purpose 
+ 
+To be able to confirm the amount of ava ilable funds at any point in time in the 
+Vote Book by ensuring that: 
+ 
+• Vouchers are not duplicated;  
+ 
+• Allocation/Releases are not exceeded; 
+ 
+• Expenditure to date agrees with the Schedules of Accounts;  
+ 
+• All vouchers are recorded in numerical sequence in ascending order; 
+ 
+• All adjustments are recorded on the Vote Control Sheets (Adjusting 
+Schedules). 
+ 
+b. References/Tools  
+ 
+Listed below are the tools which must be kept by each Check Staff Officer for 
+the proper functioning of the Check Staff section:- 
+ 
+i. Copies of the Financia l Regulations to the Exchequer and Audit Act 
+Chapter 69:01 and Financial Instructions 1965; 
+ 
+ii. Files with the specimen signatures of all authorized signatories; 
+ 
+iii. The General Warrant and subsequent Supplementary Warrants for the 
+current financial year; 
+ 
+iv. Copies of releases, transfers of funds and virements; 
+ 
+v. A copy of the Estimates of Expenditure for the current financial year; 
+ 
+vi. Copies of Contracts and Approvals (to ensure that payments for goods and 
+services contracted are not duplicated); 
+
+
+
+ 29
+ 
+ 
+vii. The Query Book/Register; 
+ 
+viii. Vote Control Registers (Control Sheets ) for all sub items of Expenditure 
+showing original provision taken fro m the Estimates of Expenditure and 
+all variation as at (iv) above; 
+ 
+ix. Voucher Register; 
+ 
+x. A “Passed for Payment” stamp; 
+ 
+xi. Red ink pens; 
+ 
+xii. Calculator. 
+ 
+(vi)  Location 
+ 
+The Check Staff section is located in the acco unting unit in an enclosed, secured area 
+which is not accessible to authorised personnel only. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+ 30
+ 
+2.4.2 CHEQUE PREPARATION  
+ 
+(i)  Authority   
+ 
+Part II Section 12 and 19 of the Financial Regulations to the Exchequer and Audit Act 
+Chapter 69:01; 
+Part VI, paragraphs 112 (2), 124 (2) and (3) of the Financial Instructions 1965; 
+Comptroller of Accounts Circular No.27 dated 03 September 1998; 
+Comptroller of Accounts Circular No.13 dated 01 September 2010. 
+ 
+(ii)  Purpose
+ 
+ 
+To effect cash payments for the acquisition of goods and services. 
+ 
+(iii)  Process
+ 
+ 
+There are several stages before a cheque is prepared.  These include: 
+  
+a. Batching of Vouchers 
+b. Data Entry 
+c. Verification of cheque information 
+  
+a.  Batching of Vouchers 
+ 
+i. On receipt of Vouchers and Register from Check Staff, the 
+Approver/Verifier batches the Vouchers and enters the date. 
+ 
+ii. The Schedules of Accounts are so rted and batched numerically in 
+ascending order according to Head/Sub- head/Item/Sub-item. At this stage 
+the number of cheques to be printe d and the cheque numbering sequence 
+is determined. 
+ 
+iii. The information on the Schedules of Accounts is summarized on a Batch 
+Form. A listing showing the Batch and Schedules of Accounts totals is 
+attached to the Batch Form. 
+ 
+iv. The Vouchers and Schedules are then submitted to the Data Entry Clerk   
+for processing. 
+ 
+ 
+
+
+
+ 31
+ 
+b.  Data Entry 
+ 
+Upon receipt of the documents i.e. Batch Forms, Schedules of Accounts and 
+vouchers from the Approver/Verifier, the Data Entry Clerk:- 
+ 
+i. Checks the numerical sequence of the Schedules of Accounts; 
+ 
+ii. Inputs the Voucher details on the Data Entry Screen; 
+ 
+iii. Edits the data entered, both during and at the end of each batch; 
+ 
+iv. Prints Data Entry Report; 
+ 
+v. Ensures that total on Batch Form agrees with total on the Data Entry 
+Report; 
+ 
+vi. Transfers the batch file electronically to the Approver/Verifier; 
+ 
+vii. Returns documents to the Approver/Verifier. 
+ 
+c. Verification of Cheque Information: 
+ 
+i. The Approver/Verifier prints an Approver Report. 
+ 
+ii. The Report is checked against the vouchers, Schedules of Accounts and 
+Batch Forms to ensure there are no errors such as incorrect amounts, 
+misspelt names, etc. 
+ 
+iii. Where there are errors, the Batch File is returned electronically to the Data 
+Entry Clerk and the necessary changes made. 
+ 
+iv. An “Approver Report” is then printed.  This Report indicates to the Printer 
+that the cheques are ready to be prin ted.  The information is then sent 
+electronically to the Printer, who w ill inform the Approver/Verifier when 
+the information is received. 
+ 
+v. The documents i.e. vouchers, Sche dules and Batch Forms are also 
+submitted to the Printer. 
+ 
+Note: The number of cheques in any batch must be an even number since Cheque 
+forms are supplied in pairs.  
+ 
+
+
+
+ 32
+ 
+(iv)  Printing of Cheques and Related Reports 
+ 
+a.   Printing of Cheques  
+ 
+On receipt of the electronic data, the Printer:- 
+ 
+i. Generates a Request Report; 
+ 
+ii. Verifies that the information on the Request Report corresponds 
+with that of the vouchers;  
+ 
+iii. Ensures that the number of cheques to be printed is the same as the 
+amount indicated by the Approver/Verifier; 
+ 
+iv. Takes the cheque forms from the secured vault, where the cheques 
+are stored and immediately updates the Cheque Register; 
+ 
+v. Prints the number of cheques required; 
+ 
+iv. Generates a Register Report (i.e. Paymaster, Funds or Deposits). 
+This report gives details of th e Head/Sub-Head/Item/Sub-Item, 
+name, cheque number and totals for each sub-item. 
+ 
+The cheques, Register Report, Batch Form s and documents are then returned to 
+the Approver/Verifier to:- 
+  
+i. Compare details on the Register Report i.e. name, amount, 
+Head/Sub-head/Sub-item and cheque  number with the details on 
+the cheque; 
+ 
+ii. Stamp vouchers with a “paid” rubber stamp;  
+ 
+iii. Insert the cheque numbers and da te on the relevant Schedules of 
+Accounts and vouchers;  
+ 
+iv. Insert the “Stock Number Range” on the Register Report (Cheque 
+List) and Batch Form;  
+ 
+v. Ensure the Dispatch Officer signs the Verification Report on 
+receipt of cheques; 
+ 
+vi. Return the vouchers and Schedules of Accounts to the Printer for 
+preparation of Expenditure Notification (after completion of 
+actions i – v); 
+ 
+vii. Return Register Report to the printer for filing. 
+ 
+b.  Related Reports 
+
+
+
+ 33
+ 
+ 
+i. General Ledger Report 
+  
+When the final batch of cheques has been printed for the day, the General 
+Ledger Report is generated by the Printer.  This Report is a summary of 
+the daily cheques issued  and is used to pr epare the Expenditure 
+Notification, which must be submitted to the Comptroller of Accounts 
+(General Accounting Services Section) on the following day. 
+  
+ 
+ii. Abstract Report 
+ 
+The Abstract Report is also generated on a daily basis.  This is a summary 
+of the expenditure according to Head/Sub-head/Item and Sub-Item. The 
+Abstract Report is used to update the Daily Abstract of Payments. 
+  
+(v) Reprinting of Spoilt Cheques
+ 
+ 
+a. Cheques may need to be reprinted for various reasons e.g. mutilation.  
+Should this occur, the printer removes the spoilt cheque and logs out from 
+Printer mode. 
+ 
+b. The following action is taken by the Reprinter: 
+ 
+i. Scrutinizes the spoilt cheque to verify that the reason for reprint is 
+valid; 
+ 
+ii. Verifies the batch and the particular s of the spoilt cheque with the 
+General Ledger Report; 
+ 
+iii. Stamps ‘CANCELLED’ across the face of the cheque; 
+ 
+iv. Logs into Reprint Mode; 
+ 
+v. Prints a new cheque on the system; 
+ 
+vi. Logs out of the system. 
+ 
+c. The printer then records and stores the cheque in a Spoilt Cheque Folder, 
+updates the Cheque Register and prin ts a new report in  respect of the 
+Spoilt Cheque. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+ 34
+ 
+(vi)  Replacement of Cheques 
+ 
+The procedure for the replacement of Stale dated; lost or mutilated cheques is as follows:- 
+ 
+a. Batch cheques to be replaced separate from the normal day’s transactions; 
+ 
+b. Complete the “Cheque Replacement Authorization Form”; 
+ 
+c. Identify the correct code to be inserted on “Replacement Cheque Authorization 
+Form”; 
+ 
+d. Print new cheque to replace erroneous cheque; 
+ 
+e. Make the necessary notations on the General Ledger and Abstract Reports; 
+ 
+f. Generate a cheque Report for the replaced cheques. 
+ 
+(vii)  Supply and Storage of Cheques Forms
+ 
+ 
+Blank cheque forms are supplied to each Acco unting Unit by the Treasury Division upon 
+request.  On receipt of the blank cheque forms from the General Ledger Services Section, 
+checks are made to ensure that there are no errors or omissions.  The blank cheque forms 
+are then entered in a Cheque Register and stored in a secured vault. 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
